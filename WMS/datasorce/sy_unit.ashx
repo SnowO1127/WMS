@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="sy_unit.ashx.cs" Class="UI.datasorce.sy_unit" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="sy_unit.ashx.cs" Class="WMS.datasorce.sy_unit" %>

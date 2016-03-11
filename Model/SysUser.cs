@@ -21,15 +21,15 @@ namespace Model
             set { _userid = value; }
         }
 
-        private string _usercode;
+        private string _loginname;
 
         /// <summary>
         /// 用户登录名
         /// </summary>
-        public string UserCode
+        public string LoginName
         {
-            get { return _usercode; }
-            set { _usercode = value; }
+            get { return _loginname; }
+            set { _loginname = value; }
         }
 
         private string _password;

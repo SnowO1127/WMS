@@ -31,38 +31,38 @@
                 frozenColumns: [[{
                     width: '100',
                     title: '登录名',
-                    field: 'loginname',
+                    field: 'LoginName',
                     sortable: true
                 }, {
                     width: '80',
                     title: '姓名',
-                    field: 'name',
+                    field: 'UserName',
                     sortable: true
                 }]],
                 columns: [[{
                     width: '150',
                     title: '创建时间',
-                    field: 'creatdatetime',
+                    field: 'UserID',
                     sortable: true
                 }, {
                     width: '150',
                     title: '修改时间',
-                    field: 'updatedatetime',
+                    field: 'PassWord',
                     sortable: true
                 }, {
                     width: '50',
                     title: '性别',
-                    field: 'sex',
+                    field: 'UserName',
                     sortable: true
                 }, {
                     width: '50',
                     title: '年龄',
-                    field: 'age',
+                    field: 'UserName',
                     sortable: true
                 }, {
                     width: '250',
                     title: '照片',
-                    field: 'photo'
+                    field: 'UserName'
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
