@@ -15,7 +15,8 @@
     <script src="library/My97DatePicker/WdatePicker.js"></script>
     <script src="library/xyEasyUI.js"></script>
     <script src="library/xyUtils.js"></script>
-    <title>easyUI</title>
+    <title>easyUI</title> 
+
     <script>
         var themeData =
             [//主题风格json格式
