@@ -303,7 +303,7 @@
                 &nbsp;系列浏览器。
             </div>
         </div>
-        <div data-options="region:'east',split:true" title="日历" iconcls="icon-standard-date" style="width: 180px;">
+        <%--<div data-options="region:'east',split:true" title="日历" iconcls="icon-standard-date" style="width: 180px;">
             <div class="easyui-layout" fit="true">
                 <div data-options="region: 'north', split: false, border: false" style="height: 180px;">
                     <div class="easyui-calendar" data-options="fit: true"></div>
@@ -312,7 +312,7 @@
                     <ul id="linkList" class="portlet-list link-list"></ul>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <div data-options="region:'west',split:true" title="菜单导航" iconcls="icon-standard-map" style="width: 200px; overflow: auto">
             <div id="index_menu_tree">
             </div>
