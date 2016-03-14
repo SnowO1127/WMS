@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="WMS.Index" %>
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,32 +10,32 @@
     <script src="library/easyui-lang-zh_CN.js"></script>
     <link id="easyuiTheme" href="library/themes/default/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
+    <link href="library/base_css/ui.css" rel="stylesheet" />
     <script src="library/jquery.cookie.js"></script>
     <script src="library/jquery-easyui-portal/jquery.portal.js"></script>
     <link href="library/jquery-easyui-portal/portal.css" rel="stylesheet" />
     <script src="library/My97DatePicker/WdatePicker.js"></script>
     <script src="library/xyEasyUI.js"></script>
     <script src="library/xyUtils.js"></script>
-    <title>easyUI</title> 
-      
+    <title>easyUI</title>
     <script>
         var themeData =
-            [//主题风格json格式
-                { id: 1, name: "默认(天空蓝,推荐)", path: "default" },
-                { id: 2, name: "金属黑(推荐)", path: "black" },
-                { id: 3, name: "银色(推荐)", path: "bootstrap" },
-                { id: 4, name: "灰霾(推荐)", path: "gray" },
-                { id: 5, name: "清泉", path: "jqueryui-cupertino", disabled: false },
-                { id: 6, name: "黑巢", path: "jqueryui-dark-hive", disabled: false },
-                { id: 7, name: "杏黄", path: "jqueryui-pepper-grinder", disabled: false },
-                { id: 8, name: "阳光", path: "jqueryui-sunny", disabled: false },
-                { id: 9, name: "磁贴（标准）", path: "metro-standard" },
-                { id: 10, name: "磁贴（蓝）", path: "metro-blue" },
-                { id: 11, name: "磁贴（灰）", path: "metro-gray" },
-                { id: 12, name: "磁贴（绿）", path: "metro-green" },
-                { id: 13, name: "磁贴（橙）", path: "metro-orange" },
-                { id: 14, name: "磁贴（红）", path: "metro-red" }
-            ];
+             [//主题风格json格式
+                 { id: 1, name: "默认(天空蓝,推荐)", path: "default" },
+                 { id: 2, name: "金属黑(推荐)", path: "black" },
+                 { id: 3, name: "银色(推荐)", path: "bootstrap" },
+                 { id: 4, name: "灰霾(推荐)", path: "gray" },
+                 { id: 5, name: "清泉", path: "jqueryui-cupertino", disabled: false },
+                 { id: 6, name: "黑巢", path: "jqueryui-dark-hive", disabled: false },
+                 { id: 7, name: "杏黄", path: "jqueryui-pepper-grinder", disabled: false },
+                 { id: 8, name: "阳光", path: "jqueryui-sunny", disabled: false },
+                 { id: 9, name: "磁贴（标准）", path: "metro-standard" },
+                 { id: 10, name: "磁贴（蓝）", path: "metro-blue" },
+                 { id: 11, name: "磁贴（灰）", path: "metro-gray" },
+                 { id: 12, name: "磁贴（绿）", path: "metro-green" },
+                 { id: 13, name: "磁贴（橙）", path: "metro-orange" },
+                 { id: 14, name: "磁贴（红）", path: "metro-red" }
+             ];
 
         var sy = $.extend({}, sy);//定义全局变量
 
@@ -164,11 +165,11 @@
 
 
 
-        function addTab(title, url) {
+        sy.addTab = function (title, url) {
             if ($('#index_tab').tabs('exists', title)) {
                 $('#index_tab').tabs('select', title);
             } else {
-                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>';
+                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
                 $('#index_tab').tabs('add', {
                     title: title,
                     content: content,
@@ -183,22 +184,71 @@
                 $("#dx").val(toCHSnum($(this).val()));
 
             });
+
+            $("#index_layout").layout("collapse", "east");
         })
 
+        //树形菜单直接加载
+        //$(function () {
+        //    $("#index_menu_tree").tree({
+        //        url: 'datasorce/sy_menu.ashx?action=getmenu',
+        //        parentField: 'pid',
+        //        lines: true,
+        //        onClick: function (node) {
+        //            if (node.attributes.url) {
+        //                addTab(node.text, node.attributes.url);
+        //            }
+        //        }
+        //    });
+        //});
 
+        //手风琴菜单加载
         $(function () {
-            $("#index_menu_tree").tree({
+            $.ajax({
                 url: 'datasorce/sy_menu.ashx?action=getmenu',
-                parentField: 'pid',
-                lines: true,
-                onClick: function (node) {
-                    if (node.attributes.url) {
-                        addTab(node.text, node.attributes.url);
+                type: 'post',
+                dataType: 'json',
+                async: false,
+                success: function (r) {
+                    for (var i = 0; i < r.length; i++) {
+                        var treeID = "tree" + i;
+                        var divHtml = "";
+                        var sub_menu = [];
+                        if (r[i].pid == null) {
+                            sy.GetChild(r[i].id, sub_menu, r);
+                            divHtml = "<div title=" + r[i].text + "><ul id=" + treeID + " style='margin-top: 3px;'></div>";
+                            $('#index_accordion').append(divHtml);
+                            $('#' + treeID).tree({
+                                data: sub_menu,
+                                parentField: 'pid',
+                                lines: true,
+                                onClick: function (node) {
+                                    if (node.attributes.url) {
+                                        sy.addTab(node.text, node.attributes.url);
+                                    }
+                                }
+                            });
+                        }
                     }
                 }
             });
+
+            $('#index_accordion').accordion({
+                border: false,
+                fit: true,
+                animate: false
+            })
         });
 
+        sy.GetChild = function (id, sub_menu, r) {
+            for (var j = 0; j < r.length; j++) {
+                if (r[j].pid == id) {
+                    sub_menu.push(r[j]);
+                    sy.GetChild(r[j].id, sub_menu, r);
+                }
+            }
+            return sub_menu;
+        }
     </script>
     <style>
         body {

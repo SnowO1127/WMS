@@ -12,21 +12,22 @@ namespace BLL
 {
     public class SysUserBLL
     {
-
+        private readonly SysUserDAL dal = new SysUserDAL();
         public Grid<SysUser> GetList()
         {
-            List<SysUser> l = new List<SysUser>();
-            int count = 0;
             Grid<SysUser> g = new Grid<SysUser>();
 
-            using (var ctx = new SysUserDAL(Globe.ConnectionString)) {
-                l = ctx.SysUsers.ToList();
-                count = ctx.SysUsers.Count();
-            }
+            g.total = dal.GetCount();
+            g.rows = dal.GetList();
+            return g;
+        }
 
+        public Grid<SysUser> GetListByPage(PageSysUser psysuser)
+        {
+            Grid<SysUser> g = new Grid<SysUser>();
 
-            g.total = count;
-            g.rows = l;
+            g.total = dal.GetCountByPage(psysuser);
+            g.rows = dal.GetListByPage(psysuser);
             return g;
         }
     }

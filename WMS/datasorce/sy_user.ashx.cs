@@ -20,15 +20,16 @@ namespace WMS.datasorce
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
+            PageSysUser psysuser = new PageSysUser();
             switch (request["action"])
             {
                 case "getuser":
 
-                    //u = utils.AutoWiredClass<user_model>(request, u);
+                    psysuser = utils.AutoWiredClass<PageSysUser>(request, psysuser);
                     try
                     {
-                        //Grid<SysUser> g = bll.GetUserGridByPage();
-                        context.Response.Write(utils.SerializeObjectWithTime<Grid<SysUser>>(bll.GetList()));
+                        Grid<SysUser> g = bll.GetListByPage(psysuser);
+                        context.Response.Write(utils.SerializeObjectWithTime<Grid<SysUser>>(g));
                     }
                     catch (Exception ex)
                     {

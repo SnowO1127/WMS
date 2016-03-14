@@ -13,6 +13,7 @@
     <script src="../../library/xyUtils.js"></script>
     <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
+    <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <title></title>
     <script>
         $(function () {
@@ -24,7 +25,7 @@
                 pagination: true,
                 singleSelect: true,
                 idField: 'id',
-                sortName: 'creatdatetime',
+                sortName: 'UserID',
                 sortOrder: 'desc',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],

@@ -76,6 +76,7 @@
     <Content Include="InformationCenter\News\news_list.aspx" />
     <Content Include="InformationCenter\Notice\notice_add.aspx" />
     <Content Include="InformationCenter\Notice\notice_list.aspx" />
+    <Content Include="library\base_css\ui.css" />
     <Content Include="library\changelog.txt" />
     <Content Include="library\demo\accordion\actions.html" />
     <Content Include="library\demo\accordion\ajax.html" />
