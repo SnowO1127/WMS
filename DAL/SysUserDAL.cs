@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class SysUserDAL : DbContext
+    public class SysUserContext : DbContext
     {
         public DbSet<SysUser> SysUsers { get; set; }
 
-        public SysUserDAL()
-            : base("name=" + Globe.ConnectionString)
+        public SysUserContext(string connection)
+            : base("name=" + connection)
         {
         }
 

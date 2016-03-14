@@ -1,4 +1,5 @@
-﻿using DAL;
+﻿using Common;
+using DAL;
 using Model;
 using PageModel;
 using System;
@@ -18,7 +19,7 @@ namespace BLL
             int count = 0;
             Grid<SysUser> g = new Grid<SysUser>();
 
-            using (var ctx = new SysUserDAL()) {
+            using (var ctx = new SysUserDAL(Globe.ConnectionString)) {
                 l = ctx.SysUsers.ToList();
                 count = ctx.SysUsers.Count();
             }
