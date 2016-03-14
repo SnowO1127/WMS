@@ -20,38 +20,42 @@ namespace WMS.datasorce
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
-            PageSysUser psysuser = new PageSysUser();
+            PageSysUser psu = new PageSysUser();
+            SysUser su = new SysUser();
+            JsonResult jr = new JsonResult();
             switch (request["action"])
             {
                 case "getuser":
 
-                    psysuser = utils.AutoWiredClass<PageSysUser>(request, psysuser);
+                    psu = utils.AutoWiredClass<PageSysUser>(request, psu);
                     try
                     {
-                        Grid<SysUser> g = bll.GetListByPage(psysuser);
+                        Grid<SysUser> g = bll.GetListByPage(psu);
                         context.Response.Write(utils.SerializeObjectWithTime<Grid<SysUser>>(g));
                     }
                     catch (Exception ex)
                     {
-                        throw ex;
+                        jr.Msg = ex.ToString();
                     }
                     break;
-                //case "adduser":
-                //    jsonresult j = new jsonresult();
-                //    try
-                //    {
-                //        u = utils.AutoWiredClass<user_model>(request, u);
-                //        bll.AddUser(u);
-                //        j.success = true;
-                //        j.msg = "添加成功";
-                //    }
-                //    catch (Exception ex)
-                //    {
+                case "adduser":
+                   
+                    try
+                    {
+                        su = utils.AutoWiredClass<SysUser>(request, su);
+                        su.UserID = Guid.NewGuid();
+                        bll.AddUser(su);
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
 
-                //        j.msg = ex.ToString();
-                //    }
+                    context.Response.Write(utils.SerializeObject<JsonResult>(jr));
 
-                //    break;
+                    break;
                 //case "getoneuser":
                 //    string id = request["id"];
                 //    try

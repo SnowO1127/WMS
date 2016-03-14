@@ -45,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SysMenuContext.cs" />
+    <Compile Include="SysMenuDAL.cs" />
+    <Compile Include="SysMenuMap.cs" />
     <Compile Include="SysUserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysUserDAL.cs" />

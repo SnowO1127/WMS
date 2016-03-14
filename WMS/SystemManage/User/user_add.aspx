@@ -34,22 +34,22 @@
             if ($('#unit_add_form').form('validate')) {
                 var url;
                 if (id) {
-                    url = "../../datasorce/sy_unit.ashx?action=updateunit";
+                    url = "../../datasorce/sy_user.ashx?action=updateuser";
                 } else {
-                    url = "../../datasorce/sy_unit.ashx?action=addunit";
+                    url = "../../datasorce/sy_user.ashx?action=adduser";
                 }
                 $.ajax({
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#unit_add_form').serializeArray(),
+                    data: $('#user_add_form').serializeArray(),
                     success: function (jsonresult) {
-                        if (jsonresult.success) {
-                            $pjq.messager.alert('提示', jsonresult.msg, 'info');
-                            $grid.treegrid('load');
+                        if (jsonresult.Success) {
+                            $pjq.messager.alert('提示', jsonresult.Msg, 'info');
+                            $grid.datagrid('load');
                             $dialog.dialog('destroy');
                         } else {
-                            $pjq.messager.alert('提示', jsonresult.msg, 'error');
+                            $pjq.messager.alert('提示', jsonresult.Msg, 'error');
                         }
                     }
                 });
@@ -62,14 +62,10 @@
         <form id="user_add_form" runat="server" style="font-size: 13px">
             <fieldset>
                 <legend>基本信息</legend>
-                <input name="loginname" />
-                <input name="pwd" />
-                <input name="sex" />
-                <input name="name" />
-                <input name="age" />
-                <input name="photo" />
+                <input name="LoginName" class="easyui-validatebox" />
+                <input name="PassWord" class="easyui-validatebox" />
+                <input name="UserName" class="easyui-validatebox" />
             </fieldset>
-
         </form>
     </div>
 </body>

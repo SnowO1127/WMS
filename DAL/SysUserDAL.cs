@@ -32,22 +32,22 @@ namespace DAL
             return count;
         }
 
-        public List<SysUser> GetListByPage(PageSysUser psysuser)
+        public List<SysUser> GetListByPage(PageSysUser psu)
         {
             List<SysUser> list = new List<SysUser>();
             using (var ctx = new SysUserContext(Globe.ConnectionString))
             {
-                list = psysuser.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => GetPropertyValue(p, psysuser.Sort)).Skip(psysuser.Rows * (psysuser.Page - 1)).Take(psysuser.Rows).ToList() : ctx.SysUsers.ToList().OrderBy(p => GetPropertyValue(p, psysuser.Sort)).Skip(psysuser.Rows * (psysuser.Page - 1)).Take(psysuser.Rows).ToList();
+                list = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList() : ctx.SysUsers.ToList().OrderBy(p => GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList();
             }
             return list;
         }
 
-        public int GetCountByPage(PageSysUser psysuser)
+        public int GetCountByPage(PageSysUser psu)
         {
             int count = 0;
             using (var ctx = new SysUserContext(Globe.ConnectionString))
             {
-                count = psysuser.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => GetPropertyValue(p, psysuser.Sort)).Skip(psysuser.Rows * (psysuser.Page - 1)).Take(psysuser.Rows).Count() : ctx.SysUsers.ToList().OrderBy(p => GetPropertyValue(p, psysuser.Sort)).Skip(psysuser.Rows * (psysuser.Page - 1)).Take(psysuser.Rows).Count();
+                count = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count() : ctx.SysUsers.ToList().OrderBy(p => GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count();
             }
             return count;
         }
@@ -56,6 +56,15 @@ namespace DAL
         {
             PropertyInfo propertyInfo = obj.GetType().GetProperty(property);
             return propertyInfo.GetValue(obj, null);
-        } 
+        }
+
+        public void AddUser(SysUser su)
+        {
+            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            {
+                ctx.SysUsers.Add(su);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

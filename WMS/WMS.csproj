@@ -1814,6 +1814,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SystemManage\Button\" />
+    <Folder Include="SystemManage\Dict\" />
     <Folder Include="SystemManage\Role\" />
   </ItemGroup>
   <ItemGroup>

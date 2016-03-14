@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BLL;
+using Common;
+using Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,18 +14,26 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_menu : IHttpHandler
     {
-        //private readonly menu_bll menubll = new menu_bll();
+        private readonly SysMenuBLL bll = new SysMenuBLL();
 
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
-            //switch (request["action"])
-            //{
-            //    case "getmenu":
-            //        context.Response.Write(utils.SerializeList<tree>(menubll.GetMenuList()));
-            //        break;
-            //}
+            switch (request["action"])
+            {
+                case "getmenu":
+                    try
+                    {
+                        context.Response.Write(utils.SerializeListWithTime<SysMenu>(bll.GetList()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+
+                    break;
+            }
         }
 
         public bool IsReusable

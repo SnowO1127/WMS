@@ -140,13 +140,12 @@
         }
 
 
-        //保存按钮
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
                 title: '新增用户',
                 width: 620,
                 height: 300,
-                url: 'SystemManage/User/user_add.aspx',
+                url: 'user_add.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
