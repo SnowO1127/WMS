@@ -41,6 +41,7 @@
                     title: '类别',
                     field: 'Category',
                     halign: 'center',
+                    align: 'center',
                     sortable: true
                 }]],
                 columns: [[{
@@ -160,8 +161,8 @@
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
                 title: '新增菜单',
-                width: 620,
-                height: 300,
+                width: 550,
+                height: 380,
                 url: 'menu_add.aspx',
                 buttons: [{
                     text: '保存',

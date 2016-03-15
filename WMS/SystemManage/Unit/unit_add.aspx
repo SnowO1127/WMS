@@ -155,7 +155,7 @@
 
                     </tr>
                     <tr>
-                        <td>是否独立法人</td>
+                        <td>独立法人</td>
                         <td>
                             <select id="isincorporation" class="easyui-combobox" data-options="panelHeight:30,editable:false" name="isincorporation" style="width: 155px">
                                 <option value="1">是</option>
