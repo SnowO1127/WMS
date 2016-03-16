@@ -33,6 +33,21 @@ namespace Common
         /// </summary>
         /// <param name="destination">目标</param>
         /// <param name="source">来源</param>
+        /// <returns>成功复制的值个数</returns>
+        public static int Copy(object destination, object source, IEnumerable<string> excludeName)
+        {
+            if (destination == null || source == null)
+            {
+                return 0;
+            }
+            return Copy(destination, source, source.GetType(), excludeName);
+        }
+
+        /// <summary>
+        /// 复制
+        /// </summary>
+        /// <param name="destination">目标</param>
+        /// <param name="source">来源</param>
         /// <param name="type">复制的属性字段模板</param>
         /// <returns>成功复制的值个数</returns>
         public static int Copy(object destination, object source, Type type)
@@ -191,11 +206,11 @@ namespace Common
                     }
                 case System.TypeCode.Boolean:
                     {
-                        if (null == value || value.ToString().Equals("0"))
+                        if (null == value || value.ToString().Equals("0") || value.ToString().Equals("false"))
                         {
                             returnValue = false;
                         }
-                        else if (value.ToString().Equals("1"))
+                        else if (value.ToString().Equals("1") || value.ToString().Equals("true"))
                         {
                             returnValue = true;
                         }

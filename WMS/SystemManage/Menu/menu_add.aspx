@@ -21,6 +21,8 @@
         var sy = sy || {};
         sy.pixel_0 = '../../library/images/pixel_0.gif';//0像素的背景，一般用于占位
 
+        var id = "<%=id %>";
+
         var showIcons = function () {
             var dialog = parent.sy.modalDialog({
                 title: '浏览小图标',
@@ -37,16 +39,67 @@
         $(function () {
             $('.iconImg').attr('src', sy.pixel_0);
         })
+
+        $(function () {
+            if (id) {
+                $.ajax({
+                    url: "../../datasorce/sy_menu.ashx?action=getonemenu",
+                    dataType: "json",
+                    type: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function (jsonresult) {
+                        $("#menu_add_form").form('load', jsonresult);
+
+                        $('#IconCls').attr('class', jsonresult.IconCls);//设置背景图标
+                        if (jsonresult.ParentID) {
+                            $('#ParentID').combotree('setValue', jsonresult.ParentID);
+                        }
+                        else {
+                            $('#ParentID').combotree('setValue', "");
+                        }
+                    }
+                })
+            }
+        });
+
+        var f_save = function ($dialog, $grid, $pjq) {
+            if ($('#menu_add_form').form('validate')) {
+                var url;
+                if (id) {
+                    url = "../../datasorce/sy_menu.ashx?action=updatemenu";
+                } else {
+                    url = "../../datasorce/sy_menu.ashx?action=addmenu";
+                }
+                $.ajax({
+                    url: url,
+                    type: "post",
+                    dataType: "json",
+                    data: $('#menu_add_form').serializeArray(),
+                    success: function (jsonresult) {
+                        if (jsonresult.Success) {
+                            $pjq.messager.alert('提示', jsonresult.Msg, 'info');
+                            $grid.datagrid('load');
+                            $dialog.dialog('destroy');
+                        } else {
+                            $pjq.messager.alert('提示', jsonresult.Msg, 'error');
+                        }
+                    }
+                });
+            }
+        };
     </script>
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <form id="menu_add_form" style="font-size: 13px; margin: 0 auto">
+        <form id="menu_add_form" style="font-size: 13px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
                     <td style="width: 60px">菜单名称</td>
                     <td colspan="3">
                         <input name="MenuName" class="easyui-validatebox" type="text" data-options="required:true" style="width: 170px" />
+                        <input name="ID" type="hidden" />
                     </td>
                 </tr>
                 <tr>
@@ -61,8 +114,8 @@
                 <tr>
                     <td>上级菜单</td>
                     <td colspan="3">
-                        <input id="pid" name="pid" class="easyui-combotree" data-options="panelHeight:150,editable:false,idField:'id',textField:'name',parentField:'pid',url:'../../datasorce/sy_menu.ashx?action=getallmenu'" />
-                        <img style="cursor: pointer; vertical-align: middle" src="../../library/themes/icons/no.png" onclick="$('#pid').combotree('clear')" title="清空" />
+                        <input id="ParentID" name="ParentID" class="easyui-combotree" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_menu.ashx?action=getismenu'" />
+                        <img style="cursor: pointer; vertical-align: middle" src="../../library/themes/icons/no.png" onclick="$('#ParentID').combotree('clear')" title="清空" />
                     </td>
                 </tr>
                 <tr>

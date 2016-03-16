@@ -17,7 +17,7 @@
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <script>
         $(function () {
-            treegrid = $('#menu_list_treegrid').treegrid({
+            grid = $('#menu_list_grid').datagrid({
                 title: '',
                 url: '../../datasorce/sy_menu.ashx?action=getmenu',
                 striped: true,
@@ -27,7 +27,6 @@
                 sortName: 'Order',
                 sortOrder: 'asc',
                 idField: 'ID',
-                treeField: 'MenuName',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 frozenColumns: [[{
@@ -94,9 +93,9 @@
                     iconCls: 'icon-save',
                     text: '查看',
                     handler: function () {
-                        var row = treegrid.treegrid('getSelected');
+                        var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.id);
+                            openView(row.ID);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -106,9 +105,9 @@
                     iconCls: 'icon-edit',
                     text: '编辑',
                     handler: function () {
-                        var row = treegrid.treegrid('getSelected');
+                        var row = grid.datagrid('getSelected');
                         if (row) {
-                            openEdit(row.id);
+                            openEdit(row.ID);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -135,14 +134,14 @@
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
                 title: '编辑菜单',
-                width: 620,
-                height: 300,
+                width: 545,
+                height: 370,
                 url: 'menu_add.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, treegrid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
             });
@@ -151,24 +150,23 @@
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
                 title: '查看菜单',
-                width: 620,
-                height: 300,
+                width: 545,
+                height: 370,
                 url: 'menu_add.aspx?id=' + id + '',
             });
         }
 
-
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
                 title: '新增菜单',
-                width: 550,
-                height: 380,
+                width: 545,
+                height: 370,
                 url: 'menu_add.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, treegrid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
             });
@@ -178,7 +176,7 @@
 <body>
     <div class="easyui-layout" fit="true">
         <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-            <div id="menu_list_treegrid" fit="true">
+            <div id="menu_list_grid" fit="true">
             </div>
         </div>
     </div>

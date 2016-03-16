@@ -11,12 +11,12 @@ namespace Model
         /// <summary>
         /// 主键
         /// </summary>
-        public Guid ID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// 父模块id/外键
         /// </summary>
-        public Guid? ParentID { get; set; }
+        public string ParentID { get; set; }
 
         /// <summary>
         /// 菜单名
@@ -36,95 +36,95 @@ namespace Model
         /// <summary>
         /// 地址
         /// </summary>
-        public string Url{ get; set; }
+        public string Url { get; set; }
 
         /// <summary>
         /// 是否公开
         /// </summary>
-        public bool IsPublic{ get; set; }
+        public bool IsPublic { get; set; }
 
         /// <summary>
         /// 是否菜单
         /// </summary>
-        public bool IsMenu{ get; set; }
-       
+        public bool IsMenu { get; set; }
+
         /// <summary>
         /// 是否允许修改
         /// </summary>
-        public bool AllowEdit{ get; set; }
+        public bool AllowEdit { get; set; }
 
         /// <summary>
         /// 是否允许删除
         /// </summary>
-        public bool AllowDelete{ get; set; }
-        
+        public bool AllowDelete { get; set; }
+
         /// <summary>
         /// 排序号
         /// </summary>
-        public int Order{ get; set; }
-      
+        public int Order { get; set; }
+
         /// <summary>
         /// 删除标记
         /// </summary>
-        public bool DeleteMark{ get; set; }
-      
+        public bool DeleteMark { get; set; }
+
         /// <summary>
         /// 是否有效
         /// </summary>
-        public bool Enabled{ get; set; }
-       
+        public bool Enabled { get; set; }
+
         /// <summary>
         /// 描述
         /// </summary>
-        public string Description{ get; set; }
-      
+        public string Description { get; set; }
+
         /// <summary>
         /// 创建日期
         /// </summary>
-        public DateTime CDate{ get; set; }
-       
+        public DateTime CDate { get; set; }
+
         /// <summary>
         /// 创建人id
         /// </summary>
-        public string CUserID{ get; set; }
-       
+        public string CUserID { get; set; }
+
         /// <summary>
         /// 创建人姓名
         /// </summary>
-        public string CUserName{ get; set; }
-     
+        public string CUserName { get; set; }
+
         /// <summary>
         /// 更新日期
         /// </summary>
-        public DateTime? UDate{ get; set; }
-       
+        public DateTime? UDate { get; set; }
+
         /// <summary>
         /// 更新人id
         /// </summary>
-        public string UUserID{ get; set; }
-     
+        public string UUserID { get; set; }
+
         /// <summary>
         /// 更新人姓名
         /// </summary>
-        public string UUserName{ get; set; }
-     
+        public string UUserName { get; set; }
+
         /// <summary>
         /// 删除日期
         /// </summary>
-        public DateTime? DDate{ get; set; }
+        public DateTime? DDate { get; set; }
 
         /// <summary>
         /// 删除人id
         /// </summary>
-        public string DUserID{ get; set; }
+        public string DUserID { get; set; }
 
         /// <summary>
         /// 删除人姓名
         /// </summary>
-        public string DUserName{ get; set; }
+        public string DUserName { get; set; }
 
         public List<SysMenu> SysMenus { get; set; }
 
-        public SysMenu PSysMenu { get; set; }
+        public virtual SysMenu PSysMenu { get; set; }
     }
 }

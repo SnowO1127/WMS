@@ -10,12 +10,12 @@ namespace Model
 {
     public class SysUser
     {
-        private Guid _userid;
+        private string _userid;
 
         /// <summary>
         /// 用户ID
         /// </summary>
-        public Guid UserID
+        public string UserID
         {
             get { return _userid; }
             set { _userid = value; }

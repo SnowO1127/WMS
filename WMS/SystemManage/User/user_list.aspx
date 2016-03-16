@@ -24,7 +24,7 @@
                 rownumbers: true,
                 pagination: true,
                 singleSelect: true,
-                idField: 'id',
+                idField: 'UserID',
                 sortName: 'UserID',
                 sortOrder: 'desc',
                 pageSize: 10,
