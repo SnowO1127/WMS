@@ -31,7 +31,7 @@ namespace WMS.datasorce
                     try
                     {
                         Grid<SysUser> g = bll.GetListByPage(psu);
-                        context.Response.Write(utils.SerializeObjectWithTime<Grid<SysUser>>(g));
+                        context.Response.Write(utils.SerializeObject(g));
                     }
                     catch (Exception ex)
                     {
@@ -53,7 +53,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject<JsonResult>(jr));
+                    context.Response.Write(utils.SerializeObject(jr));
 
                     break;
                 //case "getoneuser":

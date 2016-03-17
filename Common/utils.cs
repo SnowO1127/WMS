@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -122,45 +124,100 @@ namespace Common
         #endregion
 
         #region json序列化
-        public static string SerializeList<T>(List<T> list)
+        /// <summary>
+        /// 将对象序列化为JSON格式
+        /// </summary>
+        /// <param name="o">对象</param>
+        /// <returns>json字符串</returns>
+        public static string SerializeObject(object o)
         {
-            JavaScriptSerializer serial = new JavaScriptSerializer();
-            return serial.Serialize(list);
+            string json = JsonConvert.SerializeObject(o);
+            return json;
         }
 
-        public static string SerializeObject<T>(T t)
+        /// <summary>
+        /// 解析JSON字符串生成对象实体
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="json">json字符串(eg.{"ID":"112","Name":"石子儿"})</param>
+        /// <returns>对象实体</returns>
+        public static T DeserializeJsonToObject<T>(string json) where T : class
         {
-            JavaScriptSerializer serial = new JavaScriptSerializer();
-            return serial.Serialize(t);
+            JsonSerializer serializer = new JsonSerializer();
+            StringReader sr = new StringReader(json);
+            object o = serializer.Deserialize(new JsonTextReader(sr), typeof(T));
+            T t = o as T;
+            return t;
         }
 
-        public static string SerializeListWithTime<T>(List<T> list)
+        /// <summary>
+        /// 反序列化JSON到给定的匿名对象.
+        /// </summary>
+        /// <typeparam name="T">匿名对象类型</typeparam>
+        /// <param name="json">json字符串</param>
+        /// <param name="anonymousTypeObject">匿名对象</param>
+        /// <returns>匿名对象</returns>
+        public static T DeserializeAnonymousType<T>(string json, T anonymousTypeObject)
         {
-            JavaScriptSerializer serial = new JavaScriptSerializer();
-            string str = serial.Serialize(list);
-            str = Regex.Replace(str, @"\\/Date\((\d+)\)\\/", match =>
-            {
-                DateTime dt = new DateTime(1970, 1, 1);
-                dt = dt.AddMilliseconds(long.Parse(match.Groups[1].Value));
-                dt = dt.ToLocalTime();
-                return dt.ToString("yyyy-MM-dd HH:mm:ss");
-            });
-            return str;
+            T t = JsonConvert.DeserializeAnonymousType(json, anonymousTypeObject);
+            return t;
         }
 
-        public static string SerializeObjectWithTime<T>(T t)
+        /// <summary>
+        /// 解析JSON数组生成对象实体集合
+        /// </summary>
+        /// <typeparam name="T">对象类型</typeparam>
+        /// <param name="json">json数组字符串(eg.[{"ID":"112","Name":"石子儿"}])</param>
+        /// <returns>对象实体集合</returns>
+        public static List<T> DeserializeJsonToList<T>(string json) where T : class
         {
-            JavaScriptSerializer serial = new JavaScriptSerializer();
-            string str = serial.Serialize(t);
-            str = Regex.Replace(str, @"\\/Date\((\d+)\)\\/", match =>
-            {
-                DateTime dt = new DateTime(1970, 1, 1);
-                dt = dt.AddMilliseconds(long.Parse(match.Groups[1].Value));
-                dt = dt.ToLocalTime();
-                return dt.ToString("yyyy-MM-dd HH:mm:ss");
-            });
-            return str;
+            JsonSerializer serializer = new JsonSerializer();
+            StringReader sr = new StringReader(json);
+            object o = serializer.Deserialize(new JsonTextReader(sr), typeof(List<T>));
+            List<T> list = o as List<T>;
+            return list;
         }
+
+
+        //public static string SerializeList<T>(List<T> list)
+        //{
+        //    JavaScriptSerializer serial = new JavaScriptSerializer();
+        //    return serial.Serialize(list);
+        //}
+
+        //public static string SerializeObject<T>(T t)
+        //{
+        //    JavaScriptSerializer serial = new JavaScriptSerializer();
+        //    return serial.Serialize(t);
+        //}
+
+        //public static string SerializeListWithTime<T>(List<T> list)
+        //{
+        //    JavaScriptSerializer serial = new JavaScriptSerializer();
+        //    string str = serial.Serialize(list);
+        //    str = Regex.Replace(str, @"\\/Date\((\d+)\)\\/", match =>
+        //    {
+        //        DateTime dt = new DateTime(1970, 1, 1);
+        //        dt = dt.AddMilliseconds(long.Parse(match.Groups[1].Value));
+        //        dt = dt.ToLocalTime();
+        //        return dt.ToString("yyyy-MM-dd HH:mm:ss");
+        //    });
+        //    return str;
+        //}
+
+        //public static string SerializeObjectWithTime<T>(T t)
+        //{
+        //    JavaScriptSerializer serial = new JavaScriptSerializer();
+        //    string str = serial.Serialize(t);
+        //    str = Regex.Replace(str, @"\\/Date\((\d+)\)\\/", match =>
+        //    {
+        //        DateTime dt = new DateTime(1970, 1, 1);
+        //        dt = dt.AddMilliseconds(long.Parse(match.Groups[1].Value));
+        //        dt = dt.ToLocalTime();
+        //        return dt.ToString("yyyy-MM-dd HH:mm:ss");
+        //    });
+        //    return str;
+        //}
         #endregion
 
         #region 类注入

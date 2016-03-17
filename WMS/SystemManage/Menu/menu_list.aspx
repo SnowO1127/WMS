@@ -136,7 +136,7 @@
                 title: '编辑菜单',
                 width: 545,
                 height: 370,
-                url: 'menu_add.aspx?id=' + id + '',
+                url: 'SystemManage/Menu/menu_add.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -152,7 +152,7 @@
                 title: '查看菜单',
                 width: 545,
                 height: 370,
-                url: 'menu_add.aspx?id=' + id + '',
+                url: 'SystemManage/Menu/menu_add.aspx?id=' + id + '',
             });
         }
 
@@ -161,7 +161,7 @@
                 title: '新增菜单',
                 width: 545,
                 height: 370,
-                url: 'menu_add.aspx',
+                url: 'SystemManage/Menu/menu_add.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',

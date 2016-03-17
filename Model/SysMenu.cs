@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -123,8 +124,10 @@ namespace Model
         /// </summary>
         public string DUserName { get; set; }
 
+        [JsonIgnore] 
         public List<SysMenu> SysMenus { get; set; }
 
+        [JsonIgnore] 
         public virtual SysMenu PSysMenu { get; set; }
     }
 }

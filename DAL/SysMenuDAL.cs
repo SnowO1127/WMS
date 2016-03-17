@@ -16,8 +16,6 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
             {
-                ctx.Configuration.ProxyCreationEnabled = false;
-
                 list = ctx.SysMenus.ToList();
             }
             return list;

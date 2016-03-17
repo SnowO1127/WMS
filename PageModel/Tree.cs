@@ -46,7 +46,7 @@ namespace PageModel
             get { return _url; }
         }
 
-        public string iconcls
+        public string iconCls
         {
             set { _iconcls = value; }
             get { return _iconcls; }

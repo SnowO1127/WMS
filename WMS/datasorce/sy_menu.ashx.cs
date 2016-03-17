@@ -25,10 +25,20 @@ namespace WMS.datasorce
             SysMenu sm = new SysMenu();
             switch (request["action"])
             {
+                case "getmenutree":
+                    try
+                    {
+                        context.Response.Write(utils.SerializeObject(bll.GetMenuTree()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
                 case "getmenu":
                     try
                     {
-                        context.Response.Write(utils.SerializeListWithTime<SysMenu>(bll.GetList()));
+                        context.Response.Write(utils.SerializeObject(bll.GetList()));
                     }
                     catch (Exception ex)
                     {
@@ -39,7 +49,7 @@ namespace WMS.datasorce
                 case "getismenu":
                     try
                     {
-                        context.Response.Write(utils.SerializeList<Tree>(bll.GetIsMenuTree()));
+                        context.Response.Write(utils.SerializeObject(bll.GetIsMenuTree()));
                     }
                     catch (Exception ex)
                     {
@@ -54,7 +64,7 @@ namespace WMS.datasorce
 
                         sm.ID = Guid.NewGuid().ToString();
                         sm.CDate = DateTime.Now;
-                       
+
 
                         bll.AddMenu(sm);
 
@@ -66,7 +76,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject<JsonResult>(jr));
+                    context.Response.Write(utils.SerializeObject(jr));
                     break;
                 case "updatemenu":
                     try
@@ -82,7 +92,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject<JsonResult>(jr));
+                    context.Response.Write(utils.SerializeObject(jr));
                     break;
                 case "getonemenu":
                     try
@@ -91,7 +101,7 @@ namespace WMS.datasorce
 
                         sm = bll.GetOneMenu(id);
 
-                        context.Response.Write(utils.SerializeObjectWithTime<SysMenu>(sm));
+                        context.Response.Write(utils.SerializeObject(sm));
                     }
                     catch (Exception ex)
                     {

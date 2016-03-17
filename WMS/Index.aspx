@@ -17,6 +17,8 @@
     <script src="library/My97DatePicker/WdatePicker.js"></script>
     <script src="library/xyEasyUI.js"></script>
     <script src="library/xyUtils.js"></script>
+    <link href="library/syExtCss.css" rel="stylesheet" />
+    <link href="library/syExtIcon.css" rel="stylesheet" />
     <title>easyUI</title>
     <script>
         var themeData =
@@ -163,49 +165,26 @@
             return typeof (obj) == "date";
         };
 
-
-
-        sy.addTab = function (title, url) {
-            if ($('#index_tab').tabs('exists', title)) {
-                $('#index_tab').tabs('select', title);
-            } else {
-                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
-                $('#index_tab').tabs('add', {
-                    title: title,
-                    content: content,
-                    closable: true
-                });
-            }
-        }
-
-
-        $(function () {
-            $("#xx").change(function () {
-                $("#dx").val(toCHSnum($(this).val()));
-
-            });
-
-            $("#index_layout").layout("collapse", "east");
-        })
-
-        //树形菜单直接加载
         //$(function () {
-        //    $("#index_menu_tree").tree({
-        //        url: 'datasorce/sy_menu.ashx?action=getmenu',
-        //        parentField: 'pid',
-        //        lines: true,
-        //        onClick: function (node) {
-        //            if (node.attributes.url) {
-        //                addTab(node.text, node.attributes.url);
-        //            }
-        //        }
+        //    $("#xx").change(function () {
+        //        $("#dx").val(toCHSnum($(this).val()));
+
         //    });
-        //});
+
+        //    $("#index_layout").layout("collapse", "east");
+        //})
 
         //手风琴菜单加载
         $(function () {
+            $('#index_accordion').accordion({
+                fillSpace: true,
+                fit: true,
+                border: false,
+                animate: false
+            })
+
             $.ajax({
-                url: 'datasorce/sy_menu.ashx?action=getmenu',
+                url: 'datasorce/sy_menu.ashx?action=getmenutree',
                 type: 'post',
                 dataType: 'json',
                 async: false,
@@ -216,15 +195,24 @@
                         var sub_menu = [];
                         if (r[i].pid == null) {
                             sy.GetChild(r[i].id, sub_menu, r);
-                            divHtml = "<div title=" + r[i].text + "><ul id=" + treeID + " style='margin-top: 3px;'></div>";
-                            $('#index_accordion').append(divHtml);
+
+                            $('#index_accordion').accordion('add', {
+                                title: r[i].text,
+                                content: "<ul id='" + treeID + "' ></ul>",
+                                selected: true,
+                                iconCls: r[i].iconCls//e.Icon
+                            });
+
+
+                            //divHtml = "<div title=" + r[i].text + "><ul id=" + treeID + " style='margin-top: 3px;'></div>";
+                            //$('#index_accordion').append(divHtml);
                             $('#' + treeID).tree({
                                 data: sub_menu,
                                 parentField: 'pid',
                                 lines: true,
                                 onClick: function (node) {
                                     if (node.attributes.url) {
-                                        sy.addTab(node.text, node.attributes.url);
+                                        sy.addTab(node.text, node.attributes.url, node.iconCls);
                                     }
                                 }
                             });
@@ -232,13 +220,21 @@
                     }
                 }
             });
-
-            $('#index_accordion').accordion({
-                border: false,
-                fit: true,
-                animate: false
-            })
         });
+
+        sy.addTab = function (title, url, iconCls) {
+            if ($('#index_tab').tabs('exists', title)) {
+                $('#index_tab').tabs('select', title);
+            } else {
+                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
+                $('#index_tab').tabs('add', {
+                    title: title,
+                    content: content,
+                    closable: true,
+                    iconCls: iconCls
+                });
+            }
+        }
 
         sy.GetChild = function (id, sub_menu, r) {
             for (var j = 0; j < r.length; j++) {
@@ -364,7 +360,7 @@
             </div>
         </div>--%>
         <div data-options="region:'west',split:true" title="菜单导航" iconcls="icon-standard-map" style="width: 200px; overflow: auto">
-            <div id="index_menu_tree">
+            <div id="index_accordion">
             </div>
         </div>
         <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">

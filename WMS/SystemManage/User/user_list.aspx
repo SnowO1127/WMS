@@ -14,6 +14,8 @@
     <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
+    <link href="../../library/syExtCss.css" rel="stylesheet" />
+    <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
         $(function () {
@@ -145,7 +147,7 @@
                 title: '新增用户',
                 width: 620,
                 height: 300,
-                url: 'user_add.aspx',
+                url: 'SystemManage/User/user_add.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
