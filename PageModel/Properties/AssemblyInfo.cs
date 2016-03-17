@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("PageModel")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Lenovo")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PageModel")]
-[assembly: AssemblyCopyright("Copyright © Lenovo 2016")]
+[assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("b6079fd4-860e-4ddf-a4ac-ba1a3c1e4bcb")]
+[assembly: Guid("cc766c37-32b2-45ff-beb6-8d1e831c8eca")]
 
 // 程序集的版本信息由下面四个值组成:
 //

@@ -63,7 +63,7 @@
       <Name>Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\PageModel\PageModel.csproj">
-      <Project>{f93e536f-707a-4ca2-8ee9-c4621ffa4b9b}</Project>
+      <Project>{f5b520b2-3421-4cfb-a33f-3516dc13ac0c}</Project>
       <Name>PageModel</Name>
     </ProjectReference>
   </ItemGroup>
