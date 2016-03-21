@@ -66,5 +66,10 @@ namespace BLL
             }
             return tlist;
         }
+
+        public object GetListByPage(PageSysMenu psm)
+        {
+            return dal.GetListByPage(psm);
+        }
     }
 }

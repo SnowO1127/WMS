@@ -1,5 +1,6 @@
 ﻿using Common;
 using Model;
+using PageModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,6 +18,24 @@ namespace DAL
             using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
             {
                 list = ctx.SysMenus.ToList();
+            }
+            return list;
+        }
+
+        public List<SysMenu> GetListByPage(PageSysMenu psm)
+        {
+            List<SysMenu> list = new List<SysMenu>();
+            using (var ctx = new SysMenuContext(Globe.ConnectionString))
+            {
+                if (!string.IsNullOrEmpty(psm.ID))
+                {
+                    list = ctx.SysMenus.Where(x => x.ParentID.Equals(psm.ID)).ToList();
+                }
+                if (!string.IsNullOrEmpty(psm.MenuName)) {
+                    list = list.Where(x => x.MenuName.Contains(psm.MenuName)).ToList() ;
+                }
+
+                list = psm.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();
             }
             return list;
         }

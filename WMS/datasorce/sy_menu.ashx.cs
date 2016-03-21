@@ -23,6 +23,7 @@ namespace WMS.datasorce
             HttpRequest request = context.Request;
             JsonResult jr = new JsonResult();
             SysMenu sm = new SysMenu();
+            PageSysMenu psm = new PageSysMenu();
             switch (request["action"])
             {
                 case "getmenutree":
@@ -39,6 +40,18 @@ namespace WMS.datasorce
                     try
                     {
                         context.Response.Write(utils.SerializeObject(bll.GetList()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+
+                    break;
+                case "getmenubypage":
+                    try
+                    {
+                        psm = utils.AutoWiredClass<PageSysMenu>(request, psm);
+                        context.Response.Write(utils.SerializeObject(bll.GetListByPage(psm)));
                     }
                     catch (Exception ex)
                     {

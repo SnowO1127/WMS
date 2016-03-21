@@ -1,14 +1,21 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Model
+namespace PageModel
 {
-    public class SysMenu
+    public class PageSysMenu
     {
+        public int Page { get; set; }
+
+        public int Rows { get; set; }
+
+        public string Sort { get; set; }
+
+        public string Order { get; set; }
+
         /// <summary>
         /// 主键
         /// </summary>
@@ -124,10 +131,5 @@ namespace Model
         /// </summary>
         public string DUserName { get; set; }
 
-        [JsonIgnore] 
-        public List<SysMenu> SysMenus { get; set; }
-
-        [JsonIgnore] 
-        public virtual SysMenu PSysMenu { get; set; }
     }
 }

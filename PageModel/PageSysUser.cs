@@ -8,77 +8,33 @@ namespace PageModel
 {
     public class PageSysUser
     {
-        private int _page;
-        private int _rows;
-        private string _sort;
-        private string _order;
 
-        public int Page
-        {
-            set { _page = value; }
-            get { return _page; }
-        }
+        public int Page { get; set; }
 
-        public int Rows
-        {
-            set { _rows = value; }
-            get { return _rows; }
-        }
+        public int Rows { get; set; }
 
-        public string Sort
-        {
-            set { _sort = value; }
-            get { return _sort; }
-        }
+        public string Sort { get; set; }
 
-        public string Order
-        {
-            set { _order = value; }
-            get { return _order; }
-        }
-
-        private string _userid;
+        public string Order { get; set; }
 
         /// <summary>
         /// 用户ID
         /// </summary>
-        public string UserID
-        {
-            get { return _userid; }
-            set { _userid = value; }
-        }
-
-        private string _loginname;
+        public string UserID{ get; set; }
 
         /// <summary>
         /// 用户登录名
         /// </summary>
-        public string LoginName
-        {
-            get { return _loginname; }
-            set { _loginname = value; }
-        }
-
-        private string _password;
+        public string LoginName{ get; set; }
 
         /// <summary>
         /// 登录密码
         /// </summary>
-        public string PassWord
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        private string _username;
+        public string PassWord{ get; set; }
 
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName
-        {
-            get { return _username; }
-            set { _username = value; }
-        }
+        public string UserName{ get; set; }
     }
 }
