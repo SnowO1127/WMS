@@ -60,12 +60,105 @@
 <body>
     <div class="easyui-layout" fit="true">
         <form id="user_add_form" runat="server" style="font-size: 13px">
-            <fieldset>
-                <legend>基本信息</legend>
-                <input name="LoginName" class="easyui-validatebox" />
-                <input name="PassWord" class="easyui-validatebox" />
-                <input name="UserName" class="easyui-validatebox" />
-            </fieldset>
+            <table>
+                <tr>
+                    <td style="width: 60px">登录名</td>
+                    <td>
+                        <input name="LoginName" class="easyui-validatebox" type="text" data-options="required:true" style="width: 150px" />
+                        <input name="UserID" type="hidden" />
+                    </td>
+                    <td style="width: 60px">姓名</td>
+                    <td>
+                        <input name="UserName" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>编号</td>
+                    <td>
+                        <input name="UserNum" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
+                    </td>
+                    <td>性别</td>
+                    <td>
+                        <select id="Sex" class="easyui-combobox" data-options="required:true,panelHeight:50,editable:false" name="Sex" style="width: 150px">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>手机号码</td>
+                    <td>
+                        <input name="PhoneNum" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                    <td>出生日期</td>
+                    <td>
+                        <input name="Birthday" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>电话号码</td>
+                    <td>
+                        <input name="Tel" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                    <td>岗位</td>
+                    <td>
+                        <select id="Post" class="easyui-combobox" data-options="panelHeight:100,editable:false" name="Post" style="width: 150px">
+                            <option value="员工">员工</option>
+                            <option value="经理">经理</option>
+                            <option value="部长">部长</option>
+                            <option value="总经理">总经理</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>QQ号码</td>
+                    <td>
+                        <input name="QQ" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                    <td>邮箱</td>
+                    <td>
+                        <input name="Email" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td colspan="3">
+                        <input name="Address" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>公司</td>
+                    <td>
+                        <input name="Company" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                    <td>子公司</td>
+                    <td>
+                        <input name="ChildCompany" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>部门</td>
+                    <td>
+                        <input name="Dept" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                    <td>子部门</td>
+                    <td>
+                        <input name="ChildDept" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>组</td>
+                    <td>
+                        <input name="ClassGroup" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>备注</td>
+                    <td colspan="3">
+                        <textarea name="Memo" id="Memo" style="width: 300px; height: 50px"></textarea>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </body>

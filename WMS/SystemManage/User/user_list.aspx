@@ -119,8 +119,8 @@
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
                 title: '编辑用户',
-                width: 620,
-                height: 300,
+                width: 400,
+                height: 400,
                 url: 'SystemManage/User/user_add.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
@@ -145,8 +145,8 @@
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
                 title: '新增用户',
-                width: 620,
-                height: 300,
+                width: 500,
+                height: 400,
                 url: 'SystemManage/User/user_add.aspx',
                 buttons: [{
                     text: '保存',

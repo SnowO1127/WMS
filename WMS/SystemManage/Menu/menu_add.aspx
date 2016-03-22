@@ -114,7 +114,7 @@
                 <tr>
                     <td>上级菜单</td>
                     <td colspan="3">
-                        <input id="ParentID" name="ParentID" class="easyui-combotree" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_menu.ashx?action=getismenu'" />
+                        <input id="ParentID" name="ParentID" class="easyui-combotree" style="width: 173px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_menu.ashx?action=getismenu'" />
                         <img style="cursor: pointer; vertical-align: middle" src="../../library/themes/icons/no.png" onclick="$('#ParentID').combotree('clear')" title="清空" />
                     </td>
                 </tr>
