@@ -8,7 +8,10 @@
     <script src="../../library/jquery-1.8.2.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
-    <link href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <script src="../../library/jquery.cookie.js"></script>
+    <script src="../../library/xyEasyUI.js"></script>
+    <script src="../../library/xyUtils.js"></script>
+    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <title></title>
     <script>

@@ -8,7 +8,11 @@
     <script src="../../library/jquery-1.8.2.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
-    <link href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <script src="../../library/jquery.cookie.js"></script>
+    <script src="../../library/My97DatePicker/WdatePicker.js"></script>
+    <script src="../../library/xyEasyUI.js"></script>
+    <script src="../../library/xyUtils.js"></script>
+    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <title></title>
     <script>
@@ -59,7 +63,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <form id="user_add_form" runat="server" style="font-size: 13px">
+        <form id="user_add_form" runat="server" style="font-size: 13px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
                     <td style="width: 60px">登录名</td>
@@ -69,17 +73,17 @@
                     </td>
                     <td style="width: 60px">姓名</td>
                     <td>
-                        <input name="UserName" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
+                        <input name="RealName" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
                     <td>编号</td>
                     <td>
-                        <input name="UserNum" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
+                        <input name="Code" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
                     </td>
                     <td>性别</td>
                     <td>
-                        <select id="Sex" class="easyui-combobox" data-options="required:true,panelHeight:50,editable:false" name="Sex" style="width: 150px">
+                        <select id="Sex" class="easyui-combobox" data-options="width:155,required:true,panelHeight:50,editable:false" name="Sex">
                             <option value="男">男</option>
                             <option value="女">女</option>
                         </select>
@@ -92,7 +96,7 @@
                     </td>
                     <td>出生日期</td>
                     <td>
-                        <input name="Birthday" class="easyui-validatebox" style="width: 150px" />
+                        <input name="Birthday" class="easyui-my97" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
@@ -102,7 +106,7 @@
                     </td>
                     <td>岗位</td>
                     <td>
-                        <select id="Post" class="easyui-combobox" data-options="panelHeight:100,editable:false" name="Post" style="width: 150px">
+                        <select id="Post" class="easyui-combobox" data-options="width:155,panelHeight:100,editable:false" name="Post">
                             <option value="员工">员工</option>
                             <option value="经理">经理</option>
                             <option value="部长">部长</option>
@@ -155,7 +159,7 @@
                 <tr>
                     <td>备注</td>
                     <td colspan="3">
-                        <textarea name="Memo" id="Memo" style="width: 300px; height: 50px"></textarea>
+                        <textarea name="Memo" id="Memo" style="width: 375px; height: 50px"></textarea>
                     </td>
                 </tr>
             </table>

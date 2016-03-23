@@ -13,22 +13,47 @@ namespace Model
         /// <summary>
         /// 用户ID
         /// </summary>
-        public string UserID{ get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// 用户登录名
         /// </summary>
-        public string LoginName{ get; set; }
+        public string LoginName { get; set; }
 
         /// <summary>
         /// 登录密码
         /// </summary>
-        public string PassWord{ get; set; }
+        public string PassWord { get; set; }
 
         /// <summary>
-        /// 用户名
+        /// 真实姓名
         /// </summary>
-        public string UserName{ get; set; }
+        public string RealName { get; set; }
+
+        ///// <summary>
+        ///// 真实姓名
+        ///// </summary>
+        //public string RealName { get; set; }
+
+        ///// <summary>
+        ///// 真实姓名
+        ///// </summary>
+        //public string RealName { get; set; }
+
+        ///// <summary>
+        ///// 真实姓名
+        ///// </summary>
+        //public string RealName { get; set; }
+
+        ///// <summary>
+        ///// 真实姓名
+        ///// </summary>
+        //public string RealName { get; set; }
+
+        ///// <summary>
+        ///// 真实姓名
+        ///// </summary>
+        //public string RealName { get; set; }
 
         /// <summary>
         /// 创建日期
@@ -74,5 +99,12 @@ namespace Model
         /// 删除人姓名
         /// </summary>
         public string DUserName { get; set; }
+
+        public SysUser()
+        {
+            UserRoles = new List<SysUserRole>();
+        }
+
+        public virtual List<SysUserRole> UserRoles { get; set; }
     }
 }

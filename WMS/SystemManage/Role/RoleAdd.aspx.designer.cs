@@ -13,6 +13,15 @@ namespace WMS.SystemManage.Role {
     public partial class RoleAdd {
         
         /// <summary>
+        /// easyuiTheme 控件。
+        /// </summary>
+        /// <remarks>
+        /// 自动生成的字段。
+        /// 若要进行修改，请将字段声明从设计器文件移到代码隐藏文件。
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlLink easyuiTheme;
+        
+        /// <summary>
         /// role_add_form 控件。
         /// </summary>
         /// <remarks>

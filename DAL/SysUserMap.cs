@@ -14,7 +14,7 @@ namespace DAL
         public SysUserMap()
         {
             ToTable("Sys_User");
-            HasKey(t => t.UserID);
+            HasKey(t => t.ID);
         }
     }
 }

@@ -103,6 +103,12 @@
                     handler: function () {
                         alert('帮助按钮');
                     }
+                }, '-', {
+                    iconCls: 'icon-help',
+                    text: '用户角色设置',
+                    handler: function () {
+                        alert('帮助按钮');
+                    }
                 }],
                 onBeforeLoad: function (param) {
                     parent.$.messager.progress({
@@ -145,7 +151,7 @@
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
                 title: '新增用户',
-                width: 500,
+                width: 520,
                 height: 400,
                 url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{

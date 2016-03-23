@@ -308,7 +308,7 @@
             <div class="easyui-layout" fit="true">
                 <div data-options="region:'north',border:false" style="height: 70px">
                     <div class="top-left">
-                        <h1 style="margin-left: 10px; margin-top: 10px;">EasyUI</h1>
+                        <h1 style="margin-left: 10px; margin-top: 10px;">库存管理系统</h1>
                     </div>
                     <div class="top-right">
                         <div id="timerSpan">
