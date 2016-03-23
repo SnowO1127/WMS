@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.SystemManage.Menu
+namespace WMS.SystemManage.User
 {
-    public partial class Icons : System.Web.UI.Page
+    public partial class UserList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

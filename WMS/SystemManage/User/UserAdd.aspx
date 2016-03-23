@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="user_add.aspx.cs" Inherits="WMS.SystemManage.User.user_add" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserAdd.aspx.cs" Inherits="WMS.SystemManage.User.UserAdd" %>
 
 <!DOCTYPE html>
 

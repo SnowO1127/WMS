@@ -5,14 +5,14 @@ namespace DAL.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<DAL.SysMenuContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.SysContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(DAL.SysMenuContext context)
+        protected override void Seed(DAL.SysContext context)
         {
             //  This method will be called after migrating to the latest version.
 

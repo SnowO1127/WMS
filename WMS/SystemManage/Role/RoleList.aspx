@@ -1,11 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="menu_list.aspx.cs" Inherits="WMS.SystemManage.Menu.menu_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RoleList.aspx.cs" Inherits="WMS.SystemManage.Role.RoleList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
     <script src="../../library/jquery-1.9.1.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
@@ -17,100 +16,73 @@
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
+    <title></title>
     <script>
-
-        var treeid;
         $(function () {
-            tree = $("#menu_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getmenutree',
-                parentField: 'pid',
-                lines: true,
-                onClick: function (node) {
-                    treeid = node.id;
-                    var obj = sy.serializeObject($('#menu_search_form'));
-                    sy.mergeObj(obj, { id: treeid });
-                    grid.datagrid("load", obj);  // 在用户点击的时候提示
-                    grid.datagrid("unselectAll");
-                },
-                onLoadSuccess: function (node, data) {
-                    $.each(data, function (i) {
-                        if (data[i].pid == null) {
-                            var n = tree.tree("find", data[i].id);
-                            tree.tree("select", n.target);
-                            treeid = data[i].id;
-                        }
-                    });
-                }
-            })
-
-            grid = $('#menu_list_grid').datagrid({
+            grid = $('#role_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_menu.ashx?action=getmenubypage',
+                url: '../../datasorce/sy_role.ashx?action=getrole',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
                 singleSelect: true,
-                sortName: 'OrderID',
-                sortOrder: 'asc',
                 idField: 'ID',
+                sortName: 'OrderID',
+                sortOrder: 'desc',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
-                queryParams: {
-                    ID: treeid
-                },
                 frozenColumns: [[{
-                    width: '150',
-                    title: '菜单名',
-                    field: 'MenuName',
+                    width: '100',
+                    title: '角色编号',
+                    field: 'Code',
                     halign: 'center',
                     sortable: true
                 }, {
-                    width: '70',
-                    title: '类别',
-                    field: 'Category',
+                    width: '120',
+                    title: '角色名称',
+                    field: 'Name',
                     halign: 'center',
-                    align: 'center',
                     sortable: true
                 }]],
                 columns: [[{
-                    width: '260',
-                    title: '地址',
-                    field: 'Url',
+                    width: '120',
+                    title: '角色类别',
                     halign: 'center',
-                    sortable: true
-                }, {
-                    width: '60',
-                    title: '公开',
-                    field: 'IsPublic',
-                    halign: 'center',
-                    align: 'center',
-                    sortable: true
-                }, {
-                    width: '70',
-                    title: '允许编辑',
-                    field: 'AllowEdit',
-                    halign: 'center',
+                    field: 'Category',
                     align: 'center',
                     sortable: true
                 }, {
                     width: '70',
                     title: '允许删除',
                     field: 'AllowDelete',
+                    align: 'center',
+                    halign: 'center',
+                    sortable: true
+                }, {
+                    width: '70',
+                    title: '允许编辑',
+                    field: 'AllowEdit',
+                    align: 'center',
+                    halign: 'center',
+                    sortable: true
+                }, {
+                    width: '50',
+                    title: '有效',
+                    field: 'Enabled',
                     halign: 'center',
                     align: 'center',
                     sortable: true
                 }, {
-                    width: '60',
-                    title: '有效',
-                    field: 'Enabled',
-                    halign: 'center',
-                    align: 'center'
-                }, {
                     width: '70',
                     title: '排序号',
-                    field: 'OrderID',
                     halign: 'center',
-                    align: 'center'
+                    align: 'center',
+                    field: 'OrderID'
+                }, {
+                    width: '250',
+                    title: '描述',
+                    halign: 'center',
+                    field: 'Description'
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
@@ -146,7 +118,13 @@
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            deleteRole(row.ID);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -160,12 +138,35 @@
             });
         });
 
+        var deleteRole = function (id) {
+            parent.$.messager.confirm('删除角色', '你确定删除角色吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_role.ashx?action=deleterole",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            id: id
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                grid.datagrid('load');
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
+            });
+        }
+
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
-                title: '编辑菜单',
-                width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/menu_add.aspx?id=' + id + '',
+                title: '编辑角色',
+                width: 370,
+                height: 330,
+                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -178,19 +179,19 @@
 
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
-                title: '查看菜单',
-                width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/menu_add.aspx?id=' + id + '',
+                title: '查看角色',
+                width: 370,
+                height: 300,
+                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
             });
         }
 
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
-                title: '新增菜单',
-                width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/menu_add.aspx',
+                title: '新增角色',
+                width: 370,
+                height: 330,
+                url: 'SystemManage/Role/RoleAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -204,37 +205,8 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true" title="分类树" style="overflow: hidden; padding: 1px; width: 200px">
-            <div id="menu_tree" fit="true">
-            </div>
-        </div>
         <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-            <div class="easyui-layout" fit="true">
-                <div data-options="region: 'north', border: false" style="overflow: hidden; padding: 1px; height: 70px">
-                    <fieldset>
-                        <legend>查询条件</legend>
-                        <form id="menu_search_form">
-                            <table>
-                                <tr>
-                                    <td>菜单名称</td>
-                                    <td>
-                                        <input name="MenuName" class="easyui-validatebox" type="text" />
-                                    </td>
-                                    <td>
-                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="unitSearch()">查找</a>
-                                    </td>
-                                    <td>
-                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="unitRefresh()">清空</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </fieldset>
-                </div>
-                <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-                    <div id="menu_list_grid" fit="true">
-                    </div>
-                </div>
+            <div id="role_list_grid" fit="true">
             </div>
         </div>
     </div>

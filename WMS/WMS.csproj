@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CommonTools\fullcalendar.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="Index.aspx" />
     <Content Include="InformationCenter\News\news_add.aspx" />
     <Content Include="InformationCenter\News\news_list.aspx" />
@@ -2701,13 +2702,15 @@
     <Content Include="library\xyUtils.js" />
     <Content Include="SystemManage\Department\dept_add.aspx" />
     <Content Include="SystemManage\Department\dept_list.aspx" />
-    <Content Include="SystemManage\Menu\icons.aspx" />
-    <Content Include="SystemManage\Menu\menu_add.aspx" />
-    <Content Include="SystemManage\Menu\menu_list.aspx" />
+    <Content Include="SystemManage\Menu\Icons.aspx" />
+    <Content Include="SystemManage\Menu\MenuAdd.aspx" />
+    <Content Include="SystemManage\Menu\MenuList.aspx" />
+    <Content Include="SystemManage\Role\RoleAdd.aspx" />
+    <Content Include="SystemManage\Role\RoleList.aspx" />
     <Content Include="SystemManage\Unit\unit_add.aspx" />
     <Content Include="SystemManage\Unit\unit_list.aspx" />
-    <Content Include="SystemManage\User\user_add.aspx" />
-    <Content Include="SystemManage\User\user_list.aspx" />
+    <Content Include="SystemManage\User\UserAdd.aspx" />
+    <Content Include="SystemManage\User\UserList.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonTools\fullcalendar.aspx.cs">
@@ -2725,6 +2728,9 @@
     </Compile>
     <Compile Include="datasorce\sy_news.ashx.cs">
       <DependentUpon>sy_news.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\sy_role.ashx.cs">
+      <DependentUpon>sy_role.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_unit.ashx.cs">
       <DependentUpon>sy_unit.ashx</DependentUpon>
@@ -2790,26 +2796,40 @@
     <Compile Include="SystemManage\Department\dept_list.aspx.designer.cs">
       <DependentUpon>dept_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemManage\Menu\icons.aspx.cs">
-      <DependentUpon>icons.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\Icons.aspx.cs">
+      <DependentUpon>Icons.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemManage\Menu\icons.aspx.designer.cs">
-      <DependentUpon>icons.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\Icons.aspx.designer.cs">
+      <DependentUpon>Icons.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemManage\Menu\menu_add.aspx.cs">
-      <DependentUpon>menu_add.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\MenuAdd.aspx.cs">
+      <DependentUpon>MenuAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemManage\Menu\menu_add.aspx.designer.cs">
-      <DependentUpon>menu_add.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\MenuAdd.aspx.designer.cs">
+      <DependentUpon>MenuAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemManage\Menu\menu_list.aspx.cs">
-      <DependentUpon>menu_list.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\MenuList.aspx.cs">
+      <DependentUpon>MenuList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemManage\Menu\menu_list.aspx.designer.cs">
-      <DependentUpon>menu_list.aspx</DependentUpon>
+    <Compile Include="SystemManage\Menu\MenuList.aspx.designer.cs">
+      <DependentUpon>MenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Role\RoleAdd.aspx.cs">
+      <DependentUpon>RoleAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Role\RoleAdd.aspx.designer.cs">
+      <DependentUpon>RoleAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Role\RoleList.aspx.cs">
+      <DependentUpon>RoleList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Role\RoleList.aspx.designer.cs">
+      <DependentUpon>RoleList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\Unit\unit_add.aspx.cs">
       <DependentUpon>unit_add.aspx</DependentUpon>
@@ -2825,19 +2845,19 @@
     <Compile Include="SystemManage\Unit\unit_list.aspx.designer.cs">
       <DependentUpon>unit_list.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemManage\User\user_add.aspx.cs">
-      <DependentUpon>user_add.aspx</DependentUpon>
+    <Compile Include="SystemManage\User\UserAdd.aspx.cs">
+      <DependentUpon>UserAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemManage\User\user_add.aspx.designer.cs">
-      <DependentUpon>user_add.aspx</DependentUpon>
+    <Compile Include="SystemManage\User\UserAdd.aspx.designer.cs">
+      <DependentUpon>UserAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SystemManage\User\user_list.aspx.cs">
-      <DependentUpon>user_list.aspx</DependentUpon>
+    <Compile Include="SystemManage\User\UserList.aspx.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SystemManage\User\user_list.aspx.designer.cs">
-      <DependentUpon>user_list.aspx</DependentUpon>
+    <Compile Include="SystemManage\User\UserList.aspx.designer.cs">
+      <DependentUpon>UserList.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -2885,11 +2905,11 @@
   <ItemGroup>
     <Folder Include="SystemManage\Button\" />
     <Folder Include="SystemManage\Dict\" />
-    <Folder Include="SystemManage\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="packages.config" />
+    <Content Include="datasorce\sy_role.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

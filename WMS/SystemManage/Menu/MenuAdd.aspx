@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="menu_add.aspx.cs" Inherits="WMS.SystemManage.Menu.menu_add" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MenuAdd.aspx.cs" Inherits="WMS.SystemManage.Menu.MenuAdd" %>
 
 <!DOCTYPE html>
 
@@ -26,7 +26,7 @@
         var showIcons = function () {
             var dialog = parent.sy.modalDialog({
                 title: '浏览小图标',
-                url: 'icons.aspx',
+                url: 'SystemManage/Menu/Icons.aspx',
                 buttons: [{
                     text: '确定',
                     handler: function () {

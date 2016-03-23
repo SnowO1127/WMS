@@ -10,48 +10,69 @@ namespace Model
 {
     public class SysUser
     {
-        private string _userid;
-
         /// <summary>
         /// 用户ID
         /// </summary>
-        public string UserID
-        {
-            get { return _userid; }
-            set { _userid = value; }
-        }
-
-        private string _loginname;
+        public string UserID{ get; set; }
 
         /// <summary>
         /// 用户登录名
         /// </summary>
-        public string LoginName
-        {
-            get { return _loginname; }
-            set { _loginname = value; }
-        }
-
-        private string _password;
+        public string LoginName{ get; set; }
 
         /// <summary>
         /// 登录密码
         /// </summary>
-        public string PassWord
-        {
-            get { return _password; }
-            set { _password = value; }
-        }
-
-        private string _username;
+        public string PassWord{ get; set; }
 
         /// <summary>
         /// 用户名
         /// </summary>
-        public string UserName
-        {
-            get { return _username; }
-            set { _username = value; }
-        }
+        public string UserName{ get; set; }
+
+        /// <summary>
+        /// 创建日期
+        /// </summary>
+        public DateTime CDate { get; set; }
+
+        /// <summary>
+        /// 创建人id
+        /// </summary>
+        public string CUserID { get; set; }
+
+        /// <summary>
+        /// 创建人姓名
+        /// </summary>
+        public string CUserName { get; set; }
+
+        /// <summary>
+        /// 更新日期
+        /// </summary>
+        public DateTime? UDate { get; set; }
+
+        /// <summary>
+        /// 更新人id
+        /// </summary>
+        public string UUserID { get; set; }
+
+        /// <summary>
+        /// 更新人姓名
+        /// </summary>
+        public string UUserName { get; set; }
+
+        /// <summary>
+        /// 删除日期
+        /// </summary>
+        public DateTime? DDate { get; set; }
+
+        /// <summary>
+        /// 删除人id
+        /// </summary>
+        public string DUserID { get; set; }
+
+        /// <summary>
+        /// 删除人姓名
+        /// </summary>
+        public string DUserName { get; set; }
     }
 }

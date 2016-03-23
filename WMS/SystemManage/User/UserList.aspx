@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="user_list.aspx.cs" Inherits="WMS.SystemManage.User.user_list" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserList.aspx.cs" Inherits="WMS.SystemManage.User.UserList" %>
 
 <!DOCTYPE html>
 
@@ -121,7 +121,7 @@
                 title: '编辑用户',
                 width: 400,
                 height: 400,
-                url: 'SystemManage/User/user_add.aspx?id=' + id + '',
+                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -137,7 +137,7 @@
                 title: '查看用户',
                 width: 620,
                 height: 300,
-                url: 'SystemManage/User/user_add.aspx?id=' + id + '',
+                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
             });
         }
 
@@ -147,7 +147,7 @@
                 title: '新增用户',
                 width: 500,
                 height: 400,
-                url: 'SystemManage/User/user_add.aspx',
+                url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',

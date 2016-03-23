@@ -10,7 +10,7 @@
 namespace WMS.SystemManage.User {
     
     
-    public partial class user_add {
+    public partial class UserAdd {
         
         /// <summary>
         /// user_add_form 控件。

@@ -10,7 +10,7 @@
 namespace WMS.SystemManage.User {
     
     
-    public partial class user_list {
+    public partial class UserList {
         
         /// <summary>
         /// easyuiTheme 控件。

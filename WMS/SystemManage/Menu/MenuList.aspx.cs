@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Menu
 {
-    public partial class Icons : System.Web.UI.Page
+    public partial class MenuList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

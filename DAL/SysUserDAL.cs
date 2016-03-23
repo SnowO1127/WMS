@@ -15,7 +15,7 @@ namespace DAL
         public List<SysUser> GetList()
         {
             List<SysUser> list = new List<SysUser>();
-            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 list = ctx.SysUsers.ToList();
             }
@@ -25,7 +25,7 @@ namespace DAL
         public int GetCount()
         {
             int count = 0;
-            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 count = ctx.SysUsers.Count();
             }
@@ -35,7 +35,7 @@ namespace DAL
         public List<SysUser> GetListByPage(PageSysUser psu)
         {
             List<SysUser> list = new List<SysUser>();
-            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 list = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList() : ctx.SysUsers.ToList().OrderBy(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList();
             }
@@ -45,7 +45,7 @@ namespace DAL
         public int GetCountByPage(PageSysUser psu)
         {
             int count = 0;
-            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 count = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count() : ctx.SysUsers.ToList().OrderBy(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count();
             }
@@ -54,7 +54,7 @@ namespace DAL
 
         public void AddUser(SysUser su)
         {
-            using (var ctx = new SysUserContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 ctx.SysUsers.Add(su);
                 ctx.SaveChanges();

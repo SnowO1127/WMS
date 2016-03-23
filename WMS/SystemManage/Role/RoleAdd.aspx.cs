@@ -5,13 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.SystemManage.User
+namespace WMS.SystemManage.Role
 {
-    public partial class user_list : System.Web.UI.Page
+    public partial class RoleAdd : System.Web.UI.Page
     {
+        public string id;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            id = Request.Params["id"];
         }
     }
 }

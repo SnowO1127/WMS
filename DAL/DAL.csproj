@@ -51,10 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="SysMenuContext.cs" />
+    <Compile Include="SysContext.cs" />
     <Compile Include="SysMenuDAL.cs" />
     <Compile Include="SysMenuMap.cs" />
-    <Compile Include="SysUserContext.cs" />
+    <Compile Include="SysRoleDAL.cs" />
+    <Compile Include="SysRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SysUserDAL.cs" />
     <Compile Include="SysUserMap.cs" />

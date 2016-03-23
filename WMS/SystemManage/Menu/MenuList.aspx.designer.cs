@@ -10,7 +10,7 @@
 namespace WMS.SystemManage.Menu {
     
     
-    public partial class menu_list {
+    public partial class MenuList {
         
         /// <summary>
         /// easyuiTheme 控件。

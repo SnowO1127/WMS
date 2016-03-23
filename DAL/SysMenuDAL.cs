@@ -15,7 +15,7 @@ namespace DAL
         public List<SysMenu> GetList()
         {
             List<SysMenu> list = new List<SysMenu>();
-            using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 list = ctx.SysMenus.ToList();
             }
@@ -25,7 +25,7 @@ namespace DAL
         public List<SysMenu> GetListByPage(PageSysMenu psm)
         {
             List<SysMenu> list = new List<SysMenu>();
-            using (var ctx = new SysMenuContext(Globe.ConnectionString))
+            using (var ctx = new SysContext(Globe.ConnectionString))
             {
                 if (!string.IsNullOrEmpty(psm.ID))
                 {
@@ -43,7 +43,7 @@ namespace DAL
         public List<SysMenu> GetIsMenuList()
         {
             List<SysMenu> list = new List<SysMenu>();
-            using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 list = ctx.SysMenus.Where(x => x.IsMenu.Equals(true)).ToList();
             }
@@ -52,7 +52,7 @@ namespace DAL
 
         public void AddMenu(SysMenu sm)
         {
-            using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 if (!string.IsNullOrEmpty(sm.ParentID))
                 {
@@ -70,7 +70,7 @@ namespace DAL
 
         public void UpdateMenu(SysMenu sm)
         {
-            using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 SysMenu nsm = new SysMenu();
                 nsm = ctx.SysMenus.Find(sm.ID);
@@ -97,7 +97,7 @@ namespace DAL
         public SysMenu GetOneMenu(string id)
         {
             SysMenu sm = new SysMenu();
-            using (SysMenuContext ctx = new SysMenuContext(Globe.ConnectionString))
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 sm = ctx.SysMenus.Find(id);
             }

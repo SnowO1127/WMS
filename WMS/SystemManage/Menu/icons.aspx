@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="icons.aspx.cs" Inherits="WMS.SystemManage.Menu.icons" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Icons.aspx.cs" Inherits="WMS.SystemManage.Menu.Icons" %>
 
 <!DOCTYPE html>
 

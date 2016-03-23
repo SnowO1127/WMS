@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SysMenu.cs" />
+    <Compile Include="SysRole.cs" />
     <Compile Include="SysUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

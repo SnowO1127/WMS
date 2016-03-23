@@ -19,7 +19,7 @@
     <script src="library/xyUtils.js"></script>
     <link href="library/syExtCss.css" rel="stylesheet" />
     <link href="library/syExtIcon.css" rel="stylesheet" />
-    <title>easyUI</title>
+    <title>库存管理系统</title>
     <script>
         var themeData =
              [//主题风格json格式
