@@ -129,10 +129,11 @@
                 }],
                 onBeforeLoad: function (param) {
                     parent.$.messager.progress({
+                        fit: true,
                         text: '数据加载中....'
                     });
                 },
-                onLoadSuccess: function (data) {
+                onLoadSuccess: function () {
                     parent.$.messager.progress('close');
                 }
             });

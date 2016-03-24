@@ -17,7 +17,7 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysMenus.ToList();
+                list = ctx.SysMenus.Include(x => x.SysMenus).Include(x => x.PSysMenu).ToList();
             }
             return list;
         }
@@ -27,12 +27,14 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
+                var query = ctx.SysMenus.ToList();
                 if (!string.IsNullOrEmpty(psm.ID))
                 {
-                    list = ctx.SysMenus.Where(x => x.ParentID.Equals(psm.ID)).ToList();
+                    query = query.Where(x => x.ParentID.Equals(psm.ID)).ToList();
                 }
-                if (!string.IsNullOrEmpty(psm.MenuName)) {
-                    list = list.Where(x => x.MenuName.Contains(psm.MenuName)).ToList() ;
+                if (!string.IsNullOrEmpty(psm.MenuName))
+                {
+                    query = query.Where(x => x.MenuName.Contains(psm.MenuName)).ToList();
                 }
 
                 list = psm.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();

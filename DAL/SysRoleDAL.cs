@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -47,11 +48,11 @@ namespace DAL
 
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysRoles.Where(x => x.DeleteMark.Equals(false)).ToList();
+                list = ctx.SysRoles.Include(x => x.UserRoles).Where(x => x.DeleteMark.Equals(false)).ToList();
             }
 
             list = psr.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
-            
+
             return list;
         }
 
@@ -110,7 +111,7 @@ namespace DAL
             SysRole sr = new SysRole();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                sr = ctx.SysRoles.Find(id);
+                sr = ctx.SysRoles.Include(x => x.UserRoles).Where(x => x.ID.Equals(id)).FirstOrDefault();
             }
             return sr;
         }
