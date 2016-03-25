@@ -103,11 +103,6 @@ namespace Model
         /// </summary>
         public string DUserName { get; set; }
 
-        public SysRole()
-        {
-            UserRoles = new List<SysUserRole>();
-        }
-
-        public virtual List<SysUserRole> UserRoles { get; set; }
+        public  List<SysUser> Users { get; set; }
     }
 }

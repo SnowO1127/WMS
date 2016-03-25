@@ -48,7 +48,7 @@ namespace DAL
 
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysRoles.Include(x => x.UserRoles).Where(x => x.DeleteMark.Equals(false)).ToList();
+                list = ctx.SysRoles.Include(x => x.Users).Where(x => x.DeleteMark.Equals(false)).ToList();
             }
 
             list = psr.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
@@ -111,7 +111,7 @@ namespace DAL
             SysRole sr = new SysRole();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                sr = ctx.SysRoles.Include(x => x.UserRoles).Where(x => x.ID.Equals(id)).FirstOrDefault();
+                sr = ctx.SysRoles.Include(x => x.Users).Where(x => x.ID.Equals(id)).FirstOrDefault();
             }
             return sr;
         }
@@ -121,14 +121,32 @@ namespace DAL
             List<SysRole> list = new List<SysRole>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysRoles.Include(x => x.UserRoles.Select(t => t.User)).ToList();
-                //var query = from u in ctx.SysRoles
-                //            join r in ctx.UserRoles on u.ID equals r.RoleID
-                //            where r.UserID != userid
-                //            select u;
-                //list = query.ToList();
+                var query = from r in ctx.SysRoles
+                            from u in r.Users
+                            where u.ID != userid || u.ID == null
+                            select r;
+                list = query.ToList();
             }
             return list;
+
+            //List<SysRole> haslist = new List<SysRole>();
+            //List<SysRole> alllist = new List<SysRole>();
+            //using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            //{
+            //    var query = from r in ctx.SysRoles
+            //                from u in r.Users
+            //                where u.ID != userid
+            //                select r;
+            //    haslist = query.ToList();
+
+            //    alllist = ctx.SysRoles.Include(x => x.Users).ToList();
+            //}
+
+            //foreach (var sr in haslist)
+            //{
+            //    alllist.Remove(sr);
+            //}
+            //return alllist;
         }
 
         public List<SysRole> GetHasRoleList(string userid)
@@ -136,10 +154,10 @@ namespace DAL
             List<SysRole> list = new List<SysRole>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                var query = from u in ctx.SysRoles
-                            join r in ctx.UserRoles on u.ID equals r.RoleID
-                            where r.UserID == userid
-                            select u;
+                var query = from r in ctx.SysRoles
+                            from u in r.Users
+                            where u.ID == userid
+                            select r;
                 list = query.ToList();
             }
             return list;

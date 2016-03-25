@@ -100,11 +100,6 @@ namespace Model
         /// </summary>
         public string DUserName { get; set; }
 
-        public SysUser()
-        {
-            UserRoles = new List<SysUserRole>();
-        }
-
-        public List<SysUserRole> UserRoles { get; set; }
+        public List<SysRole> Roles { get; set; }
     }
 }

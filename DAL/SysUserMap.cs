@@ -15,6 +15,12 @@ namespace DAL
         {
             ToTable("Sys_User");
             HasKey(t => t.ID);
+            HasMany(t => t.Roles).WithMany(t => t.Users).Map(m =>
+         {
+             m.ToTable("Sys_UserRole");
+             m.MapLeftKey("UserID");
+             m.MapRightKey("RoleID");
+         });
         }
     }
 }

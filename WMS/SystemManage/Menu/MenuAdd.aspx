@@ -26,7 +26,7 @@
         var showIcons = function () {
             var dialog = parent.sy.modalDialog({
                 title: '浏览小图标',
-                url: 'SystemManage/Menu/Icons.aspx',
+                url: 'Icons.aspx',
                 buttons: [{
                     text: '确定',
                     handler: function () {

@@ -190,7 +190,7 @@
                 title: '新增菜单',
                 width: 545,
                 height: 370,
-                url: 'SystemManage/Menu/MenuAdd.aspx',
+                url: 'MenuAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
