@@ -67,5 +67,15 @@ namespace BLL
         {
             dal.DeleteRole(id);
         }
+
+        public List<SysRole> GetNoRoleList(string userid)
+        {
+            return dal.GetNoRoleList(userid);
+        }
+
+        public List<SysRole> GetHasRoleList(string userid)
+        {
+            return dal.GetHasRoleList(userid);
+        }
     }
 }

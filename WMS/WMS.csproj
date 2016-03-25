@@ -2709,6 +2709,8 @@
     <Content Include="SystemManage\Role\RoleList.aspx" />
     <Content Include="SystemManage\Unit\unit_add.aspx" />
     <Content Include="SystemManage\Unit\unit_list.aspx" />
+    <Content Include="SystemManage\UserRole\RoleUserSet.aspx" />
+    <Content Include="SystemManage\UserRole\UserRoleSet.aspx" />
     <Content Include="SystemManage\User\UserAdd.aspx" />
     <Content Include="SystemManage\User\UserList.aspx" />
   </ItemGroup>
@@ -2844,6 +2846,20 @@
     </Compile>
     <Compile Include="SystemManage\Unit\unit_list.aspx.designer.cs">
       <DependentUpon>unit_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\UserRole\RoleUserSet.aspx.cs">
+      <DependentUpon>RoleUserSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\UserRole\RoleUserSet.aspx.designer.cs">
+      <DependentUpon>RoleUserSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\UserRole\UserRoleSet.aspx.cs">
+      <DependentUpon>UserRoleSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\UserRole\UserRoleSet.aspx.designer.cs">
+      <DependentUpon>UserRoleSet.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\User\UserAdd.aspx.cs">
       <DependentUpon>UserAdd.aspx</DependentUpon>

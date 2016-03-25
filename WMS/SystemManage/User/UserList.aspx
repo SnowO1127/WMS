@@ -26,45 +26,54 @@
                 rownumbers: true,
                 pagination: true,
                 singleSelect: true,
-                idField: 'UserID',
-                sortName: 'UserID',
+                idField: 'ID',
+                sortName: 'ID',
                 sortOrder: 'desc',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 frozenColumns: [[{
-                    width: '100',
+                    width: '90',
                     title: '登录名',
                     field: 'LoginName',
+                    halign: 'center',
+                    align: 'center',
                     sortable: true
                 }, {
-                    width: '80',
+                    width: '70',
                     title: '姓名',
-                    field: 'UserName',
+                    field: 'RealName',
+                    halign: 'center',
+                    align: 'center',
                     sortable: true
                 }]],
                 columns: [[{
                     width: '150',
                     title: '创建时间',
                     field: 'UserID',
+                    halign: 'center',
                     sortable: true
                 }, {
                     width: '150',
                     title: '修改时间',
                     field: 'PassWord',
+                    halign: 'center',
                     sortable: true
                 }, {
                     width: '50',
                     title: '性别',
                     field: 'UserName',
+                    halign: 'center',
                     sortable: true
                 }, {
                     width: '50',
                     title: '年龄',
                     field: 'UserName',
+                    halign: 'center',
                     sortable: true
                 }, {
                     width: '250',
                     title: '照片',
+                    halign: 'center',
                     field: 'UserName'
                 }]],
                 toolbar: [{
@@ -79,7 +88,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.id);
+                            openView(row.ID);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -91,7 +100,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openEdit(row.id);
+                            openEdit(row.ID);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -107,7 +116,13 @@
                     iconCls: 'icon-help',
                     text: '用户角色设置',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            openAddRole(row.ID);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -121,6 +136,21 @@
             });
         });
 
+        var openAddRole = function (id) {
+            var dialog = parent.sy.modalDialog({
+                title: '角色设置',
+                width: 830,
+                height: 480,
+                url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                    }
+                }]
+            });
+        }
 
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({

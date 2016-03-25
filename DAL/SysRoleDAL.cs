@@ -115,5 +115,34 @@ namespace DAL
             }
             return sr;
         }
+
+        public List<SysRole> GetNoRoleList(string userid)
+        {
+            List<SysRole> list = new List<SysRole>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                list = ctx.SysRoles.Include(x => x.UserRoles.Select(t => t.User)).ToList();
+                //var query = from u in ctx.SysRoles
+                //            join r in ctx.UserRoles on u.ID equals r.RoleID
+                //            where r.UserID != userid
+                //            select u;
+                //list = query.ToList();
+            }
+            return list;
+        }
+
+        public List<SysRole> GetHasRoleList(string userid)
+        {
+            List<SysRole> list = new List<SysRole>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                var query = from u in ctx.SysRoles
+                            join r in ctx.UserRoles on u.ID equals r.RoleID
+                            where r.UserID == userid
+                            select u;
+                list = query.ToList();
+            }
+            return list;
+        }
     }
 }

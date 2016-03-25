@@ -18,7 +18,7 @@ namespace WMS.datasorce
         PageSysRole psr;
         SysRole sr;
         JsonResult jr;
-        string id;
+        string id, userid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -114,7 +114,30 @@ namespace WMS.datasorce
                     }
 
                     context.Response.Write(utils.SerializeObject(jr));
-
+                    break;
+                case "getnorole":
+                    userid = request["userid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        context.Response.Write(utils.SerializeObject(bll.GetNoRoleList(userid)));
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    break;
+                case "gethasrole":
+                    userid = request["userid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        context.Response.Write(utils.SerializeObject(bll.GetHasRoleList(userid)));
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
                     break;
             }
         }

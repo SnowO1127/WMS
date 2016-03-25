@@ -105,6 +105,6 @@ namespace Model
             UserRoles = new List<SysUserRole>();
         }
 
-        public virtual List<SysUserRole> UserRoles { get; set; }
+        public List<SysUserRole> UserRoles { get; set; }
     }
 }

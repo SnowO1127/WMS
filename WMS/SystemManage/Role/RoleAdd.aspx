@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <form id="role_add_form" runat="server" style="font-size: 13px; padding-left: 25px; padding-top: 10px">
+        <form id="role_add_form" runat="server" style="font-size: 12px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
                     <td style="width: 60px">角色编号</td>

@@ -189,7 +189,6 @@
                 dataType: 'json',
                 async: false,
                 success: function (r) {
-                    console.info(r);
                     for (var i = 0; i < r.length; i++) {
                         var treeID = "tree" + i;
                         var divHtml = "";

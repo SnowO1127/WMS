@@ -131,7 +131,9 @@ namespace Common
         /// <returns>json字符串</returns>
         public static string SerializeObject(object o)
         {
-            string json = JsonConvert.SerializeObject(o);
+            JsonSerializerSettings jsSettings = new JsonSerializerSettings();
+            jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            string json = JsonConvert.SerializeObject(o, jsSettings);
             return json;
         }
 

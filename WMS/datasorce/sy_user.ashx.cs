@@ -44,6 +44,7 @@ namespace WMS.datasorce
                     {
                         su = utils.AutoWiredClass<SysUser>(request, su);
                         su.ID = Guid.NewGuid().ToString();
+                        su.CDate = DateTime.Now;
                         bll.AddUser(su);
                         jr.Success = true;
                         jr.Msg = "保存成功！";

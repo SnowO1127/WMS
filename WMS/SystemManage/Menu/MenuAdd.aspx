@@ -93,7 +93,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <form id="menu_add_form" style="font-size: 13px; padding-left: 25px; padding-top: 10px">
+        <form id="menu_add_form" style="font-size: 12px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
                     <td style="width: 60px">菜单名称</td>

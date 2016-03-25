@@ -35,7 +35,7 @@ namespace BLL
         {
             Grid<SysUser> g = new Grid<SysUser>();
 
-            g.total = dal.GetCountByPage(psu);
+            g.total = dal.GetCount();
             g.rows = dal.GetListByPage(psu);
             return g;
         }
