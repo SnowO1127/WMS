@@ -48,5 +48,10 @@ namespace BLL
         {
             dal.AddUser(su);
         }
+
+        public void AddRoles(string userid, List<SysRole> list)
+        {
+            dal.AddRoles(userid, list);
+        }
     }
 }

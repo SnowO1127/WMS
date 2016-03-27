@@ -16,22 +16,26 @@ namespace WMS.datasorce
     public class sy_user : IHttpHandler
     {
         private readonly SysUserBLL bll = new SysUserBLL();
+        private string userid;
+        private string rolesjsonstr;
+        private JsonResult jr;
+        private SysUser su;
+        private PageSysUser psu;
+        private Grid<SysUser> gsu;
+        private Grid<SysRole> gsr;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
-            PageSysUser psu = new PageSysUser();
-            SysUser su = new SysUser();
-            JsonResult jr = new JsonResult();
+
             switch (request["action"])
             {
                 case "getuser":
-
-                    psu = utils.AutoWiredClass<PageSysUser>(request, psu);
+                    psu = utils.AutoWiredClass<PageSysUser>(request, psu = new PageSysUser());
                     try
                     {
-                        Grid<SysUser> g = bll.GetListByPage(psu);
-                        context.Response.Write(utils.SerializeObject(g));
+                        gsu = bll.GetListByPage(psu);
+                        context.Response.Write(utils.SerializeObject(gsu));
                     }
                     catch (Exception ex)
                     {
@@ -39,10 +43,9 @@ namespace WMS.datasorce
                     }
                     break;
                 case "adduser":
-                   
                     try
                     {
-                        su = utils.AutoWiredClass<SysUser>(request, su);
+                        su = utils.AutoWiredClass<SysUser>(request, su = new SysUser());
                         su.ID = Guid.NewGuid().ToString();
                         su.CDate = DateTime.Now;
                         bll.AddUser(su);
@@ -68,6 +71,26 @@ namespace WMS.datasorce
                 //        throw ex;
                 //    }
                 //    break;
+                case "addroles":
+                    userid = request["userid"];
+                    rolesjsonstr = request["rolesjsonstr"];
+                    jr = new JsonResult();
+
+                    try
+                    {
+                        gsr = utils.DeserializeJsonToObject<Grid<SysRole>>(rolesjsonstr);
+
+                        bll.AddRoles(userid, gsr.rows);
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+
+                    context.Response.Write(utils.SerializeObject(jr));
+                    break;
             }
         }
 

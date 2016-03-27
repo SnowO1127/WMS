@@ -118,35 +118,35 @@ namespace DAL
 
         public List<SysRole> GetNoRoleList(string userid)
         {
-            List<SysRole> list = new List<SysRole>();
-            using (SysContext ctx = new SysContext(Globe.ConnectionString))
-            {
-                var query = from r in ctx.SysRoles
-                            from u in r.Users
-                            where u.ID != userid || u.ID == null
-                            select r;
-                list = query.ToList();
-            }
-            return list;
-
-            //List<SysRole> haslist = new List<SysRole>();
-            //List<SysRole> alllist = new List<SysRole>();
+            //List<SysRole> list = new List<SysRole>();
             //using (SysContext ctx = new SysContext(Globe.ConnectionString))
             //{
             //    var query = from r in ctx.SysRoles
             //                from u in r.Users
-            //                where u.ID != userid
+            //                where u.ID != userid || u.ID == null
             //                select r;
-            //    haslist = query.ToList();
-
-            //    alllist = ctx.SysRoles.Include(x => x.Users).ToList();
+            //    list = query.ToList();
             //}
+            //return list;
 
-            //foreach (var sr in haslist)
-            //{
-            //    alllist.Remove(sr);
-            //}
-            //return alllist;
+            List<SysRole> haslist = new List<SysRole>();
+            List<SysRole> alllist = new List<SysRole>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                var query = from r in ctx.SysRoles
+                            from u in r.Users
+                            where u.ID == userid
+                            select r;
+                haslist = query.ToList();
+
+                alllist = ctx.SysRoles.Include(x => x.Users).ToList();
+
+                foreach (var sr in haslist)
+                {
+                    alllist.Remove(sr);
+                }
+            }
+            return alllist;
         }
 
         public List<SysRole> GetHasRoleList(string userid)

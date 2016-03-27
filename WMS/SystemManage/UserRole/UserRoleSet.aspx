@@ -22,7 +22,7 @@
 
         $(function () {
             nogrid = $('#norole_grid').datagrid({
-                title: '',
+                title: '未选角色',
                 url: '../../datasorce/sy_role.ashx?action=getnorole',
                 striped: true,
                 rownumbers: true,
@@ -49,13 +49,6 @@
                     field: 'Name',
                     halign: 'center',
                     sortable: true
-                }, {
-                    width: '80',
-                    title: '角色类别',
-                    halign: 'center',
-                    field: 'Category',
-                    align: 'center',
-                    sortable: true
                 }]],
                 onBeforeLoad: function (param) {
                     parent.$.messager.progress({
@@ -69,7 +62,7 @@
             });
 
             hasgrid = $('#hasrole_grid').datagrid({
-                title: '',
+                title: '已选角色',
                 url: '../../datasorce/sy_role.ashx?action=gethasrole',
                 striped: true,
                 rownumbers: true,
@@ -96,13 +89,6 @@
                     field: 'Name',
                     halign: 'center',
                     sortable: true
-                }, {
-                    width: '80',
-                    title: '角色类别',
-                    halign: 'center',
-                    field: 'Category',
-                    align: 'center',
-                    sortable: true
                 }]],
                 onBeforeLoad: function (param) {
                     parent.$.messager.progress({
@@ -115,44 +101,63 @@
                 }
             });
         });
+
+        var moveIn = function () {
+            var row = nogrid.datagrid('getSelected');
+            if (row) {
+                var index = nogrid.datagrid('getRowIndex', row);
+                nogrid.datagrid("deleteRow", index);
+                hasgrid.datagrid("appendRow", row);
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择行", "info");
+            }
+        }
+
+        var moveOut = function () {
+            var row = hasgrid.datagrid('getSelected');
+            if (row) {
+                var index = hasgrid.datagrid('getRowIndex', row);
+                hasgrid.datagrid("deleteRow", index);
+                nogrid.datagrid("appendRow", row);
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择行", "info");
+            }
+        }
+
+        var f_save_roles = function ($dialog, $pjq) {
+            var roles = hasgrid.datagrid('getData');
+            $.ajax({
+                url: '../../datasorce/sy_user.ashx?action=addroles',
+                type: 'post',
+                data: { userid: userid, rolesjsonstr: JSON.stringify(roles) },
+                dataType: 'json',
+                async: false,
+                success: function (jsonresult) {
+                    if (jsonresult.Success) {
+                        $pjq.messager.alert('提示', jsonresult.Msg, 'info');
+                        $dialog.dialog('destroy');
+                    } else {
+                        $pjq.messager.alert('提示', jsonresult.Msg, 'error');
+                    }
+                }
+            })
+        }
     </script>
 </head>
 <body>
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'west',split:true,collapsible:false" style="width: 360px;">
-            <div class="easyui-layout" data-options="fit:true,border:false">
-                <div data-options="region:'north',split:false,collapsible:false" style="height: 30px">
-                    <form id="no_search_form">
-                        角色名称:<input name="Name" class="easyui-validatebox" type="text" style="width: 110px" />
-                        <a id="no_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="unitSearch()">查找</a>
-                        <a id="no_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="unitRefresh()">清空</a>
-                    </form>
-                </div>
-                <div data-options="region:'center',split:true,title:'未选角色',collapsible:false" style="width: 330px;">
-                    <div id="norole_grid" fit="true">
-                    </div>
-                </div>
+        <div data-options="region:'west',split:true,collapsible:false,border:false" style="width: 250px;">
+            <div id="norole_grid" fit="true">
             </div>
         </div>
-
-        <div data-options="region:'center'" style="padding-top: 160px; padding-left: 12px;">
+        <div data-options="region:'center',border:false" style="padding-top: 160px; padding-left: 12px;">
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain: false" style="width: 60px; margin-bottom: 20px;" onclick="moveIn()">《 移入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain: false" style="width: 60px" onclick="moveOut()">移出 》</a>
         </div>
-
-        <div data-options="region:'east',split:true,collapsible:false" style="width: 360px;">
-            <div class="easyui-layout" data-options="fit:true,border:false">
-                <div data-options="region:'north',split:false,collapsible:false" style="height: 30px">
-                    <form id="has_search_form">
-                        角色名称:<input name="Name" class="easyui-validatebox" type="text" style="width: 110px" />
-                        <a id="has_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="unitSearch()">查找</a>
-                        <a id="has_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="unitRefresh()">清空</a>
-                    </form>
-                </div>
-                <div data-options="region:'center',split:true,title:'已选角色',collapsible:false" style="width: 330px;">
-                    <div id="hasrole_grid" fit="true">
-                    </div>
-                </div>
+        <div data-options="region:'east',split:true,collapsible:false,border:false" style="width: 250px;">
+            <div id="hasrole_grid" fit="true">
             </div>
         </div>
     </div>

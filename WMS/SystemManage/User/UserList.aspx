@@ -139,14 +139,14 @@
         var openAddRole = function (id) {
             var dialog = parent.sy.modalDialog({
                 title: '角色设置',
-                width: 830,
-                height: 480,
+                width: 600,
+                height: 450,
                 url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save_roles(dialog, parent.$);
                     }
                 }]
             });

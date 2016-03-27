@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Transactions;
 
 namespace DAL
 {
@@ -60,6 +61,38 @@ namespace DAL
                 ctx.SysUsers.Add(su);
                 ctx.SaveChanges();
             }
+        }
+
+        public void AddRoles(string userid, List<SysRole> list)
+        {
+            using (var tran = new TransactionScope())
+            {
+                using (var ctx = new SysContext(Globe.ConnectionString))
+                {
+                    SysUser su = ctx.SysUsers.Include(x => x.Roles).Where(x => x.ID.Equals(userid)).FirstOrDefault();
+
+                    var roles = new List<SysRole>();
+                    roles.AddRange(su.Roles.Select(x => x));
+
+                    foreach (var sr in roles)
+                    {
+                        su.Roles.Remove(sr);
+                    }
+
+                    List<string> filter = new List<string>();
+
+                    foreach (SysRole sr in list)
+                    {
+                        filter.Add(sr.ID);
+                    }
+
+                    if (filter.Count > 0) su.Roles = ctx.SysRoles.Where(x => filter.Contains(x.ID)).ToList();
+
+                    ctx.SaveChanges();
+                    tran.Complete();
+                }
+            }
+
         }
     }
 }
