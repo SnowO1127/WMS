@@ -53,8 +53,14 @@
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SysContext.cs" />
+    <Compile Include="SysItemDAL.cs" />
+    <Compile Include="SysItemDetailDAL.cs" />
+    <Compile Include="SysItemDetailMap.cs" />
+    <Compile Include="SysItemMap.cs" />
     <Compile Include="SysMenuDAL.cs" />
     <Compile Include="SysMenuMap.cs" />
+    <Compile Include="SysOganizeDAL.cs" />
+    <Compile Include="SysOganizeMap.cs" />
     <Compile Include="SysRoleDAL.cs" />
     <Compile Include="SysRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

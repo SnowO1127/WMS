@@ -53,7 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SysItem.cs" />
+    <Compile Include="SysItemDetail.cs" />
     <Compile Include="SysMenu.cs" />
+    <Compile Include="SysOganize.cs" />
     <Compile Include="SysRole.cs" />
     <Compile Include="SysUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

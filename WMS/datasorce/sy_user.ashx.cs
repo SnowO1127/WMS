@@ -43,6 +43,7 @@ namespace WMS.datasorce
                     }
                     break;
                 case "adduser":
+                    jr = new JsonResult();
                     try
                     {
                         su = utils.AutoWiredClass<SysUser>(request, su = new SysUser());
@@ -60,17 +61,17 @@ namespace WMS.datasorce
                     context.Response.Write(utils.SerializeObject(jr));
 
                     break;
-                //case "getoneuser":
-                //    string id = request["id"];
-                //    try
-                //    {
-                //        context.Response.Write(utils.SerializeObjectWithTime<user_model>(bll.GetById(id)));
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        throw ex;
-                //    }
-                //    break;
+                case "getoneuser":
+                    string id = request["id"];
+                    try
+                    {
+                        context.Response.Write(utils.SerializeObject(bll.GetOneUser(id)));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
                 case "addroles":
                     userid = request["userid"];
                     rolesjsonstr = request["rolesjsonstr"];

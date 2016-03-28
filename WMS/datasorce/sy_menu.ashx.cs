@@ -15,14 +15,15 @@ namespace WMS.datasorce
     public class sy_menu : IHttpHandler
     {
         private readonly SysMenuBLL bll = new SysMenuBLL();
+        private JsonResult jr;
+        private SysMenu sm;
+        private PageSysMenu psm;
 
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
-            JsonResult jr = new JsonResult();
-            SysMenu sm = new SysMenu();
-            PageSysMenu psm = new PageSysMenu();
+            
             switch (request["action"])
             {
                 case "getmenutree":
@@ -49,7 +50,7 @@ namespace WMS.datasorce
                 case "getmenubypage":
                     try
                     {
-                        psm = utils.AutoWiredClass<PageSysMenu>(request, psm);
+                        psm = utils.AutoWiredClass<PageSysMenu>(request, psm = new PageSysMenu());
                         context.Response.Write(utils.SerializeObject(bll.GetListByPage(psm)));
                     }
                     catch (Exception ex)
@@ -69,10 +70,10 @@ namespace WMS.datasorce
                     }
                     break;
                 case "addmenu":
-
+                    jr = new JsonResult();
                     try
                     {
-                        sm = utils.AutoWiredClass<SysMenu>(request, sm);
+                        sm = utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
 
                         sm.ID = Guid.NewGuid().ToString();
                         sm.CDate = DateTime.Now;
@@ -91,9 +92,10 @@ namespace WMS.datasorce
                     context.Response.Write(utils.SerializeObject(jr));
                     break;
                 case "updatemenu":
+                    jr = new JsonResult();
                     try
                     {
-                        sm = utils.AutoWiredClass<SysMenu>(request, sm);
+                        sm = utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
 
                         bll.UpdateMenu(sm);
                         jr.Success = true;

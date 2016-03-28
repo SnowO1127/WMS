@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="Grid.cs" />
     <Compile Include="JsonResult.cs" />
+    <Compile Include="PageSysItemDetail.cs" />
     <Compile Include="PageSysMenu.cs" />
+    <Compile Include="PageSysOganize.cs" />
     <Compile Include="PageSysRole.cs" />
     <Compile Include="PageSysUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

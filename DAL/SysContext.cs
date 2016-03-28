@@ -14,6 +14,9 @@ namespace DAL
         public DbSet<SysMenu> SysMenus { get; set; }
         public DbSet<SysRole> SysRoles { get; set; }
         public DbSet<SysUser> SysUsers { get; set; }
+        public DbSet<SysOganize> SysOganizes { get; set; }
+        public DbSet<SysItem> SysItems { get; set; }
+        public DbSet<SysItemDetail> SysItemDetails { get; set; }
 
         public SysContext(string connection)
             : base("name=" + connection)
@@ -25,6 +28,9 @@ namespace DAL
             modelBuilder.Configurations.Add(new SysMenuMap());
             modelBuilder.Configurations.Add(new SysUserMap());
             modelBuilder.Configurations.Add(new SysRoleMap());
+            modelBuilder.Configurations.Add(new SysOganizeMap());
+            modelBuilder.Configurations.Add(new SysItemMap());
+            modelBuilder.Configurations.Add(new SysItemDetailMap());
             base.OnModelCreating(modelBuilder);
         }
 

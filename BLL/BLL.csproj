@@ -50,7 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SysItemBLL.cs" />
+    <Compile Include="SysItemDetailBLL.cs" />
     <Compile Include="SysMenuBLL.cs" />
+    <Compile Include="SysOganizeBLL.cs" />
     <Compile Include="SysRoleBLL.cs" />
     <Compile Include="SysUserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

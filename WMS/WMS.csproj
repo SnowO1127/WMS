@@ -2702,9 +2702,14 @@
     <Content Include="library\xyUtils.js" />
     <Content Include="SystemManage\Department\dept_add.aspx" />
     <Content Include="SystemManage\Department\dept_list.aspx" />
+    <Content Include="SystemManage\Dict\DictItemDetailsAdd.aspx" />
+    <Content Include="SystemManage\Dict\DictItemsAdd.aspx" />
+    <Content Include="SystemManage\Dict\DictList.aspx" />
     <Content Include="SystemManage\Menu\Icons.aspx" />
     <Content Include="SystemManage\Menu\MenuAdd.aspx" />
     <Content Include="SystemManage\Menu\MenuList.aspx" />
+    <Content Include="SystemManage\Oganize\OganizeAdd.aspx" />
+    <Content Include="SystemManage\Oganize\OganizeList.aspx" />
     <Content Include="SystemManage\Role\RoleAdd.aspx" />
     <Content Include="SystemManage\Role\RoleList.aspx" />
     <Content Include="SystemManage\Unit\unit_add.aspx" />
@@ -2722,14 +2727,20 @@
     <Compile Include="CommonTools\fullcalendar.aspx.designer.cs">
       <DependentUpon>fullcalendar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="datasorce\sy_dept.ashx.cs">
-      <DependentUpon>sy_dept.ashx</DependentUpon>
+    <Compile Include="datasorce\sy_item.ashx.cs">
+      <DependentUpon>sy_item.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\sy_itemdetail.ashx.cs">
+      <DependentUpon>sy_itemdetail.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_menu.ashx.cs">
       <DependentUpon>sy_menu.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_news.ashx.cs">
       <DependentUpon>sy_news.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\sy_oganize.ashx.cs">
+      <DependentUpon>sy_oganize.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_role.ashx.cs">
       <DependentUpon>sy_role.ashx</DependentUpon>
@@ -2798,6 +2809,27 @@
     <Compile Include="SystemManage\Department\dept_list.aspx.designer.cs">
       <DependentUpon>dept_list.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemManage\Dict\DictItemDetailsAdd.aspx.cs">
+      <DependentUpon>DictItemDetailsAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Dict\DictItemDetailsAdd.aspx.designer.cs">
+      <DependentUpon>DictItemDetailsAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Dict\DictItemsAdd.aspx.cs">
+      <DependentUpon>DictItemsAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Dict\DictItemsAdd.aspx.designer.cs">
+      <DependentUpon>DictItemsAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Dict\DictList.aspx.cs">
+      <DependentUpon>DictList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Dict\DictList.aspx.designer.cs">
+      <DependentUpon>DictList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemManage\Menu\Icons.aspx.cs">
       <DependentUpon>Icons.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2818,6 +2850,20 @@
     </Compile>
     <Compile Include="SystemManage\Menu\MenuList.aspx.designer.cs">
       <DependentUpon>MenuList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Oganize\OganizeAdd.aspx.cs">
+      <DependentUpon>OganizeAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Oganize\OganizeAdd.aspx.designer.cs">
+      <DependentUpon>OganizeAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Oganize\OganizeList.aspx.cs">
+      <DependentUpon>OganizeList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Oganize\OganizeList.aspx.designer.cs">
+      <DependentUpon>OganizeList.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\Role\RoleAdd.aspx.cs">
       <DependentUpon>RoleAdd.aspx</DependentUpon>
@@ -2877,7 +2923,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="datasorce\sy_dept.ashx" />
     <Content Include="datasorce\sy_menu.ashx" />
     <Content Include="datasorce\sy_news.ashx" />
     <Content Include="datasorce\sy_unit.ashx" />
@@ -2920,12 +2965,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SystemManage\Button\" />
-    <Folder Include="SystemManage\Dict\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="packages.config" />
     <Content Include="datasorce\sy_role.ashx" />
+    <Content Include="datasorce\sy_oganize.ashx" />
+    <Content Include="datasorce\sy_item.ashx" />
+    <Content Include="datasorce\sy_itemdetail.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

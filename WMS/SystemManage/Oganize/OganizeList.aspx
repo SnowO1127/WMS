@@ -1,11 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MenuList.aspx.cs" Inherits="WMS.SystemManage.Menu.MenuList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="OganizeList.aspx.cs" Inherits="WMS.SystemManage.Oganize.OganizeList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
     <script src="../../library/jquery-1.9.1.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
@@ -17,17 +16,17 @@
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
+    <title></title>
     <script>
-
         var treeid;
         $(function () {
-            tree = $("#menu_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getmenutree',
+            tree = $("#oganize_tree").tree({
+                url: '../../datasorce/sy_oganize.ashx?action=getoganizetree',
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) {
                     treeid = node.id;
-                    var obj = sy.serializeObject($('#menu_search_form'));
+                    var obj = sy.serializeObject($('#oganize_search_form'));
                     sy.mergeObj(obj, { id: treeid });
                     grid.datagrid("load", obj);  // 在用户点击的时候提示
                     grid.datagrid("unselectAll");
@@ -43,9 +42,9 @@
                 }
             })
 
-            grid = $('#menu_list_grid').datagrid({
+            grid = $('#oganize_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_menu.ashx?action=getmenubypage',
+                url: '../../datasorce/sy_oganize.ashx?action=getoganizebypage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -59,10 +58,18 @@
                     ID: treeid
                 },
                 frozenColumns: [[{
-                    width: '150',
-                    title: '菜单名',
-                    field: 'MenuName',
+                    width: '120',
+                    title: '组织机构名称',
+                    field: 'Name',
                     halign: 'center',
+                    sortable: true
+                }]],
+                columns: [[{
+                    width: '100',
+                    title: '编码',
+                    field: 'Code',
+                    halign: 'center',
+                    align: 'center',
                     sortable: true
                 }, {
                     width: '70',
@@ -71,31 +78,30 @@
                     halign: 'center',
                     align: 'center',
                     sortable: true
-                }]],
-                columns: [[{
-                    width: '260',
-                    title: '地址',
-                    field: 'Url',
+                }, {
+                    width: '80',
+                    title: '主负责人',
+                    field: 'ManagerName',
                     halign: 'center',
                     sortable: true
                 }, {
-                    width: '60',
-                    title: '公开',
-                    field: 'IsPublic',
+                    width: '80',
+                    title: '电话',
+                    field: 'Tel',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '80',
+                    title: '传真',
+                    field: 'Fax',
                     halign: 'center',
                     align: 'center',
                     sortable: true
                 }, {
                     width: '70',
-                    title: '允许编辑',
-                    field: 'AllowEdit',
-                    halign: 'center',
-                    align: 'center',
-                    sortable: true
-                }, {
-                    width: '70',
-                    title: '允许删除',
-                    field: 'AllowDelete',
+                    title: '排序号',
+                    field: 'OrderID',
                     halign: 'center',
                     align: 'center',
                     sortable: true
@@ -106,11 +112,10 @@
                     halign: 'center',
                     align: 'center'
                 }, {
-                    width: '70',
-                    title: '排序号',
-                    field: 'OrderID',
-                    halign: 'center',
-                    align: 'center'
+                    width: '240',
+                    title: '备注',
+                    field: 'Description',
+                    halign: 'center'
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
@@ -162,10 +167,10 @@
 
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
-                title: '编辑菜单',
+                title: '编辑组织机构',
                 width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                height: 340,
+                url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -178,19 +183,19 @@
 
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
-                title: '查看菜单',
+                title: '查看组织机构',
                 width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                height: 330,
+                url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
             });
         }
 
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
-                title: '新增菜单',
+                title: '新增组织机构',
                 width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/MenuAdd.aspx',
+                height: 340,
+                url: 'SystemManage/Oganize/OganizeAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -200,12 +205,25 @@
                 }]
             });
         };
+
+        var oganizeSearch = function () {
+            var obj = sy.serializeObject($('#oganize_search_form'));
+            sy.mergeObj(obj, { id: treeid });
+            grid.datagrid('load', obj);
+        }
+
+        var oganizeRefresh = function () {
+            var obj = {};
+            sy.mergeObj(obj, { id: treeid });
+            $('#oganize_search_form input[name=Name]').val('');
+            grid.datagrid('load', obj);
+        }
     </script>
 </head>
 <body>
     <div class="easyui-layout" fit="true">
         <div data-options="region: 'west', border: true" title="分类树" style="overflow: hidden; padding: 1px; width: 200px">
-            <div id="menu_tree" fit="true">
+            <div id="oganize_tree" fit="true">
             </div>
         </div>
         <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
@@ -213,18 +231,18 @@
                 <div data-options="region: 'north', border: false" style="overflow: hidden; padding: 1px; height: 70px">
                     <fieldset>
                         <legend>查询条件</legend>
-                        <form id="menu_search_form">
+                        <form id="oganize_search_form">
                             <table>
                                 <tr>
-                                    <td>菜单名称</td>
+                                    <td>组织机构名称</td>
                                     <td>
-                                        <input name="MenuName" class="easyui-validatebox" type="text" />
+                                        <input name="Name" class="easyui-validatebox" type="text" />
                                     </td>
                                     <td>
-                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="unitSearch()">查找</a>
+                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="oganizeSearch()">查找</a>
                                     </td>
                                     <td>
-                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="unitRefresh()">清空</a>
+                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="oganizeRefresh()">清空</a>
                                     </td>
                                 </tr>
                             </table>
@@ -232,7 +250,7 @@
                     </fieldset>
                 </div>
                 <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-                    <div id="menu_list_grid" fit="true">
+                    <div id="oganize_list_grid" fit="true">
                     </div>
                 </div>
             </div>

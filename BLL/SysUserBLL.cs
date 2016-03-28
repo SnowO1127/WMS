@@ -53,5 +53,10 @@ namespace BLL
         {
             dal.AddRoles(userid, list);
         }
+
+        public SysUser GetOneUser(string id)
+        {
+            return dal.GetOneUser(id);
+        }
     }
 }

@@ -94,5 +94,16 @@ namespace DAL
             }
 
         }
+
+        public SysUser GetOneUser(string id)
+        {
+            SysUser su = new SysUser();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                su = ctx.SysUsers.Find(id);
+            }
+
+            return su;
+        }
     }
 }
