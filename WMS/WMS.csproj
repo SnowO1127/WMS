@@ -2700,8 +2700,6 @@
     <Content Include="library\ueditor1_4_3-utf8-net\ueditor.parse.min.js" />
     <Content Include="library\xyEasyUI.js" />
     <Content Include="library\xyUtils.js" />
-    <Content Include="SystemManage\Department\dept_add.aspx" />
-    <Content Include="SystemManage\Department\dept_list.aspx" />
     <Content Include="SystemManage\Dict\DictItemDetailsAdd.aspx" />
     <Content Include="SystemManage\Dict\DictItemsAdd.aspx" />
     <Content Include="SystemManage\Dict\DictList.aspx" />
@@ -2795,20 +2793,6 @@
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\UploadHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SystemManage\Department\dept_add.aspx.cs">
-      <DependentUpon>dept_add.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemManage\Department\dept_add.aspx.designer.cs">
-      <DependentUpon>dept_add.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="SystemManage\Department\dept_list.aspx.cs">
-      <DependentUpon>dept_list.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="SystemManage\Department\dept_list.aspx.designer.cs">
-      <DependentUpon>dept_list.aspx</DependentUpon>
-    </Compile>
     <Compile Include="SystemManage\Dict\DictItemDetailsAdd.aspx.cs">
       <DependentUpon>DictItemDetailsAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2970,9 +2954,9 @@
     <Content Include="web.config" />
     <Content Include="packages.config" />
     <Content Include="datasorce\sy_role.ashx" />
-    <Content Include="datasorce\sy_oganize.ashx" />
     <Content Include="datasorce\sy_item.ashx" />
     <Content Include="datasorce\sy_itemdetail.ashx" />
+    <Content Include="datasorce\sy_oganize.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
