@@ -366,7 +366,7 @@
         </div>
         <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">
             <div id="index_tab" class="easyui-tabs" border="false" fit="true">
-                <div title="主页">
+                <div title="主页" data-options="iconCls:'ext-icon-house'">
                     <div class="easyui-layout" fit="true">
                         <div region="south" border="false" style="height: 30px; text-align: center">
                             <div class="panel-header panel-header-noborder top-toolbar" style="height: 20px">

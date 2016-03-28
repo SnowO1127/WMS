@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Dict
 {
-    public partial class DictItemsAdd : System.Web.UI.Page
+    public partial class DictItemAdd : System.Web.UI.Page
     {
+        public string id;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            id= Request.Params["id"];
         }
     }
 }
