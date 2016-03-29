@@ -202,7 +202,7 @@
                 iconCls: 'icon-add',
                 title: '新增菜单',
                 width: 545,
-                height: 350,
+                height: 360,
                 url: 'SystemManage/Menu/MenuAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -219,7 +219,7 @@
                 iconCls: 'icon-edit',
                 title: '编辑菜单',
                 width: 545,
-                height: 350,
+                height: 360,
                 url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',

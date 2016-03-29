@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -77,6 +78,17 @@ namespace DAL
             }
 
             return sm;
+        }
+
+        public List<SysItemDetail> GetItemDetailsByCode(string code)
+        {
+            List<SysItemDetail> list = new List<SysItemDetail>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                list = ctx.SysItemDetails.Include(x => x.SysItem).Where(x => x.SysItem.Code.Equals(code)).OrderBy(x => x.OrderID).ToList();
+            }
+
+            return list;
         }
     }
 }

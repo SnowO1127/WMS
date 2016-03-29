@@ -21,7 +21,7 @@
         $(function () {
 
             $('#Post').combobox({
-                url: '../../datasorce/sy_item.ashx?action=getcombox&code=Post',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Post',
                 valueField: 'Value',
                 textField: 'Name',
                 width: 153,
@@ -31,13 +31,14 @@
             });
 
             $('#Sex').combobox({
-                url: '../../datasorce/sy_item.ashx?action=getcombox&code=Gender',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Gender',
                 valueField: 'Value',
                 textField: 'Name',
                 width: 153,
                 panelHeight: 60,
                 editable: false,
-                required: true
+                required: true,
+                tipPosition: 'left'
             });
 
             if (id) {
@@ -49,6 +50,7 @@
                         id: id
                     },
                     success: function (jsonresult) {
+                        console.info(jsonresult);
                         $("#user_add_form").form('load', jsonresult);
                     }
                 })
@@ -105,7 +107,7 @@
                     </td>
                     <td style="width: 60px">姓名</td>
                     <td>
-                        <input name="RealName" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
+                        <input name="RealName" class="easyui-validatebox" data-options="required:true,validType:'chinese',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
@@ -151,7 +153,7 @@
                     </td>
                     <td>手机号码</td>
                     <td>
-                        <input name="PhoneNum" class="easyui-validatebox" style="width: 150px" />
+                        <input name="PhoneNum" class="easyui-validatebox" data-options="validType:'mobile',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
@@ -161,7 +163,7 @@
                     </td>
                     <td>电话号码</td>
                     <td>
-                        <input name="Tel" class="easyui-validatebox" style="width: 150px" />
+                        <input name="Tel" class="easyui-validatebox" data-options="validType:'phone',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
@@ -171,7 +173,7 @@
                     </td>
                     <td>QQ号码</td>
                     <td>
-                        <input name="QQ" class="easyui-validatebox" style="width: 150px" />
+                        <input name="QQ" class="easyui-validatebox" data-options="validType:'qq',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
@@ -183,14 +185,14 @@
                 <tr>
                     <td>有效</td>
                     <td>
-                        <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 150px">
-                            <option value="true">是</option>
-                            <option value="false">否</option>
+                        <select id="Enabled" name="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
+                            <option value="1">是</option>
+                            <option value="0">否</option>
                         </select>
                     </td>
                     <td>排序号</td>
                     <td>
-                        <input name="OrderID" class="easyui-validatebox" style="width: 150px" />
+                        <input name="OrderID" class="easyui-validatebox" data-options="validType:'integer',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>

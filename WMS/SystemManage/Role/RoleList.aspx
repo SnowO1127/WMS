@@ -28,7 +28,7 @@
                 singleSelect: true,
                 idField: 'ID',
                 sortName: 'OrderID',
-                sortOrder: 'desc',
+                sortOrder: 'asc',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 frozenColumns: [[{
@@ -45,7 +45,7 @@
                     sortable: true
                 }]],
                 columns: [[{
-                    width: '120',
+                    width: '80',
                     title: '角色类别',
                     halign: 'center',
                     field: 'Category',
@@ -57,21 +57,42 @@
                     field: 'AllowDelete',
                     align: 'center',
                     halign: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowDelete) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '允许编辑',
                     field: 'AllowEdit',
                     align: 'center',
                     halign: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowEdit) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '50',
                     title: '有效',
                     field: 'Enabled',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.Enabled) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '排序号',
@@ -79,7 +100,7 @@
                     align: 'center',
                     field: 'OrderID'
                 }, {
-                    width: '250',
+                    width: '220',
                     title: '描述',
                     halign: 'center',
                     field: 'Description'
@@ -139,6 +160,50 @@
             });
         });
 
+        var openAdd = function () {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-add',
+                title: '新增角色',
+                width: 520,
+                height: 280,
+                url: 'SystemManage/Role/RoleAdd.aspx',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                    }
+                }]
+            });
+        };
+
+        var openEdit = function (id) {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
+                title: '编辑角色',
+                width: 520,
+                height: 280,
+                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                    }
+                }]
+            });
+        }
+
+        var openView = function (id) {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-save',
+                title: '查看角色',
+                width: 520,
+                height: 260,
+                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
+            });
+        }
+
         var deleteRole = function (id) {
             parent.$.messager.confirm('删除角色', '你确定删除角色吗?', function (r) {
                 if (r) {
@@ -161,47 +226,6 @@
                 }
             });
         }
-
-        var openEdit = function (id) {
-            var dialog = parent.sy.modalDialog({
-                title: '编辑角色',
-                width: 370,
-                height: 330,
-                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
-        }
-
-        var openView = function (id) {
-            var dialog = parent.sy.modalDialog({
-                title: '查看角色',
-                width: 370,
-                height: 300,
-                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
-            });
-        }
-
-        var openAdd = function () {
-            var dialog = parent.sy.modalDialog({
-                title: '新增角色',
-                width: 370,
-                height: 330,
-                url: 'SystemManage/Role/RoleAdd.aspx',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
-        };
     </script>
 </head>
 <body>

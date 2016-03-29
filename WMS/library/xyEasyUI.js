@@ -51,7 +51,7 @@ $.extend($.fn.tabs.methods, {
         var tabs = $(jq).tabs('tabs');
         var all = [];
         all = $.map(tabs, function (n, i) {
-            return $(n).panel('options')
+                return $(n).panel('options')
         });
         return all;
     },
@@ -63,7 +63,7 @@ $.extend($.fn.tabs.methods, {
     closeAll: function (jq) { //关闭全部
         var tabs = $(jq).tabs('allTabs');
         $.each(tabs, function (i, n) {
-            if (n.title != "主页")
+            if (n.title != '主页')
                 $(jq).tabs('close', n.title);
         })
     },
@@ -73,7 +73,7 @@ $.extend($.fn.tabs.methods, {
             currentTabIndex = $(jq).tabs('getTabIndex', currentTab);
 
         $.each(tabs, function (i, n) {
-            if (currentTabIndex != i) {
+            if (currentTabIndex != i && n.title != '主页') {
                 $(jq).tabs('close', n.title);
             }
         })
@@ -84,11 +84,9 @@ $.extend($.fn.tabs.methods, {
             currentTabIndex = $(jq).tabs('getTabIndex', currentTab);
         var i = currentTabIndex - 1;
 
-        while (i > -1) {
-            if (n.title != "主页") {
-                $(jq).tabs('close', tabs[i].title);
-                i--;
-            }
+        while (i > 0) {
+            $(jq).tabs('close', tabs[i].title);
+            i--;
         }
     },
     closeRight: function (jq) { //// 关闭当前页右侧tab页

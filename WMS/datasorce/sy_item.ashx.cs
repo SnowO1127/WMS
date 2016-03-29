@@ -98,19 +98,19 @@ namespace WMS.datasorce
                         throw ex;
                     }
                     break;
-                case "getcombox":
-                    code = request["code"];
-                    try
-                    {
-                        si = bll.GetOneItemByCode(code);
+                //case "getcombox":
+                //    code = request["code"];
+                //    try
+                //    {
+                //        si = bll.GetOneItemByCode(code);
 
-                        context.Response.Write(Utils.SerializeObject(si.SysItemDetails));
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
-                    break;
+                //        context.Response.Write(Utils.SerializeObject(si.SysItemDetails.OrderBy(x => x.OrderID).ToList()));
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        throw ex;
+                //    }
+                //    break;
             }
         }
 

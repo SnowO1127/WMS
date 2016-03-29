@@ -32,5 +32,10 @@ namespace BLL
         {
             dal.UpdateItemDetail(sid);
         }
+
+        public List<SysItemDetail> GetItemDetailsByCode(string code)
+        {
+            return dal.GetItemDetailsByCode(code);
+        }
     }
 }

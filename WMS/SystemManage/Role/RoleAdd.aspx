@@ -18,6 +18,47 @@
         var id = "<%=id %>";
 
         $(function () {
+
+            $('#Category').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=RoleCategory',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 100,
+                editable: false,
+                required: true
+            });
+
+            $('#Enabled').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Enabled',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 50,
+                editable: false,
+                required: true
+            });
+
+            $('#AllowEdit').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=AllowEdit',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 50,
+                editable: false,
+                required: true
+            });
+
+            $('#AllowDelete').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=AllowDelete',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 50,
+                editable: false,
+                required: true
+            });
+
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_role.ashx?action=getonerole",
@@ -45,7 +86,7 @@
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#role_add_form').serializeArray(),
+                    data: sy.serializeObject($('#role_add_form')),
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
@@ -67,7 +108,7 @@
                 <tr>
                     <td style="width: 60px">角色编号</td>
                     <td>
-                        <input name="Code" class="easyui-validatebox" type="text" data-options="required:true" style="width: 210px" />
+                        <input name="Code" class="easyui-validatebox" type="text" data-options="required:true" style="width: 150px" />
                         <input name="ID" type="hidden" />
                     </td>
 
@@ -75,61 +116,40 @@
                 <tr>
                     <td>角色名称</td>
                     <td>
-                        <input name="Name" class="easyui-validatebox" data-options="required:true" style="width: 210px" />
+                        <input name="Name" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
                     <td>角色分类</td>
                     <td>
-                        <select id="Category" class="easyui-combobox" data-options="panelHeight:100,editable:false" name="Category" style="width: 213px">
-                            <option value="管理员">管理员</option>
-                            <option value="员工">员工</option>
-                            <option value="经理">经理</option>
-                            <option value="部长">部长</option>
-                            <option value="总经理">总经理</option>
-                        </select>
+                        <input name="Category" id="Category" type="text" />
                     </td>
-                    
                 </tr>
                 <tr>
                     <td>有效</td>
                     <td>
-                        <select id="Enabled" class="easyui-combobox" data-options="required:true,panelHeight:50,editable:false" name="Enabled" style="width: 213px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
+                        <input name="Enabled" id="Enabled" type="text" />
+                    </td>
+                    <td style="width: 60px">排序号</td>
+                    <td>
+                        <input name="OrderID" class="easyui-validatebox" data-options="validType:'integer',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
                     <td>允许编辑</td>
                     <td>
-                        <select id="AllowEdit" class="easyui-combobox" data-options="required:true,panelHeight:50,editable:false" name="Enabled" style="width: 213px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
+                        <input name="AllowEdit" id="AllowEdit" type="text" />
                     </td>
-                </tr>
-                <tr>
                     <td>允许删除</td>
                     <td>
-                        <select id="AllowDelete" class="easyui-combobox" data-options="required:true,panelHeight:50,editable:false" name="Enabled" style="width: 213px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>排序号</td>
-                    <td>
-                        <input name="OrderID" class="easyui-validatebox" style="width: 210px" />
+                        <input name="AllowDelete" id="AllowDelete" type="text" />
                     </td>
                 </tr>
                 <tr>
                     <td>角色描述</td>
-                    <td>
-                        <textarea name="Description" class="easyui-validatebox" style="width: 208px; height: 40px"></textarea>
+                    <td colspan="3">
+                        <textarea name="Description" class="easyui-validatebox" style="width: 370px; height: 50px"></textarea>
                     </td>
-
                 </tr>
             </table>
         </form>

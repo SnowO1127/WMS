@@ -9,5 +9,7 @@ namespace Common
     public class Globe
     {
         public static string ConnectionString = "WmsContext";
+
+        public const string DefaultPassWord = "123456";
     }
 }

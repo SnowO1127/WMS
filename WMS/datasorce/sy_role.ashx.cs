@@ -63,11 +63,10 @@ namespace WMS.datasorce
 
                     break;
                 case "updaterole":
-                    sr = new SysRole();
                     jr = new JsonResult();
                     try
                     {
-                        sr = Utils.AutoWiredClass<SysRole>(request, sr);
+                        sr = Utils.AutoWiredClass<SysRole>(request, sr = new SysRole());
 
                         bll.UpdateRole(sr);
 

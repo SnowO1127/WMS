@@ -42,7 +42,7 @@
 
         $(function () {
             $('#Category').combobox({
-                url: '../../datasorce/sy_item.ashx?action=getcombox&code=MenuCategory',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=MenuCategory',
                 valueField: 'Value',
                 textField: 'Name',
                 width: 170,
@@ -85,7 +85,7 @@
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#menu_add_form').serializeArray(),
+                    data: sy.serializeObject($('#menu_add_form')),
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');

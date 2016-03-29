@@ -18,6 +18,7 @@ namespace WMS.datasorce
         private PageSysItemDetail psid;
         private JsonResult jr;
         private SysItemDetail sid;
+        private string code;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -39,7 +40,7 @@ namespace WMS.datasorce
 
                     break;
                 case "additemdetail":
-                   jr = new JsonResult();
+                    jr = new JsonResult();
                     try
                     {
                         sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
@@ -86,6 +87,17 @@ namespace WMS.datasorce
                         sid = bll.GetOneItemDetail(id);
 
                         context.Response.Write(Utils.SerializeObject(sid));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case "getcombox":
+                    code = request["code"];
+                    try
+                    {
+                        context.Response.Write(Utils.SerializeObject(bll.GetItemDetailsByCode(code)));
                     }
                     catch (Exception ex)
                     {
