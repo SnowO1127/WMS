@@ -41,6 +41,15 @@
         })
 
         $(function () {
+            $('#Category').combobox({
+                url: '../../datasorce/sy_item.ashx?action=getcombox&code=MenuCategory',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 170,
+                panelHeight: 60,
+                required: true
+            });
+
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_menu.ashx?action=getonemenu",
@@ -64,7 +73,7 @@
             }
         });
 
-        var f_save = function ($dialog, $grid, $pjq) {
+        var f_save = function ($dialog, $grid, $tree, $pjq) {
             if ($('#menu_add_form').form('validate')) {
                 var url;
                 if (id) {
@@ -81,6 +90,7 @@
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
                             $grid.datagrid('load');
+                            $tree.tree("reload");
                             $dialog.dialog('destroy');
                         } else {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'error');
@@ -105,10 +115,11 @@
                 <tr>
                     <td>分类</td>
                     <td>
-                        <select id="Category" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Category" style="width: 173px">
+                        <%-- <select id="Category" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Category" style="width: 173px">
                             <option value="system">system</option>
                             <option value="application">application</option>
-                        </select>
+                        </select>--%>
+                        <input name="Category" id="Category" type="text" style="width: 170px" />
                     </td>
                 </tr>
                 <tr>
@@ -141,6 +152,11 @@
                             <option value="1">是</option>
                             <option value="0">否</option>
                         </select>
+                    </td>
+                    <td>排序号
+                    </td>
+                    <td>
+                        <input id="OrderID" name="OrderID" class="easyui-validatebox" style="width: 170px" />
                     </td>
 
                 </tr>

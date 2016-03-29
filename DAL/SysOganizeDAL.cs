@@ -37,7 +37,7 @@ namespace DAL
                 }
                 list = query.ToList();
 
-                list = pso.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList();
+                list = pso.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList();
             }
             return list;
         }
@@ -69,7 +69,7 @@ namespace DAL
 
                 IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                utils.Copy(nso, so, ie);
+                Utils.Copy(nso, so, ie);
 
                 nso.UDate = DateTime.Now;
 

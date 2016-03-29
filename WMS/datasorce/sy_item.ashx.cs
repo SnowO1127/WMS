@@ -17,6 +17,7 @@ namespace WMS.datasorce
         private readonly SysItemBLL bll = new SysItemBLL();
         private JsonResult jr;
         private SysItem si;
+        private string id, code;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -27,7 +28,7 @@ namespace WMS.datasorce
                 case "getitemtree":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetItemTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetItemTree()));
                     }
                     catch (Exception ex)
                     {
@@ -37,7 +38,7 @@ namespace WMS.datasorce
                 case "getistree":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetIsTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetIsTree()));
                     }
                     catch (Exception ex)
                     {
@@ -48,7 +49,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        si = utils.AutoWiredClass<SysItem>(request, si = new SysItem());
+                        si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
 
                         si.ID = Guid.NewGuid().ToString();
                         si.CDate = DateTime.Now;
@@ -63,13 +64,13 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "updateitem":
                     jr = new JsonResult();
                     try
                     {
-                        si = utils.AutoWiredClass<SysItem>(request, si = new SysItem());
+                        si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
 
                         bll.UpdateItem(si);
 
@@ -81,17 +82,29 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneitem":
                     si = new SysItem();
+                    id = request["id"];
                     try
                     {
-                        string id = request["id"];
-
                         si = bll.GetOneItem(id);
 
-                        context.Response.Write(utils.SerializeObject(si));
+                        context.Response.Write(Utils.SerializeObject(si));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case "getcombox":
+                    code = request["code"];
+                    try
+                    {
+                        si = bll.GetOneItemByCode(code);
+
+                        context.Response.Write(Utils.SerializeObject(si.SysItemDetails));
                     }
                     catch (Exception ex)
                     {

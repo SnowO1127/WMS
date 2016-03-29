@@ -29,7 +29,7 @@ namespace WMS.datasorce
                 case "getoganizetree":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetOganizeTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetOganizeTree()));
                     }
                     catch (Exception ex)
                     {
@@ -39,7 +39,7 @@ namespace WMS.datasorce
                 case "getoganize":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetList()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetList()));
                     }
                     catch (Exception ex)
                     {
@@ -50,8 +50,8 @@ namespace WMS.datasorce
                 case "getoganizebypage":
                     try
                     {
-                        pso = utils.AutoWiredClass<PageSysOganize>(request, pso = new PageSysOganize());
-                        context.Response.Write(utils.SerializeObject(bll.GetListByPage(pso)));
+                        pso = Utils.AutoWiredClass<PageSysOganize>(request, pso = new PageSysOganize());
+                        context.Response.Write(Utils.SerializeObject(bll.GetListByPage(pso)));
                     }
                     catch (Exception ex)
                     {
@@ -63,7 +63,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        so = utils.AutoWiredClass<SysOganize>(request, so = new SysOganize());
+                        so = Utils.AutoWiredClass<SysOganize>(request, so = new SysOganize());
 
                         so.ID = Guid.NewGuid().ToString();
                         so.CDate = DateTime.Now;
@@ -78,13 +78,13 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "updateoganize":
                     jr = new JsonResult();
                     try
                     {
-                        so = utils.AutoWiredClass<SysOganize>(request, so = new SysOganize());
+                        so = Utils.AutoWiredClass<SysOganize>(request, so = new SysOganize());
 
                         bll.UpdateOganize(so);
                         jr.Success = true;
@@ -95,7 +95,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneoganize":
                     try
@@ -104,7 +104,7 @@ namespace WMS.datasorce
 
                         so = bll.GetOneOganize(id);
 
-                        context.Response.Write(utils.SerializeObject(so));
+                        context.Response.Write(Utils.SerializeObject(so));
                     }
                     catch (Exception ex)
                     {

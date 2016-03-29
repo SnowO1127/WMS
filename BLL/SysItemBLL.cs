@@ -68,5 +68,10 @@ namespace BLL
         {
             dal.UpdateItem(si);
         }
+
+        public SysItem GetOneItemByCode(string code)
+        {
+            return dal.GetOneItemByCode(code);
+        }
     }
 }

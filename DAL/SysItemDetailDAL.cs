@@ -24,19 +24,17 @@ namespace DAL
         public List<SysItemDetail> GetListByPage(PageSysItemDetail psid)
         {
             List<SysItemDetail> list = new List<SysItemDetail>();
-            using (var ctx = new SysContext(Globe.ConnectionString))
+
+            if (!string.IsNullOrEmpty(psid.ItemID))
             {
-                var query = ctx.SysItemDetails.AsQueryable();
-
-                if (!string.IsNullOrEmpty(psid.ItemID))
+                using (var ctx = new SysContext(Globe.ConnectionString))
                 {
-                    query = query.Where(x => x.ItemID.Equals(psid.ItemID));
+                    list = ctx.SysItemDetails.Where(x => x.ItemID.Equals(psid.ItemID)).ToList();
+
+                    list = psid.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList();
                 }
-
-                list = query.ToList();
-
-                list = psid.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList();
             }
+
             return list;
         }
 
@@ -60,7 +58,7 @@ namespace DAL
 
                 IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                utils.Copy(nsid, sid, ie);
+                Utils.Copy(nsid, sid, ie);
 
                 nsid.UDate = DateTime.Now;
 

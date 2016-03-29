@@ -22,6 +22,7 @@
 
         $(function () {
             nogrid = $('#norole_grid').datagrid({
+                iconCls: 'icon-cancel',
                 title: '未选角色',
                 url: '../../datasorce/sy_role.ashx?action=getnorole',
                 striped: true,
@@ -62,6 +63,7 @@
             });
 
             hasgrid = $('#hasrole_grid').datagrid({
+                iconCls: 'icon-ok',
                 title: '已选角色',
                 url: '../../datasorce/sy_role.ashx?action=gethasrole',
                 striped: true,
@@ -148,7 +150,7 @@
 </head>
 <body>
     <div class="easyui-layout" data-options="fit:true,border:false">
-        <div data-options="region:'west',split:true,collapsible:false,border:false" style="width: 250px;">
+        <div data-options="region:'west',split:true,collapsible:false,border:false" style="width: 240px;">
             <div id="norole_grid" fit="true">
             </div>
         </div>
@@ -156,7 +158,7 @@
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain: false" style="width: 60px; margin-bottom: 20px;" onclick="moveIn()">《 移入</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" data-options="plain: false" style="width: 60px" onclick="moveOut()">移出 》</a>
         </div>
-        <div data-options="region:'east',split:true,collapsible:false,border:false" style="width: 250px;">
+        <div data-options="region:'east',split:true,collapsible:false,border:false" style="width: 240px;">
             <div id="hasrole_grid" fit="true">
             </div>
         </div>

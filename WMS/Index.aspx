@@ -18,9 +18,9 @@
     <script src="library/xyEasyUI.js"></script>
     <script src="library/xyUtils.js"></script>
     <link href="library/syExtCss.css" rel="stylesheet" />
-    <link href="library/syExtIcon.css" rel="stylesheet" /> 
+    <link href="library/syExtIcon.css" rel="stylesheet" />
     <title>库存管理系统</title>
-      
+
     <script>
         var themeData =
              [//主题风格json格式
@@ -204,9 +204,6 @@
                                 iconCls: r[i].iconCls//e.Icon
                             });
 
-
-                            //divHtml = "<div title=" + r[i].text + "><ul id=" + treeID + " style='margin-top: 3px;'></div>";
-                            //$('#index_accordion').append(divHtml);
                             $('#' + treeID).tree({
                                 data: sub_menu,
                                 parentField: 'pid',
@@ -221,17 +218,41 @@
                     }
                 }
             });
+
+            $('#index_tab').tabs({
+                onContextMenu: function (e, title, index) {
+                    e.preventDefault();
+                    if (index > 0) {
+                        $('#index_tab_menu').menu('show', {
+                            left: e.pageX,
+                            top: e.pageY
+                        }).data("tabTitle", title);
+                    }
+                }
+            });
+
+            $('#index_tab_menu').menu({
+                onClick: function (item) {
+                    sy.closeTab(item.id);
+                }
+            });
         });
 
         sy.addTab = function (title, url, iconCls) {
             if ($('#index_tab').tabs('exists', title)) {
                 $('#index_tab').tabs('select', title);
             } else {
-                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
+                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>';
                 $('#index_tab').tabs('add', {
                     title: title,
                     content: content,
                     closable: true,
+                    tools: [{
+                        iconCls: 'icon-mini-refresh',
+                        handler: function () {
+                            sy.refreshTab();
+                        }
+                    }],
                     iconCls: iconCls
                 });
             }
@@ -245,6 +266,44 @@
                 }
             }
             return sub_menu;
+        }
+
+
+        sy.closeTab = function (action) {
+            switch (action) {
+                case "refresh":
+                    sy.refreshTab();
+                    break;
+                case "close":
+                    $('#index_tab').tabs("closeCurrent");
+                    break;
+                case "closeall":
+                    $('#index_tab').tabs("closeAll");
+                    break;
+                case "closeother":
+                    $('#index_tab').tabs("closeOther");
+                    break;
+                case "closeright":
+                    $('#index_tab').tabs("closeRight");
+                    break;
+                case "closeleft":
+                    $('#index_tab').tabs("closeLeft");
+                    break;
+                case "exit":
+                    $('#index_tab_menu').menu('hide');
+                    break;
+            }
+        }
+
+        sy.refreshTab = function () {
+            var currTab = self.parent.$('#index_tab').tabs('getSelected'); //获得当前tab
+            var url = $(currTab.panel('options').content).attr('src');
+            self.parent.$('#index_tab').tabs('update', {
+                tab: currTab,
+                options: {
+                    content: '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>'
+                }
+            });
         }
     </script>
     <style>
@@ -304,53 +363,52 @@
     </style>
 </head>
 <body class="easyui-layout" fit="true">
-    <form id="form1" runat="server">
-        <div data-options="region:'north'" style="height: 80px; overflow: hidden">
-            <div class="easyui-layout" fit="true">
-                <div data-options="region:'north',border:false" style="height: 70px">
-                    <div class="top-left">
-                        <h1 style="margin-left: 10px; margin-top: 10px;">库存管理系统</h1>
+    <div data-options="region:'north'" style="height: 80px; overflow: hidden">
+        <div class="easyui-layout" fit="true">
+            <div data-options="region:'north',border:false" style="height: 70px">
+                <div class="top-left">
+                    <h1 style="margin-left: 10px; margin-top: 10px;">库存管理系统</h1>
+                </div>
+                <div class="top-right">
+                    <div id="timerSpan">
                     </div>
-                    <div class="top-right">
-                        <div id="timerSpan">
-                        </div>
-                        <div id="themeSpan">
-                            <span>更换皮肤风格：</span>
-                            <select class="easyui-combobox" id="themeSelector" style="width: 150px;">
-                            </select>
-                        </div>
+                    <div id="themeSpan">
+                        <span>更换皮肤风格：</span>
+                        <select class="easyui-combobox" id="themeSelector" style="width: 150px;">
+                        </select>
                     </div>
                 </div>
-                <div data-options="region:'south',border:true" style="height: 30px">
-                    <div class="panel-header panel-header-noborder top-toolbar" style="height: 30px;">
-                        <div id="infobar">
-                            <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">此处可以放置登录用户账户信息
-                            </span>
-                        </div>
-                        <div id="buttonbar">
-                            <a id="btnContact" class="easyui-linkbutton easyui-tooltip" title="前往作者关于该插件集合的博客专文；可以进行问题反馈提交或留言操作。" data-options="plain: true, iconCls: 'icon-ok'">博客留言</a>
-                            <a id="btn2" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-reload'">按钮2</a>
-                            <a id="btn3" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-print'">按钮3</a>
-                            <a id="btnFullScreen" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-help'" onclick="fullScreen()">全屏切换</a>
-                            <a id="btnExit" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-back'">退出系统</a>
-                            <a id="btnShowNorth" class="easyui-linkbutton" data-options="plain: true, iconCls: 'layout-button-down'" style="display: none;"></a>
-                        </div>
+            </div>
+            <div data-options="region:'south',border:true" style="height: 30px">
+                <div class="panel-header panel-header-noborder top-toolbar" style="height: 30px;">
+                    <div id="infobar">
+                        <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">此处可以放置登录用户账户信息
+                        </span>
+                    </div>
+                    <div id="buttonbar">
+                        <a id="btnContact" class="easyui-linkbutton easyui-tooltip" title="前往作者关于该插件集合的博客专文；可以进行问题反馈提交或留言操作。" data-options="plain: true, iconCls: 'icon-ok'">博客留言</a>
+                        <a id="btn2" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-reload'">按钮2</a>
+                        <a id="btn3" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-print'">按钮3</a>
+                        <a id="btnFullScreen" class="easyui-linkbutton" data-options="plain: true, iconCls: 'ext-icon-arrow_out'" onclick="sy.fullScreen()">全屏切换</a>
+                        <a id="btnExit" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-back'">退出系统</a>
+                        <a id="btnShowNorth" class="easyui-linkbutton" data-options="plain: true, iconCls: 'layout-button-down'" style="display: none;"></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div data-options="region:'south',split:false,border:false" style="height: 50px;">
-            <div style="color: #4e5766; padding: 6px 0px 0px 0px; margin: 0px auto; text-align: center; font-size: 12px; font-family: 微软雅黑;">
-                @2014 Copyright: XiangYang Personal.
+    </div>
+    <div data-options="region:'south',split:false,border:false" style="height: 50px;">
+        <div style="color: #4e5766; padding: 6px 0px 0px 0px; margin: 0px auto; text-align: center; font-size: 12px; font-family: 微软雅黑;">
+            @2014 Copyright: XiangYang Personal.
                <br />
-                建议使用&nbsp;
+            建议使用&nbsp;
                 <a href="http://windows.microsoft.com/zh-CN/internet-explorer/products/ie/home" target="_blank" style="text-decoration: none;">IE(Version 9/10/11)</a>/
                 <a href="https://www.google.com/intl/zh-CN/chrome/browser/" target="_blank" style="text-decoration: none;">Chrome</a>/
                 <a href="http://firefox.com.cn/download/" target="_blank" style="text-decoration: none;">Firefox</a>
-                &nbsp;系列浏览器。
-            </div>
+            &nbsp;系列浏览器。
         </div>
-        <%--<div data-options="region:'east',split:true" title="日历" iconcls="icon-standard-date" style="width: 180px;">
+    </div>
+    <%--<div data-options="region:'east',split:true" title="日历" iconcls="icon-standard-date" style="width: 180px;">
             <div class="easyui-layout" fit="true">
                 <div data-options="region: 'north', split: false, border: false" style="height: 180px;">
                     <div class="easyui-calendar" data-options="fit: true"></div>
@@ -360,43 +418,31 @@
                 </div>
             </div>
         </div>--%>
-        <div data-options="region:'west',split:true" title="菜单导航" iconcls="icon-standard-map" style="width: 200px; overflow: auto">
-            <div id="index_accordion">
-            </div>
+    <div data-options="region:'west',split:true,iconCls:'icon-add'" title="菜单导航" style="width: 200px; overflow: auto">
+        <div id="index_accordion">
         </div>
-        <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">
-            <div id="index_tab" class="easyui-tabs" border="false" fit="true">
-                <div title="主页" data-options="iconCls:'ext-icon-house'">
-                    <div class="easyui-layout" fit="true">
-                        <div region="south" border="false" style="height: 30px; text-align: center">
-                            <div class="panel-header panel-header-noborder top-toolbar" style="height: 20px">
-                                <div>
+    </div>
+    <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">
+        <div id="index_tab" class="easyui-tabs" border="false" fit="true">
+            <div title="主页" data-options="iconCls:'ext-icon-house'">
+                <div class="easyui-layout" fit="true">
+
+                    <div region="center" border="false">
+                        <div id="mainPortal" style="position: relative">
+                            <div style="width: 33%;">
+                                <div data-options="title: '项目信息', height: 260, collapsible: true, closable: true" style="height: 260px;">
+                                </div>
+                                <div title="最新新闻" style="height: 260px; padding: 5px;">
+                                </div>
+                                <div title="最新公告" style="height: 260px; padding: 5px;">
                                 </div>
                             </div>
-                        </div>
-                        <div region="center" border="false">
-                            <div id="mainPortal" style="position: relative">
-                                <div style="width: 33%;">
-                                    <div data-options="title: '项目信息', height: 260, collapsible: true, closable: true" style="height: 260px;">
-                                        aaa
-                                    </div>
-                                    <div title="最新新闻" style="height: 260px; padding: 5px;">
-                                        <input class="easyui-my97" type="text" />
-                                    </div>
-                                    <div title="最新公告" style="height: 260px; padding: 5px;">
-                                        <input id="xx" class="easyui-validatebox" type="text" data-options="required:true" />
-                                        <input id="dx" class="easyui-validatebox" type="text" />
-                                    </div>
+                            <div style="width: 33%;">
+                                <div title="我的待办" style="height: 260px; padding: 5px;">
                                 </div>
-                                <div style="width: 33%;">
-                                    <div title="我的待办" style="height: 260px; padding: 5px;">
-                                    </div>
-                                    <div title="我的日程" style="height: 260px; padding: 5px;">
-                                        aa
-                                    </div>
-                                    <div title="最新新闻" style="height: 260px; padding: 5px;">
-                                        aaa
-                                    </div>
+                                <div title="我的日程" style="height: 260px; padding: 5px;">
+                                </div>
+                                <div title="最新新闻" style="height: 260px; padding: 5px;">
                                 </div>
                             </div>
                         </div>
@@ -404,6 +450,19 @@
                 </div>
             </div>
         </div>
-    </form>
+    </div>
+
+    <div id="index_tab_menu" class="easyui-menu" style="width: 150px;">
+        <div id="refresh" data-options="iconCls:'ext-icon-arrow_refresh'">>刷新</div>
+        <div class="menu-sep"></div>
+        <div id="close" data-options="iconCls:'icon-remove'">>关闭</div>
+        <div id="closeall" data-options="iconCls:'icon-remove'">>全部关闭</div>
+        <div id="closeother" data-options="iconCls:'icon-remove'">>除此之外全部关闭</div>
+        <div class="menu-sep"></div>
+        <div id="closeright" data-options="iconCls:'ext-icon-arrow_right'">>当前页右侧全部关闭</div>
+        <div id="closeleft" data-options="iconCls:'ext-icon-arrow_left'">>当前页左侧全部关闭</div>
+        <div class="menu-sep"></div>
+        <div id="exit" data-options="iconCls:'ext-icon-cross'">>退出</div>
+    </div>
 </body>
 </html>

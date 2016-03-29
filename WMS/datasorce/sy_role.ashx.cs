@@ -32,10 +32,10 @@ namespace WMS.datasorce
                     psr = new PageSysRole();
                     try
                     {
-                        psr = utils.AutoWiredClass<PageSysRole>(request, psr);
+                        psr = Utils.AutoWiredClass<PageSysRole>(request, psr);
                         Grid<SysRole> g = bll.GetNonDeleteListByPage(psr);
                         //Grid<SysUser> g = bll.GetListByPage(psu);
-                        context.Response.Write(utils.SerializeObject(g));
+                        context.Response.Write(Utils.SerializeObject(g));
                     }
                     catch (Exception ex)
                     {
@@ -47,7 +47,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        sr = utils.AutoWiredClass<SysRole>(request, sr);
+                        sr = Utils.AutoWiredClass<SysRole>(request, sr);
                         sr.ID = Guid.NewGuid().ToString();
                         sr.CDate = DateTime.Now;
                         bll.AddRole(sr);
@@ -59,7 +59,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
                 case "updaterole":
@@ -67,7 +67,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        sr = utils.AutoWiredClass<SysRole>(request, sr);
+                        sr = Utils.AutoWiredClass<SysRole>(request, sr);
 
                         bll.UpdateRole(sr);
 
@@ -79,7 +79,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
                 case "getonerole":
@@ -95,7 +95,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
                 case "deleterole":
@@ -113,14 +113,14 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getnorole":
                     userid = request["userid"];
                     jr = new JsonResult();
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetNoRoleList(userid)));
+                        context.Response.Write(Utils.SerializeObject(bll.GetNoRoleList(userid)));
                     }
                     catch (Exception ex)
                     {
@@ -132,7 +132,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetHasRoleList(userid)));
+                        context.Response.Write(Utils.SerializeObject(bll.GetHasRoleList(userid)));
                     }
                     catch (Exception ex)
                     {

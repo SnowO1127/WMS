@@ -39,7 +39,7 @@ namespace DAL
             List<SysUser> list = new List<SysUser>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                list = psu.Order == "desc" ? ctx.SysUsers.Include(x => x.Roles).ToList().OrderByDescending(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList() : ctx.SysUsers.Include(x => x.Roles).ToList().OrderBy(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList();
+                list = psu.Order == "desc" ? ctx.SysUsers.Include(x => x.Roles).ToList().OrderByDescending(p => Utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList() : ctx.SysUsers.Include(x => x.Roles).ToList().OrderBy(p => Utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).ToList();
             }
             return list;
         }
@@ -49,7 +49,7 @@ namespace DAL
             int count = 0;
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                count = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count() : ctx.SysUsers.ToList().OrderBy(p => utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count();
+                count = psu.Order == "desc" ? ctx.SysUsers.ToList().OrderByDescending(p => Utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count() : ctx.SysUsers.ToList().OrderBy(p => Utils.GetPropertyValue(p, psu.Sort)).Skip(psu.Rows * (psu.Page - 1)).Take(psu.Rows).Count();
             }
             return count;
         }
@@ -92,7 +92,6 @@ namespace DAL
                     tran.Complete();
                 }
             }
-
         }
 
         public SysUser GetOneUser(string id)
@@ -104,6 +103,23 @@ namespace DAL
             }
 
             return su;
+        }
+
+        public void UpdateUser(SysUser su)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysUser nsu = new SysUser();
+                nsu = ctx.SysUsers.Find(su.ID);
+
+                IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
+
+                Utils.Copy(nsu, su, ie);
+
+                nsu.UDate = DateTime.Now;
+
+                ctx.SaveChanges();
+            }
         }
     }
 }

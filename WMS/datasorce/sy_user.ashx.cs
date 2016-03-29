@@ -31,11 +31,11 @@ namespace WMS.datasorce
             switch (request["action"])
             {
                 case "getuser":
-                    psu = utils.AutoWiredClass<PageSysUser>(request, psu = new PageSysUser());
+                    psu = Utils.AutoWiredClass<PageSysUser>(request, psu = new PageSysUser());
                     try
                     {
                         gsu = bll.GetListByPage(psu);
-                        context.Response.Write(utils.SerializeObject(gsu));
+                        context.Response.Write(Utils.SerializeObject(gsu));
                     }
                     catch (Exception ex)
                     {
@@ -46,7 +46,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        su = utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+                        su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
                         su.ID = Guid.NewGuid().ToString();
                         su.CDate = DateTime.Now;
                         bll.AddUser(su);
@@ -58,14 +58,32 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
 
+                    break;
+                case "updateuser":
+                    jr = new JsonResult();
+                    try
+                    {
+                        su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+
+                        bll.UpdateUser(su);
+
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneuser":
                     string id = request["id"];
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetOneUser(id)));
+                        context.Response.Write(Utils.SerializeObject(bll.GetOneUser(id)));
                     }
                     catch (Exception ex)
                     {
@@ -79,7 +97,7 @@ namespace WMS.datasorce
 
                     try
                     {
-                        gsr = utils.DeserializeJsonToObject<Grid<SysRole>>(rolesjsonstr);
+                        gsr = Utils.DeserializeJsonToObject<Grid<SysRole>>(rolesjsonstr);
 
                         bll.AddRoles(userid, gsr.rows);
                         jr.Success = true;
@@ -90,7 +108,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
             }
         }

@@ -37,7 +37,7 @@ namespace DAL
             List<SysRole> list = new List<SysRole>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                list = psr.Order == "desc" ? ctx.SysRoles.ToList().OrderByDescending(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : ctx.SysRoles.ToList().OrderBy(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
+                list = psr.Order == "desc" ? ctx.SysRoles.ToList().OrderByDescending(p => Utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : ctx.SysRoles.ToList().OrderBy(p => Utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
             }
             return list;
         }
@@ -51,7 +51,7 @@ namespace DAL
                 list = ctx.SysRoles.Include(x => x.Users).Where(x => x.DeleteMark.Equals(false)).ToList();
             }
 
-            list = psr.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
+            list = psr.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psr.Sort)).Skip(psr.Rows * (psr.Page - 1)).Take(psr.Rows).ToList();
 
             return list;
         }
@@ -85,7 +85,7 @@ namespace DAL
 
                 IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                utils.Copy(nsr, sr, ie);
+                Utils.Copy(nsr, sr, ie);
 
                 nsr.UDate = DateTime.Now;
 

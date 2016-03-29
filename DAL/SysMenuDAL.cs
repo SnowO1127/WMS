@@ -17,7 +17,7 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysMenus.ToList();
+                list = ctx.SysMenus.Where(x => x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -27,18 +27,24 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                var query = ctx.SysMenus.AsQueryable();
+                var query = ctx.SysMenus.Where(x => x.DeleteMark.Equals(false));
                 if (!string.IsNullOrEmpty(psm.ID))
                 {
                     query = query.Where(x => x.ParentID.Equals(psm.ID));
                 }
+                else
+                {
+                    query = query.Where(x => x.ParentID.Equals(null));
+                }
+
                 if (!string.IsNullOrEmpty(psm.MenuName))
                 {
                     query = query.Where(x => x.MenuName.Contains(psm.MenuName));
                 }
+
                 list = query.ToList();
 
-                list = psm.Order == "desc" ? list.OrderByDescending(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : list.OrderBy(p => utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();
+                list = psm.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();
             }
             return list;
         }
@@ -48,7 +54,7 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysMenus.Where(x => x.IsMenu.Equals(true)).ToList();
+                list = ctx.SysMenus.Where(x => x.IsMenu.Equals(true) && x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -80,7 +86,7 @@ namespace DAL
 
                 IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                utils.Copy(nsm, sm, ie);
+                Utils.Copy(nsm, sm, ie);
 
                 nsm.UDate = DateTime.Now;
 
@@ -106,6 +112,19 @@ namespace DAL
             }
 
             return sm;
+        }
+
+        public void DeleteMenu(string id)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysMenu sm = new SysMenu();
+                sm = ctx.SysMenus.Find(id);
+
+                sm.DeleteMark = true;
+
+                ctx.SaveChanges();
+            }
         }
     }
 }
