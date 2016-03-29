@@ -1431,6 +1431,7 @@
     <Content Include="library\src\jquery.slider.js" />
     <Content Include="library\src\jquery.tabs.js" />
     <Content Include="library\src\jquery.window.js" />
+    <Content Include="library\syExtIcon.css" />
     <Content Include="library\themes\black\easyui.css" />
     <Content Include="library\themes\black\images\accordion_arrows.png" />
     <Content Include="library\themes\black\images\blank.gif" />
@@ -2427,7 +2428,6 @@
     <Content Include="library\themes\sunny\validatebox.css" />
     <Content Include="library\themes\sunny\window.css" />
     <Content Include="library\syExtCss.css" />
-    <Content Include="library\syExtIcon.css" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\anchor\anchor.html" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\attachment\attachment.css" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\attachment\attachment.html" />
