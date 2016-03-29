@@ -2427,7 +2427,6 @@
     <Content Include="library\themes\sunny\validatebox.css" />
     <Content Include="library\themes\sunny\window.css" />
     <Content Include="library\syExtCss.css" />
-    <Content Include="library\syExtIcon.css" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\anchor\anchor.html" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\attachment\attachment.css" />
     <Content Include="library\ueditor1_4_3-utf8-net\dialogs\attachment\attachment.html" />
