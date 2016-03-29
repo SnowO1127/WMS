@@ -42,7 +42,7 @@
             }
         });
 
-        var f_save = function ($dialog, $grid, $pjq) {
+        var f_save = function ($dialog, $grid, $tree, $pjq) {
             if ($('#item_add_form').form('validate')) {
                 var url;
                 if (id) {
@@ -59,6 +59,7 @@
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
                             $grid.datagrid('load');
+                            $tree.tree('reload');
                             $dialog.dialog('destroy');
                         } else {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'error');
@@ -102,14 +103,14 @@
                     </td>
                 </tr>
                 <tr>
-                   <td>是否树形</td>
+                    <td>是否树形</td>
                     <td>
                         <select id="IsTree" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsTree" style="width: 170px">
                             <option value="1">是</option>
                             <option value="0">否</option>
                         </select>
                     </td>
-                      <td>有效</td>
+                    <td>有效</td>
                     <td>
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 170px">
                             <option value="1">是</option>
@@ -134,9 +135,15 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>排序号</td>
+                    <td colspan="3">
+                        <input name="OrderID" class="easyui-validatebox" type="text" style="width: 170px" />
+                    </td>
+                </tr>
+                <tr>
                     <td>描述</td>
                     <td colspan="3">
-                        <textarea name="Description" id="Description" style="width: 405px; height: 50px"></textarea>
+                        <textarea name="Description" id="Description" style="width: 395px; height: 50px"></textarea>
                     </td>
                 </tr>
             </table>

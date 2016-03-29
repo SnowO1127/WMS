@@ -18,6 +18,7 @@ namespace WMS.datasorce
         private JsonResult jr;
         private SysMenu sm;
         private PageSysMenu psm;
+        private string id;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -29,7 +30,17 @@ namespace WMS.datasorce
                 case "getmenutree":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetMenuTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetMenuTree()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case "getheadtree":
+                    try
+                    {
+                        context.Response.Write(Utils.SerializeObject(bll.GetHeadTree()));
                     }
                     catch (Exception ex)
                     {
@@ -39,7 +50,7 @@ namespace WMS.datasorce
                 case "getmenu":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetList()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetList()));
                     }
                     catch (Exception ex)
                     {
@@ -50,8 +61,8 @@ namespace WMS.datasorce
                 case "getmenubypage":
                     try
                     {
-                        psm = utils.AutoWiredClass<PageSysMenu>(request, psm = new PageSysMenu());
-                        context.Response.Write(utils.SerializeObject(bll.GetListByPage(psm)));
+                        psm = Utils.AutoWiredClass<PageSysMenu>(request, psm = new PageSysMenu());
+                        context.Response.Write(Utils.SerializeObject(bll.GetListByPage(psm)));
                     }
                     catch (Exception ex)
                     {
@@ -62,7 +73,7 @@ namespace WMS.datasorce
                 case "getismenu":
                     try
                     {
-                        context.Response.Write(utils.SerializeObject(bll.GetIsMenuTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetIsMenuTree()));
                     }
                     catch (Exception ex)
                     {
@@ -73,7 +84,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        sm = utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
+                        sm = Utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
 
                         sm.ID = Guid.NewGuid().ToString();
                         sm.CDate = DateTime.Now;
@@ -89,13 +100,13 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "updatemenu":
                     jr = new JsonResult();
                     try
                     {
-                        sm = utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
+                        sm = Utils.AutoWiredClass<SysMenu>(request, sm = new SysMenu());
 
                         bll.UpdateMenu(sm);
                         jr.Success = true;
@@ -106,21 +117,36 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getonemenu":
+                    id = request["id"];
                     try
                     {
-                        string id = request["id"];
-
                         sm = bll.GetOneMenu(id);
 
-                        context.Response.Write(utils.SerializeObject(sm));
+                        context.Response.Write(Utils.SerializeObject(sm));
                     }
                     catch (Exception ex)
                     {
                         throw ex;
                     }
+                    break;
+                case "deletemenu":
+                    id = request["id"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        bll.DeleteMenu(id);
+
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
             }
         }

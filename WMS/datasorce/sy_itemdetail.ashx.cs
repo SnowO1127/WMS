@@ -29,8 +29,8 @@ namespace WMS.datasorce
                 case "getitemdetailbypage":
                     try
                     {
-                        psid = utils.AutoWiredClass<PageSysItemDetail>(request, psid = new PageSysItemDetail());
-                        context.Response.Write(utils.SerializeObject(bll.GetListByPage(psid)));
+                        psid = Utils.AutoWiredClass<PageSysItemDetail>(request, psid = new PageSysItemDetail());
+                        context.Response.Write(Utils.SerializeObject(bll.GetListByPage(psid)));
                     }
                     catch (Exception ex)
                     {
@@ -42,7 +42,7 @@ namespace WMS.datasorce
                    jr = new JsonResult();
                     try
                     {
-                        sid = utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
+                        sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
 
                         sid.ID = Guid.NewGuid().ToString();
                         sid.CDate = DateTime.Now;
@@ -57,13 +57,13 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "updateitemdetail":
                     jr = new JsonResult();
                     try
                     {
-                        sid = utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
+                        sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
 
                         bll.UpdateItemDetail(sid);
 
@@ -75,7 +75,7 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
-                    context.Response.Write(utils.SerializeObject(jr));
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneitemdetail":
                     sid = new SysItemDetail();
@@ -85,7 +85,7 @@ namespace WMS.datasorce
 
                         sid = bll.GetOneItemDetail(id);
 
-                        context.Response.Write(utils.SerializeObject(sid));
+                        context.Response.Write(Utils.SerializeObject(sid));
                     }
                     catch (Exception ex)
                     {

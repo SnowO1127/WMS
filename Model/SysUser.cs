@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Common;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
@@ -30,30 +32,121 @@ namespace Model
         /// </summary>
         public string RealName { get; set; }
 
-        ///// <summary>
-        ///// 真实姓名
-        ///// </summary>
-        //public string RealName { get; set; }
+        /// <summary>
+        /// 编号
+        /// </summary>
+        public string Code { get; set; }
 
-        ///// <summary>
-        ///// 真实姓名
-        ///// </summary>
-        //public string RealName { get; set; }
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public string Sex { get; set; }
 
-        ///// <summary>
-        ///// 真实姓名
-        ///// </summary>
-        //public string RealName { get; set; }
+        /// <summary>
+        /// 手机
+        /// </summary>
+        public string PhoneNum { get; set; }
 
-        ///// <summary>
-        ///// 真实姓名
-        ///// </summary>
-        //public string RealName { get; set; }
+        /// <summary>
+        /// 生日
+        /// </summary>
+        [JsonConverter(typeof(ChinaDateTimeConverter))]
+        public DateTime? Birthday { get; set; }
 
-        ///// <summary>
-        ///// 真实姓名
-        ///// </summary>
-        //public string RealName { get; set; }
+        /// <summary>
+        /// 电话
+        /// </summary>
+        public string Tel { get; set; }
+
+        /// <summary>
+        /// 岗位
+        /// </summary>
+        public string Post { get; set; }
+
+        /// <summary>
+        /// QQ
+        /// </summary>
+        public string QQ { get; set; }
+
+        /// <summary>
+        /// 邮箱
+        /// </summary>
+        public string Email { get; set; }
+
+        /// <summary>
+        /// 地址
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
+        /// 公司id
+        /// </summary>
+        public string Company { get; set; }
+
+        /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName { get; set; }
+
+        /// <summary>
+        /// 子公司id
+        /// </summary>
+        public string ChildCompany { get; set; }
+
+        /// <summary>
+        /// 子公司名称
+        /// </summary>
+        public string ChildCompanyName { get; set; }
+
+        /// <summary>
+        /// 部门id
+        /// </summary>
+        public string Dept { get; set; }
+
+        /// <summary>
+        /// 部门名称
+        /// </summary>
+        public string DeptName { get; set; }
+
+        /// <summary>
+        /// 子部门
+        /// </summary>
+        public string ChildDept { get; set; }
+
+        /// <summary>
+        /// 子部门名称
+        /// </summary>
+        public string ChildDeptName { get; set; }
+
+        /// <summary>
+        /// 组id
+        /// </summary>
+        public string ClassGroup { get; set; }
+
+        /// <summary>
+        /// 组名称
+        /// </summary>
+        public string ClassGroupName { get; set; }
+
+        /// <summary>
+        /// 排序号
+        /// </summary>
+        public int OrderID { get; set; }
+
+        /// <summary>
+        /// 有效
+        /// </summary>
+        public bool Enabled { get; set; }
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        public bool DeleteMark { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// 创建日期
@@ -100,6 +193,9 @@ namespace Model
         /// </summary>
         public string DUserName { get; set; }
 
+        /// <summary>
+        /// 角色
+        /// </summary>
         public List<SysRole> Roles { get; set; }
     }
 }

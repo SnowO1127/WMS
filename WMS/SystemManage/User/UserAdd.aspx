@@ -19,6 +19,27 @@
         var id = "<%=id %>";
 
         $(function () {
+
+            $('#Post').combobox({
+                url: '../../datasorce/sy_item.ashx?action=getcombox&code=Post',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 100,
+                editable: false,
+                required: true
+            });
+
+            $('#Sex').combobox({
+                url: '../../datasorce/sy_item.ashx?action=getcombox&code=Gender',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 153,
+                panelHeight: 60,
+                editable: false,
+                required: true
+            });
+
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_user.ashx?action=getoneuser",
@@ -35,18 +56,29 @@
         });
 
         var f_save = function ($dialog, $grid, $pjq) {
-            if ($('#unit_add_form').form('validate')) {
+            if ($('#user_add_form').form('validate')) {
                 var url;
                 if (id) {
                     url = "../../datasorce/sy_user.ashx?action=updateuser";
                 } else {
                     url = "../../datasorce/sy_user.ashx?action=adduser";
                 }
+
+                var data = sy.serializeObject($('#user_add_form'));
+
+                sy.mergeObj(data, {
+                    CompanyName: $("#Company").combotree('tree').tree('getSelected').text,
+                    ChildCompanyName: $("#ChildCompany").combotree('tree').tree('getSelected').text,
+                    DeptName: $("#Dept").combotree('tree').tree('getSelected').text,
+                    ChildDeptName: $("#ChildDept").combotree('tree').tree('getSelected').text,
+                    ClassGroupName: $("#ClassGroup").combotree('tree').tree('getSelected').text,
+                })
+
                 $.ajax({
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#user_add_form').serializeArray(),
+                    data: data,
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
@@ -69,7 +101,7 @@
                     <td style="width: 60px">登录名</td>
                     <td>
                         <input name="LoginName" class="easyui-validatebox" type="text" data-options="required:true" style="width: 150px" />
-                        <input name="UserID" type="hidden" />
+                        <input name="ID" type="hidden" />
                     </td>
                     <td style="width: 60px">姓名</td>
                     <td>
@@ -83,83 +115,88 @@
                     </td>
                     <td>性别</td>
                     <td>
-                        <select id="Sex" class="easyui-combobox" data-options="width:155,required:true,panelHeight:50,editable:false" name="Sex">
-                            <option value="男">男</option>
-                            <option value="女">女</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>手机号码</td>
-                    <td>
-                        <input name="PhoneNum" class="easyui-validatebox" style="width: 150px" />
-                    </td>
-                    <td>出生日期</td>
-                    <td>
-                        <input name="Birthday" class="easyui-my97" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width: 150px" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>电话号码</td>
-                    <td>
-                        <input name="Tel" class="easyui-validatebox" style="width: 150px" />
-                    </td>
-                    <td>岗位</td>
-                    <td>
-                        <select id="Post" class="easyui-combobox" data-options="width:155,panelHeight:100,editable:false" name="Post">
-                            <option value="员工">员工</option>
-                            <option value="经理">经理</option>
-                            <option value="部长">部长</option>
-                            <option value="总经理">总经理</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>QQ号码</td>
-                    <td>
-                        <input name="QQ" class="easyui-validatebox" style="width: 150px" />
-                    </td>
-                    <td>邮箱</td>
-                    <td>
-                        <input name="Email" class="easyui-validatebox" style="width: 150px" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>地址</td>
-                    <td colspan="3">
-                        <input name="Address" class="easyui-validatebox" style="width: 150px" />
+                        <input name="Sex" id="Sex" type="text" />
                     </td>
                 </tr>
                 <tr>
                     <td>公司</td>
                     <td>
-                        <input name="Company" class="easyui-validatebox" style="width: 150px" />
+                        <input id="Company" name="Company" class="easyui-combotree" style="width: 153px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_oganize.ashx?action=getoganizetree'" />
                     </td>
                     <td>子公司</td>
                     <td>
-                        <input name="ChildCompany" class="easyui-validatebox" style="width: 150px" />
+                        <input id="ChildCompany" name="ChildCompany" class="easyui-combotree" style="width: 153px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_oganize.ashx?action=getoganizetree'" />
                     </td>
                 </tr>
                 <tr>
                     <td>部门</td>
                     <td>
-                        <input name="Dept" class="easyui-validatebox" style="width: 150px" />
+                        <input id="Dept" name="Dept" class="easyui-combotree" style="width: 153px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_oganize.ashx?action=getoganizetree'" />
                     </td>
                     <td>子部门</td>
                     <td>
-                        <input name="ChildDept" class="easyui-validatebox" style="width: 150px" />
+                        <input id="ChildDept" name="ChildDept" class="easyui-combotree" style="width: 153px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_oganize.ashx?action=getoganizetree'" />
                     </td>
                 </tr>
                 <tr>
                     <td>组</td>
                     <td>
-                        <input name="ClassGroup" class="easyui-validatebox" style="width: 150px" />
+                        <input id="ClassGroup" name="ClassGroup" class="easyui-combotree" style="width: 153px" data-options="panelHeight:190,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_oganize.ashx?action=getoganizetree'" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>出生日期</td>
+                    <td>
+                        <input name="Birthday" class="easyui-my97" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" style="width: 150px" />
+                    </td>
+                    <td>手机号码</td>
+                    <td>
+                        <input name="PhoneNum" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>岗位</td>
+                    <td>
+                        <input name="Post" id="Post" type="text" />
+                    </td>
+                    <td>电话号码</td>
+                    <td>
+                        <input name="Tel" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>邮箱</td>
+                    <td>
+                        <input name="Email" class="easyui-validatebox" data-options="validType:'email'" style="width: 150px" />
+                    </td>
+                    <td>QQ号码</td>
+                    <td>
+                        <input name="QQ" class="easyui-validatebox" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>地址</td>
+                    <td colspan="3">
+                        <input name="Address" class="easyui-validatebox" style="width: 370px" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>有效</td>
+                    <td>
+                        <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 150px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+                    </td>
+                    <td>排序号</td>
+                    <td>
+                        <input name="OrderID" class="easyui-validatebox" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
                     <td>备注</td>
                     <td colspan="3">
-                        <textarea name="Memo" id="Memo" style="width: 375px; height: 50px"></textarea>
+                        <textarea name="Description" id="Memo" style="width: 370px; height: 50px"></textarea>
                     </td>
                 </tr>
             </table>

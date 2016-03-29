@@ -25,17 +25,15 @@
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) {
+
                     treeid = node.id;
-                    if (node.pid) {
-                        //var obj = sy.serializeObject($('#menu_search_form'));
-                        //sy.mergeObj(obj, { id: treeid });
-                        grid.datagrid("load", { ItemId: treeid });  // 在用户点击的时候提示
-                        grid.datagrid("unselectAll");
-                    }
+
+                    grid.datagrid("load", { ItemId: treeid });  // 在用户点击的时候提示
+                    grid.datagrid("unselectAll");
                 },
                 onLoadSuccess: function (node, data) {
                     $.each(data, function (i) {
-                        if (data[i].pid) {
+                        if (!data[i].pid) {
                             var n = tree.tree("find", data[i].id);
                             tree.tree("select", n.target);
                             treeid = data[i].id;
@@ -57,7 +55,7 @@
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 queryParams: {
-                    ID: treeid
+                    ItemID: treeid
                 },
                 frozenColumns: [[{
                     width: '90',
@@ -79,20 +77,41 @@
                     field: 'AllowEdit',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowEdit) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '允许删除',
                     field: 'AllowDelete',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowDelete) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '60',
                     title: '有效',
                     field: 'Enabled',
                     halign: 'center',
-                    align: 'center'
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.Enabled) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '排序号',
@@ -199,13 +218,13 @@
             var dialog = parent.sy.modalDialog({
                 title: '新增字典类别',
                 width: 545,
-                height: 370,
+                height: 330,
                 url: 'SystemManage/Dict/DictItemAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
                     }
                 }]
             });
@@ -215,13 +234,13 @@
             var dialog = parent.sy.modalDialog({
                 title: '编辑字典类别',
                 width: 545,
-                height: 370,
-                url: 'SystemManage/Dict/DictItemAdd.aspx?itemid=' + treeid,
+                height: 330,
+                url: 'SystemManage/Dict/DictItemAdd.aspx?id=' + treeid,
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
                     }
                 }]
             });
@@ -234,7 +253,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true,title:'字典分类'" style="overflow: hidden; padding: 1px; width: 200px">
+        <div data-options="region: 'west', border: true,title:'字典分类'" style="overflow: hidden; padding: 1px; width: 270px">
             <div class="easyui-panel" data-options="border:false">
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="openItemAdd()">添加</a>
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="openItemEdit()">编辑</a>

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace DAL
 {
@@ -15,7 +16,7 @@ namespace DAL
             List<SysItem> list = new List<SysItem>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysItems.ToList();
+                list = ctx.SysItems.OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -25,7 +26,7 @@ namespace DAL
             List<SysItem> list = new List<SysItem>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysItems.Where(x => x.IsTree.Equals(true)).ToList();
+                list = ctx.SysItems.Where(x => x.IsTree.Equals(true)).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -57,7 +58,7 @@ namespace DAL
 
                 IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                utils.Copy(nsi, si, ie);
+                Utils.Copy(nsi, si, ie);
 
                 nsi.UDate = DateTime.Now;
 
@@ -80,6 +81,17 @@ namespace DAL
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
                 sm = ctx.SysItems.Find(id);
+            }
+
+            return sm;
+        }
+
+        public SysItem GetOneItemByCode(string code)
+        {
+            SysItem sm = new SysItem();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                sm = ctx.SysItems.Include(x => x.SysItemDetails).Where(x => x.Code.Equals(code)).FirstOrDefault();
             }
 
             return sm;

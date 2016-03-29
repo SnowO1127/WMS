@@ -22,13 +22,16 @@
         var treeid;
         $(function () {
             tree = $("#menu_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getmenutree',
+                url: '../../datasorce/sy_menu.ashx?action=getheadtree',
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) {
-                    treeid = node.id;
+
+                    treeid = node.text == "全部" ? "" : node.id;
+
                     var obj = sy.serializeObject($('#menu_search_form'));
                     sy.mergeObj(obj, { id: treeid });
+
                     grid.datagrid("load", obj);  // 在用户点击的时候提示
                     grid.datagrid("unselectAll");
                 },
@@ -37,7 +40,7 @@
                         if (data[i].pid == null) {
                             var n = tree.tree("find", data[i].id);
                             tree.tree("select", n.target);
-                            treeid = data[i].id;
+                            treeid = "";
                         }
                     });
                 }
@@ -65,7 +68,7 @@
                     halign: 'center',
                     sortable: true
                 }, {
-                    width: '70',
+                    width: '80',
                     title: '类别',
                     field: 'Category',
                     halign: 'center',
@@ -84,27 +87,55 @@
                     field: 'IsPublic',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.IsPublic) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '允许编辑',
                     field: 'AllowEdit',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowEdit) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '允许删除',
                     field: 'AllowDelete',
                     halign: 'center',
                     align: 'center',
-                    sortable: true
+                    sortable: true,
+                    formatter: function (value, row, index) {
+                        if (row.AllowDelete) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '60',
                     title: '有效',
                     field: 'Enabled',
                     halign: 'center',
-                    align: 'center'
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.Enabled) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '70',
                     title: '排序号',
@@ -146,7 +177,13 @@
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            deleteMenu(row.ID);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -160,17 +197,35 @@
             });
         });
 
+        var openAdd = function () {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-add',
+                title: '新增菜单',
+                width: 545,
+                height: 350,
+                url: 'SystemManage/Menu/MenuAdd.aspx',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                    }
+                }]
+            });
+        };
+
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
                 title: '编辑菜单',
                 width: 545,
-                height: 370,
+                height: 350,
                 url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
                     }
                 }]
             });
@@ -178,28 +233,52 @@
 
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-save',
                 title: '查看菜单',
                 width: 545,
-                height: 370,
+                height: 330,
                 url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
             });
         }
 
-        var openAdd = function () {
-            var dialog = parent.sy.modalDialog({
-                title: '新增菜单',
-                width: 545,
-                height: 370,
-                url: 'SystemManage/Menu/MenuAdd.aspx',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
+        var deleteMenu = function (id) {
+            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_menu.ashx?action=deletemenu",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            id: id
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                grid.datagrid('load');
+                                grid.datagrid("unselectAll");
+                                tree.tree("reload");
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
             });
-        };
+        }
+
+        var menuSearch = function () {
+            var obj = sy.serializeObject($('#menu_search_form'));
+            sy.mergeObj(obj, { id: treeid });
+            grid.datagrid('load', obj);
+        }
+
+        var menuRefresh = function () {
+            var obj = {};
+            sy.mergeObj(obj, { id: treeid });
+            $('#menu_search_form input[name=MenuName]').val('');
+            grid.datagrid('load', obj);
+        }
+        
     </script>
 </head>
 <body>
@@ -218,13 +297,13 @@
                                 <tr>
                                     <td>菜单名称</td>
                                     <td>
-                                        <input name="MenuName" class="easyui-validatebox" type="text" />
+                                        <input name="MenuName" class="easyui-validatebox" style="width: 110px" type="text" />
                                     </td>
                                     <td>
-                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="unitSearch()">查找</a>
+                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="menuSearch()">查找</a>
                                     </td>
                                     <td>
-                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="unitRefresh()">清空</a>
+                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="menuRefresh()">清空</a>
                                     </td>
                                 </tr>
                             </table>

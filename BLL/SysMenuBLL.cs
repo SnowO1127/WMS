@@ -49,6 +49,32 @@ namespace BLL
             return tlist;
         }
 
+        public List<Tree> GetHeadTree()
+        {
+            List<Tree> tlist = new List<Tree>();
+
+            Tree headtree = new Tree();
+            headtree.id = Guid.NewGuid().ToString();
+            headtree.text = "全部";
+
+            tlist.Add(headtree);
+
+            List<SysMenu> smlist = dal.GetList();
+            if (smlist != null && smlist.Count > 0)
+            {
+                foreach (SysMenu sm in smlist)
+                {
+                    Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = string.IsNullOrEmpty(sm.ParentID) ? headtree.id : sm.ParentID, iconCls = sm.IconCls };
+                    Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+                    attributes.Add("url", sm.Url);
+                    t.attributes = attributes;
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
+
+
         public List<Tree> GetMenuTree()
         {
             List<Tree> tlist = new List<Tree>();
@@ -70,6 +96,11 @@ namespace BLL
         public object GetListByPage(PageSysMenu psm)
         {
             return dal.GetListByPage(psm);
+        }
+
+        public void DeleteMenu(string id)
+        {
+            dal.DeleteMenu(id);
         }
     }
 }

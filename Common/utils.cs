@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace Common
 {
-    public class utils
+    public class Utils
     {
 
         #region 类copy
@@ -230,10 +230,26 @@ namespace Common
             {
                 try
                 {
-                    if (h[pi.Name] != null && pi.CanWrite)
+                    //if (h[pi.Name] != null && pi.CanWrite)
+                    //{
+
+                    if (!pi.PropertyType.IsGenericType)
                     {
-                        pi.SetValue(t, ConvertObject(h[pi.Name], pi.PropertyType), null);
+                        //非泛型
+                        pi.SetValue(t, string.IsNullOrEmpty(h[pi.Name]) ? null : Convert.ChangeType(h[pi.Name], pi.PropertyType), null);
                     }
+                    else
+                    {
+                        //泛型Nullable<>
+                        Type genericTypeDefinition = pi.PropertyType.GetGenericTypeDefinition();
+                        if (genericTypeDefinition == typeof(Nullable<>))
+                        {
+                            pi.SetValue(t, string.IsNullOrEmpty(h[pi.Name]) ? null : Convert.ChangeType(h[pi.Name], Nullable.GetUnderlyingType(pi.PropertyType)), null);
+                        }
+                    }
+
+                    //    pi.SetValue(t, ConvertObject(h[pi.Name], pi.PropertyType), null);
+                    //}
                 }
                 catch
                 {

@@ -1431,6 +1431,7 @@
     <Content Include="library\src\jquery.slider.js" />
     <Content Include="library\src\jquery.tabs.js" />
     <Content Include="library\src\jquery.window.js" />
+    <Content Include="library\syExtIcon.css" />
     <Content Include="library\themes\black\easyui.css" />
     <Content Include="library\themes\black\images\accordion_arrows.png" />
     <Content Include="library\themes\black\images\blank.gif" />
@@ -2707,6 +2708,8 @@
     <Content Include="SystemManage\Menu\MenuList.aspx" />
     <Content Include="SystemManage\Oganize\OganizeAdd.aspx" />
     <Content Include="SystemManage\Oganize\OganizeList.aspx" />
+    <Content Include="SystemManage\Permission\RolePermission.aspx" />
+    <Content Include="SystemManage\Permission\UserPermission.aspx" />
     <Content Include="SystemManage\Role\RoleAdd.aspx" />
     <Content Include="SystemManage\Role\RoleList.aspx" />
     <Content Include="SystemManage\Unit\unit_add.aspx" />
@@ -2846,6 +2849,20 @@
     </Compile>
     <Compile Include="SystemManage\Oganize\OganizeList.aspx.designer.cs">
       <DependentUpon>OganizeList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Permission\RolePermission.aspx.cs">
+      <DependentUpon>RolePermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Permission\RolePermission.aspx.designer.cs">
+      <DependentUpon>RolePermission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Permission\UserPermission.aspx.cs">
+      <DependentUpon>UserPermission.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Permission\UserPermission.aspx.designer.cs">
+      <DependentUpon>UserPermission.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\Role\RoleAdd.aspx.cs">
       <DependentUpon>RoleAdd.aspx</DependentUpon>

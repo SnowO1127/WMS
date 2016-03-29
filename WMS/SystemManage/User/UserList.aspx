@@ -27,8 +27,8 @@
                 pagination: true,
                 singleSelect: true,
                 idField: 'ID',
-                sortName: 'ID',
-                sortOrder: 'desc',
+                sortName: 'OrderID',
+                sortOrder: 'asc',
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 frozenColumns: [[{
@@ -47,34 +47,73 @@
                     sortable: true
                 }]],
                 columns: [[{
-                    width: '150',
-                    title: '创建时间',
-                    field: 'UserID',
+                    width: '60',
+                    title: '编号',
+                    field: 'Code',
                     halign: 'center',
+                    align: 'center',
                     sortable: true
                 }, {
-                    width: '150',
-                    title: '修改时间',
-                    field: 'PassWord',
-                    halign: 'center',
-                    sortable: true
-                }, {
-                    width: '50',
+                    width: '60',
                     title: '性别',
-                    field: 'UserName',
+                    field: 'Sex',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '120',
+                    title: '公司',
+                    field: 'CompanyName',
                     halign: 'center',
                     sortable: true
                 }, {
-                    width: '50',
-                    title: '年龄',
-                    field: 'UserName',
+                    width: '90',
+                    title: '部门',
+                    field: 'DeptName',
                     halign: 'center',
                     sortable: true
                 }, {
-                    width: '250',
-                    title: '照片',
+                    width: '90',
+                    title: '生日',
                     halign: 'center',
-                    field: 'UserName'
+                    align: 'center',
+                    field: 'Birthday'
+                }, {
+                    width: '100',
+                    title: '手机',
+                    halign: 'center',
+                    align: 'center',
+                    field: 'PhoneNum'
+                }, {
+                    width: '80',
+                    title: '岗位',
+                    halign: 'center',
+                    align: 'center',
+                    field: 'Post'
+                }, {
+                    width: '220',
+                    title: '地址',
+                    halign: 'center',
+                    field: 'Address'
+                }, {
+                    width: '60',
+                    title: '有效',
+                    field: 'Enabled',
+                    halign: 'center',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.Enabled) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
+                }, {
+                    width: '70',
+                    title: '排序号',
+                    halign: 'center',
+                    align: 'center',
+                    field: 'OrderID'
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
@@ -113,7 +152,7 @@
                         alert('帮助按钮');
                     }
                 }, '-', {
-                    iconCls: 'icon-help',
+                    iconCls: 'ext-icon-cog',
                     text: '用户角色设置',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
@@ -136,27 +175,29 @@
             });
         });
 
-        var openAddRole = function (id) {
+        var openAdd = function () {
             var dialog = parent.sy.modalDialog({
-                title: '角色设置',
-                width: 600,
-                height: 450,
-                url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
+                iconCls: 'icon-add',
+                title: '新增用户',
+                width: 520,
+                height: 410,
+                url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save_roles(dialog, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
             });
-        }
+        };
 
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
                 title: '编辑用户',
-                width: 400,
-                height: 400,
+                width: 520,
+                height: 410,
                 url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
@@ -170,29 +211,55 @@
 
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-save',
                 title: '查看用户',
-                width: 620,
-                height: 300,
+                width: 520,
+                height: 380,
                 url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
             });
         }
 
+        var deleteMenu = function (id) {
+            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_menu.ashx?action=deletemenu",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            id: id
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                grid.datagrid('load');
+                                grid.datagrid("unselectAll");
+                                tree.tree("reload");
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
+            });
+        }
 
-        var openAdd = function () {
+        var openAddRole = function (id) {
             var dialog = parent.sy.modalDialog({
-                title: '新增用户',
-                width: 520,
-                height: 400,
-                url: 'SystemManage/User/UserAdd.aspx',
+                iconCls: 'ext-icon-cog',
+                title: '角色设置',
+                width: 600,
+                height: 450,
+                url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save_roles(dialog, parent.$);
                     }
                 }]
             });
-        };
+        }
     </script>
 </head>
 <body>

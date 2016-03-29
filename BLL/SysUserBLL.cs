@@ -58,5 +58,10 @@ namespace BLL
         {
             return dal.GetOneUser(id);
         }
+
+        public void UpdateUser(SysUser su)
+        {
+            dal.UpdateUser(su);
+        }
     }
 }
