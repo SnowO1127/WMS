@@ -29,36 +29,6 @@
                 required: true
             });
 
-            $('#Enabled').combobox({
-                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Enabled',
-                valueField: 'Value',
-                textField: 'Name',
-                width: 153,
-                panelHeight: 50,
-                editable: false,
-                required: true
-            });
-
-            $('#AllowEdit').combobox({
-                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=AllowEdit',
-                valueField: 'Value',
-                textField: 'Name',
-                width: 153,
-                panelHeight: 50,
-                editable: false,
-                required: true
-            });
-
-            $('#AllowDelete').combobox({
-                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=AllowDelete',
-                valueField: 'Value',
-                textField: 'Name',
-                width: 153,
-                panelHeight: 50,
-                editable: false,
-                required: true
-            });
-
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_role.ashx?action=getonerole",
@@ -128,21 +98,30 @@
                 <tr>
                     <td>有效</td>
                     <td>
-                        <input name="Enabled" id="Enabled" type="text" />
+                        <select id="Enabled" name="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
                     </td>
                     <td style="width: 60px">排序号</td>
                     <td>
-                        <input name="OrderID" class="easyui-validatebox" data-options="validType:'integer',tipPosition:'left'" style="width: 150px" />
+                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
                     <td>允许编辑</td>
                     <td>
-                        <input name="AllowEdit" id="AllowEdit" type="text" />
+                        <select id="AllowEdit" name="AllowEdit" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
                     </td>
                     <td>允许删除</td>
                     <td>
-                        <input name="AllowDelete" id="AllowDelete" type="text" />
+                        <select id="AllowDelete" name="AllowDelete" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
                     </td>
                 </tr>
                 <tr>

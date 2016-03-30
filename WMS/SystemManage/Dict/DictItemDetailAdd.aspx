@@ -89,7 +89,7 @@
                 <tr>
                     <td>类别</td>
                     <td colspan="3">
-                        <input id="ItemID" name="ItemID" readonly="readonly" type="text" style="width: 405px" />
+                        <input id="ItemID" name="ItemID" readonly="readonly" type="text" style="width: 395px" />
                     </td>
                 </tr>
                 <tr>
@@ -126,7 +126,7 @@
                 <tr>
                     <td>备注</td>
                     <td colspan="3">
-                        <textarea name="Description" id="Description" style="width: 405px; height: 50px"></textarea>
+                        <textarea name="Description" id="Description" style="width: 395px; height: 50px"></textarea>
                     </td>
                 </tr>
             </table>

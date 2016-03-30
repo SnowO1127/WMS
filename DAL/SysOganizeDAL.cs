@@ -16,7 +16,7 @@ namespace DAL
             List<SysOganize> list = new List<SysOganize>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysOganizes.ToList();
+                list = ctx.SysOganizes.OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -26,16 +26,22 @@ namespace DAL
             List<SysOganize> list = new List<SysOganize>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                var query = ctx.SysOganizes.AsQueryable();
+                var query = ctx.SysOganizes.Where(x => x.DeleteMark.Equals(false));
+
                 if (!string.IsNullOrEmpty(pso.ID))
                 {
                     query = query.Where(x => x.ParentID.Equals(pso.ID));
                 }
+                else
+                {
+                    query = query.Where(x => x.ParentID.Equals(null));
+                }
+
                 if (!string.IsNullOrEmpty(pso.Name))
                 {
                     query = query.Where(x => x.Name.Contains(pso.Name));
                 }
-                list = query.ToList();
+                list = query.OrderBy(x => x.OrderID).ToList();
 
                 list = pso.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, pso.Sort)).Skip(pso.Rows * (pso.Page - 1)).Take(pso.Rows).ToList();
             }

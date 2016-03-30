@@ -156,7 +156,7 @@
                     <td>排序号
                     </td>
                     <td>
-                        <input id="OrderID" name="OrderID" class="easyui-validatebox" style="width: 170px" />
+                        <input id="OrderID" name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 170px" />
                     </td>
 
                 </tr>

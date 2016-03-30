@@ -38,6 +38,11 @@ namespace Model
         public string Code { get; set; }
 
         /// <summary>
+        /// 拼音简写
+        /// </summary>
+        public string SpellQuery { get; set; }
+
+        /// <summary>
         /// 性别
         /// </summary>
         public string Sex { get; set; }

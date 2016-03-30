@@ -36,6 +36,16 @@ namespace WMS.datasorce
                         throw ex;
                     }
                     break;
+                case "getheadtree":
+                    try
+                    {
+                        context.Response.Write(Utils.SerializeObject(bll.GetHeadTree()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
                 case "getoganize":
                     try
                     {
@@ -87,6 +97,7 @@ namespace WMS.datasorce
                         so = Utils.AutoWiredClass<SysOganize>(request, so = new SysOganize());
 
                         bll.UpdateOganize(so);
+
                         jr.Success = true;
                         jr.Msg = "保存成功！";
                     }

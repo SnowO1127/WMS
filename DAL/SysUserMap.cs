@@ -20,6 +20,7 @@ namespace DAL
             Property(t => t.PassWord).HasMaxLength(20);
             Property(t => t.RealName).HasMaxLength(20);
             Property(t => t.Code).HasMaxLength(10);
+            Property(t => t.SpellQuery).HasMaxLength(20);
             Property(t => t.Sex).HasMaxLength(5);
             Property(t => t.PhoneNum).HasMaxLength(20);
             Property(t => t.Tel).HasMaxLength(20);
@@ -40,8 +41,6 @@ namespace DAL
             Property(t => t.DUserName).HasMaxLength(20);
             Property(t => t.UUserID).HasMaxLength(128);
             Property(t => t.UUserName).HasMaxLength(20);
-
-
 
             HasMany(t => t.Roles).WithMany(t => t.Users).Map(m =>
          {

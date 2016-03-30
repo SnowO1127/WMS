@@ -28,9 +28,9 @@ namespace Model
 
         public bool DeleteMark { get; set; }
 
-        public string Description { get; set; }
-
         public int OrderID { get; set; }
+
+        public string Description { get; set; }
 
         /// <summary>
         /// 创建日期

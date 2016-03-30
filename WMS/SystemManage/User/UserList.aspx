@@ -54,6 +54,13 @@
                     align: 'center',
                     sortable: true
                 }, {
+                    width: '70',
+                    title: '拼音简写',
+                    field: 'SpellQuery',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
                     width: '60',
                     title: '性别',
                     field: 'Sex',
@@ -180,7 +187,7 @@
                 iconCls: 'icon-add',
                 title: '新增用户',
                 width: 520,
-                height: 410,
+                height: 430,
                 url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -197,7 +204,7 @@
                 iconCls: 'icon-edit',
                 title: '编辑用户',
                 width: 520,
-                height: 410,
+                height: 430,
                 url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
@@ -214,7 +221,7 @@
                 iconCls: 'icon-save',
                 title: '查看用户',
                 width: 520,
-                height: 380,
+                height: 400,
                 url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
             });
         }

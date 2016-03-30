@@ -179,7 +179,7 @@ namespace Common
             List<T> list = o as List<T>;
             return list;
         }
-
+        #endregion
 
         //public static string SerializeList<T>(List<T> list)
         //{
@@ -220,7 +220,7 @@ namespace Common
         //    });
         //    return str;
         //}
-        #endregion
+        
 
         #region 类注入
         public static T AutoWiredClass<T>(HttpRequest h, T t)

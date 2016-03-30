@@ -30,19 +30,20 @@
                     treeid = node.text == "全部" ? "" : node.id;
 
                     var obj = sy.serializeObject($('#menu_search_form'));
-                    sy.mergeObj(obj, { id: treeid });
+                    sy.mergeObj(obj, { ID: treeid });
 
                     grid.datagrid("load", obj);  // 在用户点击的时候提示
                     grid.datagrid("unselectAll");
                 },
                 onLoadSuccess: function (node, data) {
-                    $.each(data, function (i) {
-                        if (data[i].pid == null) {
-                            var n = tree.tree("find", data[i].id);
-                            tree.tree("select", n.target);
-                            treeid = "";
-                        }
-                    });
+                    if (treeid) {
+                        var n = tree.tree("find", treeid);
+                        tree.tree("select", n.target);
+                    }
+                    else {
+                        var n = tree.tree("find", data[0].id);
+                        tree.tree("select", n.target);
+                    }
                 }
             })
 

@@ -21,6 +21,17 @@
         var id = "<%=id %>";
 
         $(function () {
+
+            $('#Category').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=DictCategory',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 173,
+                panelHeight: 100,
+                editable: false,
+                required: true
+            });
+
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_item.ashx?action=getoneitem",
@@ -84,21 +95,19 @@
                 <tr>
                     <td>分类</td>
                     <td>
-                        <select id="Category" class="easyui-combobox" data-options="panelHeight:100,editable:false" name="Category" style="width: 173px">
-                            <option value="系统内置">系统内置</option>
-                        </select>
+                        <input name="Category" id="Category" type="text" />
                     </td>
                 </tr>
                 <tr>
                     <td>编号</td>
                     <td colspan="3">
-                        <input name="Code" class="easyui-validatebox" type="text" style="width: 170px" />
+                        <input name="Code" class="easyui-validatebox" data-options="required:true" type="text" style="width: 170px" />
                     </td>
                 </tr>
                 <tr>
                     <td>上级</td>
                     <td colspan="3">
-                        <input id="ParentID" name="ParentID" class="easyui-combotree" style="width: 173px" data-options="panelHeight:160,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_item.ashx?action=getistree'" />
+                        <input id="ParentID" name="ParentID" class="easyui-combotree" style="width: 173px" data-options="panelHeight:130,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_item.ashx?action=getistree'" />
                         <img style="cursor: pointer; vertical-align: middle" src="../../library/themes/icons/no.png" onclick="$('#ParentID').combotree('clear')" title="清空" />
                     </td>
                 </tr>
@@ -106,15 +115,15 @@
                     <td>是否树形</td>
                     <td>
                         <select id="IsTree" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsTree" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td>有效</td>
                     <td>
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                 </tr>
@@ -122,22 +131,22 @@
                     <td>允许编辑</td>
                     <td>
                         <select id="AllowEdit" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowEdit" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td>允许删除</td>
                     <td>
                         <select id="AllowDelete" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowDelete" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
                     <td>排序号</td>
                     <td colspan="3">
-                        <input name="OrderID" class="easyui-validatebox" type="text" style="width: 170px" />
+                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer'" type="text" style="width: 170px" />
                     </td>
                 </tr>
                 <tr>

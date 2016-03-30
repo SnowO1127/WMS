@@ -15,8 +15,19 @@ namespace DAL
             ToTable("Sys_Item");
             HasKey(t => t.ID);
 
-            HasMany(t => t.SysItems).WithOptional(t => t.PSysItem).HasForeignKey(t => t.ParentID);
+            Property(t => t.Code).HasMaxLength(20);
+            Property(t => t.Name).HasMaxLength(30);
+            Property(t => t.Category).HasMaxLength(30);
+            Property(t => t.Description).HasMaxLength(300);
 
+            Property(t => t.CUserID).HasMaxLength(128);
+            Property(t => t.CUserName).HasMaxLength(20);
+            Property(t => t.DUserID).HasMaxLength(128);
+            Property(t => t.DUserName).HasMaxLength(20);
+            Property(t => t.UUserID).HasMaxLength(128);
+            Property(t => t.UUserName).HasMaxLength(20);
+
+            HasMany(t => t.SysItems).WithOptional(t => t.PSysItem).HasForeignKey(t => t.ParentID);
             HasMany(x => x.SysItemDetails).WithRequired(x => x.SysItem).HasForeignKey(x => x.ItemID);
         }
     }

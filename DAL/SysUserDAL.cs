@@ -121,5 +121,20 @@ namespace DAL
                 ctx.SaveChanges();
             }
         }
+
+        public List<SysUser> GetUserListBySpell(string q, int page, int rows, string sort, string order)
+        {
+            List<SysUser> list = new List<SysUser>();
+            using (var ctx = new SysContext(Globe.ConnectionString))
+            {
+                var query = ctx.SysUsers.AsQueryable();
+                if (!string.IsNullOrEmpty(q))
+                {
+                    query = query.Where(x => x.SpellQuery.Contains(q));
+                }
+                list = order == "desc" ? query.ToList().OrderByDescending(x => Utils.GetPropertyValue(x, sort)).Skip(rows * (page - 1)).Take(rows).ToList() : query.ToList().OrderBy(x => Utils.GetPropertyValue(x, sort)).Skip(rows * (page - 1)).Take(rows).ToList();
+            }
+            return list;
+        }
     }
 }

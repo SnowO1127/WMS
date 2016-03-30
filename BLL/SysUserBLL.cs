@@ -63,5 +63,10 @@ namespace BLL
         {
             dal.UpdateUser(su);
         }
+
+        public List<SysUser> GetUserListBySpell(string q, int page, int rows, string sort, string order)
+        {
+            return dal.GetUserListBySpell(q, page, rows, sort, order);
+        }
     }
 }

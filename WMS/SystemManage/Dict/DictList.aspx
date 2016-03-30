@@ -105,6 +105,7 @@
                     field: 'Enabled',
                     halign: 'center',
                     align: 'center',
+                    sortable: true,
                     formatter: function (value, row, index) {
                         if (row.Enabled) {
                             return "√";
@@ -175,9 +176,10 @@
 
         var openItemDetailAdd = function () {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-add',
                 title: '新增选项明细',
-                width: 545,
-                height: 320,
+                width: 530,
+                height: 300,
                 url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemid=' + treeid,
                 buttons: [{
                     text: '保存',
@@ -191,9 +193,10 @@
 
         var openItemDetailEdit = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
                 title: '编辑选项明细',
-                width: 545,
-                height: 320,
+                width: 530,
+                height: 300,
                 url: 'SystemManage/Dict/DictItemDetailAdd.aspx?id=' + id,
                 buttons: [{
                     text: '保存',
@@ -207,15 +210,17 @@
 
         var openItemDetailView = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-save',
                 title: '查看选项明细',
-                width: 545,
-                height: 300,
+                width: 530,
+                height: 280,
                 url: 'SystemManage/Dict/DictItemDetailAdd.aspx?id=' + id
             });
         }
 
         var openItemAdd = function () {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-add',
                 title: '新增字典类别',
                 width: 545,
                 height: 330,
@@ -232,6 +237,7 @@
 
         var openItemEdit = function () {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
                 title: '编辑字典类别',
                 width: 545,
                 height: 330,

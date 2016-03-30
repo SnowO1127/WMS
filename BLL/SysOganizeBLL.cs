@@ -51,5 +51,27 @@ namespace BLL
         {
             return dal.GetListByPage(pso);
         }
+
+        public object GetHeadTree()
+        {
+            List<Tree> tlist = new List<Tree>();
+
+            Tree headtree = new Tree();
+            headtree.id = Guid.NewGuid().ToString();
+            headtree.text = "全部";
+
+            tlist.Add(headtree);
+
+            List<SysOganize> solist = dal.GetList();
+            if (solist != null && solist.Count > 0)
+            {
+                foreach (SysOganize so in solist)
+                {
+                    Tree t = new Tree() { id = so.ID, text = so.Name, pid = string.IsNullOrEmpty(so.ParentID) ? headtree.id : so.ParentID };
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
     }
 }

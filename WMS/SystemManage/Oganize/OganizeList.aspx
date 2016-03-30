@@ -21,24 +21,28 @@
         var treeid;
         $(function () {
             tree = $("#oganize_tree").tree({
-                url: '../../datasorce/sy_oganize.ashx?action=getoganizetree',
+                url: '../../datasorce/sy_oganize.ashx?action=getheadtree',
                 parentField: 'pid',
                 lines: true,
-                onClick: function (node) {
-                    treeid = node.id;
+                onClick: function (node) { // 在用户点击的时候提示
+
+                    treeid = node.text == "全部" ? "" : node.id;
+
                     var obj = sy.serializeObject($('#oganize_search_form'));
-                    sy.mergeObj(obj, { id: treeid });
-                    grid.datagrid("load", obj);  // 在用户点击的时候提示
+                    sy.mergeObj(obj, { ID: treeid });
+
+                    grid.datagrid("load", obj);
                     grid.datagrid("unselectAll");
                 },
-                onLoadSuccess: function (node, data) {
-                    $.each(data, function (i) {
-                        if (data[i].pid == null) {
-                            var n = tree.tree("find", data[i].id);
-                            tree.tree("select", n.target);
-                            treeid = data[i].id;
-                        }
-                    });
+                onLoadSuccess: function (node, data) { // 加载成功
+                    if (treeid) {
+                        var n = tree.tree("find", treeid);
+                        tree.tree("select", n.target);
+                    }
+                    else {
+                        var n = tree.tree("find", data[0].id);
+                        tree.tree("select", n.target);
+                    }
                 }
             })
 
@@ -110,7 +114,14 @@
                     title: '有效',
                     field: 'Enabled',
                     halign: 'center',
-                    align: 'center'
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.Enabled) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
                 }, {
                     width: '240',
                     title: '备注',
@@ -165,17 +176,35 @@
             });
         });
 
+        var openAdd = function () {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-add',
+                title: '新增组织机构',
+                width: 530,
+                height: 330,
+                url: 'SystemManage/Oganize/OganizeAdd.aspx',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                    }
+                }]
+            });
+        };
+
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-edit',
                 title: '编辑组织机构',
-                width: 545,
-                height: 340,
+                width: 530,
+                height: 330,
                 url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
                     }
                 }]
             });
@@ -183,28 +212,13 @@
 
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
+                iconCls: 'icon-save',
                 title: '查看组织机构',
-                width: 545,
-                height: 330,
+                width: 530,
+                height: 310,
                 url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
             });
         }
-
-        var openAdd = function () {
-            var dialog = parent.sy.modalDialog({
-                title: '新增组织机构',
-                width: 545,
-                height: 340,
-                url: 'SystemManage/Oganize/OganizeAdd.aspx',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
-        };
 
         var oganizeSearch = function () {
             var obj = sy.serializeObject($('#oganize_search_form'));
@@ -236,7 +250,7 @@
                                 <tr>
                                     <td>组织机构名称</td>
                                     <td>
-                                        <input name="Name" class="easyui-validatebox" type="text" />
+                                        <input name="Name" class="easyui-validatebox" type="text" style="width: 110px" />
                                     </td>
                                     <td>
                                         <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="oganizeSearch()">查找</a>

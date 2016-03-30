@@ -21,6 +21,117 @@
         var id = "<%=id %>";
 
         $(function () {
+
+            $('#Category').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=OganizeCategory',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 133,
+                panelHeight: 100,
+                editable: false,
+                tipPosition: 'left',
+                required: true
+            });
+
+            $('#ManagerID').combogrid({
+                delay: 500,
+                mode: 'remote',
+                width: 133,
+                panelWidth: 330,
+                panelHeight: 155,
+                idField: 'ID',
+                textField: 'RealName',
+
+                url: '../../datasorce/sy_user.ashx?action=getuserlistbyspell',
+                striped: true,
+                rownumbers: true,
+                pagination: true,
+                singleSelect: true,
+                sortName: 'OrderID',
+                sortOrder: 'asc',
+                pageSize: 10,
+                pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
+                columns: [[{
+                    width: '70',
+                    title: '姓名',
+                    field: 'RealName',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '60',
+                    title: '编号',
+                    field: 'Code',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '70',
+                    title: '拼音简写',
+                    field: 'SpellQuery',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '60',
+                    title: '性别',
+                    field: 'Sex',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }]]
+            });
+
+            $('#AssistantManagerID').combogrid({
+                delay: 500,
+                mode: 'remote',
+                width: 133,
+                panelWidth: 330,
+                panelHeight: 155,
+                idField: 'ID',
+                textField: 'RealName',
+
+                url: '../../datasorce/sy_user.ashx?action=getuserlistbyspell',
+                striped: true,
+                rownumbers: true,
+                pagination: true,
+                singleSelect: true,
+                sortName: 'OrderID',
+                sortOrder: 'asc',
+                pageSize: 10,
+                pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
+                columns: [[{
+                    width: '70',
+                    title: '姓名',
+                    field: 'RealName',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '60',
+                    title: '编号',
+                    field: 'Code',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '70',
+                    title: '拼音简写',
+                    field: 'SpellQuery',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
+                    width: '60',
+                    title: '性别',
+                    field: 'Sex',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }]]
+            });
+
+
             if (id) {
                 $.ajax({
                     url: "../../datasorce/sy_oganize.ashx?action=getoneoganize",
@@ -43,7 +154,7 @@
             }
         });
 
-        var f_save = function ($dialog, $grid, $pjq) {
+        var f_save = function ($dialog, $grid, $tree, $pjq) {
             if ($('#oganize_add_form').form('validate')) {
                 var url;
                 if (id) {
@@ -51,15 +162,24 @@
                 } else {
                     url = "../../datasorce/sy_oganize.ashx?action=addoganize";
                 }
+
+                var data = sy.serializeObject($('#oganize_add_form'));
+
+                sy.mergeObj(data, {
+                    ManagerName: $("#ManagerID").combogrid('grid').datagrid('getSelected').RealName,
+                    AssistantManagerName: $("#AssistantManagerID").combogrid('grid').datagrid('getSelected').RealName
+                });
+
                 $.ajax({
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#oganize_add_form').serializeArray(),
+                    data: data,
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
                             $grid.datagrid('load');
+                            $tree.tree("reload");
                             $dialog.dialog('destroy');
                         } else {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'error');
@@ -82,13 +202,7 @@
                     </td>
                     <td style="width: 80px">分类</td>
                     <td>
-                        <select id="Category" class="easyui-combobox" data-options="panelHeight:100,editable:false" name="Category" style="width: 133px">
-                            <option value="公司">公司</option>
-                            <option value="子公司">子公司</option>
-                            <option value="部门">部门</option>
-                            <option value="子部门">子部门</option>
-                            <option value="组">组</option>
-                        </select>
+                        <input name="Category" id="Category" type="text" />
                     </td>
                 </tr>
                 <tr>
@@ -106,32 +220,31 @@
                     <td>主负责人
                     </td>
                     <td>
-                        <input name="ManagerName" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="ManagerID" id="ManagerID" type="text" />
                     </td>
                     <td>副主管
                     </td>
                     <td>
-                        <input name="AssistantManagerName" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="AssistantManagerID" id="AssistantManagerID" type="text" />
                     </td>
-
                 </tr>
                 <tr>
                     <td>电话
                     </td>
                     <td>
-                        <input name="Tel" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="Tel" class="easyui-validatebox" type="text" data-options="validType:'phone'" style="width: 130px" />
                     </td>
                     <td>传真
                     </td>
                     <td>
-                        <input name="Fax" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="Fax" class="easyui-validatebox" type="text" data-options="validType:'faxno',tipPosition:'left'" style="width: 130px" />
                     </td>
                 </tr>
                 <tr>
                     <td>邮编
                     </td>
                     <td>
-                        <input name="PostCode" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="PostCode" class="easyui-validatebox" data-options="validType:'zip'" type="text" style="width: 130px" />
                     </td>
                     <td>网址
                     </td>
@@ -143,16 +256,20 @@
                     <td>地址
                     </td>
                     <td colspan="3">
-                        <input name="Address" class="easyui-validatebox" type="text" style="width: 130px" />
+                        <input name="Address" class="easyui-validatebox" type="text" style="width: 350px" />
                     </td>
                 </tr>
                 <tr>
                     <td>有效</td>
                     <td>
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 133px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
+                    </td>
+                    <td>排序号</td>
+                    <td>
+                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 130px" />
                     </td>
                 </tr>
                 <tr>

@@ -37,8 +37,7 @@
                 width: 153,
                 panelHeight: 60,
                 editable: false,
-                required: true,
-                tipPosition: 'left'
+                required: true
             });
 
             if (id) {
@@ -115,6 +114,12 @@
                     <td>
                         <input name="Code" class="easyui-validatebox" data-options="required:true" style="width: 150px" />
                     </td>
+                    <td>拼音简写</td>
+                    <td>
+                        <input name="SpellQuery" class="easyui-validatebox" data-options="required:true,tipPosition:'left'" style="width: 150px" />
+                    </td>
+                </tr>
+                <tr>
                     <td>性别</td>
                     <td>
                         <input name="Sex" id="Sex" type="text" />
@@ -186,13 +191,13 @@
                     <td>有效</td>
                     <td>
                         <select id="Enabled" name="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td>排序号</td>
                     <td>
-                        <input name="OrderID" class="easyui-validatebox" data-options="validType:'integer',tipPosition:'left'" style="width: 150px" />
+                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>
