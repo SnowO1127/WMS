@@ -132,7 +132,7 @@
                 <tr>
                     <td>地址</td>
                     <td colspan="3">
-                        <input name="Url" class="easyui-validatebox" type="text" style="width: 405px" />
+                        <input name="MenuUrl" class="easyui-validatebox" type="text" style="width: 405px" />
                     </td>
                 </tr>
                 <tr>
@@ -149,8 +149,8 @@
                     <td>有效</td>
                     <td>
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td>排序号
@@ -164,15 +164,15 @@
                     <td>是否公开</td>
                     <td>
                         <select id="IsPublic" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsPublic" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td style="width: 60px">是否菜单</td>
                     <td>
                         <select id="IsMenu" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsMenu" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                 </tr>
@@ -180,15 +180,15 @@
                     <td>允许编辑</td>
                     <td>
                         <select id="AllowEdit" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowEdit" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                     <td>允许删除</td>
                     <td>
                         <select id="AllowDelete" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowDelete" style="width: 170px">
-                            <option value="1">是</option>
-                            <option value="0">否</option>
+                            <option value="true">是</option>
+                            <option value="false">否</option>
                         </select>
                     </td>
                 </tr>

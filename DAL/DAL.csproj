@@ -52,6 +52,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SysButtonDAL.cs" />
+    <Compile Include="SysButtonMap.cs" />
     <Compile Include="SysContext.cs" />
     <Compile Include="SysItemDAL.cs" />
     <Compile Include="SysItemDetailDAL.cs" />

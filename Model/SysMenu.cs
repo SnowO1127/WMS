@@ -37,7 +37,7 @@ namespace Model
         /// <summary>
         /// 地址
         /// </summary>
-        public string Url { get; set; }
+        public string MenuUrl { get; set; }
 
         /// <summary>
         /// 是否公开
@@ -127,5 +127,7 @@ namespace Model
         public List<SysMenu> SysMenus { get; set; }
 
         public SysMenu PSysMenu { get; set; }
+
+        public List<SysButton> SysButtons { get; set; }
     }
 }

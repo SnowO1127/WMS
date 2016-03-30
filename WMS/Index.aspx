@@ -241,7 +241,7 @@
             if ($('#index_tab').tabs('exists', title)) {
                 $('#index_tab').tabs('select', title);
             } else {
-                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>';
+                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
                 $('#index_tab').tabs('add', {
                     title: title,
                     content: content,
@@ -300,7 +300,7 @@
             self.parent.$('#index_tab').tabs('update', {
                 tab: currTab,
                 options: {
-                    content: '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>'
+                    content: '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>'
                 }
             });
         }

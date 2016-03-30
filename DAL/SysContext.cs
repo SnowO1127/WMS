@@ -13,6 +13,7 @@ namespace DAL
     {
         public DbSet<SysMenu> SysMenus { get; set; }
         public DbSet<SysRole> SysRoles { get; set; }
+        public DbSet<SysButton> SysButtons { get; set; }
         public DbSet<SysUser> SysUsers { get; set; }
         public DbSet<SysOganize> SysOganizes { get; set; }
         public DbSet<SysItem> SysItems { get; set; }
@@ -28,6 +29,7 @@ namespace DAL
             modelBuilder.Configurations.Add(new SysMenuMap());
             modelBuilder.Configurations.Add(new SysUserMap());
             modelBuilder.Configurations.Add(new SysRoleMap());
+            modelBuilder.Configurations.Add(new SysButtonMap());
             modelBuilder.Configurations.Add(new SysOganizeMap());
             modelBuilder.Configurations.Add(new SysItemMap());
             modelBuilder.Configurations.Add(new SysItemDetailMap());

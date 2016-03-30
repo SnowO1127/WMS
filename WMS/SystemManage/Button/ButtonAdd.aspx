@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DictItemDetailAdd.aspx.cs" Inherits="WMS.SystemManage.Dict.DictItemDetailAdd" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ButtonAdd.aspx.cs" Inherits="WMS.SystemManage.Button.ButtonAdd" %>
 
 <!DOCTYPE html>
 
@@ -18,43 +18,42 @@
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
+
         var id = "<%=id %>";
-        var itemid = "<%=itemid %>";
+        var menuid = "<%=menuid %>";
 
         $(function () {
-
-            if (itemid) {
-                $("#ItemID").val(itemid);
-            }
+            if (menuid)
+                $('#MenuID').combotree('setValue', menuid);
 
             if (id) {
                 $.ajax({
-                    url: "../../datasorce/sy_itemdetail.ashx?action=getoneitemdetail",
+                    url: "../../datasorce/sy_button.ashx?action=getonebutton",
                     dataType: "json",
                     type: "post",
                     data: {
                         id: id
                     },
                     success: function (jsonresult) {
-                        $("#itemdetail_add_form").form('load', jsonresult);
+                        $("#button_add_form").form('load', jsonresult);
                     }
                 })
             }
         });
 
         var f_save = function ($dialog, $grid, $pjq) {
-            if ($('#itemdetail_add_form').form('validate')) {
+            if ($('#button_add_form').form('validate')) {
                 var url;
                 if (id) {
-                    url = "../../datasorce/sy_itemdetail.ashx?action=updateitemdetail";
+                    url = "../../datasorce/sy_button.ashx?action=updatebutton";
                 } else {
-                    url = "../../datasorce/sy_itemdetail.ashx?action=additemdetail";
+                    url = "../../datasorce/sy_button.ashx?action=addbutton";
                 }
                 $.ajax({
                     url: url,
                     type: "post",
                     dataType: "json",
-                    data: $('#itemdetail_add_form').serializeArray(),
+                    data: sy.serializeObject($('#button_add_form')),
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
@@ -71,31 +70,38 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <form id="itemdetail_add_form" style="font-size: 12px; padding-left: 25px; padding-top: 10px">
+        <form id="button_add_form" style="font-size: 12px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
-                    <td style="width: 60px">名称</td>
+                    <td style="width: 60px">按钮名称</td>
                     <td colspan="3">
                         <input name="Name" class="easyui-validatebox" type="text" data-options="required:true" style="width: 170px" />
                         <input name="ID" type="hidden" />
                     </td>
                 </tr>
                 <tr>
-                    <td>值</td>
+                    <td>按钮id</td>
                     <td>
-                        <input name="Value" class="easyui-validatebox" type="text" data-options="required:true" style="width: 170px" />
+                        <input name="HtmlID" id="HtmlID" type="text" style="width: 170px" />
                     </td>
                 </tr>
                 <tr>
-                    <td>类别</td>
+                    <td>菜单</td>
                     <td colspan="3">
-                        <input id="ItemID" name="ItemID" readonly="readonly" type="text" style="width: 395px" />
+                        <input id="MenuID" name="MenuID" class="easyui-combotree" style="width: 173px" data-options="disabled:true,panelHeight:140,editable:false,idField:'id',textField:'text',parentField:'pid',url:'../../datasorce/sy_menu.ashx?action=getmenutree'" />
                     </td>
                 </tr>
                 <tr>
                     <td>有效</td>
                     <td>
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 170px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+                    </td>
+                    <td>是否公开</td>
+                    <td>
+                        <select id="IsPublic" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsPublic" style="width: 170px">
                             <option value="true">是</option>
                             <option value="false">否</option>
                         </select>
@@ -117,16 +123,17 @@
                         </select>
                     </td>
                 </tr>
-                  <tr>
-                    <td>排序号</td>
+                <tr>
+                    <td>排序号
+                    </td>
                     <td>
-                        <input name="OrderID" class="easyui-validatebox" type="text" data-options="required:true" style="width: 170px" />
+                        <input id="OrderID" name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer'" style="width: 170px" />
                     </td>
                 </tr>
                 <tr>
-                    <td>备注</td>
+                    <td>描述</td>
                     <td colspan="3">
-                        <textarea name="Description" id="Description" style="width: 395px; height: 50px"></textarea>
+                        <textarea name="Description" id="Description" style="width: 405px; height: 50px"></textarea>
                     </td>
                 </tr>
             </table>

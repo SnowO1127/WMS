@@ -2700,6 +2700,8 @@
     <Content Include="library\ueditor1_4_3-utf8-net\ueditor.parse.min.js" />
     <Content Include="library\xyEasyUI.js" />
     <Content Include="library\xyUtils.js" />
+    <Content Include="SystemManage\Button\ButtonAdd.aspx" />
+    <Content Include="SystemManage\Button\ButtonList.aspx" />
     <Content Include="SystemManage\Dict\DictItemAdd.aspx" />
     <Content Include="SystemManage\Dict\DictItemDetailAdd.aspx" />
     <Content Include="SystemManage\Dict\DictList.aspx" />
@@ -2726,6 +2728,9 @@
     </Compile>
     <Compile Include="CommonTools\fullcalendar.aspx.designer.cs">
       <DependentUpon>fullcalendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\sy_button.ashx.cs">
+      <DependentUpon>sy_button.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_item.ashx.cs">
       <DependentUpon>sy_item.ashx</DependentUpon>
@@ -2795,6 +2800,20 @@
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\UploadHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SystemManage\Button\ButtonAdd.aspx.cs">
+      <DependentUpon>ButtonAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Button\ButtonAdd.aspx.designer.cs">
+      <DependentUpon>ButtonAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Button\ButtonList.aspx.cs">
+      <DependentUpon>ButtonList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Button\ButtonList.aspx.designer.cs">
+      <DependentUpon>ButtonList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemManage\Dict\DictItemAdd.aspx.cs">
       <DependentUpon>DictItemAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2804,6 +2823,7 @@
     </Compile>
     <Compile Include="SystemManage\Dict\DictItemDetailAdd.aspx.cs">
       <DependentUpon>DictItemDetailAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SystemManage\Dict\DictItemDetailAdd.aspx.designer.cs">
       <DependentUpon>DictItemDetailAdd.aspx</DependentUpon>
@@ -2962,9 +2982,7 @@
     <Content Include="library\ueditor1_4_3-utf8-net\third-party\video-js\font\vjs.ttf" />
     <Content Include="library\ueditor1_4_3-utf8-net\third-party\video-js\font\vjs.woff" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SystemManage\Button\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="web.config" />
     <Content Include="packages.config" />
@@ -2972,6 +2990,7 @@
     <Content Include="datasorce\sy_item.ashx" />
     <Content Include="datasorce\sy_itemdetail.ashx" />
     <Content Include="datasorce\sy_oganize.ashx" />
+    <Content Include="datasorce\sy_button.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

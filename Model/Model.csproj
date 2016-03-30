@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SysButton.cs" />
     <Compile Include="SysItem.cs" />
     <Compile Include="SysItemDetail.cs" />
     <Compile Include="SysMenu.cs" />

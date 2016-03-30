@@ -1,11 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MenuList.aspx.cs" Inherits="WMS.SystemManage.Menu.MenuList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ButtonList.aspx.cs" Inherits="WMS.SystemManage.Button.ButtonList" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
     <script src="../../library/jquery-1.9.1.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
@@ -17,9 +16,9 @@
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
+    <title></title>
     <script>
-
-        var treeid;
+        var treenode;
         $(function () {
             tree = $("#menu_tree").tree({
                 url: '../../datasorce/sy_menu.ashx?action=getheadtree',
@@ -27,29 +26,18 @@
                 lines: true,
                 onClick: function (node) {
 
-                    treeid = node.text == "全部" ? "" : node.id;
+                    treenode = node;
 
-                    var obj = sy.serializeObject($('#menu_search_form'));
-                    sy.mergeObj(obj, { ID: treeid });
-
-                    grid.datagrid("load", obj);  // 在用户点击的时候提示
-                    grid.datagrid("unselectAll");
-                },
-                onLoadSuccess: function (node, data) {
-                    if (treeid) {
-                        var n = tree.tree("find", treeid);
-                        tree.tree("select", n.target);
-                    }
-                    else {
-                        var n = tree.tree("find", data[0].id);
-                        tree.tree("select", n.target);
+                    if (treenode.attributes && !treenode.attributes.ismenu) {
+                        grid.datagrid("load", { MenuID: treenode.id });  // 在用户点击的时候提示
+                        grid.datagrid("unselectAll");
                     }
                 }
             })
 
-            grid = $('#menu_list_grid').datagrid({
+            grid = $('#button_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_menu.ashx?action=getmenubypage',
+                url: '../../datasorce/sy_button.ashx?action=getbuttonbypage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -60,29 +48,23 @@
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 queryParams: {
-                    ID: treeid
+                    MenuID: !treenode || treenode.attributes.ismenu ? "" : treenode.id
                 },
                 frozenColumns: [[{
-                    width: '150',
-                    title: '菜单名',
-                    field: 'MenuName',
+                    width: '90',
+                    title: '按钮名称',
+                    field: 'Name',
                     halign: 'center',
                     sortable: true
                 }, {
                     width: '80',
-                    title: '类别',
-                    field: 'Category',
+                    title: '按钮id',
+                    field: 'HtmlID',
                     halign: 'center',
                     align: 'center',
                     sortable: true
                 }]],
                 columns: [[{
-                    width: '260',
-                    title: '地址',
-                    field: 'MenuUrl',
-                    halign: 'center',
-                    sortable: true
-                }, {
                     width: '60',
                     title: '公开',
                     field: 'IsPublic',
@@ -143,12 +125,23 @@
                     field: 'OrderID',
                     halign: 'center',
                     align: 'center'
+                }
+                , {
+                    width: '220',
+                    title: '描述',
+                    field: 'Description',
+                    halign: 'center'
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
                     text: '增加',
                     handler: function () {
-                        openAdd();
+                        if (treenode.attributes && !treenode.attributes.ismenu) {
+                            openAdd(treenode);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "菜单节点无法添加按钮！", "info");
+                        }
                     }
                 }, '-', {
                     iconCls: 'icon-save',
@@ -198,18 +191,18 @@
             });
         });
 
-        var openAdd = function () {
+        var openAdd = function (node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-add',
-                title: '新增菜单',
+                title: '新增按钮',
                 width: 545,
-                height: 360,
-                url: 'SystemManage/Menu/MenuAdd.aspx',
+                height: 320,
+                url: 'SystemManage/Button/ButtonAdd.aspx?menuid=' + node.id,
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
             });
@@ -218,15 +211,15 @@
         var openEdit = function (id) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑菜单',
+                title: '编辑按钮',
                 width: 545,
-                height: 360,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                height: 320,
+                url: 'SystemManage/Button/ButtonAdd.aspx?id=' + id + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
             });
@@ -235,18 +228,18 @@
         var openView = function (id) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看菜单',
+                title: '查看按钮',
                 width: 545,
-                height: 330,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                height: 300,
+                url: 'SystemManage/Button/ButtonAdd.aspx?id=' + id + '',
             });
         }
 
         var deleteMenu = function (id) {
-            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
+            parent.$.messager.confirm('删除按钮', '你确定删除按钮吗?', function (r) {
                 if (r) {
                     $.ajax({
-                        url: "../../datasorce/sy_menu.ashx?action=deletemenu",
+                        url: "../../datasorce/sy_button.ashx?action=deletebutton",
                         dataType: "json",
                         type: "post",
                         data: {
@@ -266,55 +259,16 @@
                 }
             });
         }
-
-        var menuSearch = function () {
-            var obj = sy.serializeObject($('#menu_search_form'));
-            sy.mergeObj(obj, { id: treeid });
-            grid.datagrid('load', obj);
-        }
-
-        var menuRefresh = function () {
-            var obj = {};
-            sy.mergeObj(obj, { id: treeid });
-            $('#menu_search_form input[name=MenuName]').val('');
-            grid.datagrid('load', obj);
-        }
-        
     </script>
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true" title="分类树" style="overflow: hidden; padding: 1px; width: 200px">
+        <div data-options="region: 'west', border: true" title="菜单树" style="overflow: hidden; padding: 1px; width: 200px">
             <div id="menu_tree" fit="true">
             </div>
         </div>
         <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-            <div class="easyui-layout" fit="true">
-                <div data-options="region: 'north', border: false" style="overflow: hidden; padding: 1px; height: 70px">
-                    <fieldset>
-                        <legend>查询条件</legend>
-                        <form id="menu_search_form">
-                            <table>
-                                <tr>
-                                    <td>菜单名称</td>
-                                    <td>
-                                        <input name="MenuName" class="easyui-validatebox" style="width: 110px" type="text" />
-                                    </td>
-                                    <td>
-                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="menuSearch()">查找</a>
-                                    </td>
-                                    <td>
-                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="menuRefresh()">清空</a>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
-                    </fieldset>
-                </div>
-                <div data-options="region: 'center', border: false" style="overflow: hidden; padding: 1px;">
-                    <div id="menu_list_grid" fit="true">
-                    </div>
-                </div>
+            <div id="button_list_grid" fit="true">
             </div>
         </div>
     </div>

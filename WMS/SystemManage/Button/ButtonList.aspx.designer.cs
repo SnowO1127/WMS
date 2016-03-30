@@ -7,10 +7,10 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace WMS.SystemManage.Permission {
+namespace WMS.SystemManage.Button {
     
     
-    public partial class UserPermission {
+    public partial class ButtonList {
         
         /// <summary>
         /// easyuiTheme 控件。

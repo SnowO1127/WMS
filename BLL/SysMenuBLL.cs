@@ -66,7 +66,8 @@ namespace BLL
                 {
                     Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = string.IsNullOrEmpty(sm.ParentID) ? headtree.id : sm.ParentID, iconCls = sm.IconCls };
                     Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-                    attributes.Add("url", sm.Url);
+                    attributes.Add("url", sm.MenuUrl);
+                    attributes.Add("ismenu", sm.IsMenu);
                     t.attributes = attributes;
                     tlist.Add(t);
                 }
@@ -85,7 +86,7 @@ namespace BLL
                 {
                     Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
                     Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-                    attributes.Add("url", sm.Url);
+                    attributes.Add("url", sm.MenuUrl);
                     t.attributes = attributes;
                     tlist.Add(t);
                 }
