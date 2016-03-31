@@ -2711,11 +2711,15 @@
     <Content Include="SystemManage\Oganize\OganizeAdd.aspx" />
     <Content Include="SystemManage\Oganize\OganizeList.aspx" />
     <Content Include="SystemManage\Permission\RolePermission.aspx" />
+    <Content Include="SystemManage\Permission\RolePermissionSet.aspx" />
     <Content Include="SystemManage\Permission\UserPermission.aspx" />
+    <Content Include="SystemManage\Permission\UserPermissionSet.aspx" />
     <Content Include="SystemManage\Role\RoleAdd.aspx" />
     <Content Include="SystemManage\Role\RoleList.aspx" />
     <Content Include="SystemManage\Unit\unit_add.aspx" />
     <Content Include="SystemManage\Unit\unit_list.aspx" />
+    <Content Include="SystemManage\UserOganize\OganizeUserSet.aspx" />
+    <Content Include="SystemManage\UserOganize\UserOganizeSet.aspx" />
     <Content Include="SystemManage\UserRole\RoleUserSet.aspx" />
     <Content Include="SystemManage\UserRole\UserRoleSet.aspx" />
     <Content Include="SystemManage\User\UserAdd.aspx" />
@@ -2877,12 +2881,26 @@
     <Compile Include="SystemManage\Permission\RolePermission.aspx.designer.cs">
       <DependentUpon>RolePermission.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SystemManage\Permission\RolePermissionSet.aspx.cs">
+      <DependentUpon>RolePermissionSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Permission\RolePermissionSet.aspx.designer.cs">
+      <DependentUpon>RolePermissionSet.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SystemManage\Permission\UserPermission.aspx.cs">
       <DependentUpon>UserPermission.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="SystemManage\Permission\UserPermission.aspx.designer.cs">
       <DependentUpon>UserPermission.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\Permission\UserPermissionSet.aspx.cs">
+      <DependentUpon>UserPermissionSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\Permission\UserPermissionSet.aspx.designer.cs">
+      <DependentUpon>UserPermissionSet.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\Role\RoleAdd.aspx.cs">
       <DependentUpon>RoleAdd.aspx</DependentUpon>
@@ -2911,6 +2929,20 @@
     </Compile>
     <Compile Include="SystemManage\Unit\unit_list.aspx.designer.cs">
       <DependentUpon>unit_list.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\UserOganize\OganizeUserSet.aspx.cs">
+      <DependentUpon>OganizeUserSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\UserOganize\OganizeUserSet.aspx.designer.cs">
+      <DependentUpon>OganizeUserSet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemManage\UserOganize\UserOganizeSet.aspx.cs">
+      <DependentUpon>UserOganizeSet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemManage\UserOganize\UserOganizeSet.aspx.designer.cs">
+      <DependentUpon>UserOganizeSet.aspx</DependentUpon>
     </Compile>
     <Compile Include="SystemManage\UserRole\RoleUserSet.aspx.cs">
       <DependentUpon>RoleUserSet.aspx</DependentUpon>

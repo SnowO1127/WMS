@@ -34,7 +34,7 @@ namespace DAL
             Property(t => t.ChildDept).HasMaxLength(128);
             Property(t => t.ClassGroup).HasMaxLength(128);
             Property(t => t.Description).HasMaxLength(300);
-            
+
             Property(t => t.CUserID).HasMaxLength(128);
             Property(t => t.CUserName).HasMaxLength(20);
             Property(t => t.DUserID).HasMaxLength(128);
@@ -48,6 +48,7 @@ namespace DAL
              m.MapLeftKey("UserID");
              m.MapRightKey("RoleID");
          });
+
         }
     }
 }

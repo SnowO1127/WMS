@@ -18,7 +18,7 @@
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var userid = "<%=id %>";
+        var userid = "<%=userid %>";
 
         $(function () {
             nogrid = $('#norole_grid').datagrid({

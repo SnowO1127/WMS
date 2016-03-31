@@ -123,10 +123,28 @@
                     field: 'OrderID'
                 }]],
                 toolbar: [{
+                    iconCls: 'icon-save',
+                    text: '查看用户权限',
+                    handler: function () {
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            openAddRole(row.ID);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
+                    }
+                }, '-', {
                     iconCls: 'icon-add',
                     text: '用户角色设置',
                     handler: function () {
-                        openAdd();
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            openAddRole(row);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }, '-', {
                     iconCls: 'icon-save',
@@ -134,7 +152,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openAddOganize(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -146,25 +164,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openEdit(row.ID);
-                        }
-                        else {
-                            parent.$.messager.alert('提示', "请选择行", "info");
-                        }
-                    }
-                }, '-', {
-                    iconCls: 'icon-cut',
-                    text: '删除',
-                    handler: function () {
-                        alert('帮助按钮');
-                    }
-                }, '-', {
-                    iconCls: 'ext-icon-cog',
-                    text: '用户角色设置',
-                    handler: function () {
-                        var row = grid.datagrid('getSelected');
-                        if (row) {
-                            openAddRole(row.ID);
+                            openAddPermission(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -182,82 +182,40 @@
             });
         });
 
-        var openAdd = function () {
-            var dialog = parent.sy.modalDialog({
-                iconCls: 'icon-add',
-                title: '新增用户',
-                width: 520,
-                height: 430,
-                url: 'SystemManage/User/UserAdd.aspx',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
-        };
-
-        var openEdit = function (id) {
-            var dialog = parent.sy.modalDialog({
-                iconCls: 'icon-edit',
-                title: '编辑用户',
-                width: 520,
-                height: 430,
-                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
-        }
-
-        var openView = function (id) {
+        var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看用户',
+                title: '查看用户权限',
                 width: 520,
                 height: 400,
-                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
+                url: 'SystemManage/User/UserAdd.aspx?id=' + row.ID + '',
             });
         }
 
-        var deleteMenu = function (id) {
-            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
-                if (r) {
-                    $.ajax({
-                        url: "../../datasorce/sy_menu.ashx?action=deletemenu",
-                        dataType: "json",
-                        type: "post",
-                        data: {
-                            id: id
-                        },
-                        success: function (jsonresult) {
-                            if (jsonresult.Success) {
-                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
-                                grid.datagrid('load');
-                                grid.datagrid("unselectAll");
-                                tree.tree("reload");
-                            } else {
-                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
-                            }
-                        }
-                    })
-                }
-            });
-        }
-
-        var openAddRole = function (id) {
+        var openAddRole = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'ext-icon-cog',
-                title: '角色设置',
+                title: '角色设置【当前用户：' + row.RealName + '】',
                 width: 600,
                 height: 450,
-                url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
+                url: 'SystemManage/UserRole/UserRoleSet.aspx?userid=' + row.ID + '',
+                buttons: [{
+                    text: '保存',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        dialog.find('iframe').get(0).contentWindow.f_save_roles(dialog, parent.$);
+                    }
+                }]
+            });
+        }
+
+        var openAddPermission = function (row) {
+            var dialog = parent.sy.modalDialog({
+                iconCls: 'ext-icon-cog',
+                title: '角色设置【当前用户：' + row.RealName + '】',
+                width: 300,
+                height: 450,
+                url: 'SystemManage/Permission/UserPermissionSet.aspx?userid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
