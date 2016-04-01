@@ -9,10 +9,10 @@ namespace WMS.SystemManage.Menu
 {
     public partial class MenuAdd : System.Web.UI.Page
     {
-        public string id;
+        public string menuid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Request.Params["id"];
+            menuid = Request.Params["menuid"];
         }
     }
 }

@@ -21,7 +21,7 @@
         var sy = sy || {};
         sy.pixel_0 = '../../library/images/pixel_0.gif';//0像素的背景，一般用于占位
 
-        var id = "<%=id %>";
+        var menuid = "<%=menuid %>";
 
         var showIcons = function () {
             var dialog = parent.sy.modalDialog({
@@ -50,13 +50,13 @@
                 required: true
             });
 
-            if (id) {
+            if (menuid) {
                 $.ajax({
                     url: "../../datasorce/sy_menu.ashx?action=getonemenu",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        menuid: menuid
                     },
                     success: function (jsonresult) {
                         $("#menu_add_form").form('load', jsonresult);
@@ -76,7 +76,7 @@
         var f_save = function ($dialog, $grid, $tree, $pjq) {
             if ($('#menu_add_form').form('validate')) {
                 var url;
-                if (id) {
+                if (menuid) {
                     url = "../../datasorce/sy_menu.ashx?action=updatemenu";
                 } else {
                     url = "../../datasorce/sy_menu.ashx?action=addmenu";

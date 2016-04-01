@@ -19,6 +19,7 @@ namespace WMS.datasorce
         private JsonResult jr;
         private SysItemDetail sid;
         private string code;
+        private string itemdetailid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -80,11 +81,10 @@ namespace WMS.datasorce
                     break;
                 case "getoneitemdetail":
                     sid = new SysItemDetail();
+                    itemdetailid = request["itemdetailid"];
                     try
                     {
-                        string id = request["id"];
-
-                        sid = bll.GetOneItemDetail(id);
+                        sid = bll.GetOneItemDetail(itemdetailid);
 
                         context.Response.Write(Utils.SerializeObject(sid));
                     }

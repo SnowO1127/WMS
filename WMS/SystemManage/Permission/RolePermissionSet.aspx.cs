@@ -9,9 +9,10 @@ namespace WMS.SystemManage.Permission
 {
     public partial class RolePermissionSet : System.Web.UI.Page
     {
+        public string roleid;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            roleid = Request.Params["roleid"];
         }
     }
 }

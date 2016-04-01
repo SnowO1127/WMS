@@ -18,7 +18,7 @@
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var treeid;
+        var treenode;
         $(function () {
             tree = $("#dict_items_tree").tree({
                 url: '../../datasorce/sy_item.ashx?action=getitemtree',
@@ -26,19 +26,10 @@
                 lines: true,
                 onClick: function (node) {
 
-                    treeid = node.id;
+                    treenode = node;
 
-                    grid.datagrid("load", { ItemId: treeid });  // 在用户点击的时候提示
+                    grid.datagrid("load", { ItemId: treenode.id });  // 在用户点击的时候提示
                     grid.datagrid("unselectAll");
-                },
-                onLoadSuccess: function (node, data) {
-                    $.each(data, function (i) {
-                        if (!data[i].pid) {
-                            var n = tree.tree("find", data[i].id);
-                            tree.tree("select", n.target);
-                            treeid = data[i].id;
-                        }
-                    });
                 }
             })
 
@@ -55,7 +46,7 @@
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 queryParams: {
-                    ItemID: treeid
+                    ItemID: treenode ? treenode.id : ""
                 },
                 frozenColumns: [[{
                     width: '90',
@@ -138,7 +129,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openItemDetailView(row.ID);
+                            openItemDetailView(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -150,7 +141,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openItemDetailEdit(row.ID);
+                            openItemDetailEdit(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -175,29 +166,34 @@
         })
 
         var openItemDetailAdd = function () {
-            var dialog = parent.sy.modalDialog({
-                iconCls: 'icon-add',
-                title: '新增选项明细',
-                width: 530,
-                height: 300,
-                url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemid=' + treeid,
-                buttons: [{
-                    text: '保存',
+            if (treenode) {
+                var dialog = parent.sy.modalDialog({
                     iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
-                    }
-                }]
-            });
+                    title: '新增选项明细【当前所选字典类别：' + treenode.text + '】',
+                    width: 530,
+                    height: 300,
+                    url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemid=' + treenode.id,
+                    buttons: [{
+                        text: '保存',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
+                        }
+                    }]
+                });
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择字典类别！", "info");
+            }
         }
 
-        var openItemDetailEdit = function (id) {
+        var openItemDetailEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑选项明细',
+                title: '编辑选项明细【当前：' + row.Name + '】',
                 width: 530,
                 height: 300,
-                url: 'SystemManage/Dict/DictItemDetailAdd.aspx?id=' + id,
+                url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemdetailid=' + row.ID,
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -208,13 +204,13 @@
             });
         }
 
-        var openItemDetailView = function (id) {
+        var openItemDetailView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看选项明细',
+                title: '查看选项明细【当前：' + row.Name + '】',
                 width: 530,
                 height: 280,
-                url: 'SystemManage/Dict/DictItemDetailAdd.aspx?id=' + id
+                url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemdetailid=' + row.ID
             });
         }
 
@@ -236,20 +232,25 @@
         }
 
         var openItemEdit = function () {
-            var dialog = parent.sy.modalDialog({
-                iconCls: 'icon-edit',
-                title: '编辑字典类别',
-                width: 545,
-                height: 330,
-                url: 'SystemManage/Dict/DictItemAdd.aspx?id=' + treeid,
-                buttons: [{
-                    text: '保存',
-                    iconCls: 'icon-add',
-                    handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
-                    }
-                }]
-            });
+            if (treenode) {
+                var dialog = parent.sy.modalDialog({
+                    iconCls: 'icon-edit',
+                    title: '编辑字典类别【当前：' + treenode.text + '】',
+                    width: 545,
+                    height: 330,
+                    url: 'SystemManage/Dict/DictItemAdd.aspx?itemid=' + treenode.id,
+                    buttons: [{
+                        text: '保存',
+                        iconCls: 'icon-add',
+                        handler: function () {
+                            dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                        }
+                    }]
+                });
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择字典类别！", "info");
+            }
         }
 
         var openItemDelete = function () {

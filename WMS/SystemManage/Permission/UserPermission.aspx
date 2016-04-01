@@ -103,6 +103,19 @@
                     halign: 'center',
                     field: 'Address'
                 }, {
+                    width: '70',
+                    title: '管理员',
+                    field: 'IsAdmin',
+                    halign: 'center',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.IsAdmin) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
+                }, {
                     width: '60',
                     title: '有效',
                     field: 'Enabled',
@@ -128,7 +141,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openAddRole(row.ID);
+                            if (!row.IsAdmin) {
+                                openAddRole(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员拥有所有权限,无法查看！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -140,7 +158,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openAddRole(row);
+                            if (!row.IsAdmin) {
+                                openAddRole(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法设置角色！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -152,7 +175,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openAddOganize(row);
+                            if (!row.IsAdmin) {
+                                openAddOganize(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法设置部门！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -164,7 +192,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openAddPermission(row);
+                            if (!row.IsAdmin) {
+                                openAddUserPermission(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法设置权限！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -188,7 +221,7 @@
                 title: '查看用户权限',
                 width: 520,
                 height: 400,
-                url: 'SystemManage/User/UserAdd.aspx?id=' + row.ID + '',
+                url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
             });
         }
 
@@ -209,10 +242,10 @@
             });
         }
 
-        var openAddPermission = function (row) {
+        var openAddUserPermission = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'ext-icon-cog',
-                title: '角色设置【当前用户：' + row.RealName + '】',
+                title: '权限设置【当前用户：' + row.RealName + '】',
                 width: 300,
                 height: 450,
                 url: 'SystemManage/Permission/UserPermissionSet.aspx?userid=' + row.ID + '',
@@ -220,7 +253,7 @@
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save_roles(dialog, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save_permission(dialog, parent.$);
                     }
                 }]
             });

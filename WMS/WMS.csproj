@@ -2751,6 +2751,9 @@
     <Compile Include="datasorce\sy_oganize.ashx.cs">
       <DependentUpon>sy_oganize.ashx</DependentUpon>
     </Compile>
+    <Compile Include="datasorce\sy_permission.ashx.cs">
+      <DependentUpon>sy_permission.ashx</DependentUpon>
+    </Compile>
     <Compile Include="datasorce\sy_role.ashx.cs">
       <DependentUpon>sy_role.ashx</DependentUpon>
     </Compile>
@@ -3023,6 +3026,7 @@
     <Content Include="datasorce\sy_itemdetail.ashx" />
     <Content Include="datasorce\sy_oganize.ashx" />
     <Content Include="datasorce\sy_button.ashx" />
+    <Content Include="datasorce\sy_permission.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

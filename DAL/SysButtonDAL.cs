@@ -81,5 +81,15 @@ namespace DAL
                 ctx.SaveChanges();
             }
         }
+
+        public List<SysButton> GetList()
+        {
+            List<SysButton> list = new List<SysButton>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                list = ctx.SysButtons.Where(x => x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
+            }
+            return list;
+        }
     }
 }

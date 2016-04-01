@@ -80,7 +80,7 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneuser":
-                    userid = request["id"];
+                    userid = request["userid"];
                     try
                     {
                         context.Response.Write(Utils.SerializeObject(bll.GetOneUser(userid)));
@@ -123,6 +123,22 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
 
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
+                case "deleteuser":
+                    userid = request["userid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        bll.DeleteUser(userid);
+
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
             }

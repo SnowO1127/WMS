@@ -26,6 +26,20 @@ namespace DAL
             Property(t => t.DUserName).HasMaxLength(20);
             Property(t => t.UUserID).HasMaxLength(128);
             Property(t => t.UUserName).HasMaxLength(20);
+
+            HasMany(t => t.Menus).WithMany(t => t.Roles).Map(m =>
+            {
+                m.ToTable("Sys_RoleMenu");
+                m.MapLeftKey("RoleID");
+                m.MapRightKey("MenuID");
+            });
+
+            HasMany(t => t.Buttons).WithMany(t => t.Roles).Map(m =>
+            {
+                m.ToTable("Sys_RoleButton");
+                m.MapLeftKey("RoleID");
+                m.MapRightKey("ButtonID");
+            });
         }
     }
 }

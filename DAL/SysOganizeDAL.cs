@@ -11,16 +11,25 @@ namespace DAL
 {
     public class SysOganizeDAL
     {
+        /// <summary>
+        /// 得到未删除所有组织机构
+        /// </summary>
+        /// <returns></returns>
         public List<SysOganize> GetList()
         {
             List<SysOganize> list = new List<SysOganize>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysOganizes.OrderBy(x => x.OrderID).ToList();
+                list = ctx.SysOganizes.Where(x => x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
 
+        /// <summary>
+        /// 分页得到未删除的组织机构
+        /// </summary>
+        /// <param name="pso"></param>
+        /// <returns></returns>
         public List<SysOganize> GetListByPage(PageSysOganize pso)
         {
             List<SysOganize> list = new List<SysOganize>();
@@ -48,6 +57,10 @@ namespace DAL
             return list;
         }
 
+        /// <summary>
+        /// 增加组织机构
+        /// </summary>
+        /// <param name="so"></param>
         public void AddOganize(SysOganize so)
         {
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
@@ -66,6 +79,10 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// 更新组织机构
+        /// </summary>
+        /// <param name="so"></param>
         public void UpdateOganize(SysOganize so)
         {
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
@@ -92,6 +109,11 @@ namespace DAL
             }
         }
 
+        /// <summary>
+        /// 得到一个组织机构
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public SysOganize GetOneOganize(string id)
         {
             SysOganize sm = new SysOganize();
@@ -101,6 +123,23 @@ namespace DAL
             }
 
             return sm;
+        }
+
+        /// <summary>
+        /// 伪删除
+        /// </summary>
+        /// <param name="oganizeid"></param>
+        public void DeleteOganize(string oganizeid)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysOganize so = new SysOganize();
+                so = ctx.SysOganizes.Find(oganizeid);
+
+                so.DeleteMark = true;
+
+                ctx.SaveChanges();
+            }
         }
     }
 }

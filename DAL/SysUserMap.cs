@@ -49,6 +49,20 @@ namespace DAL
              m.MapRightKey("RoleID");
          });
 
+            HasMany(t => t.Menus).WithMany(t => t.Users).Map(m =>
+            {
+                m.ToTable("Sys_UserMenu");
+                m.MapLeftKey("UserID");
+                m.MapRightKey("MenuID");
+            });
+
+            HasMany(t => t.Buttons).WithMany(t => t.Users).Map(m =>
+            {
+                m.ToTable("Sys_UserButton");
+                m.MapLeftKey("UserID");
+                m.MapRightKey("ButtonID");
+            });
+
         }
     }
 }

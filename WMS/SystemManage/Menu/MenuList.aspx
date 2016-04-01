@@ -156,7 +156,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openView(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -167,24 +167,38 @@
                     text: '编辑',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            openEdit(row.ID);
+                            if (row.AllowEdit) {
+                                openEdit(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该菜单不允许编辑！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }, '-', {
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            deleteMenu(row.ID);
+                            if (row.AllowDelete) {
+                                deleteMenu(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该菜单不允许删除！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -215,13 +229,13 @@
             });
         };
 
-        var openEdit = function (id) {
+        var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑菜单',
+                title: '编辑菜单【当前菜单：' + row.MenuName + '】',
                 width: 545,
                 height: 360,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -232,25 +246,25 @@
             });
         }
 
-        var openView = function (id) {
+        var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看菜单',
+                title: '查看菜单【当前菜单：' + row.MenuName + '】',
                 width: 545,
                 height: 330,
-                url: 'SystemManage/Menu/MenuAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',
             });
         }
 
-        var deleteMenu = function (id) {
-            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
+        var deleteMenu = function (row) {
+            parent.$.messager.confirm('删除菜单', '你确定删除菜单【' + row.MenuName + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
                         url: "../../datasorce/sy_menu.ashx?action=deletemenu",
                         dataType: "json",
                         type: "post",
                         data: {
-                            id: id
+                            menuid: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {
@@ -279,7 +293,7 @@
             $('#menu_search_form input[name=MenuName]').val('');
             grid.datagrid('load', obj);
         }
-        
+
     </script>
 </head>
 <body>

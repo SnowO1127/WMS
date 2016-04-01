@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,54 +9,26 @@ namespace PageModel
 {
     public class Tree
     {
-        private string _id;
-        private string _text;
-        private string _pid;
-        private string _url;
-        private string _iconcls;
-        private int _order;
-        private Object _attributes;
-
-        public Object attributes
+        public Tree()
         {
-            get { return _attributes; }
-            set { _attributes = value; }
+            ischecked = false;
         }
 
-        public string id
-        {
-            set { _id = value; }
-            get { return _id; }
-        }
+        public Object attributes { get; set; }
 
-        public string text
-        {
-            set { _text = value; }
-            get { return _text; }
-        }
+        public string id { get; set; }
 
-        public string pid
-        {
-            set { _pid = value; }
-            get { return _pid; }
-        }
+        public string text { get; set; }
 
-        public string url
-        {
-            set { _url = value; }
-            get { return _url; }
-        }
+        [JsonProperty(PropertyName = "checked")]
+        public bool ischecked { get; set; }
 
-        public string iconCls
-        {
-            set { _iconcls = value; }
-            get { return _iconcls; }
-        }
+        public string pid { get; set; }
 
-        public int order
-        {
-            set { _order = value; }
-            get { return _order; }
-        }
+        public string url { get; set; }
+
+        public string iconCls { get; set; }
+
+        public int order { get; set; }
     }
 }

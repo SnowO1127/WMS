@@ -144,6 +144,11 @@ namespace Model
         public bool Enabled { get; set; }
 
         /// <summary>
+        /// 是否管理员
+        /// </summary>
+        public bool IsAdmin { get; set; }
+
+        /// <summary>
         /// 删除
         /// </summary>
         public bool DeleteMark { get; set; }
@@ -202,5 +207,15 @@ namespace Model
         /// 角色
         /// </summary>
         public List<SysRole> Roles { get; set; }
+
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        public List<SysMenu> Menus { get; set; }
+
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        public List<SysButton> Buttons { get; set; }
     }
 }

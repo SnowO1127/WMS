@@ -129,5 +129,9 @@ namespace Model
         public SysMenu PSysMenu { get; set; }
 
         public List<SysButton> SysButtons { get; set; }
+
+        public List<SysUser> Users { get; set; }
+
+        public List<SysRole> Roles { get; set; }
     }
 }

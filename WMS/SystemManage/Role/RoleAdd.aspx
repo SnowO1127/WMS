@@ -15,7 +15,7 @@
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var id = "<%=id %>";
+        var roleid = "<%=roleid %>";
 
         $(function () {
 
@@ -29,13 +29,13 @@
                 required: true
             });
 
-            if (id) {
+            if (roleid) {
                 $.ajax({
                     url: "../../datasorce/sy_role.ashx?action=getonerole",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        roleid: roleid
                     },
                     success: function (jsonresult) {
                         $("#role_add_form").form('load', jsonresult.Obj);

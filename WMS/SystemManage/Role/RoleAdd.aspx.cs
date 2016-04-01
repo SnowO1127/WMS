@@ -9,10 +9,10 @@ namespace WMS.SystemManage.Role
 {
     public partial class RoleAdd : System.Web.UI.Page
     {
-        public string id;
+        public string roleid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Request.Params["id"];
+            roleid = Request.Params["roleid"];
         }
     }
 }

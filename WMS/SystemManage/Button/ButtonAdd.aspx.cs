@@ -9,10 +9,10 @@ namespace WMS.SystemManage.Button
 {
     public partial class ButtonAdd : System.Web.UI.Page
     {
-        public string id,menuid;
+        public string buttonid, menuid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Request.Params["id"];
+            buttonid = Request.Params["buttonid"];
             menuid = Request.Params["menuid"];
         }
     }

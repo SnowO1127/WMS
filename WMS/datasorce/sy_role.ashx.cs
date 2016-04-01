@@ -18,7 +18,7 @@ namespace WMS.datasorce
         PageSysRole psr;
         SysRole sr;
         JsonResult jr;
-        string id, userid;
+        string roleid, userid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -34,7 +34,6 @@ namespace WMS.datasorce
                     {
                         psr = Utils.AutoWiredClass<PageSysRole>(request, psr);
                         Grid<SysRole> g = bll.GetNonDeleteListByPage(psr);
-                        //Grid<SysUser> g = bll.GetListByPage(psu);
                         context.Response.Write(Utils.SerializeObject(g));
                     }
                     catch (Exception ex)
@@ -82,12 +81,12 @@ namespace WMS.datasorce
 
                     break;
                 case "getonerole":
-                    id = request["id"];
+                    roleid = request["roleid"];
                     jr = new JsonResult();
                     try
                     {
                         jr.Success = true;
-                        jr.Obj = bll.GetOneRole(id);
+                        jr.Obj = bll.GetOneRole(roleid);
                     }
                     catch (Exception ex)
                     {
@@ -98,11 +97,11 @@ namespace WMS.datasorce
 
                     break;
                 case "deleterole":
-                    id = request["id"];
+                    roleid = request["roleid"];
                     jr = new JsonResult();
                     try
                     {
-                        bll.DeleteRole(id);
+                        bll.DeleteRole(roleid);
 
                         jr.Success = true;
                         jr.Msg = "保存成功！";

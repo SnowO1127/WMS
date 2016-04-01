@@ -79,5 +79,9 @@ namespace Model
         public string DUserName { get; set; }
 
         public SysMenu SysMenu { get; set; }
+
+        public List<SysUser> Users { get; set; }
+
+        public List<SysRole> Roles { get; set; }
     }
 }

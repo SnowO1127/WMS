@@ -117,7 +117,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openView(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -128,24 +128,38 @@
                     text: '编辑',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            openEdit(row.ID);
+                            if (row.AllowEdit) {
+                                openEdit(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该角色无法编辑！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }, '-', {
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            deleteRole(row.ID);
+                            if (row.AllowDelete) {
+                                deleteRole(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该角色无法删除！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -177,13 +191,13 @@
             });
         };
 
-        var openEdit = function (id) {
+        var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑角色',
+                title: '编辑角色【当前角色：' + row.Name + '】',
                 width: 520,
                 height: 280,
-                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -194,25 +208,25 @@
             });
         }
 
-        var openView = function (id) {
+        var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看角色',
+                title: '查看角色【当前角色：' + row.Name + '】',
                 width: 520,
                 height: 260,
-                url: 'SystemManage/Role/RoleAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',
             });
         }
 
-        var deleteRole = function (id) {
-            parent.$.messager.confirm('删除角色', '你确定删除角色吗?', function (r) {
+        var deleteRole = function (row) {
+            parent.$.messager.confirm('删除角色', '你确定删除角色【' + row.Name + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
                         url: "../../datasorce/sy_role.ashx?action=deleterole",
                         dataType: "json",
                         type: "post",
                         data: {
-                            id: id
+                            roleid: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {

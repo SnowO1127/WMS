@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Transactions;
 
 namespace DAL
 {
@@ -118,17 +119,6 @@ namespace DAL
 
         public List<SysRole> GetNoRoleList(string userid)
         {
-            //List<SysRole> list = new List<SysRole>();
-            //using (SysContext ctx = new SysContext(Globe.ConnectionString))
-            //{
-            //    var query = from r in ctx.SysRoles
-            //                from u in r.Users
-            //                where u.ID != userid || u.ID == null
-            //                select r;
-            //    list = query.ToList();
-            //}
-            //return list;
-
             List<SysRole> haslist = new List<SysRole>();
             List<SysRole> alllist = new List<SysRole>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
@@ -161,6 +151,74 @@ namespace DAL
                 list = query.ToList();
             }
             return list;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="roleid"></param>
+        /// <returns></returns>
+        public SysRole GetOneRoleWithMany(string roleid)
+        {
+            SysRole sr = new SysRole();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                sr = ctx.SysRoles.Include(x => x.Users).Include(x => x.Menus).Include(x => x.Buttons).Where(x => x.ID.Equals(roleid)).FirstOrDefault();
+            }
+            return sr;
+        }
+
+        /// <summary>
+        /// 添加角色权限
+        /// </summary>
+        /// <param name="roleid"></param>
+        /// <param name="smlist"></param>
+        /// <param name="sblist"></param>
+        public void AddRolePermission(string roleid, List<SysMenu> smlist, List<SysButton> sblist)
+        {
+            using (var tran = new TransactionScope())
+            {
+                using (var ctx = new SysContext(Globe.ConnectionString))
+                {
+                    SysRole sr = ctx.SysRoles.Include(x => x.Menus).Include(x => x.Buttons).Where(x => x.ID.Equals(roleid)).FirstOrDefault();
+
+                    var menus = new List<SysMenu>();
+                    menus.AddRange(sr.Menus.Select(x => x));
+
+                    foreach (var m in menus)
+                    {
+                        sr.Menus.Remove(m);
+                    }
+
+                    var buttons = new List<SysButton>();
+                    buttons.AddRange(sr.Buttons.Select(x => x));
+
+                    foreach (var b in buttons)
+                    {
+                        sr.Buttons.Remove(b);
+                    }
+
+                    List<string> smfilter = new List<string>();
+
+                    foreach (SysMenu sm in smlist)
+                    {
+                        smfilter.Add(sm.ID);
+                    }
+
+                    List<string> sbfilter = new List<string>();
+
+                    foreach (SysButton sb in sblist)
+                    {
+                        sbfilter.Add(sb.ID);
+                    }
+
+                    if (smfilter.Count > 0) sr.Menus = ctx.SysMenus.Where(x => smfilter.Contains(x.ID)).ToList();
+                    if (sbfilter.Count > 0) sr.Buttons = ctx.SysButtons.Where(x => sbfilter.Contains(x.ID)).ToList();
+
+                    ctx.SaveChanges();
+                    tran.Complete();
+                }
+            }
         }
     }
 }

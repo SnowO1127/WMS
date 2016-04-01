@@ -16,7 +16,7 @@
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var id = "<%=id %>";
+        var userid = "<%=userid %>";
 
         $(function () {
 
@@ -40,13 +40,13 @@
                 required: true
             });
 
-            if (id) {
+            if (userid) {
                 $.ajax({
                     url: "../../datasorce/sy_user.ashx?action=getoneuser",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        userid: userid
                     },
                     success: function (jsonresult) {
                         console.info(jsonresult);
@@ -59,7 +59,7 @@
         var f_save = function ($dialog, $grid, $pjq) {
             if ($('#user_add_form').form('validate')) {
                 var url;
-                if (id) {
+                if (userid) {
                     url = "../../datasorce/sy_user.ashx?action=updateuser";
                 } else {
                     url = "../../datasorce/sy_user.ashx?action=adduser";
@@ -195,9 +195,18 @@
                             <option value="false">否</option>
                         </select>
                     </td>
+                    <td>管理员</td>
+                    <td>
+                        <select id="IsAdmin" name="IsAdmin" class="easyui-combobox" data-options="panelHeight:50,editable:false" style="width: 153px">
+                            <option value="true">是</option>
+                            <option value="false">否</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
                     <td>排序号</td>
                     <td>
-                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 150px" />
+                        <input name="OrderID" class="easyui-validatebox" data-options="required:true,validType:'integer'" style="width: 150px" />
                     </td>
                 </tr>
                 <tr>

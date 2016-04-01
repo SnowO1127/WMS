@@ -103,6 +103,19 @@
                     halign: 'center',
                     field: 'Address'
                 }, {
+                    width: '70',
+                    title: '管理员',
+                    field: 'IsAdmin',
+                    halign: 'center',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        if (row.IsAdmin) {
+                            return "√";
+                        } else {
+                            return "×";
+                        }
+                    }
+                }, {
                     width: '60',
                     title: '有效',
                     field: 'Enabled',
@@ -134,7 +147,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openView(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -145,30 +158,57 @@
                     text: '编辑',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            openEdit(row.ID);
+                            if (!row.IsAdmin) {
+                                openEdit(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法编辑！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }, '-', {
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+
+                        if (row) {
+                            if (!row.IsAdmin) {
+                                deleteUser(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法删除！", "info");
+                            }
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
+
                     }
                 }, '-', {
                     iconCls: 'ext-icon-cog',
                     text: '用户角色设置',
                     handler: function () {
                         var row = grid.datagrid('getSelected');
+
                         if (row) {
-                            openAddRole(row.ID);
+                            if (!row.IsAdmin) {
+                                openAddRole(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法设置角色！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
                         }
+
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -187,7 +227,7 @@
                 iconCls: 'icon-add',
                 title: '新增用户',
                 width: 520,
-                height: 430,
+                height: 450,
                 url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -199,13 +239,13 @@
             });
         };
 
-        var openEdit = function (id) {
+        var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑用户',
+                title: '编辑用户【当前用户：' + row.RealName + '】',
                 width: 520,
-                height: 430,
-                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
+                height: 450,
+                url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -216,32 +256,31 @@
             });
         }
 
-        var openView = function (id) {
+        var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看用户',
+                title: '查看用户【当前用户：' + row.RealName + '】',
                 width: 520,
-                height: 400,
-                url: 'SystemManage/User/UserAdd.aspx?id=' + id + '',
+                height: 430,
+                url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
             });
         }
 
-        var deleteMenu = function (id) {
-            parent.$.messager.confirm('删除菜单', '你确定删除菜单吗?', function (r) {
+        var deleteUser = function (row) {
+            parent.$.messager.confirm('删除用户', '你确定删除用户【' + row.RealName + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
-                        url: "../../datasorce/sy_menu.ashx?action=deletemenu",
+                        url: "../../datasorce/sy_user.ashx?action=deleteuser",
                         dataType: "json",
                         type: "post",
                         data: {
-                            id: id
+                            userid: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {
                                 parent.$.messager.alert('提示', jsonresult.Msg, 'info');
                                 grid.datagrid('load');
                                 grid.datagrid("unselectAll");
-                                tree.tree("reload");
                             } else {
                                 parent.$.messager.alert('提示', jsonresult.Msg, 'error');
                             }
@@ -251,13 +290,13 @@
             });
         }
 
-        var openAddRole = function (id) {
+        var openAddRole = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'ext-icon-cog',
-                title: '角色设置',
+                title: '角色设置【当前用户：' + row.RealName + '】',
                 width: 600,
                 height: 450,
-                url: 'SystemManage/UserRole/UserRoleSet.aspx?id=' + id + '',
+                url: 'SystemManage/UserRole/UserRoleSet.aspx?userid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',

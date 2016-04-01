@@ -18,7 +18,7 @@ namespace WMS.datasorce
         private PageSysButton psb;
         private SysButton sb;
         private JsonResult jr;
-        private string id;
+        private string buttonid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -79,10 +79,10 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getonebutton":
-                    id = request["id"];
+                    buttonid = request["buttonid"];
                     try
                     {
-                        sb = bll.GetOneButton(id);
+                        sb = bll.GetOneButton(buttonid);
 
                         context.Response.Write(Utils.SerializeObject(sb));
                     }
@@ -92,11 +92,11 @@ namespace WMS.datasorce
                     }
                     break;
                 case "deletebutton":
-                    id = request["id"];
+                    buttonid = request["buttonid"];
                     jr = new JsonResult();
                     try
                     {
-                        bll.DeleteButton(id);
+                        bll.DeleteButton(buttonid);
 
                         jr.Success = true;
                         jr.Msg = "删除成功！";

@@ -134,6 +134,7 @@ namespace Common
             JsonSerializerSettings jsSettings = new JsonSerializerSettings();
             jsSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             string json = JsonConvert.SerializeObject(o, jsSettings);
+            //string json = JsonConvert.SerializeObject(o);
             return json;
         }
 

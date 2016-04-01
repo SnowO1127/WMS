@@ -18,7 +18,7 @@
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var id = "<%=id %>";
+        var itemdetailid = "<%=itemdetailid %>";
         var itemid = "<%=itemid %>";
 
         $(function () {
@@ -27,13 +27,13 @@
                 $("#ItemID").val(itemid);
             }
 
-            if (id) {
+            if (itemdetailid) {
                 $.ajax({
                     url: "../../datasorce/sy_itemdetail.ashx?action=getoneitemdetail",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        itemdetailid: itemdetailid
                     },
                     success: function (jsonresult) {
                         $("#itemdetail_add_form").form('load', jsonresult);
@@ -45,7 +45,7 @@
         var f_save = function ($dialog, $grid, $pjq) {
             if ($('#itemdetail_add_form').form('validate')) {
                 var url;
-                if (id) {
+                if (itemdetailid) {
                     url = "../../datasorce/sy_itemdetail.ashx?action=updateitemdetail";
                 } else {
                     url = "../../datasorce/sy_itemdetail.ashx?action=additemdetail";

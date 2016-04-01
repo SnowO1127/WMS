@@ -153,8 +153,8 @@ namespace PageModel
         public bool Enabled { get; set; }
 
         /// <summary>
-        /// 删除
+        /// 是否管理员
         /// </summary>
-        public bool DeleteMark { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

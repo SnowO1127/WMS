@@ -11,5 +11,11 @@ namespace Common
         public static string ConnectionString = "WmsContext";
 
         public const string DefaultPassWord = "123456";
+
+        public class MenuButtonCategory
+        {
+            public const string MenuCategory = "SysMenu";
+            public const string ButtonCategory = "SysButton";
+        }
     }
 }

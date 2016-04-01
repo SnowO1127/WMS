@@ -68,5 +68,10 @@ namespace BLL
         {
             return dal.GetUserListBySpell(q, page, rows, sort, order);
         }
+
+        public void DeleteUser(string userid)
+        {
+            dal.DeleteUser(userid);
+        }
     }
 }

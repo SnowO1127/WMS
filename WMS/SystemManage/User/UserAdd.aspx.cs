@@ -9,10 +9,10 @@ namespace WMS.SystemManage.User
 {
     public partial class UserAdd : System.Web.UI.Page
     {
-        public string id;
+        public string userid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Request.Params["id"];
+            userid = Request.Params["userid"];
         }
     }
 }

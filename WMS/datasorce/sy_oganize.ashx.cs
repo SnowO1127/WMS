@@ -15,9 +15,10 @@ namespace WMS.datasorce
     public class sy_oganize : IHttpHandler
     {
         private readonly SysOganizeBLL bll = new SysOganizeBLL();
-        JsonResult jr;
-        SysOganize so;
-        PageSysOganize pso;
+        private JsonResult jr;
+        private SysOganize so;
+        private PageSysOganize pso;
+        private string oganizeid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -109,11 +110,10 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getoneoganize":
+                    oganizeid = request["oganizeid"];
                     try
                     {
-                        string id = request["id"];
-
-                        so = bll.GetOneOganize(id);
+                        so = bll.GetOneOganize(oganizeid);
 
                         context.Response.Write(Utils.SerializeObject(so));
                     }
@@ -121,6 +121,22 @@ namespace WMS.datasorce
                     {
                         throw ex;
                     }
+                    break;
+                case "deleteoganize":
+                    oganizeid = request["oganizeid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        bll.DeleteOganize(oganizeid);
+
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
             }
         }

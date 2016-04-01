@@ -133,7 +133,10 @@
             $.ajax({
                 url: '../../datasorce/sy_user.ashx?action=addroles',
                 type: 'post',
-                data: { userid: userid, rolesjsonstr: JSON.stringify(roles) },
+                data: {
+                    userid: userid,
+                    rolesjsonstr: JSON.stringify(roles)
+                },
                 dataType: 'json',
                 async: false,
                 success: function (jsonresult) {

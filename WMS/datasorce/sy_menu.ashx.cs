@@ -18,7 +18,7 @@ namespace WMS.datasorce
         private JsonResult jr;
         private SysMenu sm;
         private PageSysMenu psm;
-        private string id;
+        private string menuid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -89,7 +89,6 @@ namespace WMS.datasorce
                         sm.ID = Guid.NewGuid().ToString();
                         sm.CDate = DateTime.Now;
 
-
                         bll.AddMenu(sm);
 
                         jr.Success = true;
@@ -120,10 +119,10 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 case "getonemenu":
-                    id = request["id"];
+                    menuid = request["menuid"];
                     try
                     {
-                        sm = bll.GetOneMenu(id);
+                        sm = bll.GetOneMenu(menuid);
 
                         context.Response.Write(Utils.SerializeObject(sm));
                     }
@@ -133,11 +132,11 @@ namespace WMS.datasorce
                     }
                     break;
                 case "deletemenu":
-                    id = request["id"];
+                    menuid = request["menuid"];
                     jr = new JsonResult();
                     try
                     {
-                        bll.DeleteMenu(id);
+                        bll.DeleteMenu(menuid);
 
                         jr.Success = true;
                         jr.Msg = "删除成功！";

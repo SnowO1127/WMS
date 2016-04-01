@@ -19,20 +19,20 @@
     <title></title>
     <script>
 
-        var id = "<%=id %>";
+        var buttonid = "<%=buttonid %>";
         var menuid = "<%=menuid %>";
 
         $(function () {
             if (menuid)
                 $('#MenuID').combotree('setValue', menuid);
 
-            if (id) {
+            if (buttonid) {
                 $.ajax({
                     url: "../../datasorce/sy_button.ashx?action=getonebutton",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        buttonid: buttonid
                     },
                     success: function (jsonresult) {
                         $("#button_add_form").form('load', jsonresult);
@@ -44,7 +44,7 @@
         var f_save = function ($dialog, $grid, $pjq) {
             if ($('#button_add_form').form('validate')) {
                 var url;
-                if (id) {
+                if (buttonid) {
                     url = "../../datasorce/sy_button.ashx?action=updatebutton";
                 } else {
                     url = "../../datasorce/sy_button.ashx?action=addbutton";

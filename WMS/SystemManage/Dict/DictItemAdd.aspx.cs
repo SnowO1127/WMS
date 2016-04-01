@@ -9,10 +9,10 @@ namespace WMS.SystemManage.Dict
 {
     public partial class DictItemAdd : System.Web.UI.Page
     {
-        public string id;
+        public string itemid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id= Request.Params["id"];
+            itemid = Request.Params["itemid"];
         }
     }
 }

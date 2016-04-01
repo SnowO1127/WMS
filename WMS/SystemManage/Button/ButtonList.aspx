@@ -149,7 +149,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openView(row, treenode);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -161,7 +161,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openEdit(row.ID);
+                            if (row.AllowEdit) {
+                                openEdit(row, treenode);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该按钮无法编辑！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -173,7 +178,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            deleteMenu(row.ID);
+                            if (row.AllowDelete) {
+                                deleteMenu(row, treenode);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该按钮无法删除！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -194,9 +204,9 @@
         var openAdd = function (node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-add',
-                title: '新增按钮',
+                title: '新增按钮【当前所选菜单：' + node.text + '】',
                 width: 545,
-                height: 320,
+                height: 310,
                 url: 'SystemManage/Button/ButtonAdd.aspx?menuid=' + node.id,
                 buttons: [{
                     text: '保存',
@@ -208,13 +218,13 @@
             });
         };
 
-        var openEdit = function (id) {
+        var openEdit = function (row, node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑按钮',
+                title: '编辑按钮【当前所选菜单：' + node.text + ',当前按钮：' + row.Name + '】',
                 width: 545,
-                height: 320,
-                url: 'SystemManage/Button/ButtonAdd.aspx?id=' + id + '',
+                height: 310,
+                url: 'SystemManage/Button/ButtonAdd.aspx?buttonid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -225,25 +235,25 @@
             });
         }
 
-        var openView = function (id) {
+        var openView = function (row, node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看按钮',
+                title: '查看按钮【当前所选菜单：' + node.text + ',当前按钮：' + row.Name + '】',
                 width: 545,
-                height: 300,
-                url: 'SystemManage/Button/ButtonAdd.aspx?id=' + id + '',
+                height: 280,
+                url: 'SystemManage/Button/ButtonAdd.aspx?buttonid=' + row.ID + '',
             });
         }
 
-        var deleteMenu = function (id) {
-            parent.$.messager.confirm('删除按钮', '你确定删除按钮吗?', function (r) {
+        var deleteMenu = function (row, node) {
+            parent.$.messager.confirm('删除按钮', '你确定删除菜单【' + node.text + '】的按钮【' + row.Name + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
                         url: "../../datasorce/sy_button.ashx?action=deletebutton",
                         dataType: "json",
                         type: "post",
                         data: {
-                            id: id
+                            buttonid: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {

@@ -10,38 +10,53 @@ $(function () {
     }
 });
 
-(function ($) {
-    var buttonDir = { north: 'down', south: 'up', east: 'left', west: 'right' };
-    $.extend($.fn.layout.paneldefaults, {
-        onBeforeCollapse: function () {
-            /**/
-            var popts = $(this).panel('options');
-            var dir = popts.region;
-            var btnDir = buttonDir[dir];
-            if (!btnDir) return false;
 
-            setTimeout(function () {
-                var pDiv = $('.layout-button-' + btnDir).closest('.layout-expand').css({
-                    textAlign: 'center', lineHeight: '18px', fontWeight: 'bold'
-                });
-
-                if (popts.title) {
-                    var vTitle = popts.title;
-                    if (dir == "east" || dir == "west") {
-                        var vTitle = popts.title.split('').join('<br/>');
-                        pDiv.find('.panel-body').html(vTitle);
-                    } else {
-                        $('.layout-button-' + btnDir).closest('.layout-expand').find('.panel-title')
-                        .css({ textAlign: 'left' })
-                        .html(vTitle)
-                    }
-
-                }
-            }, 100);
-
+/*
+*重写Tree的loader,增加queryParams属性支持,并且增加setQueryParams方法
+*/
+$.extend($.fn.tree.defaults, {
+    loader: function (param, success, error) {
+        var opts = $(this).tree("options");
+        if (!opts.url) {
+            return false;
         }
-    });
-})(jQuery);
+        if (opts.queryParams) {
+            param = $.extend({}, opts.queryParams, param);
+        }
+        $.ajax({
+            type: opts.method,
+            url: opts.url,
+            data: param,
+            dataType: "json",
+            success: function (data) {
+                success(data);
+            },
+            error: function () {
+                error.apply(this, arguments);
+            }
+        });
+    },
+    queryParams: {}
+});
+//设置参数
+$.extend($.fn.tree.methods, {
+    setQueryParams: function (jq, params) {
+        return jq.each(function () {
+            $(this).tree("options").queryParams = params;
+        });
+    }
+});
+
+/*
+*tree 取消选择扩展
+*/
+$.extend($.fn.tree.methods, {
+    unSelect: function (jq, target) {
+        return jq.each(function () {
+            $(target).removeClass("tree-node-selected");
+        });
+    }
+});
 
 /*
 扩展tabs插件,关闭标签页
@@ -51,7 +66,7 @@ $.extend($.fn.tabs.methods, {
         var tabs = $(jq).tabs('tabs');
         var all = [];
         all = $.map(tabs, function (n, i) {
-                return $(n).panel('options')
+            return $(n).panel('options')
         });
         return all;
     },
@@ -1667,5 +1682,42 @@ $.extend($.fn.datagrid.methods, {
                 }).tooltip('show');
             });
         }
+    }
+});
+
+/**
+*Easyui Datagrid扩展fixRownumber方法
+*使用方法：$("#easyui-datagrid").datagrid({
+*	    onLoadSuccess : function () {
+*	        $(this).datagrid("fixRownumber");
+*	    }
+*	});
+**/
+$.extend($.fn.datagrid.methods, {
+    fixRownumber: function (jq) {
+        return jq.each(function () {
+            var panel = $(this).datagrid("getPanel");
+            //获取最后一行的number容器,并拷贝一份
+            var clone = $(".datagrid-cell-rownumber", panel).last().clone();
+            //由于在某些浏览器里面,是不支持获取隐藏元素的宽度,所以取巧一下
+            clone.css({
+                "position": "absolute",
+                left: -1000
+            }).appendTo("body");
+            var width = clone.width("auto").width();
+            //默认宽度是25,所以只有大于25的时候才进行fix
+            if (width > 25) {
+                //多加5个像素,保持一点边距
+                $(".datagrid-header-rownumber,.datagrid-cell-rownumber", panel).width(width + 5);
+                //修改了宽度之后,需要对容器进行重新计算,所以调用resize
+                $(this).datagrid("resize");
+                //一些清理工作
+                clone.remove();
+                clone = null;
+            } else {
+                //还原成默认状态
+                $(".datagrid-header-rownumber,.datagrid-cell-rownumber", panel).removeAttr("style");
+            }
+        });
     }
 });

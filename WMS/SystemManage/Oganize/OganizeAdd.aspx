@@ -18,7 +18,7 @@
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
     <title></title>
     <script>
-        var id = "<%=id %>";
+        var oganizeid = "<%=oganizeid %>";
 
         $(function () {
 
@@ -132,13 +132,13 @@
             });
 
 
-            if (id) {
+            if (oganizeid) {
                 $.ajax({
                     url: "../../datasorce/sy_oganize.ashx?action=getoneoganize",
                     dataType: "json",
                     type: "post",
                     data: {
-                        id: id
+                        oganizeid: oganizeid
                     },
                     success: function (jsonresult) {
                         $("#oganize_add_form").form('load', jsonresult);
@@ -157,7 +157,7 @@
         var f_save = function ($dialog, $grid, $tree, $pjq) {
             if ($('#oganize_add_form').form('validate')) {
                 var url;
-                if (id) {
+                if (oganizeid) {
                     url = "../../datasorce/sy_oganize.ashx?action=updateoganize";
                 } else {
                     url = "../../datasorce/sy_oganize.ashx?action=addoganize";

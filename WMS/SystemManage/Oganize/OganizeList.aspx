@@ -140,7 +140,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openView(row.ID);
+                            openView(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -152,7 +152,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openEdit(row.ID);
+                            openEdit(row);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -162,7 +162,13 @@
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            deleteOganize(row);
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -193,13 +199,13 @@
             });
         };
 
-        var openEdit = function (id) {
+        var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑组织机构',
+                title: '编辑组织机构【当前组织机构：' + row.Name + '】',
                 width: 530,
                 height: 330,
-                url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Oganize/OganizeAdd.aspx?oganizeid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -210,13 +216,38 @@
             });
         }
 
-        var openView = function (id) {
+        var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看组织机构',
+                title: '查看组织机构【当前组织机构：' + row.Name + '】',
                 width: 530,
                 height: 310,
-                url: 'SystemManage/Oganize/OganizeAdd.aspx?id=' + id + '',
+                url: 'SystemManage/Oganize/OganizeAdd.aspx?oganizeid=' + row.ID + '',
+            });
+        }
+
+        var deleteOganize = function (row) {
+            parent.$.messager.confirm('删除组织机构', '你确定删除组织机构【' + row.Name + '】吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_oganize.ashx?action=deleteoganize",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            oganizeid: row.ID
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                grid.datagrid('load');
+                                grid.datagrid("unselectAll");
+                                tree.tree("reload");
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
             });
         }
 

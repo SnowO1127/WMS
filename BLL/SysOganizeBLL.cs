@@ -73,5 +73,10 @@ namespace BLL
             }
             return tlist;
         }
+
+        public void DeleteOganize(string oganizeid)
+        {
+            dal.DeleteOganize(oganizeid);
+        }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using BLL;
 using Common;
-using Model;
 using PageModel;
 using System;
 using System.Collections.Generic;
@@ -10,14 +9,13 @@ using System.Web;
 namespace WMS.datasorce
 {
     /// <summary>
-    /// sy_item 的摘要说明
+    /// sy_permission 的摘要说明
     /// </summary>
-    public class sy_item : IHttpHandler
+    public class sy_permission : IHttpHandler
     {
-        private readonly SysItemBLL bll = new SysItemBLL();
+        private readonly SysPermissionBLL bll = new SysPermissionBLL();
         private JsonResult jr;
-        private SysItem si;
-        private string itemid;
+        private string userid, roleid, jsonstr;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
@@ -25,37 +23,36 @@ namespace WMS.datasorce
 
             switch (request["action"])
             {
-                case "getitemtree":
+                case "getuserpermissiontree":
+                    userid = request.Params["userid"];
                     try
                     {
-                        context.Response.Write(Utils.SerializeObject(bll.GetItemTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetUserPermissionTree(userid)));
                     }
                     catch (Exception ex)
                     {
                         throw ex;
                     }
                     break;
-                case "getistree":
+                case "getrolepermissiontree":
+                    roleid = request.Params["roleid"];
                     try
                     {
-                        context.Response.Write(Utils.SerializeObject(bll.GetIsTree()));
+                        context.Response.Write(Utils.SerializeObject(bll.GetRolePermissionTree(roleid)));
                     }
                     catch (Exception ex)
                     {
                         throw ex;
                     }
                     break;
-                case "additem":
+                case "adduerpermission":
                     jr = new JsonResult();
+                    userid = request.Params["userid"];
+                    jsonstr = request.Params["jsonstr"];
+
                     try
                     {
-                        si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
-
-                        si.ID = Guid.NewGuid().ToString();
-                        si.CDate = DateTime.Now;
-
-                        bll.AddItem(si);
-
+                        bll.AddUserPermission(userid, jsonstr);
                         jr.Success = true;
                         jr.Msg = "保存成功！";
                     }
@@ -66,14 +63,15 @@ namespace WMS.datasorce
 
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
-                case "updateitem":
+
+                case "addrolepermission":
                     jr = new JsonResult();
+                    roleid = request.Params["roleid"];
+                    jsonstr = request.Params["jsonstr"];
+
                     try
                     {
-                        si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
-
-                        bll.UpdateItem(si);
-
+                        bll.AddRolePermission(roleid, jsonstr);
                         jr.Success = true;
                         jr.Msg = "保存成功！";
                     }
@@ -83,20 +81,6 @@ namespace WMS.datasorce
                     }
 
                     context.Response.Write(Utils.SerializeObject(jr));
-                    break;
-                case "getoneitem":
-                    si = new SysItem();
-                    itemid = request["itemid"];
-                    try
-                    {
-                        si = bll.GetOneItem(itemid);
-
-                        context.Response.Write(Utils.SerializeObject(si));
-                    }
-                    catch (Exception ex)
-                    {
-                        throw ex;
-                    }
                     break;
             }
         }

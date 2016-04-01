@@ -104,5 +104,15 @@ namespace Model
         public string DUserName { get; set; }
 
         public  List<SysUser> Users { get; set; }
+
+        /// <summary>
+        /// 菜单
+        /// </summary>
+        public List<SysMenu> Menus { get; set; }
+
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        public List<SysButton> Buttons { get; set; }
     }
 }

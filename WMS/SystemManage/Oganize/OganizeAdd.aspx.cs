@@ -9,10 +9,10 @@ namespace WMS.SystemManage.Oganize
 {
     public partial class OganizeAdd : System.Web.UI.Page
     {
-        public string id;
+        public string oganizeid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            id = Request.Params["id"];
+            oganizeid = Request.Params["oganizeid"];
         }
     }
 }

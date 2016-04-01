@@ -20,40 +20,72 @@
     <script>
         var userid = "<%=userid %>";
 
-        var treeid;
         $(function () {
             tree = $("#permission_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getmenutree',
+                url: '../../datasorce/sy_permission.ashx?action=getuserpermissiontree',
                 parentField: 'pid',
                 lines: true,
-                onClick: function (node) {
+                checkbox: true,
+                queryParams: { userid: userid }
+            })
+        })
 
-                    treeid = node.text == "全部" ? "" : node.id;
+        var checkAll = function (check) {
+            var roots = tree.tree("getRoots");
+            $(roots).each(function (i) {
+                var node = tree.tree('find', roots[i].id);
+                if (check) {
+                    tree.tree('check', node.target);
+                }
+                else {
+                    tree.tree('uncheck', node.target);
+                }
+            });
+        }
 
-                    var obj = sy.serializeObject($('#menu_search_form'));
-                    sy.mergeObj(obj, { ID: treeid });
+        var f_save_permission = function ($dialog, $pjq) {
+            var nodes = tree.tree('getChecked', ['checked', 'indeterminate']);
 
-                    grid.datagrid("load", obj);  // 在用户点击的时候提示
-                    grid.datagrid("unselectAll");
+            var permission = [];
+
+            $(nodes).each(function (i) {
+                var o = {};
+                o.ID = nodes[i].id;
+                o.ParentID = nodes[i].pid;
+                o.IconCls = nodes[i].iconCls;
+                o.Name = nodes[i].text;
+                o.Category = nodes[i].attributes.category;
+                permission.push(o);
+            });
+
+            $.ajax({
+                url: "../../datasorce/sy_permission.ashx?action=adduerpermission",
+                type: "post",
+                dataType: "json",
+                data: {
+                    userid: userid,
+                    jsonstr: JSON.stringify(permission)
                 },
-                onLoadSuccess: function (node, data) {
-                    if (treeid) {
-                        var n = tree.tree("find", treeid);
-                        tree.tree("select", n.target);
-                    }
-                    else {
-                        var n = tree.tree("find", data[0].id);
-                        tree.tree("select", n.target);
+                success: function (jsonresult) {
+                    if (jsonresult.Success) {
+                        $pjq.messager.alert('提示', jsonresult.Msg, 'info');
+                        $dialog.dialog('destroy');
+                    } else {
+                        $pjq.messager.alert('提示', jsonresult.Msg, 'error');
                     }
                 }
             })
-        })
+        }
     </script>
 </head>
 <body>
     <div class="easyui-layout" data-options="fit:true,border:false">
         <div data-options="region:'center',border:false" style="padding: 1px;">
-            <div id="permission_tree" fit="true">
+            <div class="easyui-panel" data-options="border:false">
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok'" onclick="checkAll(true)">全选</a>
+                <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" onclick="checkAll(false)">取消全选</a>
+                <div id="permission_tree" fit="true">
+                </div>
             </div>
         </div>
     </div>
