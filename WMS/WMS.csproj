@@ -1314,6 +1314,14 @@
     <Content Include="library\images\ext_icons\zoom\zoom_in.png" />
     <Content Include="library\images\ext_icons\zoom\zoom_out.png" />
     <Content Include="library\images\loading.gif" />
+    <Content Include="library\images\login\hand.png" />
+    <Content Include="library\images\login\left-handing.png" />
+    <Content Include="library\images\login\left_hand.png" />
+    <Content Include="library\images\login\password.png" />
+    <Content Include="library\images\login\right_hand.png" />
+    <Content Include="library\images\login\right_handing.png" />
+    <Content Include="library\images\login\tou.png" />
+    <Content Include="library\images\login\username.png" />
     <Content Include="library\images\pixel_0.gif" />
     <Content Include="library\images\sshe.png" />
     <Content Include="library\images\sypro.png" />
@@ -2700,6 +2708,7 @@
     <Content Include="library\ueditor1_4_3-utf8-net\ueditor.parse.min.js" />
     <Content Include="library\xyEasyUI.js" />
     <Content Include="library\xyUtils.js" />
+    <Content Include="Login.aspx" />
     <Content Include="SystemManage\Button\ButtonAdd.aspx" />
     <Content Include="SystemManage\Button\ButtonList.aspx" />
     <Content Include="SystemManage\Dict\DictItemAdd.aspx" />
@@ -2741,6 +2750,9 @@
     </Compile>
     <Compile Include="datasorce\sy_itemdetail.ashx.cs">
       <DependentUpon>sy_itemdetail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\sy_login.ashx.cs">
+      <DependentUpon>sy_login.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_menu.ashx.cs">
       <DependentUpon>sy_menu.ashx</DependentUpon>
@@ -2806,6 +2818,13 @@
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\NotSupportedHandler.cs" />
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\PathFormater.cs" />
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\UploadHandler.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManage\Button\ButtonAdd.aspx.cs">
       <DependentUpon>ButtonAdd.aspx</DependentUpon>
@@ -3027,6 +3046,7 @@
     <Content Include="datasorce\sy_oganize.ashx" />
     <Content Include="datasorce\sy_button.ashx" />
     <Content Include="datasorce\sy_permission.ashx" />
+    <Content Include="datasorce\sy_login.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

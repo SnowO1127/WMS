@@ -194,7 +194,7 @@
         var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑角色【当前角色：' + row.Name + '】',
+                title: '编辑角色【当前：' + row.Name + '】',
                 width: 520,
                 height: 280,
                 url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',
@@ -211,7 +211,7 @@
         var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看角色【当前角色：' + row.Name + '】',
+                title: '查看角色【当前：' + row.Name + '】',
                 width: 520,
                 height: 260,
                 url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',

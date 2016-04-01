@@ -129,7 +129,7 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openItemDetailView(row);
+                            openItemDetailView(row, treenode);
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -141,7 +141,12 @@
                     handler: function () {
                         var row = grid.datagrid('getSelected');
                         if (row) {
-                            openItemDetailEdit(row);
+                            if (row.AllowEdit) {
+                                openItemDetailEdit(row, treenode);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该字典选项明细无法编辑！", "info");
+                            }
                         }
                         else {
                             parent.$.messager.alert('提示', "请选择行", "info");
@@ -151,7 +156,18 @@
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
-                        alert('帮助按钮');
+                        var row = grid.datagrid('getSelected');
+                        if (row) {
+                            if (row.AllowDelete) {
+                                deleteItemDetail(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "该字典选项明细无法删除！", "info");
+                            }
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
                     }
                 }],
                 onBeforeLoad: function (param) {
@@ -187,10 +203,10 @@
             }
         }
 
-        var openItemDetailEdit = function (row) {
+        var openItemDetailEdit = function (row, node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑选项明细【当前：' + row.Name + '】',
+                title: '编辑选项明细【当前字典类别：' + node.text + ',当前选项明细：' + row.Name + '】',
                 width: 530,
                 height: 300,
                 url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemdetailid=' + row.ID,
@@ -204,13 +220,36 @@
             });
         }
 
-        var openItemDetailView = function (row) {
+        var openItemDetailView = function (row, node) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看选项明细【当前：' + row.Name + '】',
+                title: '查看选项明细【当前字典类别：<b>' + node.text + '</b>,当前选项明细：' + row.Name + '】',
                 width: 530,
                 height: 280,
                 url: 'SystemManage/Dict/DictItemDetailAdd.aspx?itemdetailid=' + row.ID
+            });
+        }
+
+        var deleteItemDetail = function (row) {
+            parent.$.messager.confirm('删除字典选项明细', '你确定删除字典选项明细【' + row.Name + '】吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_itemdetail.ashx?action=deleteitemdetail",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            itemdetailid: row.ID
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                grid.datagrid("load");
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
             });
         }
 
@@ -233,20 +272,25 @@
 
         var openItemEdit = function () {
             if (treenode) {
-                var dialog = parent.sy.modalDialog({
-                    iconCls: 'icon-edit',
-                    title: '编辑字典类别【当前：' + treenode.text + '】',
-                    width: 545,
-                    height: 330,
-                    url: 'SystemManage/Dict/DictItemAdd.aspx?itemid=' + treenode.id,
-                    buttons: [{
-                        text: '保存',
-                        iconCls: 'icon-add',
-                        handler: function () {
-                            dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
-                        }
-                    }]
-                });
+                if (treenode.attributes.allowedit) {
+                    var dialog = parent.sy.modalDialog({
+                        iconCls: 'icon-edit',
+                        title: '编辑字典类别【当前：' + treenode.text + '】',
+                        width: 545,
+                        height: 330,
+                        url: 'SystemManage/Dict/DictItemAdd.aspx?itemid=' + treenode.id,
+                        buttons: [{
+                            text: '保存',
+                            iconCls: 'icon-add',
+                            handler: function () {
+                                dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                            }
+                        }]
+                    });
+                }
+                else {
+                    parent.$.messager.alert('提示', "该字典类别无法编辑！", "info");
+                }
             }
             else {
                 parent.$.messager.alert('提示', "请选择字典类别！", "info");
@@ -254,7 +298,36 @@
         }
 
         var openItemDelete = function () {
-
+            if (treenode) {
+                if (treenode.attributes.allowdelete) {
+                    parent.$.messager.confirm('删除字典类别', '你确定删除字典类别【' + treenode.text + '】吗?', function (r) {
+                        if (r) {
+                            $.ajax({
+                                url: "../../datasorce/sy_item.ashx?action=deleteitem",
+                                dataType: "json",
+                                type: "post",
+                                data: {
+                                    itemid: treenode.id
+                                },
+                                success: function (jsonresult) {
+                                    if (jsonresult.Success) {
+                                        parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                                        tree.tree("reload");
+                                    } else {
+                                        parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                                    }
+                                }
+                            })
+                        }
+                    });
+                }
+                else {
+                    parent.$.messager.alert('提示', "该字典类别无法删除！", "info");
+                }
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择字典类别！", "info");
+            }
         }
     </script>
 </head>

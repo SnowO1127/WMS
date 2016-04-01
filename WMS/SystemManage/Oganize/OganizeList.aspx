@@ -202,7 +202,7 @@
         var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑组织机构【当前组织机构：' + row.Name + '】',
+                title: '编辑组织机构【当前：' + row.Name + '】',
                 width: 530,
                 height: 330,
                 url: 'SystemManage/Oganize/OganizeAdd.aspx?oganizeid=' + row.ID + '',
@@ -219,7 +219,7 @@
         var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看组织机构【当前组织机构：' + row.Name + '】',
+                title: '查看组织机构【当前：' + row.Name + '】',
                 width: 530,
                 height: 310,
                 url: 'SystemManage/Oganize/OganizeAdd.aspx?oganizeid=' + row.ID + '',

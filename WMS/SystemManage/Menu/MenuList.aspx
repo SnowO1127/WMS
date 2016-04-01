@@ -232,7 +232,7 @@
         var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑菜单【当前菜单：' + row.MenuName + '】',
+                title: '编辑菜单【当前：' + row.MenuName + '】',
                 width: 545,
                 height: 360,
                 url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',
@@ -249,7 +249,7 @@
         var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看菜单【当前菜单：' + row.MenuName + '】',
+                title: '查看菜单【当前：' + row.MenuName + '】',
                 width: 545,
                 height: 330,
                 url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',

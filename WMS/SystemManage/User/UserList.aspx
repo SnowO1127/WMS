@@ -242,7 +242,7 @@
         var openEdit = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
-                title: '编辑用户【当前用户：' + row.RealName + '】',
+                title: '编辑用户【当前：' + row.RealName + '】',
                 width: 520,
                 height: 450,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
@@ -259,7 +259,7 @@
         var openView = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
-                title: '查看用户【当前用户：' + row.RealName + '】',
+                title: '查看用户【当前：' + row.RealName + '】',
                 width: 520,
                 height: 430,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
@@ -293,7 +293,7 @@
         var openAddRole = function (row) {
             var dialog = parent.sy.modalDialog({
                 iconCls: 'ext-icon-cog',
-                title: '角色设置【当前用户：' + row.RealName + '】',
+                title: '角色设置【当前：' + row.RealName + '】',
                 width: 600,
                 height: 450,
                 url: 'SystemManage/UserRole/UserRoleSet.aspx?userid=' + row.ID + '',

@@ -31,7 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>C:\Users\lenovo\Documents\Visual Studio 2012\Projects\WMS\WMS\library\ueditor1_4_3-utf8-net\net\Bin\Newtonsoft.Json.dll</HintPath>
+      <HintPath>D:\GitProject\WMS\WMS\bin\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

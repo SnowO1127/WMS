@@ -37,5 +37,10 @@ namespace BLL
         {
             return dal.GetItemDetailsByCode(code);
         }
+
+        public void DeleteItemDetail(string itemdetailid)
+        {
+            dal.DeleteItemDetail(itemdetailid);
+        }
     }
 }

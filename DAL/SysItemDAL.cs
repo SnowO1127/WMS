@@ -16,7 +16,7 @@ namespace DAL
             List<SysItem> list = new List<SysItem>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysItems.OrderBy(x => x.OrderID).ToList();
+                list = ctx.SysItems.Where(x=>x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
@@ -95,6 +95,19 @@ namespace DAL
             }
 
             return sm;
+        }
+
+        public void DeleteItem(string itemid)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysItem si = new SysItem();
+                si = ctx.SysItems.Find(itemid);
+
+                si.DeleteMark = true;
+
+                ctx.SaveChanges();
+            }
         }
     }
 }

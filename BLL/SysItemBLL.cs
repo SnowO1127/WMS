@@ -34,6 +34,13 @@ namespace BLL
                 t.text = si.Name;
                 t.pid = si.ParentID;
 
+                Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+                attributes.Add("istree", si.IsTree);
+                attributes.Add("allowedit", si.AllowEdit);
+                attributes.Add("allowdelete", si.AllowDelete);
+
+                t.attributes = attributes;
+
                 tlist.Add(t);
             }
             return tlist;
@@ -72,6 +79,11 @@ namespace BLL
         public SysItem GetOneItemByCode(string code)
         {
             return dal.GetOneItemByCode(code);
+        }
+
+        public void DeleteItem(string itemid)
+        {
+            dal.DeleteItem(itemid);
         }
     }
 }

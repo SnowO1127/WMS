@@ -98,6 +98,22 @@ namespace WMS.datasorce
                         throw ex;
                     }
                     break;
+                case "deleteitem":
+                    itemid = request["itemid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        bll.DeleteItem(itemid);
+
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
             }
         }
 

@@ -30,7 +30,7 @@ namespace DAL
             {
                 using (var ctx = new SysContext(Globe.ConnectionString))
                 {
-                    list = ctx.SysItemDetails.Where(x => x.ItemID.Equals(psid.ItemID)).ToList();
+                    list = ctx.SysItemDetails.Where(x => x.DeleteMark.Equals(false) && x.ItemID.Equals(psid.ItemID)).ToList();
 
                     list = psid.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psid.Sort)).Skip(psid.Rows * (psid.Page - 1)).Take(psid.Rows).ToList();
                 }
@@ -89,6 +89,18 @@ namespace DAL
             }
 
             return list;
+        }
+
+        public void DeleteItemDetail(string itemdetailid)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysItemDetail sid = new SysItemDetail();
+                sid = ctx.SysItemDetails.Find(itemdetailid);
+
+                sid.DeleteMark = true;
+                ctx.SaveChanges();
+            }
         }
     }
 }
