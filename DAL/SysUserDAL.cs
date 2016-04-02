@@ -146,7 +146,7 @@ namespace DAL
                 SysUser nsu = new SysUser();
                 nsu = ctx.SysUsers.Find(su.ID);
 
-                IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName" };
+                IEnumerable<string> ie = new List<string> { "ID", "PassWord", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
                 Utils.Copy(nsu, su, ie);
 
@@ -248,6 +248,41 @@ namespace DAL
 
                 ctx.SaveChanges();
             }
+        }
+
+        public void ResetPassWord(string userid, string password)
+        {
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                SysUser su = new SysUser();
+                su = ctx.SysUsers.Find(userid);
+
+                su.PassWord = password;
+
+                ctx.SaveChanges();
+            }
+        }
+
+        public SysUser GetOneUserByLoginName(string loginname)
+        {
+            SysUser su = new SysUser();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                su = ctx.SysUsers.Where(x => x.LoginName.Equals(loginname)).FirstOrDefault();
+            }
+
+            return su;
+        }
+
+        public SysUser GetOneUserByLogin(string loginname, string password)
+        {
+            SysUser su = new SysUser();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                su = ctx.SysUsers.Where(x => x.LoginName.Equals(loginname) && x.PassWord.Equals(password)).FirstOrDefault();
+            }
+
+            return su;
         }
     }
 }

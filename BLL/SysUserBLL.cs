@@ -73,5 +73,20 @@ namespace BLL
         {
             dal.DeleteUser(userid);
         }
+
+        public void ResetPassWord(string userid, string password)
+        {
+            dal.ResetPassWord(userid, password);
+        }
+
+        public SysUser GetOneUserByLoginName(string loginname)
+        {
+            return dal.GetOneUserByLoginName(loginname);
+        }
+
+        public SysUser GetOneUserByLogin(string loginname, string password)
+        {
+            return dal.GetOneUserByLogin(loginname, password);
+        }
     }
 }

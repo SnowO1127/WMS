@@ -173,6 +173,25 @@
 
                     }
                 }, '-', {
+                    iconCls: 'icon-edit',
+                    text: '重置密码',
+                    handler: function () {
+                        var row = grid.datagrid('getSelected');
+
+                        if (row) {
+                            if (!row.IsAdmin) {
+                                resetPassWord(row);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "管理员无法重置密码！", "info");
+                            }
+                        }
+                        else {
+                            parent.$.messager.alert('提示', "请选择行", "info");
+                        }
+
+                    }
+                }, '-', {
                     iconCls: 'icon-cut',
                     text: '删除',
                     handler: function () {
@@ -253,6 +272,28 @@
                         dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, parent.$);
                     }
                 }]
+            });
+        }
+
+        var resetPassWord = function (row) {
+            parent.$.messager.confirm('重置密码', '你确定重置用户【' + row.RealName + '】的密码吗?', function (r) {
+                if (r) {
+                    $.ajax({
+                        url: "../../datasorce/sy_user.ashx?action=resetpassword",
+                        dataType: "json",
+                        type: "post",
+                        data: {
+                            userid: row.ID
+                        },
+                        success: function (jsonresult) {
+                            if (jsonresult.Success) {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'info');
+                            } else {
+                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                            }
+                        }
+                    })
+                }
             });
         }
 

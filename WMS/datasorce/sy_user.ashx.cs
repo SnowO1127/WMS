@@ -47,7 +47,9 @@ namespace WMS.datasorce
                     try
                     {
                         su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+
                         su.ID = Guid.NewGuid().ToString();
+                        su.PassWord = DEncrypt.Encrypt(Globe.DefaultPassWord);
                         su.CDate = DateTime.Now;
                         bll.AddUser(su);
                         jr.Success = true;
@@ -134,6 +136,22 @@ namespace WMS.datasorce
 
                         jr.Success = true;
                         jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
+                case "resetpassword":
+                    userid = request["userid"];
+                    jr = new JsonResult();
+                    try
+                    {
+                        bll.ResetPassWord(userid, DEncrypt.Encrypt(Globe.DefaultPassWord));
+
+                        jr.Success = true;
+                        jr.Msg = "重置成功！";
                     }
                     catch (Exception ex)
                     {
