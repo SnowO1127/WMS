@@ -10,6 +10,6 @@
 namespace WMS {
     
     
-    public partial class Login {
+    public partial class SecurityCode {
     }
 }

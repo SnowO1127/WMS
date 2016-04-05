@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SecurityCode.aspx.cs" Inherits="WMS.SecurityCode" %>
