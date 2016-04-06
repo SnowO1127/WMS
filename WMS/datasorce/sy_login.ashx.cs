@@ -15,7 +15,7 @@ namespace WMS.datasorce
     public class sy_login : IHttpHandler
     {
         private readonly SysUserBLL bll = new SysUserBLL();
-        private string loginname, password;
+        private string loginname, password, securitycode;
         private JsonResult jr;
         private SysUser su;
         public void ProcessRequest(HttpContext context)
@@ -29,25 +29,32 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     loginname = request["loginname"];
                     password = request["password"];
+                    securitycode = request["securitycode"];
 
-                    su = bll.GetOneUserByLoginName(loginname);
-
-                    if (su != null)
+                    if (securitycode.Equals(SessionHelper.Get(Globe.SecurityCodeSessionName)))
                     {
-                        su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
+                        su = bll.GetOneUserByLoginName(loginname);
+
                         if (su != null)
                         {
-                            jr.Success = true;
-                            jr.Msg = "登录成功！";
+                            su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
+                            if (su != null)
+                            {
+                                jr.Success = true;
+                            }
+                            else
+                            {
+                                jr.Msg = "3";
+                            }
                         }
                         else
                         {
-                            jr.Msg = "登录密码错误！";
+                            jr.Msg = "2";
                         }
                     }
                     else
                     {
-                        jr.Msg = "用户名不存在！";
+                        jr.Msg = "1";
                     }
 
                     context.Response.Write(Utils.SerializeObject(jr));

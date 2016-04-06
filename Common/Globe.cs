@@ -17,5 +17,7 @@ namespace Common
             public const string MenuCategory = "SysMenu";
             public const string ButtonCategory = "SysButton";
         }
+
+        public const string SecurityCodeSessionName = "SecurityCode";
     }
 }

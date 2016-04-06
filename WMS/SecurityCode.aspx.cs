@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -32,7 +33,8 @@ namespace WMS
             Response.AddHeader("pragma", "no-cache");
             Response.CacheControl = "no-cache";
             string str_ValidateCode = GetRandomNumberString(letterCount);
-            Session["CheckCode"] = str_ValidateCode;
+
+            SessionHelper.Add(Globe.SecurityCodeSessionName, str_ValidateCode);
 
             CreateImage(str_ValidateCode);
         }

@@ -80,8 +80,6 @@
     <Content Include="InformationCenter\Notice\notice_add.aspx" />
     <Content Include="InformationCenter\Notice\notice_list.aspx" />
     <Content Include="library\base_css\ui.css" />
-    <Content Include="library\bootstrap.css" />
-    <Content Include="library\bootstrap.min.js" />
     <Content Include="library\changelog.txt" />
     <Content Include="library\demo\accordion\actions.html" />
     <Content Include="library\demo\accordion\ajax.html" />
@@ -261,7 +259,6 @@
     <Content Include="library\demo\window\windowlayout.html" />
     <Content Include="library\easyloader.js" />
     <Content Include="library\easyui-lang-zh_CN.js" />
-    <Content Include="library\images\20150212154319.jpg" />
     <Content Include="library\images\alipay.jpg" />
     <Content Include="library\images\blue_face\bluefaces_01.png" />
     <Content Include="library\images\blue_face\bluefaces_02.png" />
@@ -1316,21 +1313,18 @@
     <Content Include="library\images\ext_icons\zoom\zoom.png" />
     <Content Include="library\images\ext_icons\zoom\zoom_in.png" />
     <Content Include="library\images\ext_icons\zoom\zoom_out.png" />
-    <Content Include="library\images\input_icon_1.png" />
-    <Content Include="library\images\input_icon_2.png" />
     <Content Include="library\images\loading.gif" />
-    <Content Include="library\images\login\hand.png" />
-    <Content Include="library\images\login\left-handing.png" />
-    <Content Include="library\images\login\left_hand.png" />
-    <Content Include="library\images\login\password.png" />
-    <Content Include="library\images\login\right_hand.png" />
-    <Content Include="library\images\login\right_handing.png" />
-    <Content Include="library\images\login\tou.png" />
-    <Content Include="library\images\login\username.png" />
+    <Content Include="library\images\login\bg.gif" />
+    <Content Include="library\images\login\btn.gif" />
+    <Content Include="library\images\login\login-icon.gif" />
+    <Content Include="library\images\login\login.gif" />
+    <Content Include="library\images\login\pwd.gif" />
+    <Content Include="library\images\login\topBg.gif" />
+    <Content Include="library\images\login\topleft.gif" />
+    <Content Include="library\images\login\username.gif" />
     <Content Include="library\images\pixel_0.gif" />
     <Content Include="library\images\sshe.png" />
     <Content Include="library\images\sypro.png" />
-    <Content Include="library\images\tit.png" />
     <Content Include="library\jquery-1.8.2.js" />
     <Content Include="library\jquery-1.8.2.min.js" />
     <Content Include="library\jquery-1.9.1.min.js" />
@@ -1365,6 +1359,7 @@
     <Content Include="library\locale\easyui-lang-tr.js" />
     <Content Include="library\locale\easyui-lang-zh_CN.js" />
     <Content Include="library\locale\easyui-lang-zh_TW.js" />
+    <Content Include="library\login.css" />
     <Content Include="library\My97DatePicker\calendar.js" />
     <Content Include="library\My97DatePicker\config.js" />
     <Content Include="library\My97DatePicker\lang\en.js" />
@@ -2782,9 +2777,6 @@
     <Compile Include="datasorce\sy_user.ashx.cs">
       <DependentUpon>sy_user.ashx</DependentUpon>
     </Compile>
-    <Compile Include="datasorce\sy_validate.ashx.cs">
-      <DependentUpon>sy_validate.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -3064,7 +3056,6 @@
     <Content Include="datasorce\sy_button.ashx" />
     <Content Include="datasorce\sy_permission.ashx" />
     <Content Include="datasorce\sy_login.ashx" />
-    <Content Include="datasorce\sy_validate.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
