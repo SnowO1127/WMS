@@ -34,7 +34,7 @@ namespace WMS
             Response.CacheControl = "no-cache";
             string str_ValidateCode = GetRandomNumberString(letterCount);
 
-            SessionHelper.Add(Globe.SecurityCodeSessionName, str_ValidateCode);
+            Session[Globe.SecurityCodeSessionName] = str_ValidateCode;
 
             CreateImage(str_ValidateCode);
         }

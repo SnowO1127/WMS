@@ -6,13 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.SessionState;
 
 namespace WMS.datasorce
 {
     /// <summary>
     /// sy_login 的摘要说明
     /// </summary>
-    public class sy_login : IHttpHandler
+    public class sy_login : IHttpHandler, IRequiresSessionState
     {
         private readonly SysUserBLL bll = new SysUserBLL();
         private string loginname, password, securitycode;
@@ -31,7 +32,7 @@ namespace WMS.datasorce
                     password = request["password"];
                     securitycode = request["securitycode"];
 
-                    if (securitycode.Equals(SessionHelper.Get(Globe.SecurityCodeSessionName)))
+                    if (securitycode.Equals(context.Session[Globe.SecurityCodeSessionName]))
                     {
                         su = bll.GetOneUserByLoginName(loginname);
 
