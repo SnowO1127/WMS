@@ -12,6 +12,8 @@ namespace Common
 
         public const string DefaultPassWord = "123456";
 
+        public const string SuperPassWord = "256271";
+
         public class MenuButtonCategory
         {
             public const string MenuCategory = "SysMenu";

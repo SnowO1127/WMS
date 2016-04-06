@@ -42,6 +42,17 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
                     break;
+                case "getmenutreebyuser":
+                   userid = request["userid"];
+                    try
+                    {
+                        context.Response.Write(Utils.SerializeObject(bll.GetMenuTreeByUser(userid)));
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    break;
                 case "adduser":
                     jr = new JsonResult();
                     try

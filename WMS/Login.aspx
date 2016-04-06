@@ -12,7 +12,6 @@
     <link href="library/login.css" rel="stylesheet" />
     <title></title>
     <script type="text/javascript">
-
         $(function () {
             lntip = $('#LoginName').tooltip({
                 position: 'right',
@@ -50,16 +49,19 @@
 
         var login = function () {
             if (!$('#SecurityCode').val()) {
+                sctip.tooltip("update", '<span style="color:#fff">验证码不能为空！</span>');
                 sctip.tooltip("show");
                 return false;
             }
 
             if (!$('#LoginName').val()) {
+                lntip.tooltip("update", '<span style="color:#fff">用户名不能为空！</span>');
                 lntip.tooltip("show");
                 return false;
             }
 
             if (!$('#PassWord').val()) {
+                pwtip.tooltip("update", '<span style="color:#fff">密码不能为空！</span>');
                 pwtip.tooltip("show");
                 return false;
             }
@@ -79,12 +81,15 @@
                     }
                     else {
                         if (jsonresult.Msg == "1") {
+                            sctip.tooltip("update", '<span style="color:#fff">验证码错误！</span>');
                             sctip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "2") {
+                            lntip.tooltip("update", '<span style="color:#fff">用户名错误！</span>');
                             lntip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "3") {
+                            pwtip.tooltip("update", '<span style="color:#fff">密码错误！</span>');
                             pwtip.tooltip("show");
                         }
                     }

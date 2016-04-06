@@ -18,13 +18,13 @@ namespace WMS.datasorce
         private JsonResult jr;
         private SysMenu sm;
         private PageSysMenu psm;
-        private string menuid;
+        private string menuid, userid;
 
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
-            
+
             switch (request["action"])
             {
                 case "getmenutree":

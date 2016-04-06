@@ -130,7 +130,7 @@ namespace DAL
             SysUser su = new SysUser();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                su = ctx.SysUsers.Include(x => x.Menus).Include(x => x.Buttons).Include(x => x.Roles).Where(x => x.ID.Equals(userid)).FirstOrDefault();
+                su = ctx.SysUsers.Include(x => x.Menus).Include(x => x.Buttons).Include(x => x.Roles).Include(x => x.Roles.Select(y => y.Menus)).Where(x => x.ID.Equals(userid)).FirstOrDefault();
             }
             return su;
         }

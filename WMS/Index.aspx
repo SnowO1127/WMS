@@ -184,10 +184,13 @@
             })
 
             $.ajax({
-                url: 'datasorce/sy_menu.ashx?action=getmenutree',
+                url: 'datasorce/sy_user.ashx?action=getmenutreebyuser',
                 type: 'post',
                 dataType: 'json',
                 async: false,
+                data: {
+                    userid: "<%=su.ID %>"
+                },
                 success: function (r) {
                     for (var i = 0; i < r.length; i++) {
                         var treeID = "tree" + i;
@@ -359,6 +362,10 @@
             line-height: 20px;
             left: 10px;
         }
+
+        .icon-hamburg-user {
+            background: rgba(0, 0, 0, 0) url("library/images/ext_icons/user/user.png") no-repeat scroll center center;
+        }
     </style>
 </head>
 <body class="easyui-layout" fit="true">
@@ -381,7 +388,7 @@
             <div data-options="region:'south',border:true" style="height: 30px">
                 <div class="panel-header panel-header-noborder top-toolbar" style="height: 30px;">
                     <div id="infobar">
-                        <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">此处可以放置登录用户账户信息
+                        <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">欢迎您【<%=su.RealName %>】
                         </span>
                     </div>
                     <div id="buttonbar">
