@@ -53,6 +53,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppClient.cs" />
+    <Compile Include="AppMaterialCategory.cs" />
+    <Compile Include="AppSupplier.cs" />
+    <Compile Include="AppUnit.cs" />
+    <Compile Include="AppUnitConversion.cs" />
+    <Compile Include="AppWareHouse.cs" />
     <Compile Include="SysButton.cs" />
     <Compile Include="SysItem.cs" />
     <Compile Include="SysItemDetail.cs" />

@@ -15,10 +15,10 @@ namespace WMS.datasorce
     public class sy_role : IHttpHandler
     {
         private readonly SysRoleBLL bll = new SysRoleBLL();
-        PageSysRole psr;
-        SysRole sr;
-        JsonResult jr;
-        string roleid, userid;
+        private PageSysRole psr;
+        private SysRole sr;
+        private JsonResult jr;
+        private string roleid, userid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -104,7 +104,7 @@ namespace WMS.datasorce
                         bll.DeleteRole(roleid);
 
                         jr.Success = true;
-                        jr.Msg = "保存成功！";
+                        jr.Msg = "删除成功！";
                     }
                     catch (Exception ex)
                     {

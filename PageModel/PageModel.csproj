@@ -44,6 +44,11 @@
   <ItemGroup>
     <Compile Include="Grid.cs" />
     <Compile Include="JsonResult.cs" />
+    <Compile Include="PageAppClient.cs" />
+    <Compile Include="PageAppMaterialCategory.cs" />
+    <Compile Include="PageAppSupplier.cs" />
+    <Compile Include="PageAppUnit.cs" />
+    <Compile Include="PageAppWareHouse.cs" />
     <Compile Include="PageSysButton.cs" />
     <Compile Include="PageSysItemDetail.cs" />
     <Compile Include="PageSysMenu.cs" />

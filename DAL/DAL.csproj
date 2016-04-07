@@ -51,6 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppClientDAL.cs" />
+    <Compile Include="AppClientMap.cs" />
+    <Compile Include="AppMaterialCategoryDAL.cs" />
+    <Compile Include="AppSupplierDAL.cs" />
+    <Compile Include="AppSupplierMap.cs" />
+    <Compile Include="AppUnitDAL.cs" />
+    <Compile Include="AppUnitMap.cs" />
+    <Compile Include="AppWareHouseDAL.cs" />
+    <Compile Include="AppWareHouseMap.cs" />
+    <Compile Include="AppMaterialCategoryMap.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SysButtonDAL.cs" />
     <Compile Include="SysButtonMap.cs" />

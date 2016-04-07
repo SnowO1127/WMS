@@ -72,6 +72,18 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Application\BasicData\ClientAdd.aspx" />
+    <Content Include="Application\BasicData\ClientList.aspx" />
+    <Content Include="Application\BasicData\MaterialBasicDataAdd.aspx" />
+    <Content Include="Application\BasicData\MaterialBasicDataList.aspx" />
+    <Content Include="Application\BasicData\MaterialCategoryAdd.aspx" />
+    <Content Include="Application\BasicData\MaterialCategoryList.aspx" />
+    <Content Include="Application\BasicData\SupplierAdd.aspx" />
+    <Content Include="Application\BasicData\SupplierList.aspx" />
+    <Content Include="Application\BasicData\UnitAdd.aspx" />
+    <Content Include="Application\BasicData\UnitList.aspx" />
+    <Content Include="Application\BasicData\WareHouseAdd.aspx" />
+    <Content Include="Application\BasicData\WareHouseList.aspx" />
     <Content Include="CommonTools\fullcalendar.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Index.aspx" />
@@ -2737,12 +2749,111 @@
     <Content Include="SystemManage\User\UserList.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\BasicData\ClientAdd.aspx.cs">
+      <DependentUpon>ClientAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\ClientAdd.aspx.designer.cs">
+      <DependentUpon>ClientAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\ClientList.aspx.cs">
+      <DependentUpon>ClientList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\ClientList.aspx.designer.cs">
+      <DependentUpon>ClientList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialBasicDataAdd.aspx.cs">
+      <DependentUpon>MaterialBasicDataAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialBasicDataAdd.aspx.designer.cs">
+      <DependentUpon>MaterialBasicDataAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialBasicDataList.aspx.cs">
+      <DependentUpon>MaterialBasicDataList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialBasicDataList.aspx.designer.cs">
+      <DependentUpon>MaterialBasicDataList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialCategoryAdd.aspx.cs">
+      <DependentUpon>MaterialCategoryAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialCategoryAdd.aspx.designer.cs">
+      <DependentUpon>MaterialCategoryAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialCategoryList.aspx.cs">
+      <DependentUpon>MaterialCategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialCategoryList.aspx.designer.cs">
+      <DependentUpon>MaterialCategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\SupplierAdd.aspx.cs">
+      <DependentUpon>SupplierAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\SupplierAdd.aspx.designer.cs">
+      <DependentUpon>SupplierAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\SupplierList.aspx.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\SupplierList.aspx.designer.cs">
+      <DependentUpon>SupplierList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitAdd.aspx.cs">
+      <DependentUpon>UnitAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitAdd.aspx.designer.cs">
+      <DependentUpon>UnitAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitList.aspx.cs">
+      <DependentUpon>UnitList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitList.aspx.designer.cs">
+      <DependentUpon>UnitList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\WareHouseAdd.aspx.cs">
+      <DependentUpon>WareHouseAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\WareHouseAdd.aspx.designer.cs">
+      <DependentUpon>WareHouseAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\WareHouseList.aspx.cs">
+      <DependentUpon>WareHouseList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\WareHouseList.aspx.designer.cs">
+      <DependentUpon>WareHouseList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CommonTools\fullcalendar.aspx.cs">
       <DependentUpon>fullcalendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CommonTools\fullcalendar.aspx.designer.cs">
       <DependentUpon>fullcalendar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_client.ashx.cs">
+      <DependentUpon>ap_client.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_materialcategory.ashx.cs">
+      <DependentUpon>ap_materialcategory.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_supplier.ashx.cs">
+      <DependentUpon>ap_supplier.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_unit.ashx.cs">
+      <DependentUpon>ap_unit.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_warehouse.ashx.cs">
+      <DependentUpon>ap_warehouse.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\sy_button.ashx.cs">
       <DependentUpon>sy_button.ashx</DependentUpon>
@@ -3056,6 +3167,11 @@
     <Content Include="datasorce\sy_button.ashx" />
     <Content Include="datasorce\sy_permission.ashx" />
     <Content Include="datasorce\sy_login.ashx" />
+    <Content Include="datasorce\ap_warehouse.ashx" />
+    <Content Include="datasorce\ap_client.ashx" />
+    <Content Include="datasorce\ap_supplier.ashx" />
+    <Content Include="datasorce\ap_unit.ashx" />
+    <Content Include="datasorce\ap_materialcategory.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

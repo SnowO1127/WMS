@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BLL
 {
@@ -131,6 +132,17 @@ namespace BLL
                 }
             }
             return tlist.OrderBy(x => x.order).ToList();
+        }
+
+        public SysUser GetCurrentUser()
+        {
+            SysUser su = new SysUser();
+            string userid = SessionHelper.GetSession("UserID").ToString();
+            if (string.IsNullOrEmpty(userid))
+            {
+                su = sudal.GetOneUser(userid);
+            }
+            return su;
         }
     }
 }

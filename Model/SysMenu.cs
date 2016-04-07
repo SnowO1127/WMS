@@ -109,21 +109,6 @@ namespace Model
         /// </summary>
         public string UUserName { get; set; }
 
-        /// <summary>
-        /// 删除日期
-        /// </summary>
-        public DateTime? DDate { get; set; }
-
-        /// <summary>
-        /// 删除人id
-        /// </summary>
-        public string DUserID { get; set; }
-
-        /// <summary>
-        /// 删除人姓名
-        /// </summary>
-        public string DUserName { get; set; }
-
         public List<SysMenu> SysMenus { get; set; }
 
         public SysMenu PSysMenu { get; set; }

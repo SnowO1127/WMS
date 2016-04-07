@@ -50,6 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppClientBLL.cs" />
+    <Compile Include="AppMaterialCategoryBLL.cs" />
+    <Compile Include="AppSupplierBLL.cs" />
+    <Compile Include="AppUnitBLL.cs" />
+    <Compile Include="AppWareHouseBLL.cs" />
     <Compile Include="SysButtonBLL.cs" />
     <Compile Include="SysItemBLL.cs" />
     <Compile Include="SysItemDetailBLL.cs" />

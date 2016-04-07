@@ -52,7 +52,7 @@ namespace BLL
             return dal.GetListByPage(pso);
         }
 
-        public object GetHeadTree()
+        public List<Tree> GetHeadTree()
         {
             List<Tree> tlist = new List<Tree>();
 

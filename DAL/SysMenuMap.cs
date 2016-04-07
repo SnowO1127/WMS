@@ -22,8 +22,6 @@ namespace DAL
             Property(t => t.Description).HasMaxLength(200);
             Property(t => t.CUserID).HasMaxLength(128);
             Property(t => t.CUserName).HasMaxLength(20);
-            Property(t => t.DUserID).HasMaxLength(128);
-            Property(t => t.DUserName).HasMaxLength(20);
             Property(t => t.UUserID).HasMaxLength(128);
             Property(t => t.UUserName).HasMaxLength(20);
 

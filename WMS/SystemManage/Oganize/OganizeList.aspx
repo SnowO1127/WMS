@@ -284,10 +284,10 @@
                                         <input name="Name" class="easyui-validatebox" type="text" style="width: 110px" />
                                     </td>
                                     <td>
-                                        <a id="unit_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="oganizeSearch()">查找</a>
+                                        <a id="oganize_search_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-search'" onclick="oganizeSearch()">查找</a>
                                     </td>
                                     <td>
-                                        <a id="unit_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="oganizeRefresh()">清空</a>
+                                        <a id="oganize_refresh_btn" class="easyui-linkbutton" data-options="plain: false, iconCls: 'icon-undo'" onclick="oganizeRefresh()">清空</a>
                                     </td>
                                 </tr>
                             </table>
