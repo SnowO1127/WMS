@@ -23,6 +23,7 @@ namespace DAL
         public DbSet<AppSupplier> AppSuppliers { get; set; }
         public DbSet<AppMaterialCategory> AppMaterialCategorys { get; set; }
         public DbSet<AppUnit> AppUnits { get; set; }
+        public DbSet<AppUnitConversion> AppUnitConversions { get; set; }
 
         public SysContext(string connection)
             : base("name=" + connection)
@@ -43,6 +44,7 @@ namespace DAL
             modelBuilder.Configurations.Add(new AppSupplierMap());
             modelBuilder.Configurations.Add(new AppMaterialCategoryMap());
             modelBuilder.Configurations.Add(new AppUnitMap());
+            modelBuilder.Configurations.Add(new AppUnitConversionMap());
             base.OnModelCreating(modelBuilder);
         }
 

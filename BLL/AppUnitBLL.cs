@@ -41,5 +41,10 @@ namespace BLL
         {
             dal.DeleteUnit(unitid);
         }
+
+        public List<AppUnit> GetUnitList()
+        {
+            return dal.GetList();
+        }
     }
 }

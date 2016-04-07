@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MaterialBasicDataList.aspx.cs" Inherits="WMS.Application.BasicData.MaterialBasicDataList" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="MaterialAdd.aspx.cs" Inherits="WMS.Application.BasicData.MaterialAdd" %>
 
 <!DOCTYPE html>
 

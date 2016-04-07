@@ -11,39 +11,28 @@ using System.Web.SessionState;
 namespace WMS.datasorce
 {
     /// <summary>
-    /// ap_unit 的摘要说明
+    /// ap_unitconversion 的摘要说明
     /// </summary>
-    public class ap_unit : IHttpHandler, IRequiresSessionState
+    public class ap_unitconversion : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppUnitBLL bll = new AppUnitBLL();
+        private readonly AppUnitConversionBLL bll = new AppUnitConversionBLL();
         private readonly SysUserBLL subll = new SysUserBLL();
-        private PageAppUnit pau;
-        private AppUnit au;
+        private PageAppUnitConversion pauc;
+        private AppUnitConversion auc;
         private JsonResult jr;
-        private string unitid;
+        private string uinitconversionid;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
             switch (request["action"])
             {
-                case "getunit":
+                case "getunitconversionbypage":
                     jr = new JsonResult();
                     try
                     {
-                        context.Response.Write(Utils.SerializeObject(bll.GetUnitList()));
-                    }
-                    catch (Exception ex)
-                    {
-                        jr.Msg = ex.ToString();
-                    }
-                    break;
-                case "getunitbypage":
-                    jr = new JsonResult();
-                    try
-                    {
-                        pau = Utils.AutoWiredClass<PageAppUnit>(request, pau = new PageAppUnit());
-                        Grid<AppUnit> g = bll.GetUnitByPage(pau);
+                        pauc = Utils.AutoWiredClass<PageAppUnitConversion>(request, pauc = new PageAppUnitConversion());
+                        Grid<AppUnitConversion> g = bll.GetUnitConversionByPage(pauc);
                         context.Response.Write(Utils.SerializeObject(g));
                     }
                     catch (Exception ex)
@@ -51,17 +40,17 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
                     break;
-                case "addunit":
+                case "addunitconversion":
                     jr = new JsonResult();
                     try
                     {
-                        au = Utils.AutoWiredClass<AppUnit>(request, au = new AppUnit());
-                        au.ID = Guid.NewGuid().ToString();
-                        au.CDate = DateTime.Now;
-                        au.CUserID = subll.GetCurrentUser().ID;
-                        au.CUserName = subll.GetCurrentUser().RealName;
+                        auc = Utils.AutoWiredClass<AppUnitConversion>(request, auc = new AppUnitConversion());
+                        auc.ID = Guid.NewGuid().ToString();
+                        auc.CDate = DateTime.Now;
+                        auc.CUserID = subll.GetCurrentUser().ID;
+                        auc.CUserName = subll.GetCurrentUser().RealName;
 
-                        bll.AddUnit(au);
+                        bll.AddUnitConversion(auc);
                         jr.Success = true;
                         jr.Msg = "保存成功！";
                     }
@@ -73,16 +62,16 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "updateunit":
+                case "updateunitconversion":
                     jr = new JsonResult();
                     try
                     {
-                        au = Utils.AutoWiredClass<AppUnit>(request, au = new AppUnit());
-                        au.UDate = DateTime.Now;
-                        au.UUserID = subll.GetCurrentUser().ID;
-                        au.UUserName = subll.GetCurrentUser().RealName;
+                        auc = Utils.AutoWiredClass<AppUnitConversion>(request, auc = new AppUnitConversion());
+                        auc.UDate = DateTime.Now;
+                        auc.UUserID = subll.GetCurrentUser().ID;
+                        auc.UUserName = subll.GetCurrentUser().RealName;
 
-                        bll.UpdateUnit(au);
+                        bll.UpdateUnitConversion(auc);
 
                         jr.Success = true;
                         jr.Msg = "保存成功！";
@@ -95,13 +84,13 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "getoneunit":
-                    unitid = request["unitid"];
+                case "getoneunitconversion":
+                    uinitconversionid = request["unitconversionid"];
                     jr = new JsonResult();
                     try
                     {
                         jr.Success = true;
-                        jr.Obj = bll.GetOneUnit(unitid);
+                        jr.Obj = bll.GetOneUnitConversion(uinitconversionid);
                     }
                     catch (Exception ex)
                     {
@@ -111,12 +100,12 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "deleteunit":
-                    unitid = request["unitid"];
+                case "deleteunitconversion":
+                    uinitconversionid = request["unitconversionid"];
                     jr = new JsonResult();
                     try
                     {
-                        bll.DeleteUnit(unitid);
+                        bll.DeleteUnitConversion(uinitconversionid);
 
                         jr.Success = true;
                         jr.Msg = "删除成功！";

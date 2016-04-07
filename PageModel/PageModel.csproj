@@ -48,6 +48,7 @@
     <Compile Include="PageAppMaterialCategory.cs" />
     <Compile Include="PageAppSupplier.cs" />
     <Compile Include="PageAppUnit.cs" />
+    <Compile Include="PageAppUnitConversion.cs" />
     <Compile Include="PageAppWareHouse.cs" />
     <Compile Include="PageSysButton.cs" />
     <Compile Include="PageSysItemDetail.cs" />

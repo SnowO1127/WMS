@@ -16,7 +16,7 @@ namespace DAL
             List<AppUnit> list = new List<AppUnit>();
             using (var ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.AppUnits.ToList();
+                list = ctx.AppUnits.Where(x => x.Enabled && !x.DeleteMark).ToList();
             }
             return list;
         }

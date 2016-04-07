@@ -7,11 +7,12 @@ using System.Web.UI.WebControls;
 
 namespace WMS.Application.BasicData
 {
-    public partial class MaterialBasicDataAdd : System.Web.UI.Page
+    public partial class UnitConversionAdd : System.Web.UI.Page
     {
+        public string unitconversionid;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            unitconversionid = Request.Params["unitconversionid"];
         }
     }
 }

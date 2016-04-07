@@ -74,13 +74,15 @@
   <ItemGroup>
     <Content Include="Application\BasicData\ClientAdd.aspx" />
     <Content Include="Application\BasicData\ClientList.aspx" />
-    <Content Include="Application\BasicData\MaterialBasicDataAdd.aspx" />
-    <Content Include="Application\BasicData\MaterialBasicDataList.aspx" />
+    <Content Include="Application\BasicData\MaterialAdd.aspx" />
+    <Content Include="Application\BasicData\MaterialList.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryAdd.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryList.aspx" />
     <Content Include="Application\BasicData\SupplierAdd.aspx" />
     <Content Include="Application\BasicData\SupplierList.aspx" />
     <Content Include="Application\BasicData\UnitAdd.aspx" />
+    <Content Include="Application\BasicData\UnitConversionAdd.aspx" />
+    <Content Include="Application\BasicData\UnitConversionList.aspx" />
     <Content Include="Application\BasicData\UnitList.aspx" />
     <Content Include="Application\BasicData\WareHouseAdd.aspx" />
     <Content Include="Application\BasicData\WareHouseList.aspx" />
@@ -2763,19 +2765,19 @@
     <Compile Include="Application\BasicData\ClientList.aspx.designer.cs">
       <DependentUpon>ClientList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Application\BasicData\MaterialBasicDataAdd.aspx.cs">
-      <DependentUpon>MaterialBasicDataAdd.aspx</DependentUpon>
+    <Compile Include="Application\BasicData\MaterialAdd.aspx.cs">
+      <DependentUpon>MaterialAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Application\BasicData\MaterialBasicDataAdd.aspx.designer.cs">
-      <DependentUpon>MaterialBasicDataAdd.aspx</DependentUpon>
+    <Compile Include="Application\BasicData\MaterialAdd.aspx.designer.cs">
+      <DependentUpon>MaterialAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Application\BasicData\MaterialBasicDataList.aspx.cs">
-      <DependentUpon>MaterialBasicDataList.aspx</DependentUpon>
+    <Compile Include="Application\BasicData\MaterialList.aspx.cs">
+      <DependentUpon>MaterialList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Application\BasicData\MaterialBasicDataList.aspx.designer.cs">
-      <DependentUpon>MaterialBasicDataList.aspx</DependentUpon>
+    <Compile Include="Application\BasicData\MaterialList.aspx.designer.cs">
+      <DependentUpon>MaterialList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\BasicData\MaterialCategoryAdd.aspx.cs">
       <DependentUpon>MaterialCategoryAdd.aspx</DependentUpon>
@@ -2811,6 +2813,20 @@
     </Compile>
     <Compile Include="Application\BasicData\UnitAdd.aspx.designer.cs">
       <DependentUpon>UnitAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitConversionAdd.aspx.cs">
+      <DependentUpon>UnitConversionAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitConversionAdd.aspx.designer.cs">
+      <DependentUpon>UnitConversionAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitConversionList.aspx.cs">
+      <DependentUpon>UnitConversionList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\UnitConversionList.aspx.designer.cs">
+      <DependentUpon>UnitConversionList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\BasicData\UnitList.aspx.cs">
       <DependentUpon>UnitList.aspx</DependentUpon>
@@ -2851,6 +2867,9 @@
     </Compile>
     <Compile Include="datasorce\ap_unit.ashx.cs">
       <DependentUpon>ap_unit.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="datasorce\ap_unitconversion.ashx.cs">
+      <DependentUpon>ap_unitconversion.ashx</DependentUpon>
     </Compile>
     <Compile Include="datasorce\ap_warehouse.ashx.cs">
       <DependentUpon>ap_warehouse.ashx</DependentUpon>
@@ -3172,6 +3191,7 @@
     <Content Include="datasorce\ap_supplier.ashx" />
     <Content Include="datasorce\ap_unit.ashx" />
     <Content Include="datasorce\ap_materialcategory.ashx" />
+    <Content Include="datasorce\ap_unitconversion.ashx" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
