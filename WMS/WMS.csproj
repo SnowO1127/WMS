@@ -75,7 +75,6 @@
     <Content Include="Application\BasicData\ClientAdd.aspx" />
     <Content Include="Application\BasicData\ClientList.aspx" />
     <Content Include="Application\BasicData\MaterialAdd.aspx" />
-    <Content Include="Application\BasicData\MaterialList.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryAdd.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryList.aspx" />
     <Content Include="Application\BasicData\SupplierAdd.aspx" />
@@ -2771,13 +2770,6 @@
     </Compile>
     <Compile Include="Application\BasicData\MaterialAdd.aspx.designer.cs">
       <DependentUpon>MaterialAdd.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Application\BasicData\MaterialList.aspx.cs">
-      <DependentUpon>MaterialList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Application\BasicData\MaterialList.aspx.designer.cs">
-      <DependentUpon>MaterialList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\BasicData\MaterialCategoryAdd.aspx.cs">
       <DependentUpon>MaterialCategoryAdd.aspx</DependentUpon>
