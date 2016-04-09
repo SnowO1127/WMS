@@ -22,6 +22,16 @@
 
         $(function () {
 
+            $('#Category').combobox({
+                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=SupplierCategory',
+                valueField: 'Value',
+                textField: 'Name',
+                width: 143,
+                panelHeight: 100,
+                editable: false,
+                required: true
+            });
+
             if (supplierid) {
                 $.ajax({
                     url: "../../datasorce/ap_supplier.ashx?action=getonesupplier",
@@ -68,10 +78,15 @@
     </script>
 </head>
 <body>
-   <div class="easyui-layout" fit="true">
+    <div class="easyui-layout" fit="true">
         <form id="supplier_add_form" style="font-size: 12px; padding-left: 25px; padding-top: 10px">
             <table>
                 <tr>
+                    <td style="width: 80px">供应商编码
+                    </td>
+                    <td>
+                        <input name="Code" id="Code" class="easyui-validatebox" data-options="required:true" style="width: 140px" type="text" />
+                    </td>
                     <td style="width: 80px">供应商名称</td>
                     <td>
                         <input name="Name" class="easyui-validatebox" type="text" data-options="required:true" style="width: 140px" />
@@ -79,30 +94,35 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>分类</td>
+                    <td>
+                        <input name="Category" id="Category" type="text" />
+                    </td>
                     <td>联系人
                     </td>
                     <td>
                         <input name="LinkMan" id="LinkMan" class="easyui-validatebox" style="width: 140px" type="text" />
                     </td>
-                    <td style="width: 80px">手机
+
+                </tr>
+                <tr>
+                    <td>手机
                     </td>
                     <td>
                         <input name="Phone" class="easyui-validatebox" type="text" data-options="validType:'mobile'" style="width: 140px" />
                     </td>
-                </tr>
-                <tr>
                     <td>电话
                     </td>
                     <td>
                         <input name="Tel" class="easyui-validatebox" type="text" data-options="validType:'phone'" style="width: 140px" />
                     </td>
+                </tr>
+                <tr>
                     <td>传真
                     </td>
                     <td>
                         <input name="Fax" class="easyui-validatebox" type="text" data-options="validType:'faxno',tipPosition:'left'" style="width: 140px" />
                     </td>
-                </tr>
-                <tr>
                     <td>邮编
                     </td>
                     <td>

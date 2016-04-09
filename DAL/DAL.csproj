@@ -54,6 +54,8 @@
     <Compile Include="AppClientDAL.cs" />
     <Compile Include="AppClientMap.cs" />
     <Compile Include="AppMaterialCategoryDAL.cs" />
+    <Compile Include="AppMaterialDAL.cs" />
+    <Compile Include="AppMaterialMap.cs" />
     <Compile Include="AppSupplierDAL.cs" />
     <Compile Include="AppSupplierMap.cs" />
     <Compile Include="AppUnitConversionDAL.cs" />

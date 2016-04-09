@@ -15,6 +15,7 @@ namespace DAL
             ToTable("App_Client");
             HasKey(t => t.ID);
 
+            Property(t => t.Code).HasMaxLength(10);
             Property(t => t.Name).HasMaxLength(30);
             Property(t => t.LinkMan).HasMaxLength(20);
             Property(t => t.Tel).HasMaxLength(20);

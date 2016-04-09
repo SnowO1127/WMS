@@ -197,6 +197,19 @@
                 }
             });
         }
+
+        var setMaterialCategory = function ($dialog, $CategoryID, $CategoryName) {
+            var row = grid.datagrid('getSelected');
+            if (row) {
+                $CategoryID.val(row.ID);
+                $CategoryName.val(row.Name);
+
+                $dialog.dialog('destroy');
+            }
+            else {
+                parent.$.messager.alert('提示', "请选择行", "info");
+            }
+        }
     </script>
 </head>
 <body>

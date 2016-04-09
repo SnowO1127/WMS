@@ -32,6 +32,13 @@
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 frozenColumns: [[{
+                    width: '60',
+                    title: '编号',
+                    field: 'Code',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
                     width: '90',
                     title: '供应商名称',
                     field: 'Name',
@@ -40,6 +47,13 @@
                     sortable: true
                 }]],
                 columns: [[{
+                    width: '60',
+                    title: '分类',
+                    field: 'Category',
+                    halign: 'center',
+                    align: 'center',
+                    sortable: true
+                }, {
                     width: '60',
                     title: '联系人',
                     field: 'LinkMan',

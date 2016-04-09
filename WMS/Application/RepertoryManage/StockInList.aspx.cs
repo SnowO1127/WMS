@@ -5,14 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.Application.BasicData
+namespace WMS.Application.RepertoryManage
 {
-    public partial class MaterialAdd : System.Web.UI.Page
+    public partial class StockInList : System.Web.UI.Page
     {
-        public string materialid;
         protected void Page_Load(object sender, EventArgs e)
         {
-            materialid = Request.Params["materialid"];
+
         }
     }
 }

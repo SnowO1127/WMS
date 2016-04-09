@@ -211,6 +211,21 @@
                   }
               });
           }
+
+          var setUnitConversion = function ($dialog, $UnitConversionID, $MainUnit, $AssistUnit, $TranslateRate) {
+              var row = grid.datagrid('getSelected');
+              if (row) {
+                  $UnitConversionID.val(row.ID);
+                  $MainUnit.val(row.MainUnitName);
+                  $AssistUnit.val(row.AssistUnitName);
+                  $TranslateRate.val(row.TranslateRate);
+
+                  $dialog.dialog('destroy');
+              }
+              else {
+                  parent.$.messager.alert('提示', "请选择行", "info");
+              }
+          }
     </script>
 </head>
 <body>

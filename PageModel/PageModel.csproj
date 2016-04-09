@@ -45,6 +45,7 @@
     <Compile Include="Grid.cs" />
     <Compile Include="JsonResult.cs" />
     <Compile Include="PageAppClient.cs" />
+    <Compile Include="PageAppMaterial.cs" />
     <Compile Include="PageAppMaterialCategory.cs" />
     <Compile Include="PageAppSupplier.cs" />
     <Compile Include="PageAppUnit.cs" />

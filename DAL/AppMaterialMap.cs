@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class AppUnitConversionMap : EntityTypeConfiguration<AppUnitConversion>
+    public class AppMaterialMap : EntityTypeConfiguration<AppMaterial>
     {
-        public AppUnitConversionMap()
+        public AppMaterialMap()
         {
-            ToTable("App_UnitConversion");
+            ToTable("App_Material");
             HasKey(t => t.ID);
 
-            Property(t => t.Code).HasMaxLength(20);
-            Property(t => t.MainUnitName).HasMaxLength(20);
-            Property(t => t.AssistUnitName).HasMaxLength(20);
+            Property(t => t.Code).HasMaxLength(10);
+            Property(t => t.Name).HasMaxLength(30);
+            Property(t => t.Mnemonics).HasMaxLength(20);
+            Property(t => t.Wrappage).HasMaxLength(20);
             Property(t => t.Description).HasMaxLength(300);
 
             Property(t => t.CUserID).HasMaxLength(128);
@@ -25,7 +26,8 @@ namespace DAL
             Property(t => t.UUserID).HasMaxLength(128);
             Property(t => t.UUserName).HasMaxLength(20);
 
-            HasMany(t => t.AppMaterials).WithOptional(t => t.UnitConversion).HasForeignKey(t => t.UnitConversionID);
+
+
         }
     }
 }

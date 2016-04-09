@@ -11,39 +11,28 @@ using System.Web.SessionState;
 namespace WMS.datasorce
 {
     /// <summary>
-    /// ap_materialcategory 的摘要说明
+    /// ap_material 的摘要说明
     /// </summary>
-    public class ap_materialcategory : IHttpHandler, IRequiresSessionState
+    public class ap_material : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppMaterialCategoryBLL bll = new AppMaterialCategoryBLL();
+        private readonly AppMaterialBLL bll = new AppMaterialBLL();
         private readonly SysUserBLL subll = new SysUserBLL();
-        private PageAppMaterialCategory pamc;
-        private AppMaterialCategory amc;
+        private PageAppMaterial pam;
+        private AppMaterial am;
         private JsonResult jr;
-        private string materialcategoryid;
+        private string materialid;
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/plain";
             HttpRequest request = context.Request;
             switch (request["action"])
             {
-                case "getheadtree":
+                case "getmaterialbypage":
                     jr = new JsonResult();
                     try
                     {
-                        context.Response.Write(Utils.SerializeObject(bll.GetHeadTree()));
-                    }
-                    catch (Exception ex)
-                    {
-                        jr.Msg = ex.ToString();
-                    }
-                    break;
-                case "getmaterialcategorybypage":
-                    jr = new JsonResult();
-                    try
-                    {
-                        pamc = Utils.AutoWiredClass<PageAppMaterialCategory>(request, pamc = new PageAppMaterialCategory());
-                        Grid<AppMaterialCategory> g = bll.GetMaterialCategoryByPage(pamc);
+                        pam = Utils.AutoWiredClass<PageAppMaterial>(request, pam = new PageAppMaterial());
+                        Grid<AppMaterial> g = bll.GetMaterialByPage(pam);
                         context.Response.Write(Utils.SerializeObject(g));
                     }
                     catch (Exception ex)
@@ -51,17 +40,17 @@ namespace WMS.datasorce
                         jr.Msg = ex.ToString();
                     }
                     break;
-                case "addmaterialcategory":
+                case "addmaterial":
                     jr = new JsonResult();
                     try
                     {
-                        amc = Utils.AutoWiredClass<AppMaterialCategory>(request, amc = new AppMaterialCategory());
-                        amc.ID = Guid.NewGuid().ToString();
-                        amc.CDate = DateTime.Now;
-                        amc.CUserID = subll.GetCurrentUser().ID;
-                        amc.CUserName = subll.GetCurrentUser().RealName;
+                        am = Utils.AutoWiredClass<AppMaterial>(request, am = new AppMaterial());
+                        am.ID = Guid.NewGuid().ToString();
+                        am.CDate = DateTime.Now;
+                        am.CUserID = subll.GetCurrentUser().ID;
+                        am.CUserName = subll.GetCurrentUser().RealName;
 
-                        bll.AddMaterialCategory(amc);
+                        bll.AddMaterial(am);
                         jr.Success = true;
                         jr.Msg = "保存成功！";
                     }
@@ -73,16 +62,16 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "updatematerialcategory":
+                case "updatematerial":
                     jr = new JsonResult();
                     try
                     {
-                        amc = Utils.AutoWiredClass<AppMaterialCategory>(request, amc = new AppMaterialCategory());
-                        amc.UDate = DateTime.Now;
-                        amc.UUserID = subll.GetCurrentUser().ID;
-                        amc.UUserName = subll.GetCurrentUser().RealName;
+                        am = Utils.AutoWiredClass<AppMaterial>(request, am = new AppMaterial());
+                        am.UDate = DateTime.Now;
+                        am.UUserID = subll.GetCurrentUser().ID;
+                        am.UUserName = subll.GetCurrentUser().RealName;
 
-                        bll.UpdateMaterialCategory(amc);
+                        bll.UpdateMaterial(am);
 
                         jr.Success = true;
                         jr.Msg = "保存成功！";
@@ -95,13 +84,13 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "getonematerialcategory":
-                    materialcategoryid = request["materialcategoryid"];
+                case "getonematerial":
+                    materialid = request["materialid"];
                     jr = new JsonResult();
                     try
                     {
                         jr.Success = true;
-                        jr.Obj = bll.GetOneMaterialCategory(materialcategoryid);
+                        jr.Obj = bll.GetOneMaterial(materialid);
                     }
                     catch (Exception ex)
                     {
@@ -111,12 +100,12 @@ namespace WMS.datasorce
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                case "deletematerialcategory":
-                    materialcategoryid = request["materialcategoryid"];
+                case "deletematerial":
+                    materialid = request["materialid"];
                     jr = new JsonResult();
                     try
                     {
-                        bll.DeleteMaterialCategory(materialcategoryid);
+                        bll.DeleteMaterial(materialid);
 
                         jr.Success = true;
                         jr.Msg = "删除成功！";

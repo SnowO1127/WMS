@@ -24,6 +24,7 @@ namespace DAL
         public DbSet<AppMaterialCategory> AppMaterialCategorys { get; set; }
         public DbSet<AppUnit> AppUnits { get; set; }
         public DbSet<AppUnitConversion> AppUnitConversions { get; set; }
+        public DbSet<AppMaterial> AppMaterials { get; set; }
 
         public SysContext(string connection)
             : base("name=" + connection)
@@ -45,6 +46,7 @@ namespace DAL
             modelBuilder.Configurations.Add(new AppMaterialCategoryMap());
             modelBuilder.Configurations.Add(new AppUnitMap());
             modelBuilder.Configurations.Add(new AppUnitConversionMap());
+            modelBuilder.Configurations.Add(new AppMaterialMap());
             base.OnModelCreating(modelBuilder);
         }
 

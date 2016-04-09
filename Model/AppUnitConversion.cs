@@ -55,5 +55,7 @@ namespace Model
         /// 更新人姓名
         /// </summary>
         public string UUserName { get; set; }
+
+        public List<AppMaterial> AppMaterials { get; set; }
     }
 }

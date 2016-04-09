@@ -41,5 +41,27 @@ namespace BLL
         {
             dal.DeleteMaterialCategory(materialcategoryid);
         }
+
+        public List<Tree> GetHeadTree()
+        {
+            List<Tree> tlist = new List<Tree>();
+
+            Tree headtree = new Tree();
+            headtree.id = Guid.NewGuid().ToString();
+            headtree.text = "物料分类";
+
+            tlist.Add(headtree);
+
+            List<AppMaterialCategory> amclist = dal.GetList();
+            if (amclist != null && amclist.Count > 0)
+            {
+                foreach (AppMaterialCategory amc in amclist)
+                {
+                    Tree t = new Tree() { id = amc.ID, text = amc.Name, pid = headtree.id };
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class AppMaterialCategoryMap: EntityTypeConfiguration<AppMaterialCategory>
+    public class AppMaterialCategoryMap : EntityTypeConfiguration<AppMaterialCategory>
     {
 
         public AppMaterialCategoryMap()
@@ -24,6 +24,8 @@ namespace DAL
             Property(t => t.CUserName).HasMaxLength(20);
             Property(t => t.UUserID).HasMaxLength(128);
             Property(t => t.UUserName).HasMaxLength(20);
+
+            HasMany(t => t.AppMaterials).WithOptional(t => t.MaterialCategory).HasForeignKey(t => t.CategoryID);
         }
     }
 }

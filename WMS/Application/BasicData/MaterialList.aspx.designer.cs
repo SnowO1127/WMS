@@ -10,7 +10,7 @@
 namespace WMS.Application.BasicData {
     
     
-    public partial class MaterialAdd {
+    public partial class MaterialList {
         
         /// <summary>
         /// easyuiTheme 控件。

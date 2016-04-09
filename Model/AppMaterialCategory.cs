@@ -52,6 +52,6 @@ namespace Model
         /// </summary>
         public string UUserName { get; set; }
 
-
+        public List<AppMaterial> AppMaterials { get; set; }
     }
 }

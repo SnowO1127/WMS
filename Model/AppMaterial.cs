@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class AppClient
+    public class AppMaterial
     {
         public string ID { get; set; }
 
@@ -14,33 +14,33 @@ namespace Model
 
         public string Name { get; set; }
 
-        public string Category { get; set; }
+        public string CategoryID { get; set; }
 
-        public string LinkMan { get; set; }
+        public string UnitConversionID { get; set; }
 
-        public string Tel { get; set; }
+        public string Mnemonics { get; set; }
 
-        public string Fax { get; set; }
+        public decimal Weight { get; set; }
 
-        public string Phone { get; set; }
+        public decimal Long { get; set; }
 
-        public string Address { get; set; }
+        public decimal Width { get; set; }
 
-        public string PostCode { get; set; }
+        public decimal Height { get; set; }
+
+        public decimal Volume { get; set; }
+
+        public string Wrappage { get; set; }
+
+        public int WarrantyDays { get; set; }
+
+        public int WarrantyWarnDays { get; set; }
 
         public string Description { get; set; }
 
-        /// <summary>
-        /// 经度
-        /// </summary>
-        public string Longitude { get; set; }
-
-        /// <summary>
-        /// 纬度
-        /// </summary>
-        public string Latitude { get; set; }
-
         public int OrderID { get; set; }
+
+        public bool IsBatch { get; set; }
 
         public bool Enabled { get; set; }
 
@@ -75,5 +75,10 @@ namespace Model
         /// 更新人姓名
         /// </summary>
         public string UUserName { get; set; }
+
+
+        public AppUnitConversion UnitConversion { get; set; }
+
+        public AppMaterialCategory MaterialCategory { get; set; }
     }
 }
