@@ -90,6 +90,16 @@
         });
 
         var f_save = function ($dialog, $grid, $pjq) {
+            if (!$("#CategoryID").val()) {
+                $pjq.messager.alert('提示', '请选择物料分类！', 'info');
+                return false;
+            }
+
+            if (!$("#UnitConversionID").val()) {
+                $pjq.messager.alert('提示', '请选择计量单位换算！', 'info');
+                return false;
+            }
+
             if ($('#material_add_form').form('validate')) {
                 var url;
                 if (materialid) {

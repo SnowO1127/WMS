@@ -77,6 +77,7 @@
     <Content Include="Application\BasicData\MaterialAdd.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryAdd.aspx" />
     <Content Include="Application\BasicData\MaterialCategoryList.aspx" />
+    <Content Include="Application\BasicData\MaterialList.aspx" />
     <Content Include="Application\BasicData\SupplierAdd.aspx" />
     <Content Include="Application\BasicData\SupplierList.aspx" />
     <Content Include="Application\BasicData\UnitAdd.aspx" />
@@ -85,6 +86,7 @@
     <Content Include="Application\BasicData\UnitList.aspx" />
     <Content Include="Application\BasicData\WareHouseAdd.aspx" />
     <Content Include="Application\BasicData\WareHouseList.aspx" />
+    <Content Include="Application\RepertoryManage\StockInAdd.aspx" />
     <Content Include="Application\RepertoryManage\StockInList.aspx" />
     <Content Include="CommonTools\fullcalendar.aspx" />
     <Content Include="favicon.ico" />
@@ -2786,6 +2788,13 @@
     <Compile Include="Application\BasicData\MaterialCategoryList.aspx.designer.cs">
       <DependentUpon>MaterialCategoryList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Application\BasicData\MaterialList.aspx.cs">
+      <DependentUpon>MaterialList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\BasicData\MaterialList.aspx.designer.cs">
+      <DependentUpon>MaterialList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Application\BasicData\SupplierAdd.aspx.cs">
       <DependentUpon>SupplierAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2841,6 +2850,13 @@
     </Compile>
     <Compile Include="Application\BasicData\WareHouseList.aspx.designer.cs">
       <DependentUpon>WareHouseList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application\RepertoryManage\StockInAdd.aspx.cs">
+      <DependentUpon>StockInAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application\RepertoryManage\StockInAdd.aspx.designer.cs">
+      <DependentUpon>StockInAdd.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application\RepertoryManage\StockInList.aspx.cs">
       <DependentUpon>StockInList.aspx</DependentUpon>
