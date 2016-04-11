@@ -167,7 +167,7 @@
                 title: '新增仓库',
                 width: 530,
                 height: 330,
-                url: 'Application/BasicData/WarehouseAdd.aspx',
+                url: 'Application/BasicData/WareHouseAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -184,7 +184,7 @@
                 title: '编辑仓库【当前：' + row.Name + '】',
                 width: 530,
                 height: 330,
-                url: 'Application/BasicData/WarehouseAdd.aspx?warehouseid=' + row.ID + '',
+                url: 'Application/BasicData/WareHouseAdd.aspx?warehouseid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
@@ -201,7 +201,7 @@
                 title: '查看仓库【当前：' + row.Name + '】',
                 width: 530,
                 height: 310,
-                url: 'Application/BasicData/WarehouseAdd.aspx?warehouseid=' + row.ID + '',
+                url: 'Application/BasicData/WareHouseAdd.aspx?warehouseid=' + row.ID + '',
             });
         }
 
