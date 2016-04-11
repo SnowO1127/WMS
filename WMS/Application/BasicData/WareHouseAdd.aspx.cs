@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.Application.BasicData
 {
-    public partial class WareHouseAdd : System.Web.UI.Page
+    public partial class WareHouseAdd : BasePage
     {
         public string warehouseid;
         protected void Page_Load(object sender, EventArgs e)

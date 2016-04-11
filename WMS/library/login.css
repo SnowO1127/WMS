@@ -3,7 +3,7 @@
 html, body { 
 	background: url(/library/images/login/bg.gif);
 	overflow-y: auto;
-	overflow-x: hidden;
+	overflow-x: auto;
 	font:normal 15px "Microsoft YaHei";
 }
 #login_bottom {

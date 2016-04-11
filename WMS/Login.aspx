@@ -8,7 +8,11 @@
     <script src="library/jquery-1.9.1.min.js"></script>
     <script src="library/jquery.easyui.min.js"></script>
     <script src="library/easyui-lang-zh_CN.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <script src="library/jquery.cookie.js"></script>
+    <script src="library/xyEasyUI.js"></script>
+    <script src="library/xyUtils.js"></script>
+    <link id="easyuiTheme" href="library/themes/default/easyui.css" rel="stylesheet" />
+    <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/login.css" rel="stylesheet" />
     <title></title>
     <script type="text/javascript">
@@ -75,20 +79,36 @@
                     password: $('#PassWord').val(),
                     securitycode: $('#SecurityCode').val()
                 },
+                beforeSend: function () {
+                    $.messager.progress({
+                        title: "登录",
+                        text:'正在登录,请稍候......'
+                    });
+                },
                 success: function (jsonresult) {
+                    $.messager.progress('close');
                     if (jsonresult.Success) {
-                        window.location = "index.aspx"
+                        window.location = jsonresult.Obj;
                     }
                     else {
-                        if (jsonresult.Msg == "1") {
+                        if (jsonresult.Msg == "0") {
+                            sctip.tooltip("update", '<span style="color:#fff">验证码超时,请重新填写验证！</span>');
+                            sctip.tooltip("show");
+                            $("#validate").click();
+                        }
+                        else if (jsonresult.Msg == "1") {
                             sctip.tooltip("update", '<span style="color:#fff">验证码错误！</span>');
                             sctip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "2") {
-                            lntip.tooltip("update", '<span style="color:#fff">用户名错误！</span>');
+                            lntip.tooltip("update", '<span style="color:#fff">用户名不存在！</span>');
                             lntip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "3") {
+                            lntip.tooltip("update", '<span style="color:#fff">用户名不可用！</span>');
+                            lntip.tooltip("show");
+                        }
+                        else if (jsonresult.Msg == "4") {
                             pwtip.tooltip("update", '<span style="color:#fff">密码错误！</span>');
                             pwtip.tooltip("show");
                         }

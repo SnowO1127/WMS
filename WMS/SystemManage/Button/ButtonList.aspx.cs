@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Button
 {
-    public partial class ButtonList : System.Web.UI.Page
+    public partial class ButtonList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

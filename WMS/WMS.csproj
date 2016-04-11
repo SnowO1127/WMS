@@ -89,6 +89,7 @@
     <Content Include="Application\RepertoryManage\StockInAdd.aspx" />
     <Content Include="Application\RepertoryManage\StockInList.aspx" />
     <Content Include="CommonTools\fullcalendar.aspx" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Index.aspx" />
     <Content Include="InformationCenter\News\news_add.aspx" />
@@ -326,6 +327,7 @@
     <Content Include="library\images\dogs\puppy_dogs_08.png" />
     <Content Include="library\images\dogs\puppy_dogs_09.png" />
     <Content Include="library\images\dogs\puppy_dogs_10.png" />
+    <Content Include="library\images\error.png" />
     <Content Include="library\images\ext_icons\anchor.png" />
     <Content Include="library\images\ext_icons\application\application.png" />
     <Content Include="library\images\ext_icons\application\application_add.png" />
@@ -2726,6 +2728,8 @@
     <Content Include="library\xyEasyUI.js" />
     <Content Include="library\xyUtils.js" />
     <Content Include="Login.aspx" />
+    <Content Include="NoPower.aspx" />
+    <Content Include="NoSession.aspx" />
     <Content Include="SecurityCode.aspx" />
     <Content Include="SystemManage\Button\ButtonAdd.aspx" />
     <Content Include="SystemManage\Button\ButtonList.aspx" />
@@ -2865,6 +2869,9 @@
     <Compile Include="Application\RepertoryManage\StockInList.aspx.designer.cs">
       <DependentUpon>StockInList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="BasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="CommonTools\fullcalendar.aspx.cs">
       <DependentUpon>fullcalendar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2926,6 +2933,13 @@
     <Compile Include="datasorce\sy_user.ashx.cs">
       <DependentUpon>sy_user.ashx</DependentUpon>
     </Compile>
+    <Compile Include="ErrorPage.aspx.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.cs">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -2975,6 +2989,20 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoPower.aspx.cs">
+      <DependentUpon>NoPower.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoPower.aspx.designer.cs">
+      <DependentUpon>NoPower.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoSession.aspx.cs">
+      <DependentUpon>NoSession.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoSession.aspx.designer.cs">
+      <DependentUpon>NoSession.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecurityCode.aspx.cs">

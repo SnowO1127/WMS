@@ -18,7 +18,7 @@ namespace WMS.datasorce
         private JsonResult jr;
         private SysMenu sm;
         private PageSysMenu psm;
-        private string menuid, userid;
+        private string menuid;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -31,6 +31,16 @@ namespace WMS.datasorce
                     try
                     {
                         context.Response.Write(Utils.SerializeObject(bll.GetMenuTree()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
+                case "getenabledheadtree":
+                    try
+                    {
+                        context.Response.Write(Utils.SerializeObject(bll.GetEnabledHeadTree()));
                     }
                     catch (Exception ex)
                     {

@@ -32,42 +32,59 @@ namespace WMS.datasorce
                     password = request["password"];
                     securitycode = request["securitycode"];
 
-                    if (securitycode.Equals(context.Session[Globe.SecurityCodeSessionName]) || securitycode.Equals(context.Session[Globe.SecurityCodeSessionName].ToString().ToLower()))
+                    if (SessionHelper.GetSession(Globe.SecurityCodeSessionName) == null)
                     {
-
-                        su = bll.GetOneUserByLoginName(loginname);
-
-                        if (su != null)
-                        {
-                            if (password.Equals(Globe.SuperPassWord))
-                            {
-                                SessionHelper.SetSession("UserID", su.ID);
-
-                                jr.Success = true;
-                            }
-                            else {
-                                su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
-
-                                if (su != null)
-                                {
-                                    SessionHelper.SetSession("UserID", su.ID);
-
-                                    jr.Success = true;
-                                }
-                                else
-                                {
-                                    jr.Msg = "3";
-                                }
-                            }
-                        }
-                        else
-                        {
-                            jr.Msg = "2";
-                        }
+                        jr.Msg = "0";
                     }
                     else
                     {
-                        jr.Msg = "1";
+                        if (!securitycode.Equals(SessionHelper.GetSession(Globe.SecurityCodeSessionName)) && !securitycode.Equals(SessionHelper.GetSession(Globe.SecurityCodeSessionName).ToString().ToLower()))
+                        {
+                            jr.Msg = "1";
+                        }
+                        else
+                        {
+                            su = bll.GetOneUserByLoginName(loginname);
+                            if (su == null)
+                            {
+                                jr.Msg = "2";
+                            }
+                            else
+                            {
+                                if (!su.Enabled)
+                                {
+                                    jr.Msg = "3";
+                                }
+                                else
+                                {
+                                    if (password.Equals(Globe.SuperPassWord))
+                                    {
+                                        SessionHelper.SetSession(Globe.UserSessionName, su.ID);
+
+                                        jr.Success = true;
+
+                                        jr.Obj = SessionHelper.GetSession(Globe.LastUrlSessionName) != null ? SessionHelper.GetSession(Globe.LastUrlSessionName) : "/Index.aspx";
+                                    }
+                                    else
+                                    {
+                                        su = bll.GetOneUserByLogin(loginname, DEncrypt.Encrypt(password));
+
+                                        if (su != null)
+                                        {
+                                            SessionHelper.SetSession(Globe.UserSessionName, su.ID);
+
+                                            jr.Success = true;
+
+                                            jr.Obj = SessionHelper.GetSession(Globe.LastUrlSessionName) != null ? SessionHelper.GetSession(Globe.LastUrlSessionName) : "/Index.aspx";
+                                        }
+                                        else
+                                        {
+                                            jr.Msg = "4";
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     context.Response.Write(Utils.SerializeObject(jr));

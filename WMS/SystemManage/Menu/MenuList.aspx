@@ -298,7 +298,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true" title="分类树" style="overflow: hidden; padding: 1px; width: 200px">
+        <div data-options="region: 'west', border: true" title="分类树" style="padding: 1px; width: 200px">
             <div id="menu_tree" fit="true">
             </div>
         </div>

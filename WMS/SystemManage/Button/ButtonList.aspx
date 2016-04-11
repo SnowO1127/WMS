@@ -21,7 +21,7 @@
         var treenode;
         $(function () {
             tree = $("#menu_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getheadtree',
+                url: '../../datasorce/sy_menu.ashx?action=getenabledheadtree',
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) {
@@ -136,11 +136,15 @@
                     iconCls: 'icon-add',
                     text: '增加',
                     handler: function () {
-                        if (treenode.attributes && !treenode.attributes.ismenu) {
-                            openAdd(treenode);
-                        }
+                        if (treenode)
+                            if (treenode.attributes && !treenode.attributes.ismenu) {
+                                openAdd(treenode);
+                            }
+                            else {
+                                parent.$.messager.alert('提示', "菜单节点无法添加按钮！", "info");
+                            }
                         else {
-                            parent.$.messager.alert('提示', "菜单节点无法添加按钮！", "info");
+                            parent.$.messager.alert('提示', "请选择菜单！", "info");
                         }
                     }
                 }, '-', {

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Role
 {
-    public partial class RoleList : System.Web.UI.Page
+    public partial class RoleList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

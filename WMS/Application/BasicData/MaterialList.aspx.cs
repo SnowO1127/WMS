@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.Application.BasicData
 {
-    public partial class MaterialList : System.Web.UI.Page
+    public partial class MaterialList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

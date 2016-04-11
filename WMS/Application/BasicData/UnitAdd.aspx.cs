@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.Application.BasicData
 {
-    public partial class UnitAdd : System.Web.UI.Page
+    public partial class UnitAdd : BasePage
     {
         public string unitid;
         protected void Page_Load(object sender, EventArgs e)

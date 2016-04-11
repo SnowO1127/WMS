@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Oganize
 {
-    public partial class OganizeList : System.Web.UI.Page
+    public partial class OganizeList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -187,7 +187,7 @@
                 iconCls: 'icon-add',
                 title: '新增供应商',
                 width: 560,
-                height: 350,
+                height: 340,
                 url: 'Application/BasicData/supplierAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -204,7 +204,7 @@
                 iconCls: 'icon-edit',
                 title: '编辑供应商【当前：' + row.Name + '】',
                 width: 560,
-                height: 350,
+                height: 340,
                 url: 'Application/BasicData/supplierAdd.aspx?supplierid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
@@ -221,7 +221,7 @@
                 iconCls: 'icon-save',
                 title: '查看供应商【当前：' + row.Name + '】',
                 width: 560,
-                height: 330,
+                height: 320,
                 url: 'Application/BasicData/supplierAdd.aspx?supplierid=' + row.ID + '',
             });
         }

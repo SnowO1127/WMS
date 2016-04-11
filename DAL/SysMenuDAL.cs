@@ -17,12 +17,27 @@ namespace DAL
             List<SysMenu> list = new List<SysMenu>();
             using (SysContext ctx = new SysContext(Globe.ConnectionString))
             {
-                list = ctx.SysMenus.Where(x => x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
+                list = ctx.SysMenus.Where(x => !x.DeleteMark).OrderBy(x => x.OrderID).ToList();
+            }
+            return list;
+        }
+
+        public List<SysMenu> GetEnabledList()
+        {
+            List<SysMenu> list = new List<SysMenu>();
+            using (SysContext ctx = new SysContext(Globe.ConnectionString))
+            {
+                list = ctx.SysMenus.Where(x => x.Enabled && !x.DeleteMark).OrderBy(x => x.OrderID).ToList();
             }
             return list;
         }
 
         public List<SysMenu> GetListByPage(PageSysMenu psm)
+        {
+            return psm.Order == "desc" ? GetAllListByPage(psm).OrderByDescending(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : GetAllListByPage(psm).OrderBy(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();
+        }
+
+        public List<SysMenu> GetAllListByPage(PageSysMenu psm)
         {
             List<SysMenu> list = new List<SysMenu>();
             using (var ctx = new SysContext(Globe.ConnectionString))
@@ -43,10 +58,13 @@ namespace DAL
                 }
 
                 list = query.ToList();
-
-                list = psm.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psm.Sort)).Skip(psm.Rows * (psm.Page - 1)).Take(psm.Rows).ToList();
             }
             return list;
+        }
+
+        public long GetCountByPage(PageSysMenu psm)
+        {
+            return GetAllListByPage(psm).Count;
         }
 
         public List<SysMenu> GetIsMenuList()
@@ -126,7 +144,5 @@ namespace DAL
                 ctx.SaveChanges();
             }
         }
-
-
     }
 }

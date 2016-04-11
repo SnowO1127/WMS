@@ -92,13 +92,77 @@ namespace BLL
             return sudal.GetOneUserByLogin(loginname, password);
         }
 
+        /// <summary>
+        /// 根据用户生成菜单树
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public List<Tree> GetMenuTreeByUser(string userid)
         {
-            List<Tree> tlist = new List<Tree>();
+            return CreateTreeList(GetEnabledPessionMenus(userid));
+        }
+
+        /// <summary>
+        /// 得到当前登录用户
+        /// </summary>
+        /// <returns></returns>
+        public SysUser GetCurrentUser()
+        {
+            SysUser su = null;
+            if (SessionHelper.GetSession(Globe.UserSessionName) != null)
+            {
+                string userid = SessionHelper.GetSession(Globe.UserSessionName).ToString();
+                if (!string.IsNullOrEmpty(userid))
+                {
+                    su = sudal.GetOneUser(userid);
+                }
+            }
+            return su;
+        }
+
+        /// <summary>
+        /// 得到权限菜单
+        /// </summary>
+        /// <param name="su"></param>
+        /// <returns></returns>
+        public List<SysMenu> GetEnabledPessionMenus(string userid)
+        {
+            SysUser su = sudal.GetOneUserWithMany(userid);
+
             List<SysMenu> smlist = new List<SysMenu>();
 
+            if (su.IsAdmin)
+            {
+                smlist = smdal.GetEnabledList();
+            }
+            else
+            {
+                smlist = su.Menus.Where(x => x.Enabled).ToList();
 
+                foreach (var sr in su.Roles)
+                {
+                    foreach (var sm in sr.Menus)
+                    {
+                        if (!smlist.Contains(sm))
+                        {
+                            smlist.Add(sm);
+                        }
+                    }
+                }
+            }
+            return smlist;
+        }
+
+        /// <summary>
+        /// 得到权限菜单
+        /// </summary>
+        /// <param name="su"></param>
+        /// <returns></returns>
+        public List<SysMenu> GetPessionMenus(string userid)
+        {
             SysUser su = sudal.GetOneUserWithMany(userid);
+
+            List<SysMenu> smlist = new List<SysMenu>();
 
             if (su.IsAdmin)
             {
@@ -119,7 +183,17 @@ namespace BLL
                     }
                 }
             }
+            return smlist;
+        }
 
+        /// <summary>
+        /// 生成菜单树
+        /// </summary>
+        /// <param name="smlist"></param>
+        /// <returns></returns>
+        public List<Tree> CreateTreeList(List<SysMenu> smlist)
+        {
+            List<Tree> tlist = new List<Tree>();
             if (smlist != null && smlist.Count > 0)
             {
                 foreach (SysMenu sm in smlist)
@@ -132,17 +206,6 @@ namespace BLL
                 }
             }
             return tlist.OrderBy(x => x.order).ToList();
-        }
-
-        public SysUser GetCurrentUser()
-        {
-            SysUser su = new SysUser();
-            string userid = SessionHelper.GetSession("UserID").ToString();
-            if (string.IsNullOrEmpty(userid))
-            {
-                su = sudal.GetOneUser(userid);
-            }
-            return su;
         }
     }
 }

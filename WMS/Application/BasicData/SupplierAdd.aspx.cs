@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.Application.BasicData
 {
-    public partial class SupplierAdd : System.Web.UI.Page
+    public partial class SupplierAdd : BasePage
     {
         public string supplierid;
         protected void Page_Load(object sender, EventArgs e)

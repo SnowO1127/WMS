@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Permission
 {
-    public partial class UserPermission : System.Web.UI.Page
+    public partial class UserPermission : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

@@ -89,7 +89,7 @@
                     success: function (jsonresult) {
                         if (jsonresult.Success) {
                             $pjq.messager.alert('提示', jsonresult.Msg, 'info');
-                            $grid.datagrid('load');
+                            $grid.datagrid('reload');
                             $tree.tree("reload");
                             $dialog.dialog('destroy');
                         } else {

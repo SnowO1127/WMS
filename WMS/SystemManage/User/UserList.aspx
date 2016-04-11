@@ -246,7 +246,8 @@
                 iconCls: 'icon-add',
                 title: '新增用户',
                 width: 520,
-                height: 450,
+                height: 460,
+                maximizable: true,
                 url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -263,7 +264,7 @@
                 iconCls: 'icon-edit',
                 title: '编辑用户【当前：' + row.RealName + '】',
                 width: 520,
-                height: 450,
+                height: 460,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
@@ -302,7 +303,7 @@
                 iconCls: 'icon-save',
                 title: '查看用户【当前：' + row.RealName + '】',
                 width: 520,
-                height: 430,
+                height: 440,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
             });
         }

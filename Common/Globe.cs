@@ -21,5 +21,9 @@ namespace Common
         }
 
         public const string SecurityCodeSessionName = "SecurityCode";
+
+        public const string UserSessionName = "User";
+
+        public const string LastUrlSessionName = "LastUrl";
     }
 }

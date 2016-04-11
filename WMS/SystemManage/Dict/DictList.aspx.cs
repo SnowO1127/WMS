@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.SystemManage.Dict
 {
-    public partial class DictList : System.Web.UI.Page
+    public partial class DictList : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

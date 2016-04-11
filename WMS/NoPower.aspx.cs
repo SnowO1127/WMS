@@ -5,13 +5,13 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.Application.BasicData
+namespace WMS
 {
-    public partial class ClientList : BasePage
+    public partial class NoPower : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
+        } 
     }
 }
