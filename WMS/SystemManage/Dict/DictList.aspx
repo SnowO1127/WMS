@@ -333,7 +333,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true,title:'字典分类'" style="overflow: hidden; padding: 1px; width: 270px">
+        <div data-options="region: 'west', border: true,title:'字典分类'" style="padding: 1px; width: 270px">
             <div class="easyui-panel" data-options="border:false">
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="openItemAdd()">添加</a>
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="openItemEdit()">编辑</a>

@@ -53,9 +53,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppStockInBill.cs" />
     <Compile Include="AppClient.cs" />
     <Compile Include="AppMaterial.cs" />
     <Compile Include="AppMaterialCategory.cs" />
+    <Compile Include="AppStockInBillDetail.cs" />
     <Compile Include="AppSupplier.cs" />
     <Compile Include="AppUnit.cs" />
     <Compile Include="AppUnitConversion.cs" />

@@ -105,7 +105,7 @@
                             lntip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "3") {
-                            lntip.tooltip("update", '<span style="color:#fff">用户名不可用！</span>');
+                            lntip.tooltip("update", '<span style="color:#fff">用户不可用！</span>');
                             lntip.tooltip("show");
                         }
                         else if (jsonresult.Msg == "4") {
