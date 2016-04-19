@@ -5,8 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="Content/Js/jquery-1.9.1.min.js"></script>
-    <title>仪化信息技术公司协同办公系统</title>
+    <title></title>
     <style>
         .w-box {
             margin: 0 auto;
@@ -53,10 +52,6 @@
                 <span>
                     <img src="library/images/error.png" /></span> 您没有此页面的权限，请联系管理员获得权限！
             </div>
-            <p>
-                <%--系统将自动在【<label id="count_num">6</label>】秒内返回登录首页。   若系统繁忙，没有跳转请--%>
-                <a href="Login.aspx">点此回到登录首页</a>
-            </p>
         </div>
         <div class="footer">
             <div style="text-align: center">
