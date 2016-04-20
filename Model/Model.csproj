@@ -66,6 +66,7 @@
     <Compile Include="SysItem.cs" />
     <Compile Include="SysItemDetail.cs" />
     <Compile Include="SysMenu.cs" />
+    <Compile Include="SysNews.cs" />
     <Compile Include="SysOganize.cs" />
     <Compile Include="SysPermission.cs" />
     <Compile Include="SysRole.cs" />

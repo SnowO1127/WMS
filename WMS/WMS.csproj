@@ -92,10 +92,10 @@
     <Content Include="ErrorPage.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Index.aspx" />
-    <Content Include="InformationCenter\News\news_add.aspx" />
-    <Content Include="InformationCenter\News\news_list.aspx" />
-    <Content Include="InformationCenter\Notice\notice_add.aspx" />
-    <Content Include="InformationCenter\Notice\notice_list.aspx" />
+    <Content Include="InformationCenter\News\NewsAdd.aspx" />
+    <Content Include="InformationCenter\News\NewsList.aspx" />
+    <Content Include="InformationCenter\Notice\NoticeAdd.aspx" />
+    <Content Include="InformationCenter\Notice\NoticeList.aspx" />
     <Content Include="library\base_css\ui.css" />
     <Content Include="library\changelog.txt" />
     <Content Include="library\demo\accordion\actions.html" />
@@ -2947,33 +2947,33 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InformationCenter\News\news_add.aspx.cs">
-      <DependentUpon>news_add.aspx</DependentUpon>
+    <Compile Include="InformationCenter\News\NewsAdd.aspx.cs">
+      <DependentUpon>NewsAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InformationCenter\News\news_add.aspx.designer.cs">
-      <DependentUpon>news_add.aspx</DependentUpon>
+    <Compile Include="InformationCenter\News\NewsAdd.aspx.designer.cs">
+      <DependentUpon>NewsAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InformationCenter\News\news_list.aspx.cs">
-      <DependentUpon>news_list.aspx</DependentUpon>
+    <Compile Include="InformationCenter\News\NewsList.aspx.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InformationCenter\News\news_list.aspx.designer.cs">
-      <DependentUpon>news_list.aspx</DependentUpon>
+    <Compile Include="InformationCenter\News\NewsList.aspx.designer.cs">
+      <DependentUpon>NewsList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InformationCenter\Notice\notice_add.aspx.cs">
-      <DependentUpon>notice_add.aspx</DependentUpon>
+    <Compile Include="InformationCenter\Notice\NoticeAdd.aspx.cs">
+      <DependentUpon>NoticeAdd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InformationCenter\Notice\notice_add.aspx.designer.cs">
-      <DependentUpon>notice_add.aspx</DependentUpon>
+    <Compile Include="InformationCenter\Notice\NoticeAdd.aspx.designer.cs">
+      <DependentUpon>NoticeAdd.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InformationCenter\Notice\notice_list.aspx.cs">
-      <DependentUpon>notice_list.aspx</DependentUpon>
+    <Compile Include="InformationCenter\Notice\NoticeList.aspx.cs">
+      <DependentUpon>NoticeList.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InformationCenter\Notice\notice_list.aspx.designer.cs">
-      <DependentUpon>notice_list.aspx</DependentUpon>
+    <Compile Include="InformationCenter\Notice\NoticeList.aspx.designer.cs">
+      <DependentUpon>NoticeList.aspx</DependentUpon>
     </Compile>
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\Config.cs" />
     <Compile Include="library\ueditor1_4_3-utf8-net\net\App_Code\ConfigHandler.cs" />

@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace WMS.InformationCenter.News
+namespace WMS.InformationCenter.Notice
 {
-    public partial class news_list : System.Web.UI.Page
+    public partial class NoticeList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

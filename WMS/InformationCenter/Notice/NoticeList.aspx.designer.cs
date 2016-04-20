@@ -10,7 +10,7 @@
 namespace WMS.InformationCenter.Notice {
     
     
-    public partial class notice_add {
+    public partial class NoticeList {
         
         /// <summary>
         /// form1 控件。

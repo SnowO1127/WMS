@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.InformationCenter.Notice
 {
-    public partial class notice_list : System.Web.UI.Page
+    public partial class NoticeAdd : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

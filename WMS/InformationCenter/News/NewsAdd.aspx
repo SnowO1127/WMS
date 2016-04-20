@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="news_add.aspx.cs" Inherits="WMS.InformationCenter.News.news_add" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewsAdd.aspx.cs" Inherits="WMS.InformationCenter.News.NewsAdd" %>
 
 <!DOCTYPE html>
 

@@ -438,9 +438,9 @@
                             <div style="width: 33%;">
                                 <div data-options="title: '项目信息', height: 260, collapsible: true, closable: true" style="height: 260px;">
                                 </div>
-                                <div title="最新新闻" style="height: 260px; padding: 5px;">
+                                <div title="最新新闻" id="c_news" style="height: 260px; padding: 5px;">
                                 </div>
-                                <div title="最新公告" style="height: 260px; padding: 5px;">
+                                <div title="最新公告" id="c_notice" style="height: 260px; padding: 5px;">
                                 </div>
                             </div>
                             <div style="width: 33%;">

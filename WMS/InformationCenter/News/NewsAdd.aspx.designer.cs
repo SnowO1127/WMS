@@ -10,7 +10,7 @@
 namespace WMS.InformationCenter.News {
     
     
-    public partial class news_list {
+    public partial class NewsAdd {
         
         /// <summary>
         /// easyuiTheme 控件。

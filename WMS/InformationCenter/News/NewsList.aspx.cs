@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace WMS.InformationCenter.News
 {
-    public partial class news_add : System.Web.UI.Page
+    public partial class NewsList : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

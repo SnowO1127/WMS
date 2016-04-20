@@ -17,7 +17,7 @@ namespace DAL
 
             Property(t => t.MenuName).HasMaxLength(20);
             Property(t => t.Category).HasMaxLength(20);
-            Property(t => t.IconCls).HasMaxLength(30);
+            Property(t => t.IconCls).HasMaxLength(40);
             Property(t => t.MenuUrl).HasMaxLength(100);
             Property(t => t.Description).HasMaxLength(200);
             Property(t => t.CUserID).HasMaxLength(128);
