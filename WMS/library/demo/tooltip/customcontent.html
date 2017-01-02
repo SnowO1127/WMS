@@ -11,18 +11,17 @@
 </head>
 <body>
 	<h2>Custom Tooltip Content</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Access to each elements attribute to get the tooltip content.</div>
+	<p>Access to each elements attribute to get the tooltip content.</p>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel">
+		<div id="pg" data-options="total:114"></div>
 	</div>
-	<div style="margin:10px 0;"></div>
-	<div id="pg" data-options="total:114" style="border:1px solid #ddd;"></div>
 	
 	<script>
 		$(function(){
 			$('#pg').pagination().find('a.l-btn').tooltip({
 				content: function(){
-					var cc = $(this).find('span.l-btn-empty').attr('class').split(' ');
+					var cc = $(this).find('span.l-btn-icon').attr('class').split(' ');
 					var icon = cc[1].split('-')[1];
 					return icon + ' page';
 				}

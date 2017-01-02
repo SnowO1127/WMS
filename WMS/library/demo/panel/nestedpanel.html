@@ -11,18 +11,18 @@
 </head>
 <body>
 	<h2>Nested Panel</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>The panel can be placed inside containers and can contain other components.</div>
-	</div>
-	<div style="margin:10px 0;"></div>
-	<div class="easyui-panel" title="Nested Panel" style="width:500px;height:200px;padding:10px;">
+	<p>The panel can be placed inside containers and can contain other components.</p>
+	<div style="margin:20px 0 10px 0;"></div>
+	<div class="easyui-panel" title="Nested Panel" style="width:700px;height:200px;padding:10px;">
 		<div class="easyui-layout" data-options="fit:true">
 			<div data-options="region:'west',split:true" style="width:100px;padding:10px">
 				Left Content
 			</div>
-			<div data-options="region:'center'" style="padding:10px">
+			<div data-options="region:'east'" style="width:100px;padding:10px">
 				Right Content
+			</div>
+			<div data-options="region:'center'" style="padding:10px">
+				Center Content
 			</div>
 		</div>
 	</div>

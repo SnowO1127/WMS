@@ -11,12 +11,11 @@
 </head>
 <body>
 	<h2>Transform DataGrid from Table</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Transform DataGrid from an existing, unformatted html table.</div>
+	<p>Transform DataGrid from an existing, unformatted html table.</p>
+	<div style="margin:20px 0;">
+		<a href="#" class="easyui-linkbutton" onclick="javascript:$('#dg').datagrid()">Transform</a>
 	</div>
-	<div style="margin:10px 0;"></div>
-	<table class="easyui-datagrid" style="width:500px;height:auto">
+	<table id="dg" style="width:700px;height:auto;border:1px solid #ccc;">
 		<thead>
 			<tr>
 				<th data-options="field:'itemid'">Item ID</th>

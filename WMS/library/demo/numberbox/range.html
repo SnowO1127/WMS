@@ -11,11 +11,15 @@
 </head>
 <body>
 	<h2>Number Range</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>The value is constrained to a range between 10 and 90.</div>
+	<p>The value is constrained to a specified range.</p>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel" style="width:400px;padding:20px 100px 60px 100px;">
+		<p>Amount:</p>
+		<input class="easyui-numberbox" data-options="min:10,max:90,precision:2,required:true">
+		<p>Weight:</p>
+		<input class="easyui-numberbox" data-options="min:10,max:90,required:true">
+		<p>Age:</p>
+		<input class="easyui-numberbox" data-options="min:0,max:100,required:true">
 	</div>
-	<div style="margin:10px 0;"></div>
-	<input class="easyui-numberbox" data-options="min:10,max:90,precision:2,required:true">
 </body>
 </html>

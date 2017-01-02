@@ -11,11 +11,8 @@
 </head>
 <body>
 	<h2>Menu Events</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Right click on page to display menu and click an item.</div>
-	</div>
-	<div style="margin:10px 0;"></div>
+	<p>Right click on page to display menu and click an item.</p>
+	<div style="margin:20px 0;"></div>
 	<div id="mm" class="easyui-menu" data-options="onClick:menuHandler" style="width:120px;">
 		<div data-options="name:'new'">New</div>
 		<div data-options="name:'save',iconCls:'icon-save'">Save</div>
@@ -23,9 +20,11 @@
 		<div class="menu-sep"></div>
 		<div data-options="name:'exit'">Exit</div>
 	</div>
+	<div id="log" class="easyui-panel" title="Event Log" style="height:250px;padding:10px">
+	</div>
 	<script>
 		function menuHandler(item){
-			alert(item.name);
+			$('#log').prepend('<p>Click Item: '+item.name+'</p>');
 		}
 		$(function(){
 			$(document).bind('contextmenu',function(e){

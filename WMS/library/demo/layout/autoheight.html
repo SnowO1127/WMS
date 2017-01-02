@@ -11,11 +11,8 @@
 </head>
 <body>
 	<h2>Auto Height for Layout</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>This example shows how to auto adjust layout height after dynamically adding items.</div>
-	</div>
-	<div style="margin:10px 0;">
+	<p>This example shows how to auto adjust layout height after dynamically adding items.</p>
+	<div style="margin:20px 0;">
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="addItem()">Add Item</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="removeItem()">Remove Item</a>
 	</div>
@@ -53,8 +50,9 @@
 			var oldHeight = p.panel('panel').outerHeight();
 			p.panel('resize', {height:'auto'});
 			var newHeight = p.panel('panel').outerHeight();
-			c.height(c.height() + newHeight - oldHeight);
-			c.layout('resize');
+			c.layout('resize',{
+				height: (c.height() + newHeight - oldHeight)
+			});
 		}
 	</script>
 </body>

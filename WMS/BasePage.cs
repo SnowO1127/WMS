@@ -37,10 +37,10 @@ namespace WMS
             }
             else
             {
-                if (!url.Equals("/Login.aspx") 
-                 && !url.Equals("/Index.aspx") 
-                 && !url.Equals("/NoSession.aspx") 
-                 && !url.Equals("/NoPower.aspx"))
+                if (!url.Equals("/Login.aspx")
+                    && !url.Equals("/Index.aspx")
+                    && !url.Equals("/NoSession.aspx")
+                    && !url.Equals("/NoPower.aspx"))
                 {
                     List<SysMenu> smlist = bll.GetPessionMenus(su.ID);
 

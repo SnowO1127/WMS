@@ -11,12 +11,11 @@
 </head>
 <body>
 	<h2>Lazy Load Tree Nodes</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Get full hierarchical tree data but lazy load nodes level by level.</div>
+	<p>Get full hierarchical tree data but lazy load nodes level by level.</p>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel" style="padding:5px">
+		<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',loadFilter:myLoadFilter"></ul>
 	</div>
-	<div style="margin:10px 0;"></div>
-	<ul class="easyui-tree" data-options="url:'tree_data1.json',method:'get',loadFilter:myLoadFilter"></ul>
 	<script>
 		function myLoadFilter(data, parent){
 			var state = $.data(this, 'tree');

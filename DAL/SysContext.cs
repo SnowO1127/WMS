@@ -1,4 +1,5 @@
-﻿using Model;
+﻿using SqlProviderServices = System.Data.Entity.SqlServer.SqlProviderServices;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,9 +9,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL
-{
+{   
     public class SysContext : DbContext
     {
+     
         public DbSet<SysMenu> SysMenus { get; set; }
         public DbSet<SysRole> SysRoles { get; set; }
         public DbSet<SysButton> SysButtons { get; set; }

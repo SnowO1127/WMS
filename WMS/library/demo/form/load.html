@@ -11,34 +11,31 @@
 </head>
 <body>
 	<h2>Load Form Data</h2>
-	<div class="demo-info">
-		<div class="demo-tip icon-tip"></div>
-		<div>Click the buttons below to load form data.</div>
-	</div>
-	<div style="margin:10px 0;">
+	<p>Click the buttons below to load form data.</p>
+	<div style="margin:20px 0;">
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="loadLocal()">LoadLocal</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="loadRemote()">LoadRemote</a>
 		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()">Clear</a>
 	</div>
 	<div class="easyui-panel" title="New Topic" style="width:400px">
-		<div style="padding:10px 0 10px 60px">
+		<div style="padding:10px 60px 20px 60px">
 	    <form id="ff" method="post">
-	    	<table>
+	    	<table cellpadding="5">
 	    		<tr>
 	    			<td>Name:</td>
-	    			<td><input class="easyui-validatebox" type="text" name="name" data-options="required:true"></input></td>
+	    			<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Email:</td>
-	    			<td><input class="easyui-validatebox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
+	    			<td><input class="easyui-textbox" type="text" name="email" data-options="required:true,validType:'email'"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Subject:</td>
-	    			<td><input class="easyui-validatebox" type="text" name="subject" data-options="required:true"></input></td>
+	    			<td><input class="easyui-textbox" type="text" name="subject" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Message:</td>
-	    			<td><textarea name="message" style="height:60px;"></textarea></td>
+	    			<td><input class="easyui-textbox" name="message" data-options="multiline:true" style="height:60px"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td>Language:</td>
