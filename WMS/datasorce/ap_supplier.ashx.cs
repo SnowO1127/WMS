@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_supplier : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppSupplierBLL bll = new AppSupplierBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly SupplierBLL bll = new SupplierBLL();
+        private readonly UserBLL subll = new UserBLL();
         private PageAppSupplier pasu;
         private AppSupplier asu;
         private JsonResult jr;

@@ -14,7 +14,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_role : IHttpHandler
     {
-        private readonly SysRoleBLL bll = new SysRoleBLL();
+        private readonly RoleBLL bll = new RoleBLL();
         private PageSysRole psr;
         private SysRole sr;
         private JsonResult jr;

@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_client : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppClientBLL bll = new AppClientBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly ClientBLL bll = new ClientBLL();
+        private readonly UserBLL subll = new UserBLL();
         private PageAppClient pac;
         private AppClient ac;
         private JsonResult jr;

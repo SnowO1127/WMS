@@ -15,7 +15,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_user : IHttpHandler
     {
-        private readonly SysUserBLL bll = new SysUserBLL();
+        private readonly UserBLL bll = new UserBLL();
         private string userid, q;
         private string rolesjsonstr;
         private JsonResult jr;

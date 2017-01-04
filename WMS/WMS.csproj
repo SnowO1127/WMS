@@ -1754,6 +1754,7 @@
     <Content Include="library\themes\cupertino\tree.css" />
     <Content Include="library\themes\cupertino\validatebox.css" />
     <Content Include="library\themes\cupertino\window.css" />
+    <Content Include="library\themes\custom\easyui.css" />
     <Content Include="library\themes\dark-hive\accordion.css" />
     <Content Include="library\themes\dark-hive\calendar.css" />
     <Content Include="library\themes\dark-hive\combo.css" />

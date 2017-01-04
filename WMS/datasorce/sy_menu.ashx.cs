@@ -14,7 +14,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_menu : IHttpHandler
     {
-        private readonly SysMenuBLL bll = new SysMenuBLL();
+        private readonly MenuBLL bll = new MenuBLL();
         private JsonResult jr;
         private SysMenu sm;
         private PageSysMenu psm;

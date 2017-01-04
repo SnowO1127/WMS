@@ -14,7 +14,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_button : IHttpHandler
     {
-        private readonly SysButtonBLL bll = new SysButtonBLL();
+        private readonly ButtonBLL bll = new ButtonBLL();
         private PageSysButton psb;
         private SysButton sb;
         private JsonResult jr;

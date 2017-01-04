@@ -14,7 +14,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_oganize : IHttpHandler
     {
-        private readonly SysOganizeBLL bll = new SysOganizeBLL();
+        private readonly OganizeBLL bll = new OganizeBLL();
         private JsonResult jr;
         private SysOganize so;
         private PageSysOganize pso;

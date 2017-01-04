@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ChinaDateTimeConverter.cs" />
+    <Compile Include="DataCache.cs" />
     <Compile Include="DEncrypt.cs" />
     <Compile Include="Globe.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

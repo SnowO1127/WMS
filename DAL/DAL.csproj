@@ -39,14 +39,6 @@
       <HintPath>..\packages\cyqdata.5.7.5.6\lib\net\CYQ.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -59,37 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppClientDAL.cs" />
-    <Compile Include="AppClientMap.cs" />
-    <Compile Include="AppMaterialCategoryDAL.cs" />
-    <Compile Include="AppMaterialDAL.cs" />
-    <Compile Include="AppMaterialMap.cs" />
-    <Compile Include="AppSupplierDAL.cs" />
-    <Compile Include="AppSupplierMap.cs" />
-    <Compile Include="AppUnitConversionDAL.cs" />
-    <Compile Include="AppUnitConversionMap.cs" />
-    <Compile Include="AppUnitDAL.cs" />
-    <Compile Include="AppUnitMap.cs" />
-    <Compile Include="AppWareHouseDAL.cs" />
-    <Compile Include="AppWareHouseMap.cs" />
-    <Compile Include="AppMaterialCategoryMap.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="SysButtonDAL.cs" />
-    <Compile Include="SysButtonMap.cs" />
-    <Compile Include="SysContext.cs" />
-    <Compile Include="SysItemDAL.cs" />
-    <Compile Include="SysItemDetailDAL.cs" />
-    <Compile Include="SysItemDetailMap.cs" />
-    <Compile Include="SysItemMap.cs" />
-    <Compile Include="SysMenuDAL.cs" />
-    <Compile Include="SysMenuMap.cs" />
-    <Compile Include="SysOganizeDAL.cs" />
-    <Compile Include="SysOganizeMap.cs" />
-    <Compile Include="SysRoleDAL.cs" />
-    <Compile Include="SysRoleMap.cs" />
+    <Compile Include="ClientDAL.cs" />
+    <Compile Include="MaterialCategoryDAL.cs" />
+    <Compile Include="MaterialDAL.cs" />
+    <Compile Include="SupplierDAL.cs" />
+    <Compile Include="UnitConversionDAL.cs" />
+    <Compile Include="UnitDAL.cs" />
+    <Compile Include="WareHouseDAL.cs" />
+    <Compile Include="ButtonDAL.cs" />
+    <Compile Include="ItemDAL.cs" />
+    <Compile Include="ItemDetailDAL.cs" />
+    <Compile Include="MenuDAL.cs" />
+    <Compile Include="OganizeDAL.cs" />
+    <Compile Include="RoleDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SysUserDAL.cs" />
-    <Compile Include="SysUserMap.cs" />
+    <Compile Include="UserDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
@@ -106,7 +82,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -8,7 +8,7 @@
     <script src="library/jquery-1.9.1.min.js"></script>
     <script src="library/jquery.easyui.min.js"></script>
     <script src="library/easyui-lang-zh_CN.js"></script>
-    <link id="easyuiTheme" href="library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="library/themes/custom/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/base_css/ui.css" rel="stylesheet" />
     <script src="library/jquery.cookie.js"></script>

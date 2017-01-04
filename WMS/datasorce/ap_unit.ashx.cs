@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_unit : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppUnitBLL bll = new AppUnitBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly UnitBLL bll = new UnitBLL();
+        private readonly UserBLL subll = new UserBLL();
         private PageAppUnit pau;
         private AppUnit au;
         private JsonResult jr;

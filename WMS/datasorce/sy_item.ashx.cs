@@ -14,7 +14,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_item : IHttpHandler
     {
-        private readonly SysItemBLL bll = new SysItemBLL();
+        private readonly ItemBLL bll = new ItemBLL();
         private JsonResult jr;
         private SysItem si;
         private string itemid;

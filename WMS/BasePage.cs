@@ -12,7 +12,7 @@ namespace WMS
 {
     public class BasePage : System.Web.UI.Page
     {
-        private readonly SysUserBLL bll = new SysUserBLL();
+        private readonly UserBLL bll = new UserBLL();
         public SysUser su
             ;
         public BasePage()

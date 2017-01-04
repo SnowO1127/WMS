@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_unitconversion : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppUnitConversionBLL bll = new AppUnitConversionBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly UnitConversionBLL bll = new UnitConversionBLL();
+        private readonly UserBLL subll = new UserBLL();
         private PageAppUnitConversion pauc;
         private AppUnitConversion auc;
         private JsonResult jr;

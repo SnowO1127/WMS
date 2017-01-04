@@ -15,7 +15,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_login : IHttpHandler, IRequiresSessionState
     {
-        private readonly SysUserBLL bll = new SysUserBLL();
+        private readonly UserBLL bll = new UserBLL();
         private string loginname, password, securitycode;
         private JsonResult jr;
         private SysUser su;

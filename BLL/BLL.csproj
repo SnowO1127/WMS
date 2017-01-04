@@ -57,21 +57,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppClientBLL.cs" />
-    <Compile Include="AppMaterialBLL.cs" />
-    <Compile Include="AppMaterialCategoryBLL.cs" />
-    <Compile Include="AppSupplierBLL.cs" />
-    <Compile Include="AppUnitBLL.cs" />
-    <Compile Include="AppUnitConversionBLL.cs" />
-    <Compile Include="AppWareHouseBLL.cs" />
-    <Compile Include="SysButtonBLL.cs" />
-    <Compile Include="SysItemBLL.cs" />
-    <Compile Include="SysItemDetailBLL.cs" />
-    <Compile Include="SysMenuBLL.cs" />
-    <Compile Include="SysOganizeBLL.cs" />
-    <Compile Include="SysPermissionBLL.cs" />
-    <Compile Include="SysRoleBLL.cs" />
-    <Compile Include="SysUserBLL.cs" />
+    <Compile Include="ClientBLL.cs" />
+    <Compile Include="MaterialBLL.cs" />
+    <Compile Include="MaterialCategoryBLL.cs" />
+    <Compile Include="SupplierBLL.cs" />
+    <Compile Include="UnitBLL.cs" />
+    <Compile Include="UnitConversionBLL.cs" />
+    <Compile Include="WareHouseBLL.cs" />
+    <Compile Include="ButtonBLL.cs" />
+    <Compile Include="ItemBLL.cs" />
+    <Compile Include="ItemDetailBLL.cs" />
+    <Compile Include="MenuBLL.cs" />
+    <Compile Include="OganizeBLL.cs" />
+    <Compile Include="PermissionBLL.cs" />
+    <Compile Include="RoleBLL.cs" />
+    <Compile Include="UserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

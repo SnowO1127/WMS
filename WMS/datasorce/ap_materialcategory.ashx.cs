@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_materialcategory : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppMaterialCategoryBLL bll = new AppMaterialCategoryBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly MaterialCategoryBLL bll = new MaterialCategoryBLL();
+        private readonly UserBLL subll = new UserBLL();
         private PageAppMaterialCategory pamc;
         private AppMaterialCategory amc;
         private JsonResult jr;

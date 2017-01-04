@@ -15,8 +15,8 @@ namespace WMS.datasorce
     /// </summary>
     public class ap_warehouse : IHttpHandler, IRequiresSessionState
     {
-        private readonly AppWareHouseBLL bll = new AppWareHouseBLL();
-        private readonly SysUserBLL subll = new SysUserBLL();
+        private readonly WareHouseBLL bll = new WareHouseBLL();
+        private readonly UserBLL subll = new UserBLL();
         private JsonResult jr;
         private AppWareHouse awh;
         private PageAppWareHouse pawh;

@@ -13,7 +13,7 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_permission : IHttpHandler
     {
-        private readonly SysPermissionBLL bll = new SysPermissionBLL();
+        private readonly PermissionBLL bll = new PermissionBLL();
         private JsonResult jr;
         private string userid, roleid, jsonstr;
         public void ProcessRequest(HttpContext context)
