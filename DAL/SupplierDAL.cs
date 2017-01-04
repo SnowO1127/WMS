@@ -1,6 +1,5 @@
 ﻿using Common;
 using Model;
-using PageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,84 +10,84 @@ namespace DAL
 {
     public class SupplierDAL
     {
-        public List<AppSupplier> GetList()
-        {
-            List<AppSupplier> list = new List<AppSupplier>();
-            using (var ctx = new Context(Globe.ConnectionString))
-            {
-                list = ctx.AppSuppliers.ToList();
-            }
-            return list;
-        }
+        //public List<AppSupplier> GetList()
+        //{
+        //    List<AppSupplier> list = new List<AppSupplier>();
+        //    using (var ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        list = ctx.AppSuppliers.ToList();
+        //    }
+        //    return list;
+        //}
 
-        public int GetCount()
-        {
-            int count = 0;
-            using (var ctx = new Context(Globe.ConnectionString))
-            {
-                count = ctx.AppSuppliers.Count();
-            }
-            return count;
-        }
+        //public int GetCount()
+        //{
+        //    int count = 0;
+        //    using (var ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        count = ctx.AppSuppliers.Count();
+        //    }
+        //    return count;
+        //}
 
-        public List<AppSupplier> GetListByPage(PageAppSupplier pasu)
-        {
-            List<AppSupplier> list = new List<AppSupplier>();
-            using (var ctx = new Context(Globe.ConnectionString))
-            {
-                list = ctx.AppSuppliers.Where(x => x.DeleteMark.Equals(false)).ToList();
+        //public List<AppSupplier> GetListByPage(PageAppSupplier pasu)
+        //{
+        //    List<AppSupplier> list = new List<AppSupplier>();
+        //    using (var ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        list = ctx.AppSuppliers.Where(x => x.DeleteMark.Equals(false)).ToList();
 
-            }
-            list = pasu.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, pasu.Sort)).Skip(pasu.Rows * (pasu.Page - 1)).Take(pasu.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, pasu.Sort)).Skip(pasu.Rows * (pasu.Page - 1)).Take(pasu.Rows).ToList();
+        //    }
+        //    list = pasu.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, pasu.Sort)).Skip(pasu.Rows * (pasu.Page - 1)).Take(pasu.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, pasu.Sort)).Skip(pasu.Rows * (pasu.Page - 1)).Take(pasu.Rows).ToList();
 
-            return list;
-        }
+        //    return list;
+        //}
 
-        public void AddSupplier(AppSupplier ac)
-        {
-            using (var ctx = new Context(Globe.ConnectionString))
-            {
-                ctx.AppSuppliers.Add(ac);
-                ctx.SaveChanges();
-            }
-        }
+        //public void AddSupplier(AppSupplier ac)
+        //{
+        //    using (var ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        ctx.AppSuppliers.Add(ac);
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public void UpdateSupplier(AppSupplier asu)
-        {
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                AppSupplier nacu = new AppSupplier();
-                nacu = ctx.AppSuppliers.Find(asu.ID);
+        //public void UpdateSupplier(AppSupplier asu)
+        //{
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        AppSupplier nacu = new AppSupplier();
+        //        nacu = ctx.AppSuppliers.Find(asu.ID);
 
-                IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "DDate", "DUserID", "DUserName", "DeleteMark" };
+        //        IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                Utils.Copy(nacu, asu, ie);
+        //        Utils.Copy(nacu, asu, ie);
 
-                ctx.SaveChanges();
-            }
-        }
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public void DeleteSupplier(string supplierid)
-        {
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                AppSupplier asu = new AppSupplier();
-                asu = ctx.AppSuppliers.Find(supplierid);
+        //public void DeleteSupplier(string supplierid)
+        //{
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        AppSupplier asu = new AppSupplier();
+        //        asu = ctx.AppSuppliers.Find(supplierid);
 
-                asu.DeleteMark = true;
+        //        asu.DeleteMark = true;
 
-                ctx.SaveChanges();
-            }
-        }
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public AppSupplier GetOneSupplier(string supplierid)
-        {
-            AppSupplier asu = new AppSupplier();
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                asu = ctx.AppSuppliers.Find(supplierid);
-            }
-            return asu;
-        }
+        //public AppSupplier GetOneSupplier(string supplierid)
+        //{
+        //    AppSupplier asu = new AppSupplier();
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        asu = ctx.AppSuppliers.Find(supplierid);
+        //    }
+        //    return asu;
+        //}
     }
 }

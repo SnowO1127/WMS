@@ -1,6 +1,5 @@
 ﻿using Common;
 using Model;
-using PageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,85 +10,85 @@ namespace DAL
 {
     public class ButtonDAL
     {
-        public List<SysButton> GetListByPage(PageSysButton psb)
-        {
-            List<SysButton> list = new List<SysButton>();
+        //public List<SysButton> GetListByPage(PageSysButton psb)
+        //{
+        //    List<SysButton> list = new List<SysButton>();
 
-            if (!string.IsNullOrEmpty(psb.MenuID))
-            {
-                using (var ctx = new Context(Globe.ConnectionString))
-                {
-                    var query = ctx.SysButtons.Where(x => x.MenuID.Equals(psb.MenuID) && x.DeleteMark.Equals(false));
-                    list = query.ToList();
+        //    if (!string.IsNullOrEmpty(psb.MenuID))
+        //    {
+        //        using (var ctx = new Context(Globe.ConnectionString))
+        //        {
+        //            var query = ctx.SysButtons.Where(x => x.MenuID.Equals(psb.MenuID) && x.DeleteMark.Equals(false));
+        //            list = query.ToList();
 
-                    list = psb.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psb.Sort)).Skip(psb.Rows * (psb.Page - 1)).Take(psb.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psb.Sort)).Skip(psb.Rows * (psb.Page - 1)).Take(psb.Rows).ToList();
-                }
-            }
-            return list;
-        }
+        //            list = psb.Order == "desc" ? list.OrderByDescending(p => Utils.GetPropertyValue(p, psb.Sort)).Skip(psb.Rows * (psb.Page - 1)).Take(psb.Rows).ToList() : list.OrderBy(p => Utils.GetPropertyValue(p, psb.Sort)).Skip(psb.Rows * (psb.Page - 1)).Take(psb.Rows).ToList();
+        //        }
+        //    }
+        //    return list;
+        //}
 
-        public void AddButton(SysButton sb)
-        {
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                sb.SysMenu = ctx.SysMenus.Find(sb.MenuID);
+        //public void AddButton(SysButton sb)
+        //{
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        sb.SysMenu = ctx.SysMenus.Find(sb.MenuID);
 
-                ctx.SysButtons.Add(sb);
+        //        ctx.SysButtons.Add(sb);
 
-                ctx.SaveChanges();
-            }
-        }
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public void UpdateButton(SysButton sb)
-        {
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                SysButton nsb = new SysButton();
+        //public void UpdateButton(SysButton sb)
+        //{
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        SysButton nsb = new SysButton();
 
-                nsb = ctx.SysButtons.Find(sb.ID);
+        //        nsb = ctx.SysButtons.Find(sb.ID);
 
-                IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
+        //        IEnumerable<string> ie = new List<string> { "ID", "CDate", "CUserName", "CUserID", "UDate", "UUserID", "UUserName", "DDate", "DUserID", "DUserName", "DeleteMark" };
 
-                Utils.Copy(nsb, sb, ie);
+        //        Utils.Copy(nsb, sb, ie);
 
-                nsb.UDate = DateTime.Now;
+        //        nsb.UDate = DateTime.Now;
 
-                ctx.SaveChanges();
-            }
-        }
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public SysButton GetOneButton(string id)
-        {
-            SysButton sb = new SysButton();
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                sb = ctx.SysButtons.Find(id);
-            }
+        //public SysButton GetOneButton(string id)
+        //{
+        //    SysButton sb = new SysButton();
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        sb = ctx.SysButtons.Find(id);
+        //    }
 
-            return sb;
-        }
+        //    return sb;
+        //}
 
-        public void DeleteButton(string id)
-        {
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                SysButton sb = new SysButton();
-                sb = ctx.SysButtons.Find(id);
+        //public void DeleteButton(string id)
+        //{
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        SysButton sb = new SysButton();
+        //        sb = ctx.SysButtons.Find(id);
 
-                sb.DeleteMark = true;
+        //        sb.DeleteMark = true;
 
-                ctx.SaveChanges();
-            }
-        }
+        //        ctx.SaveChanges();
+        //    }
+        //}
 
-        public List<SysButton> GetList()
-        {
-            List<SysButton> list = new List<SysButton>();
-            using (Context ctx = new Context(Globe.ConnectionString))
-            {
-                list = ctx.SysButtons.Where(x => x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
-            }
-            return list;
-        }
+        //public List<SysButton> GetList()
+        //{
+        //    List<SysButton> list = new List<SysButton>();
+        //    using (Context ctx = new Context(Globe.ConnectionString))
+        //    {
+        //        list = ctx.SysButtons.Where(x => x.Enabled.Equals(true) && x.DeleteMark.Equals(false)).OrderBy(x => x.OrderID).ToList();
+        //    }
+        //    return list;
+        //}
     }
 }

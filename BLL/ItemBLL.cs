@@ -1,6 +1,5 @@
 ﻿using DAL;
 using Model;
-using PageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,75 +14,75 @@ namespace BLL
 
         public List<SysItem> GetIsTreeList()
         {
-            return dal.GetIsTreeList();
+            return null;
         }
 
         public List<SysItem> GetList()
         {
-            return dal.GetList();
+            return null;
         }
 
-        public List<Tree> GetItemTree()
-        {
-            List<Tree> tlist = new List<Tree>();
-            List<SysItem> list = GetList();
-            foreach (SysItem si in list)
-            {
-                Tree t = new Tree();
-                t.id = si.ID;
-                t.text = si.Name;
-                t.pid = si.ParentID;
+        //public List<Tree> GetItemTree()
+        //{
+        //    List<Tree> tlist = new List<Tree>();
+        //    List<SysItem> list = GetList();
+        //    foreach (SysItem si in list)
+        //    {
+        //        Tree t = new Tree();
+        //        t.id = si.ID;
+        //        t.text = si.Name;
+        //        t.pid = si.ParentID;
 
-                Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-                attributes.Add("istree", si.IsTree);
-                attributes.Add("allowedit", si.AllowEdit);
-                attributes.Add("allowdelete", si.AllowDelete);
+        //        Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+        //        attributes.Add("istree", si.IsTree);
+        //        attributes.Add("allowedit", si.AllowEdit);
+        //        attributes.Add("allowdelete", si.AllowDelete);
 
-                t.attributes = attributes;
+        //        t.attributes = attributes;
 
-                tlist.Add(t);
-            }
-            return tlist;
-        }
+        //        tlist.Add(t);
+        //    }
+        //    return tlist;
+        //}
 
-        public void AddItem(SysItem si)
-        {
-            dal.AddItem(si);
-        }
+        //public void AddItem(SysItem si)
+        //{
+        //    dal.AddItem(si);
+        //}
 
-        public List<Tree> GetIsTree()
-        {
-            List<Tree> tlist = new List<Tree>();
-            List<SysItem> list = GetIsTreeList();
-            foreach (SysItem si in list)
-            {
-                Tree t = new Tree();
-                t.id = si.ID;
-                t.text = si.Name;
+        //public List<Tree> GetIsTree()
+        //{
+        //    List<Tree> tlist = new List<Tree>();
+        //    List<SysItem> list = GetIsTreeList();
+        //    foreach (SysItem si in list)
+        //    {
+        //        Tree t = new Tree();
+        //        t.id = si.ID;
+        //        t.text = si.Name;
 
-                tlist.Add(t);
-            }
-            return tlist;
-        }
+        //        tlist.Add(t);
+        //    }
+        //    return tlist;
+        //}
 
-        public SysItem GetOneItem(string id)
-        {
-            return dal.GetOneItem(id);
-        }
+        //public SysItem GetOneItem(string id)
+        //{
+        //    return null;
+        //}
 
-        public void UpdateItem(SysItem si)
-        {
-            dal.UpdateItem(si);
-        }
+        //public void UpdateItem(SysItem si)
+        //{
+        //    dal.UpdateItem(si);
+        //}
 
-        public SysItem GetOneItemByCode(string code)
-        {
-            return dal.GetOneItemByCode(code);
-        }
+        //public SysItem GetOneItemByCode(string code)
+        //{
+        //    return null;
+        //}
 
-        public void DeleteItem(string itemid)
-        {
-            dal.DeleteItem(itemid);
-        }
+        //public void DeleteItem(string itemid)
+        //{
+        //    dal.DeleteItem(itemid);
+        //}
     }
 }

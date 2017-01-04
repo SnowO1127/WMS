@@ -1,6 +1,5 @@
 ﻿using DAL;
 using Model;
-using PageModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,29 +11,29 @@ namespace BLL
     public class ButtonBLL
     {
         private readonly ButtonDAL dal = new ButtonDAL();
-        public List<SysButton> GetListByPage(PageSysButton psb)
+        public List<SysButton> GetListByPage()
         {
-            return dal.GetListByPage(psb);
+            return null;
         }
 
         public void AddButton(SysButton sb)
         {
-            dal.AddButton(sb);
+           
         }
 
         public void UpdateButton(SysButton sb)
         {
-            dal.UpdateButton(sb);
+           
         }
 
         public SysButton GetOneButton(string id)
         {
-            return dal.GetOneButton(id);
+            return null;
         }
 
         public void DeleteButton(string id)
         {
-            dal.DeleteButton(id);
+            
         }
     }
 }

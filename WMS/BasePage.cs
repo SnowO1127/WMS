@@ -28,7 +28,7 @@ namespace WMS
 
             SessionHelper.SetSession(Globe.LastUrlSessionName, lasturl);
 
-            su = bll.GetCurrentUser();
+            //su = bll.GetCurrentUser();
 
             if (su == null)
             {
@@ -42,15 +42,15 @@ namespace WMS
                     && !url.Equals("/NoSession.aspx")
                     && !url.Equals("/NoPower.aspx"))
                 {
-                    List<SysMenu> smlist = bll.GetPessionMenus(su.ID);
+                    //List<SysMenu> smlist = bll.GetPessionMenus(su.ID);
 
-                    List<string> urls = smlist.Select(x => x.MenuUrl).ToList();
+                    //List<string> urls = smlist.Select(x => x.MenuUrl).ToList();
 
-                    if (!urls.Contains(url))
-                    {
-                        Response.Write("<script language='javascript'>window.location.href='/NoPower.aspx';</script>");
-                        Response.End();
-                    }
+                    //if (!urls.Contains(url))
+                    //{
+                    //    Response.Write("<script language='javascript'>window.location.href='/NoPower.aspx';</script>");
+                    //    Response.End();
+                    //}
                 }
             }
         }
