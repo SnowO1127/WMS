@@ -55,6 +55,7 @@
     <Compile Include="MaterialCategoryDAL.cs" />
     <Compile Include="MaterialDAL.cs" />
     <Compile Include="SupplierDAL.cs" />
+    <Compile Include="SysUserDAL.cs" />
     <Compile Include="UnitConversionDAL.cs" />
     <Compile Include="UnitDAL.cs" />
     <Compile Include="WareHouseDAL.cs" />

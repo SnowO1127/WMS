@@ -43,11 +43,11 @@ namespace DalFactory
         /// <summary>
         /// 创建User数据层接口。
         /// </summary>
-        public static IUser CreateUser()
+        public static ISysUser CreateUser()
         {
             string ClassNamespace = AssemblyPath + ".UserDAL";
             object objType = CreateObject(AssemblyPath, ClassNamespace);
-            return (IUser)objType;
+            return (ISysUser)objType;
         }
     }
 }
