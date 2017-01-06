@@ -11,7 +11,7 @@
     <script src="library/jquery.cookie.js"></script>
     <script src="library/xyEasyUI.js"></script>
     <script src="library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="library/themes/custom/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/login.css" rel="stylesheet" />
     <title></title>

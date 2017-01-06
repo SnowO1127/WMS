@@ -1,5 +1,4 @@
-﻿using DAL;
-using Model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace BLL
 {
     public class ItemBLL
     {
-        private readonly ItemDAL dal = new ItemDAL();
+        //private readonly ItemDAL dal = new ItemDAL();
 
         public List<SysItem> GetIsTreeList()
         {

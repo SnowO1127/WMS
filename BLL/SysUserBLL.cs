@@ -1,5 +1,6 @@
 ﻿using Common;
-using DAL;
+using DalFactory;
+using IDAL;
 using Model;
 using System;
 using System.Collections.Generic;
@@ -10,61 +11,62 @@ using System.Web;
 
 namespace BLL
 {
-    public class UserBLL
+    public class SysUserBLL
     {
-        //private readonly UserDAL sudal = new UserDAL();
+        private readonly ISysUserDAL sysUserDal = DataAccess.CreateUser();
         //private readonly RoleDAL srdal = new RoleDAL();
         //private readonly MenuDAL smdal = new MenuDAL();
-        ///// <summary>
-        ///// 得到所有用户
-        ///// </summary>
-        ///// <returns></returns>
-        //public Grid<SysUser> GetList()
-        //{
-        //    Grid<SysUser> g = new Grid<SysUser>();
+        /// <summary>
+        /// 得到所有用户
+        /// </summary>
+        /// <returns></returns>
+        public Grid<SysUser> GetList()
+        {
+            Grid<SysUser> g = new Grid<SysUser>();
 
-        //    g.total = sudal.GetCount();
-        //    g.rows = sudal.GetList();
-        //    return g;
-        //}
+            g.total = sysUserDal.GetCount();
+            g.rows = sysUserDal.GetList();
 
-        ///// <summary>
-        ///// 分页得到用户
-        ///// </summary>
-        ///// <param name="psu"></param>
-        ///// <returns></returns>
-        //public Grid<SysUser> GetListByPage(PageSysUser psu)
-        //{
-        //    Grid<SysUser> g = new Grid<SysUser>();
+            return g;
+        }
 
-        //    g.total = sudal.GetCount();
-        //    g.rows = sudal.GetListByPage(psu);
-        //    return g;
-        //}
+        /// <summary>
+        /// 分页得到用户
+        /// </summary>
+        /// <param name="psu"></param>
+        /// <returns></returns>
+        public Grid<SysUser> GetList(int pageIndex, int pageSize, string where)
+        {
+            Grid<SysUser> g = new Grid<SysUser>();
 
-        ///// <summary>
-        ///// 添加用户
-        ///// </summary>
-        ///// <param name="su"></param>
-        //public void AddUser(SysUser su)
-        //{
-        //    sudal.AddUser(su);
-        //}
+            g.total = sysUserDal.GetCount(where);
+            g.rows = sysUserDal.GetList(pageIndex, pageSize, where);
+            return g;
+        }
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <param name="su"></param>
+        public void Insert(SysUser su)
+        {
+            sysUserDal.Insert(su);
+        }
 
         //public void AddRoles(string userid, List<SysRole> list)
         //{
         //    sudal.AddRoles(userid, list);
         //}
 
-        //public SysUser GetOneUser(string id)
-        //{
-        //    return sudal.GetOneUser(id);
-        //}
+        public SysUser GetOneUser(string id)
+        {
+            return sysUserDal.GetOneUserByKey(id);
+        }
 
-        //public void UpdateUser(SysUser su)
-        //{
-        //    sudal.UpdateUser(su);
-        //}
+        public void Update(SysUser su)
+        {
+            sysUserDal.Update(su);
+        }
 
         //public List<SysUser> GetUserListBySpell(string q, int page, int rows, string sort, string order)
         //{
@@ -81,15 +83,20 @@ namespace BLL
         //    sudal.ResetPassWord(userid, password);
         //}
 
-        //public SysUser GetOneUserByLoginName(string loginname)
-        //{
-        //    return sudal.GetOneUserByLoginName(loginname);
-        //}
+        public SysUser GetOneUserByLoginName(string loginname)
+        {
+            string where = "LoginName = '" + loginname + "'";
 
-        //public SysUser GetOneUserByLogin(string loginname, string password)
-        //{
-        //    return sudal.GetOneUserByLogin(loginname, password);
-        //}
+            return sysUserDal.GetOneUserByCondition(where);
+        }
+
+
+        public SysUser GetOneUserByLogin(string loginname, string password)
+        {
+            string where = "LoginName = '" + loginname + "' and PassWord = '" + password + "'";
+
+            return sysUserDal.GetOneUserByCondition(where);
+        }
 
         ///// <summary>
         ///// 根据用户生成菜单树
@@ -101,23 +108,25 @@ namespace BLL
         //    return CreateTreeList(GetEnabledPessionMenus(userid));
         //}
 
-        ///// <summary>
-        ///// 得到当前登录用户
-        ///// </summary>
-        ///// <returns></returns>
-        //public SysUser GetCurrentUser()
-        //{
-        //    SysUser su = null;
-        //    if (SessionHelper.GetSession(Globe.UserSessionName) != null)
-        //    {
-        //        string userid = SessionHelper.GetSession(Globe.UserSessionName).ToString();
-        //        if (!string.IsNullOrEmpty(userid))
-        //        {
-        //            su = sudal.GetOneUser(userid);
-        //        }
-        //    }
-        //    return su;
-        //}
+        /// <summary>
+        /// 得到当前登录用户
+        /// </summary>
+        /// <returns></returns>
+        public SysUser GetCurrentUser()
+        {
+            SysUser su = null;
+            if (SessionHelper.GetSession(Globe.UserSessionName) != null)
+            {
+                string loginname = SessionHelper.GetSession(Globe.UserSessionName).ToString();
+                if (!string.IsNullOrEmpty(loginname))
+                {
+                    string where = "LoginName='" + loginname + "'";
+
+                    su = sysUserDal.GetOneUserByCondition(where);
+                }
+            }
+            return su;
+        }
 
         ///// <summary>
         ///// 得到权限菜单
@@ -206,5 +215,6 @@ namespace BLL
         //    }
         //    return tlist.OrderBy(x => x.order).ToList();
         //}
+
     }
 }

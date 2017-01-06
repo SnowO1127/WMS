@@ -8,11 +8,11 @@ namespace Common
 {
     public class Globe
     {
-        public static string ConnectionString = "WmsContext";
-
         public const string DefaultPassWord = "123456";
 
-        public const string SuperPassWord = "256271";
+        public const string SuperPassWord = "201201";
+
+        public const string SuperUser = "admin";
 
         public class MenuButtonCategory
         {

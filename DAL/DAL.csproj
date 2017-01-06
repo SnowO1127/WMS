@@ -68,9 +68,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{560cdd96-207e-4e4b-8eb3-1d5a8eb0af27}</Project>
-      <Name>Common</Name>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{a59eed80-0a97-49b2-a92e-87c86ad6637a}</Project>
+      <Name>IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{8cf7db3d-d103-4e29-aec6-760ca75188cf}</Project>

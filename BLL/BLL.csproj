@@ -63,7 +63,7 @@
     <Compile Include="OganizeBLL.cs" />
     <Compile Include="PermissionBLL.cs" />
     <Compile Include="RoleBLL.cs" />
-    <Compile Include="UserBLL.cs" />
+    <Compile Include="SysUserBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -71,9 +71,13 @@
       <Project>{560cdd96-207e-4e4b-8eb3-1d5a8eb0af27}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{bc25d809-7154-4949-b65a-05878c33fa54}</Project>
-      <Name>DAL</Name>
+    <ProjectReference Include="..\DalFactory\DalFactory.csproj">
+      <Project>{6f46d37e-e8e8-4096-a8b8-1a7ba17bf07a}</Project>
+      <Name>DalFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDAL\IDAL.csproj">
+      <Project>{a59eed80-0a97-49b2-a92e-87c86ad6637a}</Project>
+      <Name>IDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{8cf7db3d-d103-4e29-aec6-760ca75188cf}</Project>

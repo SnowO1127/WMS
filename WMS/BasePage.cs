@@ -12,7 +12,7 @@ namespace WMS
 {
     public class BasePage : System.Web.UI.Page
     {
-        private readonly UserBLL bll = new UserBLL();
+        private readonly SysUserBLL bll = new SysUserBLL();
         public SysUser su
             ;
         public BasePage()
@@ -28,7 +28,7 @@ namespace WMS
 
             SessionHelper.SetSession(Globe.LastUrlSessionName, lasturl);
 
-            //su = bll.GetCurrentUser();
+            su = bll.GetCurrentUser();
 
             if (su == null)
             {

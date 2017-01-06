@@ -8,24 +8,24 @@ namespace Common
 {
     public class JsonResult
     {
-        private bool _isSucess;
+        private bool _sucess;
         public JsonResult()
         {
-            this.IsSuccess = false;
+            this.Success = false;
         }
 
-        public bool IsSuccess
+        public bool Success
         {
-            get { return _isSucess; }
-            set { _isSucess = value; }
+            get { return _sucess; }
+            set { _sucess = value; }
         }
 
-        private string _message;
+        private string _msg;
 
-        public string Message
+        public string Msg
         {
-            get { return _message; }
-            set { _message = value; }
+            get { return _msg; }
+            set { _msg = value; }
         }
         private Object _obj;
 

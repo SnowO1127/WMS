@@ -1,5 +1,4 @@
-﻿using DAL;
-using Model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace BLL
 {
     public class ButtonBLL
     {
-        private readonly ButtonDAL dal = new ButtonDAL();
+        //private readonly ButtonDAL dal = new ButtonDAL();
         public List<SysButton> GetListByPage()
         {
             return null;

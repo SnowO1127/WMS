@@ -1,5 +1,4 @@
-﻿using DAL;
-using Model;
+﻿using Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +9,7 @@ namespace BLL
 {
     public class ClientBLL
     {
-        private readonly ClientDAL dal = new ClientDAL();
+        //private readonly ClientDAL dal = new ClientDAL();
 
         public AppClient GetOneClient(string id)
         {

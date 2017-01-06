@@ -12,7 +12,7 @@ namespace DalFactory
 {
     public sealed class DataAccess//<t>
     {
-        private static readonly string AssemblyPath = ConfigurationManager.AppSettings["DAL"];
+        private static readonly string AssemblyPath = ConfigurationManager.AppSettings["DALPath"];
         /// <summary>
         /// 创建对象或从缓存获取
         /// </summary>
@@ -43,11 +43,11 @@ namespace DalFactory
         /// <summary>
         /// 创建User数据层接口。
         /// </summary>
-        public static ISysUser CreateUser()
+        public static ISysUserDAL CreateUser()
         {
-            string ClassNamespace = AssemblyPath + ".UserDAL";
+            string ClassNamespace = AssemblyPath + ".SysUserDAL";
             object objType = CreateObject(AssemblyPath, ClassNamespace);
-            return (ISysUser)objType;
+            return (ISysUserDAL)objType;
         }
     }
 }

@@ -389,57 +389,8 @@
     <Content Include="library\demo\window\windowlayout.html" />
     <Content Include="library\easyloader.js" />
     <Content Include="library\easyui-lang-zh_CN.js" />
-    <Content Include="library\images\alipay.jpg" />
-    <Content Include="library\images\blue_face\bluefaces_01.png" />
-    <Content Include="library\images\blue_face\bluefaces_02.png" />
-    <Content Include="library\images\blue_face\bluefaces_03.png" />
-    <Content Include="library\images\blue_face\bluefaces_04.png" />
-    <Content Include="library\images\blue_face\bluefaces_05.png" />
-    <Content Include="library\images\blue_face\bluefaces_06.png" />
-    <Content Include="library\images\blue_face\bluefaces_07.png" />
-    <Content Include="library\images\blue_face\bluefaces_08.png" />
-    <Content Include="library\images\blue_face\bluefaces_09.png" />
-    <Content Include="library\images\blue_face\bluefaces_10.png" />
-    <Content Include="library\images\blue_face\bluefaces_11.png" />
-    <Content Include="library\images\blue_face\bluefaces_12.png" />
-    <Content Include="library\images\blue_face\bluefaces_13.png" />
-    <Content Include="library\images\blue_face\bluefaces_14.png" />
-    <Content Include="library\images\blue_face\bluefaces_15.png" />
-    <Content Include="library\images\blue_face\bluefaces_16.png" />
-    <Content Include="library\images\blue_face\bluefaces_17.png" />
-    <Content Include="library\images\blue_face\bluefaces_18.png" />
-    <Content Include="library\images\blue_face\bluefaces_19.png" />
-    <Content Include="library\images\blue_face\bluefaces_20.png" />
-    <Content Include="library\images\blue_face\bluefaces_21.png" />
-    <Content Include="library\images\blue_face\bluefaces_22.png" />
-    <Content Include="library\images\blue_face\bluefaces_23.png" />
-    <Content Include="library\images\blue_face\bluefaces_24.png" />
-    <Content Include="library\images\blue_face\bluefaces_25.png" />
-    <Content Include="library\images\blue_face\bluefaces_26.png" />
-    <Content Include="library\images\blue_face\bluefaces_27.png" />
-    <Content Include="library\images\blue_face\bluefaces_28.png" />
-    <Content Include="library\images\blue_face\bluefaces_29.png" />
-    <Content Include="library\images\blue_face\bluefaces_30.png" />
-    <Content Include="library\images\blue_face\bluefaces_31.png" />
-    <Content Include="library\images\blue_face\bluefaces_32.png" />
-    <Content Include="library\images\blue_face\bluefaces_33.png" />
-    <Content Include="library\images\blue_face\bluefaces_34.png" />
-    <Content Include="library\images\blue_face\bluefaces_35.png" />
-    <Content Include="library\images\blue_face\bluefaces_36.png" />
-    <Content Include="library\images\blue_face\bluefaces_37.png" />
-    <Content Include="library\images\blue_face\bluefaces_38.png" />
-    <Content Include="library\images\blue_face\bluefaces_39.png" />
-    <Content Include="library\images\blue_face\bluefaces_40.png" />
-    <Content Include="library\images\dogs\puppy_dogs_01.png" />
-    <Content Include="library\images\dogs\puppy_dogs_02.png" />
-    <Content Include="library\images\dogs\puppy_dogs_03.png" />
-    <Content Include="library\images\dogs\puppy_dogs_04.png" />
-    <Content Include="library\images\dogs\puppy_dogs_05.png" />
-    <Content Include="library\images\dogs\puppy_dogs_06.png" />
-    <Content Include="library\images\dogs\puppy_dogs_07.png" />
-    <Content Include="library\images\dogs\puppy_dogs_08.png" />
-    <Content Include="library\images\dogs\puppy_dogs_09.png" />
-    <Content Include="library\images\dogs\puppy_dogs_10.png" />
+    <Content Include="library\images\bbg4.png" />
+    <Content Include="library\images\bg.png" />
     <Content Include="library\images\error.png" />
     <Content Include="library\images\ext_icons\anchor.png" />
     <Content Include="library\images\ext_icons\application\application.png" />
@@ -1445,6 +1396,7 @@
     <Content Include="library\images\ext_icons\zoom\zoom_in.png" />
     <Content Include="library\images\ext_icons\zoom\zoom_out.png" />
     <Content Include="library\images\loading.gif" />
+    <Content Include="library\images\bbg2.png" />
     <Content Include="library\images\login\bg.gif" />
     <Content Include="library\images\login\btn.gif" />
     <Content Include="library\images\login\login-icon.gif" />
@@ -1453,9 +1405,8 @@
     <Content Include="library\images\login\topBg.gif" />
     <Content Include="library\images\login\topleft.gif" />
     <Content Include="library\images\login\username.gif" />
+    <Content Include="library\images\LOGO.png" />
     <Content Include="library\images\pixel_0.gif" />
-    <Content Include="library\images\sshe.png" />
-    <Content Include="library\images\sypro.png" />
     <Content Include="library\jquery-1.8.2.js" />
     <Content Include="library\jquery-1.8.2.min.js" />
     <Content Include="library\jquery-1.9.1.min.js" />
@@ -3455,6 +3406,10 @@
     <ProjectReference Include="..\Common\Common.csproj">
       <Project>{560cdd96-207e-4e4b-8eb3-1d5a8eb0af27}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{bc25d809-7154-4949-b65a-05878c33fa54}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{8cf7db3d-d103-4e29-aec6-760ca75188cf}</Project>

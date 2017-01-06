@@ -21,92 +21,92 @@
     <link href="library/syExtIcon.css" rel="stylesheet" />
     <title>库存管理系统</title>
     <script>
-        var themeData =
-             [//主题风格json格式
-                 { id: 1, name: "默认(天空蓝,推荐)", path: "default" },
-                 { id: 2, name: "金属黑(推荐)", path: "black" },
-                 { id: 3, name: "银色(推荐)", path: "bootstrap" },
-                 { id: 4, name: "灰霾(推荐)", path: "gray" },
-                 { id: 5, name: "清泉", path: "jqueryui-cupertino", disabled: false },
-                 { id: 6, name: "黑巢", path: "jqueryui-dark-hive", disabled: false },
-                 { id: 7, name: "杏黄", path: "jqueryui-pepper-grinder", disabled: false },
-                 { id: 8, name: "阳光", path: "jqueryui-sunny", disabled: false },
-                 { id: 9, name: "磁贴（标准）", path: "metro-standard" },
-                 { id: 10, name: "磁贴（蓝）", path: "metro-blue" },
-                 { id: 11, name: "磁贴（灰）", path: "metro-gray" },
-                 { id: 12, name: "磁贴（绿）", path: "metro-green" },
-                 { id: 13, name: "磁贴（橙）", path: "metro-orange" },
-                 { id: 14, name: "磁贴（红）", path: "metro-red" }
-             ];
+        //var themeData =
+        //     [//主题风格json格式
+        //         { id: 1, name: "默认(天空蓝,推荐)", path: "default" },
+        //         { id: 2, name: "金属黑(推荐)", path: "black" },
+        //         { id: 3, name: "银色(推荐)", path: "bootstrap" },
+        //         { id: 4, name: "灰霾(推荐)", path: "gray" },
+        //         { id: 5, name: "清泉", path: "jqueryui-cupertino", disabled: false },
+        //         { id: 6, name: "黑巢", path: "jqueryui-dark-hive", disabled: false },
+        //         { id: 7, name: "杏黄", path: "jqueryui-pepper-grinder", disabled: false },
+        //         { id: 8, name: "阳光", path: "jqueryui-sunny", disabled: false },
+        //         { id: 9, name: "磁贴（标准）", path: "metro-standard" },
+        //         { id: 10, name: "磁贴（蓝）", path: "metro-blue" },
+        //         { id: 11, name: "磁贴（灰）", path: "metro-gray" },
+        //         { id: 12, name: "磁贴（绿）", path: "metro-green" },
+        //         { id: 13, name: "磁贴（橙）", path: "metro-orange" },
+        //         { id: 14, name: "磁贴（红）", path: "metro-red" }
+        //     ];
 
         var sy = $.extend({}, sy);//定义全局变量
 
         $(function () {
-            var themeName = $.cookie("themeName"),
-            themeCombo = $("#themeSelector").combobox({
-                width: 140,
-                editable: false,
-                data: themeData,
-                valueField: "path",
-                textField: "name",
-                value: themeName || themeData[0].path,
-                onSelect: function (record) {
-                    var opts = themeCombo.combobox("options");
-                    sy.setTheme(record[opts.valueField]);
-                }
-            });
+            //var themeName = $.cookie("themeName"),
+            //themeCombo = $("#themeSelector").combobox({
+            //    width: 140,
+            //    editable: false,
+            //    data: themeData,
+            //    valueField: "path",
+            //    textField: "name",
+            //    value: themeName || themeData[0].path,
+            //    onSelect: function (record) {
+            //        var opts = themeCombo.combobox("options");
+            //        sy.setTheme(record[opts.valueField]);
+            //    }
+            //});
 
-            if (themeName) {
-                var $easyuiTheme = $('#easyuiTheme');
-                var url = $easyuiTheme.attr('href');
-                var href = url.substring(0, url.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
-                $easyuiTheme.attr('href', href);
-            }
+            //if (themeName) {
+            //    var $easyuiTheme = $('#easyuiTheme');
+            //    var url = $easyuiTheme.attr('href');
+            //    var href = url.substring(0, url.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
+            //    $easyuiTheme.attr('href', href);
+            //}
 
-            $('#mainPortal').portal({
-                border: false,
-                fit: true
-            });
+            //$('#mainPortal').portal({
+            //    border: false,
+            //    fit: true
+            //});
 
             sy.startTimer();
         });
 
-        sy.setTheme = function (themeName) {
-            var $easyuiTheme = $('#easyuiTheme');
-            var url = $easyuiTheme.attr('href');
-            var href = url.substring(0, url.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
-            $easyuiTheme.attr('href', href);
+        //sy.setTheme = function (themeName) {
+        //    var $easyuiTheme = $('#easyuiTheme');
+        //    var url = $easyuiTheme.attr('href');
+        //    var href = url.substring(0, url.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
+        //    $easyuiTheme.attr('href', href);
 
-            sy.getIframe($('iframe'), themeName);
+        //    sy.getIframe($('iframe'), themeName);
 
-            $.cookie('themeName', themeName, {
-                expires: 7
-            });
-        };
+        //    $.cookie('themeName', themeName, {
+        //        expires: 7
+        //    });
+        //};
 
-        sy.getIframe = function (obj, themeName) {
+        //sy.getIframe = function (obj, themeName) {
 
-            if (obj.length > 0) {
-                for (var i = 0; i < obj.length; i++) {
-                    var ifr = obj[i];
-                    try {
-                        var frameTheme = $(ifr).contents().find('#easyuiTheme');
-                        var frameurl = frameTheme.attr('href');
-                        var framehref = frameurl.substring(0, frameurl.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
-                        frameTheme.attr('href', framehref);
-                        if ($(ifr).contents().find('iframe')) {
-                            sy.getIframe($(ifr).contents().find('iframe'), themeName);
-                        }
-                    } catch (e) {
-                        try {
-                            ifr.contentWindow.document.getElementById('easyuiTheme').href = href;
-                        } catch (e) {
-                        }
-                    }
-                }
-            }
+        //    if (obj.length > 0) {
+        //        for (var i = 0; i < obj.length; i++) {
+        //            var ifr = obj[i];
+        //            try {
+        //                var frameTheme = $(ifr).contents().find('#easyuiTheme');
+        //                var frameurl = frameTheme.attr('href');
+        //                var framehref = frameurl.substring(0, frameurl.indexOf('themes')) + 'themes/' + themeName + '/easyui.css';
+        //                frameTheme.attr('href', framehref);
+        //                if ($(ifr).contents().find('iframe')) {
+        //                    sy.getIframe($(ifr).contents().find('iframe'), themeName);
+        //                }
+        //            } catch (e) {
+        //                try {
+        //                    ifr.contentWindow.document.getElementById('easyuiTheme').href = href;
+        //                } catch (e) {
+        //                }
+        //            }
+        //        }
+        //    }
 
-        }
+        //}
 
         var timer = null;
         var timerRunning = false;
@@ -189,7 +189,7 @@
                 dataType: 'json',
                 async: false,
                 data: {
-                    userid: "<%=su.ID %>"
+                    userid: "<%=su.LoginName %>"
                 },
                 success: function (r) {
                     for (var i = 0; i < r.length; i++) {
@@ -317,6 +317,7 @@
             position: absolute;
             width: 500px;
             height: 52px;
+            background-image: url(library/images/LOGO.png);
         }
 
         .top-right {
@@ -369,24 +370,23 @@
     </style>
 </head>
 <body class="easyui-layout" fit="true">
-    <div data-options="region:'north'" style="height: 80px; overflow: hidden">
+    <div data-options="region:'north'" style="height: 100px; overflow: hidden">
         <div class="easyui-layout" fit="true">
-            <div data-options="region:'north',border:false" style="height: 70px">
+            <div data-options="region:'north',border:false" style="height: 70px; background-image: url(library/images/bbg2.png);">
                 <div class="top-left">
-                    <h1 style="margin-left: 10px; margin-top: 10px;">库存管理系统</h1>
                 </div>
                 <div class="top-right">
                     <div id="timerSpan">
                     </div>
-                    <div id="themeSpan">
+                    <%--  <div id="themeSpan">
                         <span>更换皮肤风格：</span>
                         <select class="easyui-combobox" id="themeSelector" style="width: 150px;">
                         </select>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
-            <div data-options="region:'south',border:true" style="height: 30px">
-                <div class="panel-header panel-header-noborder top-toolbar" style="height: 30px;">
+            <div data-options="region:'south',border:true" style="height: 20px">
+                <div class="panel-header panel-header-noborder top-toolbar" style="height: 20px;">
                     <div id="infobar">
                         <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">欢迎您【<%=su.RealName %>】
                         </span>
@@ -431,11 +431,11 @@
     <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">
         <div id="index_tab" class="easyui-tabs" border="false" fit="true">
             <div title="主页" data-options="iconCls:'ext-icon-house'">
-                <div class="easyui-layout" fit="true">
+                <%-- <div class="easyui-layout" fit="true">
 
                     <div region="center" border="false">
                         <div id="mainPortal" style="position: relative">
-                            <div style="width: 33%;">
+                            <div style="width: 20%;">
                                 <div data-options="title: '项目信息', height: 260, collapsible: true, closable: true" style="height: 260px;">
                                 </div>
                                 <div title="最新新闻" id="c_news" style="height: 260px; padding: 5px;">
@@ -443,7 +443,7 @@
                                 <div title="最新公告" id="c_notice" style="height: 260px; padding: 5px;">
                                 </div>
                             </div>
-                            <div style="width: 33%;">
+                            <div style="width: 20%;">
                                 <div title="我的待办" style="height: 260px; padding: 5px;">
                                 </div>
                                 <div title="我的日程" style="height: 260px; padding: 5px;">
@@ -453,7 +453,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>--%>
             </div>
         </div>
     </div>
