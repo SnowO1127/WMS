@@ -59,7 +59,7 @@
     <Compile Include="ButtonBLL.cs" />
     <Compile Include="ItemBLL.cs" />
     <Compile Include="ItemDetailBLL.cs" />
-    <Compile Include="MenuBLL.cs" />
+    <Compile Include="SysMenuBLL.cs" />
     <Compile Include="OganizeBLL.cs" />
     <Compile Include="PermissionBLL.cs" />
     <Compile Include="RoleBLL.cs" />

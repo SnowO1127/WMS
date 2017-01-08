@@ -49,5 +49,12 @@ namespace DalFactory
             object objType = CreateObject(AssemblyPath, ClassNamespace);
             return (ISysUserDAL)objType;
         }
+
+        public static ISysMenuDAL CreateMenu()
+        {
+            string ClassNamespace = AssemblyPath + ".SysMenuDAL";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (ISysMenuDAL)objType;
+        }
     }
 }

@@ -12,17 +12,8 @@ namespace DAL
     public class SysUserDAL : ISysUserDAL
     {
         private readonly string tableName = "Sys_User";
-        public SysUser GetOneUserByKey(string id)
-        {
-            SysUser sysUser = new SysUser();
-            using (MAction action = new MAction(tableName))
-            {
-                sysUser = action.Get<SysUser>(id);
-            }
-            return sysUser;
-        }
 
-        public SysUser GetOneUserByCondition(string where)
+        public SysUser GetObjectByCondition(string where)
         {
             SysUser sysUser = new SysUser();
             using (MAction action = new MAction(tableName))
@@ -100,13 +91,26 @@ namespace DAL
 
             return list;
         }
+
+        public List<SysUser> GetList(int pageIndex, int pageSize)
+        {
+            List<SysUser> list = new List<SysUser>();
+
+            using (MAction action = new MAction(tableName))
+            {
+                list = action.Select(pageIndex, pageSize).ToList<SysUser>();
+            }
+
+            return list;
+        }
+
         public List<SysUser> GetList(int pageIndex, int pageSize, string where)
         {
             List<SysUser> list = new List<SysUser>();
 
             using (MAction action = new MAction(tableName))
             {
-                list = action.Select(pageIndex, pageSize, pageSize).ToList<SysUser>();
+                list = action.Select(pageIndex, pageSize, where).ToList<SysUser>();
             }
 
             return list;

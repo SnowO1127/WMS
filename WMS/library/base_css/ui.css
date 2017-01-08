@@ -1,70 +1,70 @@
 ﻿/*ui初始化*/
 .combo {
-  display: inline-block;
-  white-space: nowrap;
-  margin: 0;
-  padding: 0;
-  border-width: 1px;
-  border-style: solid;
-  overflow: hidden;
-  vertical-align: middle;
+    display: inline-block;
+    white-space: nowrap;
+    margin: 0;
+    padding: 0;
+    border-width: 1px;
+    border-style: solid;
+    overflow: hidden;
+    vertical-align: middle;
 }
-.combo .combo-text {
-  font-size: 12px;
-  border: 0px;
-  line-height: 20px;
-  height: 20px;
-  margin: 0;
-  padding: 0px 2px;
-  *margin-top: -1px;
-  *height: 18px;
-  *line-height: 18px;
-  _height: 18px;
-  _line-height: 18px;
-  vertical-align: baseline;
-}
+
+    .combo .combo-text {
+        font-size: 12px;
+        border: 0px;
+        line-height: 20px;
+        height: 20px;
+        margin: 0;
+        padding: 0px 2px;
+        *margin-top: -1px;
+        *height: 18px;
+        *line-height: 18px;
+        _height: 18px;
+        _line-height: 18px;
+        vertical-align: baseline;
+    }
+
 .combo-arrow {
-  width: 18px;
-  height: 20px;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: top;
-  cursor: pointer;
-  opacity: 0.6;
-  filter: alpha(opacity=60);
+    width: 18px;
+    height: 20px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
 }
+
 .combo-arrow-hover {
-  opacity: 1.0;
-  filter: alpha(opacity=100);
+    opacity: 1.0;
+    filter: alpha(opacity=100);
 }
+
 .combo-panel {
-  overflow: auto;
+    overflow: auto;
 }
-.panel-body
-{
+
+.panel-body {
     border-width: 1px;
     border-style: solid;
 }
 
-.panel-header
-{
+.panel-header {
     padding: 5px;
     position: relative;
 }
 
-.panel-body-noheader
-{
+.panel-body-noheader {
     border-top-width: 1px;
 }
 
-.panel-body-noborder
-{
+.panel-body-noborder {
     border-width: 0px;
 }
 
 .panel-icon,
-.panel-tool
-{
+.panel-tool {
     position: absolute;
     top: 50%;
     margin-top: -8px;
@@ -72,20 +72,17 @@
     overflow: hidden;
 }
 
-.panel-icon
-{
+.panel-icon {
     left: 5px;
     width: 16px;
 }
 
-.panel-tool
-{
+.panel-tool {
     right: 5px;
     width: auto;
 }
 
-.panel-fit, .panel-fit body
-{
+.panel-fit, .panel-fit body {
     height: 100%;
     margin: 0;
     padding: 0;
@@ -93,8 +90,7 @@
     overflow: hidden;
 }
 
-.tabs-tool
-{
+.tabs-tool {
     position: absolute;
     bottom: 0;
     padding: 1px;
@@ -103,8 +99,7 @@
     border-style: solid;
 }
 
-.tabs
-{
+.tabs {
     list-style-type: none;
     height: 26px;
     margin: 0px;
@@ -115,8 +110,7 @@
     border-width: 0 0 1px 0;
 }
 
-    .tabs li
-    {
+    .tabs li {
         float: left;
         display: inline-block;
         margin: 0 4px -1px 0;
@@ -125,8 +119,7 @@
         border: 0;
     }
 
-        .tabs li a.tabs-inner
-        {
+        .tabs li a.tabs-inner {
             display: inline-block;
             text-decoration: none;
             margin: 0;
@@ -141,3 +134,4 @@
             -webkit-border-radius: 5px 5px 0 0;
             border-radius: 5px 5px 0 0;
         }
+

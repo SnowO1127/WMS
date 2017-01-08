@@ -62,7 +62,7 @@
     <Compile Include="ButtonDAL.cs" />
     <Compile Include="ItemDAL.cs" />
     <Compile Include="ItemDetailDAL.cs" />
-    <Compile Include="MenuDAL.cs" />
+    <Compile Include="SysMenuDAL.cs" />
     <Compile Include="OganizeDAL.cs" />
     <Compile Include="RoleDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

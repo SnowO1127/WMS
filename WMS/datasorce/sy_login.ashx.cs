@@ -38,7 +38,9 @@ namespace WMS.datasorce
                         {
                             jr.Success = true;
 
-                            SessionHelper.SetSession(Globe.UserSessionName, loginname);
+                            su = bll.GetOneUserByLoginName(loginname);
+
+                            SessionHelper.SetSession(Globe.UserSessionName, su.ID);
 
                             jr.Obj = SessionHelper.GetSession(Globe.LastUrlSessionName) != null ? SessionHelper.GetSession(Globe.LastUrlSessionName) : "/Index.aspx";
                         }
@@ -65,14 +67,13 @@ namespace WMS.datasorce
                                     {
                                         if (DEncrypt.Encrypt(su.PassWord).Equals(password))
                                         {
-
                                             if (!su.Enabled)
                                             {
                                                 jr.Msg = "3"; //用户不可用
                                             }
                                             else
                                             {
-                                                SessionHelper.SetSession(Globe.UserSessionName, loginname);
+                                                SessionHelper.SetSession(Globe.UserSessionName, su.ID);
 
                                                 jr.Success = true;
 

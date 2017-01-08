@@ -30,11 +30,18 @@ namespace BLL
             return g;
         }
 
-        /// <summary>
-        /// 分页得到用户
-        /// </summary>
-        /// <param name="psu"></param>
-        /// <returns></returns>
+        public Grid<SysUser> GetList(int pageIndex, int pageSize, string sortName, string sortOrder)
+        {
+            Grid<SysUser> g = new Grid<SysUser>();
+
+            string where = "order by " + sortName + " " + sortOrder + "";
+
+            g.total = sysUserDal.GetCount();
+            g.rows = sysUserDal.GetList(pageIndex, pageSize, where);
+
+            return g;
+        }
+
         public Grid<SysUser> GetList(int pageIndex, int pageSize, string where)
         {
             Grid<SysUser> g = new Grid<SysUser>();
@@ -58,9 +65,10 @@ namespace BLL
         //    sudal.AddRoles(userid, list);
         //}
 
-        public SysUser GetOneUser(string id)
+        public SysUser GetOneUserByID(string id)
         {
-            return sysUserDal.GetOneUserByKey(id);
+            string where = "ID='" + id + "'";
+            return sysUserDal.GetObjectByCondition(where);
         }
 
         public void Update(SysUser su)
@@ -87,15 +95,7 @@ namespace BLL
         {
             string where = "LoginName = '" + loginname + "'";
 
-            return sysUserDal.GetOneUserByCondition(where);
-        }
-
-
-        public SysUser GetOneUserByLogin(string loginname, string password)
-        {
-            string where = "LoginName = '" + loginname + "' and PassWord = '" + password + "'";
-
-            return sysUserDal.GetOneUserByCondition(where);
+            return sysUserDal.GetObjectByCondition(where);
         }
 
         ///// <summary>
@@ -117,104 +117,15 @@ namespace BLL
             SysUser su = null;
             if (SessionHelper.GetSession(Globe.UserSessionName) != null)
             {
-                string loginname = SessionHelper.GetSession(Globe.UserSessionName).ToString();
-                if (!string.IsNullOrEmpty(loginname))
+                string id = SessionHelper.GetSession(Globe.UserSessionName).ToString();
+                if (!string.IsNullOrEmpty(id))
                 {
-                    string where = "LoginName='" + loginname + "'";
+                    string where = "ID = '" + id + "'";
 
-                    su = sysUserDal.GetOneUserByCondition(where);
+                    su = sysUserDal.GetObjectByCondition(id);
                 }
             }
             return su;
         }
-
-        ///// <summary>
-        ///// 得到权限菜单
-        ///// </summary>
-        ///// <param name="su"></param>
-        ///// <returns></returns>
-        //public List<SysMenu> GetEnabledPessionMenus(string userid)
-        //{
-        //    SysUser su = sudal.GetOneUserWithMany(userid);
-
-        //    List<SysMenu> smlist = new List<SysMenu>();
-
-        //    if (su.IsAdmin)
-        //    {
-        //        smlist = smdal.GetEnabledList();
-        //    }
-        //    else
-        //    {
-        //        smlist = su.Menus.Where(x => x.Enabled).ToList();
-
-        //        foreach (var sr in su.Roles)
-        //        {
-        //            foreach (var sm in sr.Menus)
-        //            {
-        //                if (!smlist.Contains(sm))
-        //                {
-        //                    smlist.Add(sm);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return smlist;
-        //}
-
-        ///// <summary>
-        ///// 得到权限菜单
-        ///// </summary>
-        ///// <param name="su"></param>
-        ///// <returns></returns>
-        //public List<SysMenu> GetPessionMenus(string userid)
-        //{
-        //    SysUser su = sudal.GetOneUserWithMany(userid);
-
-        //    List<SysMenu> smlist = new List<SysMenu>();
-
-        //    if (su.IsAdmin)
-        //    {
-        //        smlist = smdal.GetList();
-        //    }
-        //    else
-        //    {
-        //        smlist = su.Menus;
-
-        //        foreach (var sr in su.Roles)
-        //        {
-        //            foreach (var sm in sr.Menus)
-        //            {
-        //                if (!smlist.Contains(sm))
-        //                {
-        //                    smlist.Add(sm);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return smlist;
-        //}
-
-        ///// <summary>
-        ///// 生成菜单树
-        ///// </summary>
-        ///// <param name="smlist"></param>
-        ///// <returns></returns>
-        //public List<Tree> CreateTreeList(List<SysMenu> smlist)
-        //{
-        //    List<Tree> tlist = new List<Tree>();
-        //    if (smlist != null && smlist.Count > 0)
-        //    {
-        //        foreach (SysMenu sm in smlist)
-        //        {
-        //            Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls, order = sm.OrderID };
-        //            Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-        //            attributes.Add("url", sm.MenuUrl);
-        //            t.attributes = attributes;
-        //            tlist.Add(t);
-        //        }
-        //    }
-        //    return tlist.OrderBy(x => x.order).ToList();
-        //}
-
     }
 }

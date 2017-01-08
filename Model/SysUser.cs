@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Model
 {
@@ -52,6 +53,7 @@ namespace Model
         /// <summary>
         /// 生日
         /// </summary>      
+        [JsonConverter(typeof(ChinaDateTimeConverter))]
         public DateTime? Birthday { get; set; }
 
         /// <summary>

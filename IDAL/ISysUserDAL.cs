@@ -13,9 +13,7 @@ namespace IDAL
 
         void Update(SysUser sysUser);
 
-        SysUser GetOneUserByKey(string id);
-
-        SysUser GetOneUserByCondition(string id);
+        SysUser GetObjectByCondition(string id);
 
         long GetCount();
 
@@ -24,6 +22,8 @@ namespace IDAL
         List<SysUser> GetList();
 
         List<SysUser> GetList(string strWhere);
+
+        List<SysUser> GetList(int pageIndex, int pageSize);
 
         List<SysUser> GetList(int pageIndex, int pageSize, string where);
     }

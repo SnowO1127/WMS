@@ -11,21 +11,26 @@
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
-    <link href="../../library/base_css/ui.css" rel="stylesheet" />
+    <%--<link href="../../library/base_css/ui.css" rel="stylesheet" />--%>
+    <link href="../../library/base_css/bootstrapbug.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
+    <script src="../../library/datagrid-filter.js"></script>
     <title></title>
     <script>
         $(function () {
             grid = $('#user_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_user.ashx?action=getuser',
+                url: '../../datasorce/sy_user.ashx?action=getuserlist',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
                 singleSelect: true,
+                autocolwidth: true,
+                filterDelay: 400,
+                filterRules: [],
                 idField: 'ID',
                 sortName: 'OrderID',
                 sortOrder: 'asc',
@@ -133,7 +138,8 @@
                     title: '排序号',
                     halign: 'center',
                     align: 'center',
-                    field: 'OrderID'
+                    field: 'OrderID',
+                    sortable: true
                 }]],
                 toolbar: [{
                     iconCls: 'icon-add',
@@ -237,6 +243,16 @@
                 },
                 onLoadSuccess: function (data) {
                     parent.$.messager.progress('close');
+
+                    //grid.datagrid('enableFilter');
+                },
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.progress('close');
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
                 }
             });
         });

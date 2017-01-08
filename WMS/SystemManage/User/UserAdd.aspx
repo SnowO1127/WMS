@@ -12,7 +12,7 @@
     <script src="../../library/My97DatePicker/WdatePicker.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <title></title>
     <script>

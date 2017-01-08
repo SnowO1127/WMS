@@ -8,7 +8,7 @@
     <script src="library/jquery-1.9.1.min.js"></script>
     <script src="library/jquery.easyui.min.js"></script>
     <script src="library/easyui-lang-zh_CN.js"></script>
-    <link id="easyuiTheme" href="library/themes/custom/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/base_css/ui.css" rel="stylesheet" />
     <script src="library/jquery.cookie.js"></script>
@@ -184,13 +184,13 @@
             })
 
             $.ajax({
-                url: 'datasorce/sy_user.ashx?action=getmenutreebyuser',
+                url: 'datasorce/sy_menu.ashx?action=getmenutreebyuser',
                 type: 'post',
                 dataType: 'json',
                 async: false,
-                data: {
-                    userid: "<%=su.LoginName %>"
-                },
+                <%--data: {
+                    userid: "<%=su.ID %>"
+                },--%>
                 success: function (r) {
                     for (var i = 0; i < r.length; i++) {
                         var treeID = "tree" + i;
@@ -244,7 +244,7 @@
             if ($('#index_tab').tabs('exists', title)) {
                 $('#index_tab').tabs('select', title);
             } else {
-                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>';
+                var content = '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>';
                 $('#index_tab').tabs('add', {
                     title: title,
                     content: content,
@@ -303,7 +303,7 @@
             self.parent.$('#index_tab').tabs('update', {
                 tab: currTab,
                 options: {
-                    content: '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.3%;overflow:hidden"></iframe>'
+                    content: '<iframe scrolling="false" frameborder="0"  src="' + url + '" style="width:100%;height:99.6%;overflow:hidden"></iframe>'
                 }
             });
         }
@@ -372,7 +372,7 @@
 <body class="easyui-layout" fit="true">
     <div data-options="region:'north'" style="height: 100px; overflow: hidden">
         <div class="easyui-layout" fit="true">
-            <div data-options="region:'north',border:false" style="height: 70px; background-image: url(library/images/bbg2.png);">
+            <div data-options="region:'north',border:false" style="height: 80px; background-color:#0081c2;">
                 <div class="top-left">
                 </div>
                 <div class="top-right">
@@ -385,7 +385,7 @@
                     </div>--%>
                 </div>
             </div>
-            <div data-options="region:'south',border:true" style="height: 20px">
+            <div data-options="region:'south',border:false" style="height: 20px">
                 <div class="panel-header panel-header-noborder top-toolbar" style="height: 20px;">
                     <div id="infobar">
                         <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">欢迎您【<%=su.RealName %>】
@@ -403,7 +403,7 @@
             </div>
         </div>
     </div>
-    <div data-options="region:'south',split:false,border:false" style="height: 50px;">
+    <div data-options="region:'south',split:false,border:false" style="height: 50px;background-color:whitesmoke">
         <div style="color: #4e5766; padding: 6px 0px 0px 0px; margin: 0px auto; text-align: center; font-size: 12px; font-family: 微软雅黑;">
             @2014 Copyright: XiangYang Personal.
                <br />
@@ -428,7 +428,7 @@
         <div id="index_accordion">
         </div>
     </div>
-    <div id="index_center" data-options="region: 'center', border: false" style="padding: 1px;">
+    <div id="index_center" data-options="region: 'center', border: true" style="padding: 1px;">
         <div id="index_tab" class="easyui-tabs" border="false" fit="true">
             <div title="主页" data-options="iconCls:'ext-icon-house'">
                 <%-- <div class="easyui-layout" fit="true">

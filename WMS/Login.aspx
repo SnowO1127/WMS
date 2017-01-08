@@ -82,7 +82,7 @@
                 beforeSend: function () {
                     $.messager.progress({
                         title: "登录",
-                        text:'正在登录,请稍候......'
+                        text: '正在登录,请稍候......'
                     });
                 },
                 success: function (jsonresult) {
