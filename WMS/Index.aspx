@@ -320,7 +320,7 @@
             background-image: url(library/images/LOGO.png);
         }
 
-        .top-right {
+        /*.top-right {
             position: absolute;
             width: 400px;
             height: 52px;
@@ -339,11 +339,7 @@
                 top: 24px;
                 right: 5px;
                 text-align: right;
-            }
-
-        #mainTab > div.tabs-header {
-            border-right-width: 0px;
-        }
+            }*/
 
         .floatSpan {
             float: right;
@@ -351,59 +347,66 @@
             font-weight: bold;
         }
 
-        #buttonbar {
+        .buttonbar {
             position: absolute;
             right: 5px;
-            text-align: right;
+            height: 20px;
+            line-height: 20px;
         }
 
-        #infobar {
+        .infobar {
             position: absolute;
             height: 20px;
             line-height: 20px;
             left: 10px;
         }
 
-        .icon-hamburg-user {
+        .icon-user {
             background: rgba(0, 0, 0, 0) url("library/images/ext_icons/user/user.png") no-repeat scroll center center;
+            padding-left: 25px;
+            background-position: left center;
+        }
+
+        .icon-clock {
+            margin-left: 20px;
+            background: rgba(0, 0, 0, 0) url("library/images/ext_icons/clock.png") no-repeat scroll center center;
+            padding-left: 25px;
+            background-position: left center;
         }
     </style>
 </head>
 <body class="easyui-layout" fit="true">
     <div data-options="region:'north'" style="height: 100px; overflow: hidden">
         <div class="easyui-layout" fit="true">
-            <div data-options="region:'north',border:false" style="height: 80px; background-color:#0081c2;">
+            <div data-options="region:'north',border:false" style="height: 80px; background-color: #0081c2;">
                 <div class="top-left">
                 </div>
-                <div class="top-right">
+                <%-- <div class="top-right">
                     <div id="timerSpan">
                     </div>
-                    <%--  <div id="themeSpan">
+                      <div id="themeSpan">
                         <span>更换皮肤风格：</span>
                         <select class="easyui-combobox" id="themeSelector" style="width: 150px;">
                         </select>
-                    </div>--%>
-                </div>
+                    </div>
+                </div>--%>
             </div>
             <div data-options="region:'south',border:false" style="height: 20px">
                 <div class="panel-header panel-header-noborder top-toolbar" style="height: 20px;">
-                    <div id="infobar">
-                        <span class="icon-hamburg-user" style="padding-left: 25px; background-position: left center;">欢迎您【<%=su.RealName %>】
+                    <div class="infobar">
+                        <span class="icon-user" style="">欢迎您【<%=su.RealName %>】
                         </span>
+                        <span class="icon-clock" id="timerSpan"></span>
                     </div>
-                    <div id="buttonbar">
-                        <a id="btnContact" class="easyui-linkbutton easyui-tooltip" title="前往作者关于该插件集合的博客专文；可以进行问题反馈提交或留言操作。" data-options="plain: true, iconCls: 'icon-ok'">博客留言</a>
-                        <a id="btn2" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-reload'">按钮2</a>
-                        <a id="btn3" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-print'">按钮3</a>
-                        <a id="btnFullScreen" class="easyui-linkbutton" data-options="plain: true, iconCls: 'ext-icon-arrow_out'" onclick="sy.fullScreen()">全屏切换</a>
+                    <div class="buttonbar">
+                        <a id="btnFullScreen" class="easyui-linkbutton" data-options="plain: true, iconCls: 'ext-icon-arrow_out'">修改密码</a>
                         <a id="btnExit" class="easyui-linkbutton" data-options="plain: true, iconCls: 'icon-back'">退出系统</a>
-                        <a id="btnShowNorth" class="easyui-linkbutton" data-options="plain: true, iconCls: 'layout-button-down'" style="display: none;"></a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div data-options="region:'south',split:false,border:false" style="height: 50px;background-color:whitesmoke">
+    <div data-options="region:'south',split:false,border:false" style="height: 50px; background-color: whitesmoke">
         <div style="color: #4e5766; padding: 6px 0px 0px 0px; margin: 0px auto; text-align: center; font-size: 12px; font-family: 微软雅黑;">
             @2014 Copyright: XiangYang Personal.
                <br />

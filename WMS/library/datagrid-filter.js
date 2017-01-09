@@ -250,6 +250,8 @@
 				});
 				var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
 				var end = start + parseInt(opts.pageSize);
+				console.info(data.rows);
+
 				data.rows = data.rows.slice(start, end);
 			}
 		}

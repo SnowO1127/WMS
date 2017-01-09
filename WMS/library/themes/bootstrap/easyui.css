@@ -1748,7 +1748,8 @@
 
 .datagrid-header-row,
 .datagrid-row {
-    height: 25px;
+    /*height: 25px;*/
+    height: 30px;
 }
 
 .datagrid-header td,
@@ -3147,7 +3148,8 @@
         }
 
 .tree-node {
-    height: 18px;
+    /*height: 18px;*/
+     height: 26px;
     white-space: nowrap;
     cursor: pointer;
 }

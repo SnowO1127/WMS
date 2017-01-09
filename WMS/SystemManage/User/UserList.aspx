@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="../../library/jquery-1.9.1.min.js"></script>
+    <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
@@ -14,10 +14,8 @@
     <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
-    <%--<link href="../../library/base_css/bootstrapbug.css" rel="stylesheet" />--%>
     <link href="../../library/syExtCss.css" rel="stylesheet" />
     <link href="../../library/syExtIcon.css" rel="stylesheet" />
-    <script src="../../library/datagrid-filter.js"></script>
     <title></title>
     <script>
         $(function () {
@@ -243,8 +241,6 @@
                 },
                 onLoadSuccess: function (data) {
                     parent.$.messager.progress('close');
-
-                    //grid.datagrid('enableFilter');
                 },
                 loadFilter: function (data) {
                     if (data.Success) {
