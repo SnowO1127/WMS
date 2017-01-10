@@ -14,7 +14,7 @@
     <link id="easyuiTheme" href="library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/login.css" rel="stylesheet" />
-    <title></title>
+    <title><%=Common.Globe.SystemName %></title>
     <script type="text/javascript">
         $(function () {
             lntip = $('#LoginName').tooltip({

@@ -42,12 +42,12 @@ namespace BLL
             return g;
         }
 
-        public Grid<SysUser> GetList(int pageIndex, int pageSize, string where)
+        public Grid<SysUser> GetList(int pageIndex, int pageSize)
         {
             Grid<SysUser> g = new Grid<SysUser>();
 
-            g.total = sysUserDal.GetCount(where);
-            g.rows = sysUserDal.GetList(pageIndex, pageSize, where);
+            g.total = sysUserDal.GetCount();
+            g.rows = sysUserDal.GetList(pageIndex, pageSize);
             return g;
         }
 
@@ -97,16 +97,6 @@ namespace BLL
 
             return sysUserDal.GetObjectByCondition(where);
         }
-
-        ///// <summary>
-        ///// 根据用户生成菜单树
-        ///// </summary>
-        ///// <param name="userid"></param>
-        ///// <returns></returns>
-        //public List<Tree> GetMenuTreeByUser(string userid)
-        //{
-        //    return CreateTreeList(GetEnabledPessionMenus(userid));
-        //}
 
         /// <summary>
         /// 得到当前登录用户

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="../../library/jquery-1.9.1.min.js"></script>
+    <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
         $(function () {
             grid = $('#role_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_role.ashx?action=getrole',
+                url: '../../datasorce/sy_role.ashx?action=getRoleByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -162,14 +162,23 @@
 
                     }
                 }],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        fit: true,
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function () {
-                    parent.$.messager.progress('close');
+                //onBeforeLoad: function (param) {
+                //    parent.$.messager.progress({
+                //        fit: true,
+                //        text: '数据加载中....'
+                //    });
+                //},
+                //onLoadSuccess: function () {
+                //    parent.$.messager.progress('close');
+                //},
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    }
+                    else {
+                        //parent.$.messager.progress('close');
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
                 }
             });
         });

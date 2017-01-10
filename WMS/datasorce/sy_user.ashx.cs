@@ -18,8 +18,7 @@ namespace WMS.datasorce
         //private string userid, q;
         //private string rolesjsonstr;
         private JsonResult jr;
-        private string jsonStr;
-        private SysUser su;
+        //private SysUser su;
         private int page, rows;
         private string sort, order;
         private Grid<SysUser> gsu;
@@ -44,17 +43,13 @@ namespace WMS.datasorce
 
                         jr.Success = true;
                         jr.Obj = gsu;
-
-                        jsonStr = Utils.SerializeObject(jr);
                     }
                     catch (Exception ex)
                     {
                         jr.Msg = ex.ToString();
-
-                        jsonStr = Utils.SerializeObject(jr);
                     }
 
-                    context.Response.Write(jsonStr);
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
                 //        case "adduser":
                 //            jr = new JsonResult();

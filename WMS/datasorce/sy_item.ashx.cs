@@ -13,107 +13,115 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_item : IHttpHandler
     {
-        //private readonly ItemBLL bll = new ItemBLL();
-        //private JsonResult jr;
+        private readonly SysItemBLL bll = new SysItemBLL();
+        private JsonResult jr;
+        private List<Tree> treeList;
         //private SysItem si;
         //private string itemid;
         public void ProcessRequest(HttpContext context)
         {
-        //    context.Response.ContentType = "text/plain";
-        //    HttpRequest request = context.Request;
+            context.Response.ContentType = "text/plain";
+            HttpRequest request = context.Request;
 
-        //    switch (request["action"])
-        //    {
-        //        case "getitemtree":
-        //            try
-        //            {
-        //                context.Response.Write(Utils.SerializeObject(bll.GetItemTree()));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            break;
-        //        case "getistree":
-        //            try
-        //            {
-        //                context.Response.Write(Utils.SerializeObject(bll.GetIsTree()));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            break;
-        //        case "additem":
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
+            switch (request["action"])
+            {
+                case "getItemTree":
+                    jr = new JsonResult();
+                    try
+                    {
+                        treeList = bll.GetItemTree();
 
-        //                si.ID = Guid.NewGuid().ToString();
-        //                si.CDate = DateTime.Now;
+                        jr.Success = true;
+                        jr.Obj = treeList;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
 
-        //                bll.AddItem(si);
+                    context.Response.Write(Utils.SerializeObject(jr));
+                   
+                    break;
+                //        case "getistree":
+                //            try
+                //            {
+                //                context.Response.Write(Utils.SerializeObject(bll.GetIsTree()));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            break;
+                //        case "additem":
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
 
-        //                jr.Success = true;
-        //                jr.Msg = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Msg = ex.ToString();
-        //            }
+                //                si.ID = Guid.NewGuid().ToString();
+                //                si.CDate = DateTime.Now;
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //        case "updateitem":
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
+                //                bll.AddItem(si);
 
-        //                bll.UpdateItem(si);
+                //                jr.Success = true;
+                //                jr.Msg = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Msg = ex.ToString();
+                //            }
 
-        //                jr.Success = true;
-        //                jr.Msg = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Msg = ex.ToString();
-        //            }
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "updateitem":
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                si = Utils.AutoWiredClass<SysItem>(request, si = new SysItem());
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //        case "getoneitem":
-        //            si = new SysItem();
-        //            itemid = request["itemid"];
-        //            try
-        //            {
-        //                si = bll.GetOneItem(itemid);
+                //                bll.UpdateItem(si);
 
-        //                context.Response.Write(Utils.SerializeObject(si));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            break;
-        //        case "deleteitem":
-        //            itemid = request["itemid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                bll.DeleteItem(itemid);
+                //                jr.Success = true;
+                //                jr.Msg = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Msg = ex.ToString();
+                //            }
 
-        //                jr.Success = true;
-        //                jr.Msg = "删除成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //    }
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "getoneitem":
+                //            si = new SysItem();
+                //            itemid = request["itemid"];
+                //            try
+                //            {
+                //                si = bll.GetOneItem(itemid);
+
+                //                context.Response.Write(Utils.SerializeObject(si));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            break;
+                //        case "deleteitem":
+                //            itemid = request["itemid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                bll.DeleteItem(itemid);
+
+                //                jr.Success = true;
+                //                jr.Msg = "删除成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+            }
         }
 
         public bool IsReusable

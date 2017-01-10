@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace Common
 {
@@ -25,5 +26,7 @@ namespace Common
         public const string UserSessionName = "User";
 
         public const string LastUrlSessionName = "LastUrl";
+
+        public static readonly string SystemName = ConfigurationManager.AppSettings["SystemName"];
     }
 }

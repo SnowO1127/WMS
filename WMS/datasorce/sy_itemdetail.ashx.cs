@@ -13,113 +13,132 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_itemdetail : IHttpHandler
     {
-        //private readonly ItemDetailBLL bll = new ItemDetailBLL();
-        //private PageSysItemDetail psid;
-        //private JsonResult jr;
-        //private SysItemDetail sid;
-        //private string code;
-        //private string itemdetailid;
+        private readonly SysItemDetailBLL bll = new SysItemDetailBLL();
+        private JsonResult jr;
+        private SysItemDetail sid;
+        private string code;
+        private string itemdetailid;
+        private string itemid;
+        private int page, rows;
+        private string sort, order;
+        private Grid<SysItemDetail> gsid;
 
         public void ProcessRequest(HttpContext context)
         {
-        //    context.Response.ContentType = "text/plain";
-        //    HttpRequest request = context.Request;
+            context.Response.ContentType = "text/plain";
+            HttpRequest request = context.Request;
 
-        //    switch (request["action"])
-        //    {
-        //        case "getitemdetailbypage":
-        //            try
-        //            {
-        //                psid = Utils.AutoWiredClass<PageSysItemDetail>(request, psid = new PageSysItemDetail());
-        //                context.Response.Write(Utils.SerializeObject(bll.GetListByPage(psid)));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
+            switch (request["action"])
+            {
+                case "getListByPage":
+                    jr = new JsonResult();
+                    try
+                    {
+                        page = Convert.ToInt32(request["page"]);
+                        rows = Convert.ToInt32(request["rows"]);
+                        sort = request["sort"];
+                        order = request["order"];
+                        itemid = request["ItemID"];
 
-        //            break;
-        //        case "additemdetail":
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
+                        if (!string.IsNullOrEmpty(itemid))
+                        {
+                            gsid = bll.GetListByPage(page, rows, sort, order, itemid);
+                        }
+                        else
+                        {
+                            gsid = new Grid<SysItemDetail>();
+                        }
 
-        //                sid.ID = Guid.NewGuid().ToString();
-        //                sid.CDate = DateTime.Now;
+                        jr.Success = true;
+                        jr.Obj = gsid;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
+                //        case "additemdetail":
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
 
-        //                bll.AddItemDetail(sid);
+                //                sid.ID = Guid.NewGuid().ToString();
+                //                sid.CDate = DateTime.Now;
 
-        //                jr.Success = true;
-        //                jr.Msg = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Msg = ex.ToString();
-        //            }
+                //                bll.AddItemDetail(sid);
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //        case "updateitemdetail":
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
+                //                jr.Success = true;
+                //                jr.Msg = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Msg = ex.ToString();
+                //            }
 
-        //                bll.UpdateItemDetail(sid);
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "updateitemdetail":
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                sid = Utils.AutoWiredClass<SysItemDetail>(request, sid = new SysItemDetail());
 
-        //                jr.Success = true;
-        //                jr.Msg = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Msg = ex.ToString();
-        //            }
+                //                bll.UpdateItemDetail(sid);
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //        case "getoneitemdetail":
-        //            sid = new SysItemDetail();
-        //            itemdetailid = request["itemdetailid"];
-        //            try
-        //            {
-        //                sid = bll.GetOneItemDetail(itemdetailid);
+                //                jr.Success = true;
+                //                jr.Msg = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Msg = ex.ToString();
+                //            }
 
-        //                context.Response.Write(Utils.SerializeObject(sid));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            break;
-        //        case "getcombox":
-        //            code = request["code"];
-        //            try
-        //            {
-        //                context.Response.Write(Utils.SerializeObject(bll.GetItemDetailsByCode(code)));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            break;
-        //        case "deleteitemdetail":
-        //            itemdetailid = request["itemdetailid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                bll.DeleteItemDetail(itemdetailid);
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "getoneitemdetail":
+                //            sid = new SysItemDetail();
+                //            itemdetailid = request["itemdetailid"];
+                //            try
+                //            {
+                //                sid = bll.GetOneItemDetail(itemdetailid);
 
-        //                jr.Success = true;
-        //                jr.Msg = "删除成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                throw ex;
-        //            }
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //    }
+                //                context.Response.Write(Utils.SerializeObject(sid));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            break;
+                //        case "getcombox":
+                //            code = request["code"];
+                //            try
+                //            {
+                //                context.Response.Write(Utils.SerializeObject(bll.GetItemDetailsByCode(code)));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            break;
+                //        case "deleteitemdetail":
+                //            itemdetailid = request["itemdetailid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                bll.DeleteItemDetail(itemdetailid);
+
+                //                jr.Success = true;
+                //                jr.Msg = "删除成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                throw ex;
+                //            }
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+            }
         }
 
         public bool IsReusable

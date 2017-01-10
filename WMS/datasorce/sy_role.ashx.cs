@@ -13,130 +13,140 @@ namespace WMS.datasorce
     /// </summary>
     public class sy_role : IHttpHandler
     {
-        //private readonly RoleBLL bll = new RoleBLL();
+        private readonly SysRoleBLL bll = new SysRoleBLL();
+        private JsonResult jr;
+        private int page, rows;
+        private string sort, order;
+        private Grid<SysRole> gsr;
         //private SysRole psr;
         //private SysRole sr;
-        //private JsonResult jr;
         //private string roleid, userid;
 
         public void ProcessRequest(HttpContext context)
         {
-        //    context.Response.ContentType = "text/plain";
-        //    HttpRequest request = context.Request;
+            context.Response.ContentType = "text/plain";
+            HttpRequest request = context.Request;
 
-        //    switch (request["action"])
-        //    {
-        //        case "getrole":
-        //            jr = new JsonResult();
-        //            psr = new SysRole();
-        //            try
-        //            {
-        //                psr = Utils.AutoWiredClass<SysRole>(request, psr);
-        //                //Grid<SysRole> g = bll.GetNonDeleteListByPage(psr);
-        //                context.Response.Write(Utils.SerializeObject(g));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
-        //            break;
-        //        case "addrole":
-        //            sr = new SysRole();
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                sr = Utils.AutoWiredClass<SysRole>(request, sr);
-        //                sr.ID = Guid.NewGuid().ToString();
-        //                sr.CDate = DateTime.Now;
-        //                //bll.AddRole(sr);
-        //                jr.IsSuccess = true;
-        //                jr.Message = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
+            switch (request["action"])
+            {
+                case "getRoleByPage":
+                    jr = new JsonResult();
+                    try
+                    {
+                        page = Convert.ToInt32(request["page"]);
+                        rows = Convert.ToInt32(request["rows"]);
+                        sort = request["sort"];
+                        order = request["order"];
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
+                        gsr = bll.GetListByPage(page, rows, sort, order);
 
-        //            break;
-        //        case "updaterole":
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                sr = Utils.AutoWiredClass<SysRole>(request, sr = new SysRole());
+                        jr.Success = true;
+                        jr.Obj = gsr;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
 
-        //                //bll.UpdateRole(sr);
+                    break;
+                //        case "addrole":
+                //            sr = new SysRole();
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                sr = Utils.AutoWiredClass<SysRole>(request, sr);
+                //                sr.ID = Guid.NewGuid().ToString();
+                //                sr.CDate = DateTime.Now;
+                //                //bll.AddRole(sr);
+                //                jr.IsSuccess = true;
+                //                jr.Message = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
 
-        //                jr.IsSuccess = true;
-        //                jr.Message = "保存成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
+                //            context.Response.Write(Utils.SerializeObject(jr));
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "updaterole":
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                sr = Utils.AutoWiredClass<SysRole>(request, sr = new SysRole());
 
-        //            break;
-        //        case "getonerole":
-        //            roleid = request["roleid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                jr.IsSuccess = true;
-        //                //jr.Obj = bll.GetOneRole(roleid);
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
+                //                //bll.UpdateRole(sr);
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
+                //                jr.IsSuccess = true;
+                //                jr.Message = "保存成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
 
-        //            break;
-        //        case "deleterole":
-        //            roleid = request["roleid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                //bll.DeleteRole(roleid);
+                //            context.Response.Write(Utils.SerializeObject(jr));
 
-        //                jr.IsSuccess = true;
-        //                jr.Message = "删除成功！";
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
+                //            break;
+                //        case "getonerole":
+                //            roleid = request["roleid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                jr.IsSuccess = true;
+                //                //jr.Obj = bll.GetOneRole(roleid);
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
 
-        //            context.Response.Write(Utils.SerializeObject(jr));
-        //            break;
-        //        case "getnorole":
-        //            userid = request["userid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                //context.Response.Write(Utils.SerializeObject(bll.GetNoRoleList(userid)));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
-        //            break;
-        //        case "gethasrole":
-        //            userid = request["userid"];
-        //            jr = new JsonResult();
-        //            try
-        //            {
-        //                //context.Response.Write(Utils.SerializeObject(bll.GetHasRoleList(userid)));
-        //            }
-        //            catch (Exception ex)
-        //            {
-        //                jr.Message = ex.ToString();
-        //            }
-        //            break;
-        //    }
+                //            context.Response.Write(Utils.SerializeObject(jr));
+
+                //            break;
+                //        case "deleterole":
+                //            roleid = request["roleid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                //bll.DeleteRole(roleid);
+
+                //                jr.IsSuccess = true;
+                //                jr.Message = "删除成功！";
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
+
+                //            context.Response.Write(Utils.SerializeObject(jr));
+                //            break;
+                //        case "getnorole":
+                //            userid = request["userid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                //context.Response.Write(Utils.SerializeObject(bll.GetNoRoleList(userid)));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
+                //            break;
+                //        case "gethasrole":
+                //            userid = request["userid"];
+                //            jr = new JsonResult();
+                //            try
+                //            {
+                //                //context.Response.Write(Utils.SerializeObject(bll.GetHasRoleList(userid)));
+                //            }
+                //            catch (Exception ex)
+                //            {
+                //                jr.Message = ex.ToString();
+                //            }
+                //            break;
+            }
         }
 
         public bool IsReusable

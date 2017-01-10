@@ -14,32 +14,32 @@ $(function () {
 /*
 *easyui 表格列动态自适应扩展
 */
-$.extend($.fn.datagrid.defaults.view, {
-    onAfterRender: function (target) {
-        if (target.id != null && target.id.length > 0) {
+//$.extend($.fn.datagrid.defaults.view, {
+//    onAfterRender: function (target) {
+//        if (target.id != null && target.id.length > 0) {
 
-            var cols = $('#' + target.id).datagrid('getColumnFields'),
-                datagridname = target.id,
-                colsArr = $('#' + target.id).datagrid('options').columns[0],
-                i = 0;
+//            var cols = $('#' + target.id).datagrid('getColumnFields'),
+//                datagridname = target.id,
+//                colsArr = $('#' + target.id).datagrid('options').columns[0],
+//                i = 0;
 
-            for (var i = 0; i < cols.length; i++) {
-                try {
-                    //console.log(datagridname + "|autoSizeColumn" + "|" + cols + "|" + i);
-                    if (cols.indexOf('action') == -1 && cols != 'undefined') {
+//            for (var i = 0; i < cols.length; i++) {
+//                try {
+//                    //console.log(datagridname + "|autoSizeColumn" + "|" + cols + "|" + i);
+//                    if (cols.indexOf('action') == -1 && cols != 'undefined') {
 
-                        if (colsArr.hidden != "true" && cols != null && colsArr.checkbox != true && colsArr.autocolwidth != true) {
-                            $('#' + datagridname).datagrid('autoSizeColumn', cols);
-                        }
-                    }
-                }
-                catch (e) {
-                    console.log(e + "|" + cols);
-                }
-            }
-        }
-    }
-});
+//                        if (colsArr.hidden != "true" && cols != null && colsArr.checkbox != true && colsArr.autocolwidth != true) {
+//                            $('#' + datagridname).datagrid('autoSizeColumn', cols);
+//                        }
+//                    }
+//                }
+//                catch (e) {
+//                    console.log(e + "|" + cols);
+//                }
+//            }
+//        }
+//    }
+//});
 
 /*
 *重写Tree的loader,增加queryParams属性支持,并且增加setQueryParams方法

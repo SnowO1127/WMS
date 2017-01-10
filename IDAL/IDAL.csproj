@@ -39,6 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISysRoleDAL.cs" />
+    <Compile Include="ISysItemDAL.cs" />
+    <Compile Include="ISysItemDetailDAL.cs" />
     <Compile Include="ISysMenuDAL.cs" />
     <Compile Include="ISysUserDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

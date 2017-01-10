@@ -17,16 +17,6 @@ namespace DAL
         private List<SysMenu> list;
         private long count = 0;
 
-        public SysMenu GetObjectByKey(string id)
-        {
-            sysMenu = new SysMenu();
-            using (MAction action = new MAction(tableName))
-            {
-                sysMenu = action.Get<SysMenu>(id);
-            }
-            return sysMenu;
-        }
-
         public SysMenu GetObjectByCondition(string where)
         {
             sysMenu = new SysMenu();

@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="../../library/jquery-1.9.1.min.js"></script>
+    <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -20,22 +20,41 @@
     <script>
         var treenode;
         $(function () {
-            tree = $("#dict_items_tree").tree({
-                url: '../../datasorce/sy_item.ashx?action=getitemtree',
-                parentField: 'pid',
-                lines: true,
-                onClick: function (node) {
+            $.ajax({
+                url: '../../datasorce/sy_item.ashx?action=getItemTree',
+                dataType: 'json',
+                type: "post",
+                beforeSend: function () {
+                    $.messager.progress({
+                        text: '正在加载......'
+                    });
+                },
+                success: function (data) {
+                    $.messager.progress('close');
 
-                    treenode = node;
+                    if (data.Success) {
+                        tree = $("#dict_items_tree").tree({
+                            parentField: 'pid',
+                            lines: true,
+                            data: data.Obj,
+                            onClick: function (node) {
 
-                    grid.datagrid("load", { ItemId: treenode.id });  // 在用户点击的时候提示
-                    grid.datagrid("unselectAll");
+                                treenode = node;
+
+                                grid.datagrid("load", { ItemId: treenode.id });  // 在用户点击的时候提示
+                                grid.datagrid("unselectAll");
+                            }
+                        })
+                    }
+                    else {
+                        parent.$.messager.alert('错误', data.Msg, "error");
+                    }
                 }
             })
 
             grid = $('#dict_detaillist_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_itemdetail.ashx?action=getitemdetailbypage',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -177,6 +196,14 @@
                 },
                 onLoadSuccess: function (data) {
                     parent.$.messager.progress('close');
+                },
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.progress('close');
+                        parent.$.messager.alert('错误', data.Msg, 'error');
+                    }
                 }
             });
         })
@@ -333,7 +360,7 @@
 </head>
 <body>
     <div class="easyui-layout" fit="true">
-        <div data-options="region: 'west', border: true,title:'字典分类'" style="padding: 1px; width: 270px">
+        <div data-options="region: 'west', border: true,title:'字典分类'" style="padding: 1px; width: 200px">
             <div class="easyui-panel" data-options="border:false">
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="openItemAdd()">添加</a>
                 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-edit'" onclick="openItemEdit()">编辑</a>

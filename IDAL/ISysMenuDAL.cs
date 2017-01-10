@@ -13,9 +13,7 @@ namespace IDAL
 
         void Update(SysMenu SysMenu);
 
-        SysMenu GetObjectByKey(string id);
-
-        SysMenu GetObjectByCondition(string id);
+        SysMenu GetObjectByCondition(string where);
 
         long GetCount();
 

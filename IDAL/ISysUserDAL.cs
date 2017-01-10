@@ -9,11 +9,11 @@ namespace IDAL
 {
     public interface ISysUserDAL
     {
+        SysUser GetObjectByCondition(string where);
+
         void Insert(SysUser sysUser);
 
         void Update(SysUser sysUser);
-
-        SysUser GetObjectByCondition(string id);
 
         long GetCount();
 
