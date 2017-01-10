@@ -11,7 +11,7 @@
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
         var treeid;
         $(function () {
             tree = $("#oganize_tree").tree({
-                url: '../../datasorce/sy_oganize.ashx?action=getheadtree',
+                //url: '../../datasorce/sy_oganize.ashx?action=getHeadTree',
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) { // 在用户点击的时候提示
@@ -29,26 +29,28 @@
                     treeid = node.text == "全部" ? "" : node.id;
 
                     var obj = sy.serializeObject($('#oganize_search_form'));
-                    sy.mergeObj(obj, { ID: treeid });
+                    sy.mergeObj(obj, { ParentID: treeid });
 
                     grid.datagrid("load", obj);
                     grid.datagrid("unselectAll");
-                },
-                onLoadSuccess: function (node, data) { // 加载成功
-                    if (treeid) {
-                        var n = tree.tree("find", treeid);
-                        tree.tree("select", n.target);
-                    }
-                    else {
-                        var n = tree.tree("find", data[0].id);
-                        tree.tree("select", n.target);
-                    }
                 }
+                //onLoadSuccess: function (node, data) { // 加载成功
+                //    if (treeid) {
+                //        var n = tree.tree("find", treeid);
+                //        tree.tree("select", n.target);
+                //    }
+                //    else {
+                //        var n = tree.tree("find", data[0].id);
+                //        tree.tree("select", n.target);
+                //    }
+                //}
             })
+
+            loadOganizeTree();
 
             grid = $('#oganize_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_oganize.ashx?action=getoganizebypage',
+                url: '../../datasorce/sy_oganize.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -59,7 +61,7 @@
                 pageSize: 10,
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 queryParams: {
-                    ID: treeid
+                    ParentID: treeid
                 },
                 frozenColumns: [[{
                     width: '120',
@@ -171,16 +173,47 @@
                         }
                     }
                 }],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function (data) {
-                    parent.$.messager.progress('close');
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('错误', data.Msg, 'error');
+                    }
                 }
             });
         });
+
+        var loadOganizeTree = function () {
+            $.ajax({
+                url: '../../datasorce/sy_oganize.ashx?action=getHeadTree',
+                dataType: 'json',
+                type: "post",
+                beforeSend: function () {
+                    $.messager.progress({
+                        text: '正在加载......'
+                    });
+                },
+                success: function (data) {
+                    $.messager.progress('close');
+
+                    if (data.Success) {
+                        tree.tree("loadData", data.Obj);
+
+                        if (treeid) {
+                            var n = tree.tree("find", treeid);
+                            tree.tree("select", n.target);
+                        }
+                        else {
+                            var n = tree.tree("find", data.Obj[0].id);
+                            tree.tree("select", n.target);
+                        }
+                    }
+                    else {
+                        parent.$.messager.alert('错误', data.Msg, "error");
+                    }
+                }
+            })
+        }
 
         var openAdd = function () {
             var dialog = parent.sy.modalDialog({
@@ -253,13 +286,13 @@
 
         var oganizeSearch = function () {
             var obj = sy.serializeObject($('#oganize_search_form'));
-            sy.mergeObj(obj, { id: treeid });
+            sy.mergeObj(obj, { ParentID: treeid });
             grid.datagrid('load', obj);
         }
 
         var oganizeRefresh = function () {
             var obj = {};
-            sy.mergeObj(obj, { id: treeid });
+            sy.mergeObj(obj, { ParentID: treeid });
             $('#oganize_search_form input[name=Name]').val('');
             grid.datagrid('load', obj);
         }

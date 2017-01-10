@@ -53,14 +53,14 @@
     <Compile Include="MaterialBLL.cs" />
     <Compile Include="MaterialCategoryBLL.cs" />
     <Compile Include="SupplierBLL.cs" />
+    <Compile Include="SysButtonBLL.cs" />
     <Compile Include="SysItemBLL.cs" />
     <Compile Include="SysItemDetailBLL.cs" />
+    <Compile Include="SysOganizeBLL.cs" />
     <Compile Include="UnitBLL.cs" />
     <Compile Include="UnitConversionBLL.cs" />
     <Compile Include="WareHouseBLL.cs" />
-    <Compile Include="ButtonBLL.cs" />
     <Compile Include="SysMenuBLL.cs" />
-    <Compile Include="OganizeBLL.cs" />
     <Compile Include="PermissionBLL.cs" />
     <Compile Include="SysRoleBLL.cs" />
     <Compile Include="SysUserBLL.cs" />

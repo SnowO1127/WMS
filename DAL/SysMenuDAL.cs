@@ -96,7 +96,7 @@ namespace DAL
 
             using (MAction action = new MAction(tableName))
             {
-                list = action.Select(pageIndex, pageSize, pageSize).ToList<SysMenu>();
+                list = action.Select(pageIndex, pageSize, where).ToList<SysMenu>();
             }
 
             return list;

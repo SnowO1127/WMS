@@ -55,16 +55,16 @@
     <Compile Include="MaterialCategoryDAL.cs" />
     <Compile Include="MaterialDAL.cs" />
     <Compile Include="SupplierDAL.cs" />
+    <Compile Include="SysButtonDAL.cs" />
     <Compile Include="SysItemDAL.cs" />
     <Compile Include="SysItemDetailDAL.cs" />
+    <Compile Include="SysOganizeDAL.cs" />
     <Compile Include="SysRoleDAL.cs" />
     <Compile Include="SysUserDAL.cs" />
     <Compile Include="UnitConversionDAL.cs" />
     <Compile Include="UnitDAL.cs" />
     <Compile Include="WareHouseDAL.cs" />
-    <Compile Include="ButtonDAL.cs" />
     <Compile Include="SysMenuDAL.cs" />
-    <Compile Include="OganizeDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

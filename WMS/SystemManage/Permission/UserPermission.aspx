@@ -11,7 +11,7 @@
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
         $(function () {
             grid = $('#user_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_user.ashx?action=getuser',
+                url: '../../datasorce/sy_user.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,

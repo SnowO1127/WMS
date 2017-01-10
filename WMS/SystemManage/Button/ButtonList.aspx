@@ -11,7 +11,7 @@
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
         var treenode;
         $(function () {
             tree = $("#menu_tree").tree({
-                url: '../../datasorce/sy_menu.ashx?action=getenabledheadtree',
+                //url: '../../datasorce/sy_menu.ashx?action=getMenuTree',
                 parentField: 'pid',
                 lines: true,
                 onClick: function (node) {
@@ -35,9 +35,11 @@
                 }
             })
 
+            loadMenuTree();
+
             grid = $('#button_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_button.ashx?action=getbuttonbypage',
+                url: '../../datasorce/sy_button.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -194,16 +196,38 @@
                         }
                     }
                 }],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function (data) {
-                    parent.$.messager.progress('close');
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('错误', data.Msg, 'error');
+                    }
                 }
             });
         });
+
+        var loadMenuTree = function () {
+            $.ajax({
+                url: '../../datasorce/sy_menu.ashx?action=getMenuTree',
+                dataType: 'json',
+                type: "post",
+                beforeSend: function () {
+                    $.messager.progress({
+                        text: '正在加载......'
+                    });
+                },
+                success: function (data) {
+                    $.messager.progress('close');
+
+                    if (data.Success) {
+                        tree.tree("loadData", data.Obj);
+                    }
+                    else {
+                        parent.$.messager.alert('错误', data.Msg, "error");
+                    }
+                }
+            })
+        }
 
         var openAdd = function (node) {
             var dialog = parent.sy.modalDialog({

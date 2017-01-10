@@ -16,7 +16,11 @@ namespace WMS.datasorce
     {
         private readonly SysMenuBLL bll = new SysMenuBLL();
         private JsonResult jr;
-        private string jsonStr;
+        private int page, rows;
+        private string sort, order;
+        private string parentID;
+
+        private Grid<SysMenu> gsm;
         //private SysMenu sm;
         //private PageSysMenu psm;
         //private string menuid;
@@ -28,16 +32,23 @@ namespace WMS.datasorce
 
             switch (request["action"])
             {
-                //        case "getmenutree":
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetMenuTree()));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getMenuTree":
+                    jr = new JsonResult();
+                    try
+                    {
+                        List<Tree> list = bll.GetEnabledMenuTree();
+
+                        jr.Success = true;
+                        jr.Obj = list;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+
+                    break;
                 //        case "getenabledheadtree":
                 //            try
                 //            {
@@ -48,16 +59,22 @@ namespace WMS.datasorce
                 //                throw ex;
                 //            }
                 //            break;
-                //        case "getheadtree":
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetHeadTree()));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getHeadTree":
+                    jr = new JsonResult();
+                    try
+                    {
+                        List<Tree> list = bll.GetHeadTree();
+
+                        jr.Success = true;
+                        jr.Obj = list;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 //        case "getmenu":
                 //            try
                 //            {
@@ -69,18 +86,29 @@ namespace WMS.datasorce
                 //            }
 
                 //            break;
-                //        case "getmenubypage":
-                //            try
-                //            {
-                //                psm = Utils.AutoWiredClass<PageSysMenu>(request, psm = new PageSysMenu());
-                //                context.Response.Write(Utils.SerializeObject(bll.GetListByPage(psm)));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
+                case "getListByPage":
+                    jr = new JsonResult();
+                    try
+                    {
+                        page = Convert.ToInt32(request["page"]);
+                        rows = Convert.ToInt32(request["rows"]);
+                        sort = request["sort"];
+                        order = request["order"];
 
-                //            break;
+                        parentID = request["parentID"];
+
+                        gsm = bll.GetListByPage(page, rows, sort, order, parentID);
+
+                        jr.Success = true;
+                        jr.Obj = gsm;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 //        case "getismenu":
                 //            try
                 //            {
@@ -158,19 +186,19 @@ namespace WMS.datasorce
                 //            }
                 //            context.Response.Write(Utils.SerializeObject(jr));
                 //            break;
-                case "getmenutreebyuser":
+                case "getPermissionMenuTree":
                     jr = new JsonResult();
                     try
                     {
-                        jsonStr = Utils.SerializeObject(bll.GetPessionTreeMenus());
+                        jr.Success = true;
+                        jr.Obj = bll.GetPermissionMenuTree();
                     }
                     catch (Exception ex)
                     {
                         jr.Msg = ex.ToString();
-                        jsonStr = Utils.SerializeObject(jr);
                     }
 
-                    context.Response.Write(jsonStr);
+                    context.Response.Write(Utils.SerializeObject(jr));
                     break;
             }
         }

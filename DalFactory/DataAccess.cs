@@ -77,5 +77,19 @@ namespace DalFactory
             object objType = CreateObject(AssemblyPath, ClassNamespace);
             return (ISysRoleDAL)objType;
         }
+
+        public static ISysButtonDAL CreatButton()
+        {
+            string ClassNamespace = AssemblyPath + ".SysButtonDAL";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (ISysButtonDAL)objType;
+        }
+
+        public static ISysOganizeDAL CreateOganize()
+        {
+            string ClassNamespace = AssemblyPath + ".SysOganizeDAL";
+            object objType = CreateObject(AssemblyPath, ClassNamespace);
+            return (ISysOganizeDAL)objType;
+        }
     }
 }

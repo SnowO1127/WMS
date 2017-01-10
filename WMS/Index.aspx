@@ -184,7 +184,7 @@
             })
 
             $.ajax({
-                url: 'datasorce/sy_menu.ashx?action=getmenutreebyuser',
+                url: 'datasorce/sy_menu.ashx?action=getPermissionMenuTree',
                 type: 'post',
                 dataType: 'json',
                 async: false,
@@ -192,31 +192,38 @@
                     userid: "<%=su.ID %>"
                 },--%>
                 success: function (r) {
-                    for (var i = 0; i < r.length; i++) {
-                        var treeID = "tree" + i;
-                        var divHtml = "";
-                        var sub_menu = [];
-                        if (r[i].pid == null) {
-                            sy.GetChild(r[i].id, sub_menu, r);
+                    if (r.Success) {
+                        var menuTree = r.Obj;
 
-                            $('#index_accordion').accordion('add', {
-                                title: r[i].text,
-                                content: "<ul id='" + treeID + "' ></ul>",
-                                selected: true,
-                                iconCls: r[i].iconCls//e.Icon
-                            });
+                        for (var i = 0; i < menuTree.length; i++) {
+                            var treeID = "tree" + i;
+                            var divHtml = "";
+                            var sub_menu = [];
+                            if (menuTree[i].pid == null) {
+                                sy.GetChild(menuTree[i].id, sub_menu, menuTree);
 
-                            $('#' + treeID).tree({
-                                data: sub_menu,
-                                parentField: 'pid',
-                                lines: true,
-                                onClick: function (node) {
-                                    if (node.attributes.url) {
-                                        sy.addTab(node.text, node.attributes.url, node.iconCls);
+                                $('#index_accordion').accordion('add', {
+                                    title: menuTree[i].text,
+                                    content: "<ul id='" + treeID + "' ></ul>",
+                                    selected: true,
+                                    iconCls: menuTree[i].iconCls//e.Icon
+                                });
+
+                                $('#' + treeID).tree({
+                                    data: sub_menu,
+                                    parentField: 'pid',
+                                    lines: true,
+                                    onClick: function (node) {
+                                        if (node.attributes.url) {
+                                            sy.addTab(node.text, node.attributes.url, node.iconCls);
+                                        }
                                     }
-                                }
-                            });
+                                });
+                            }
                         }
+                    }
+                    else {
+                        $.messager.alert('错误', r.Msg, "error");
                     }
                 }
             });
@@ -260,16 +267,15 @@
             }
         }
 
-        sy.GetChild = function (id, sub_menu, r) {
-            for (var j = 0; j < r.length; j++) {
-                if (r[j].pid == id) {
-                    sub_menu.push(r[j]);
-                    sy.GetChild(r[j].id, sub_menu, r);
+        sy.GetChild = function (id, sub_menu, menuTree) {
+            for (var j = 0; j < menuTree.length; j++) {
+                if (menuTree[j].pid == id) {
+                    sub_menu.push(menuTree[j]);
+                    sy.GetChild(menuTree[j].id, sub_menu, menuTree);
                 }
             }
             return sub_menu;
         }
-
 
         sy.closeTab = function (action) {
             switch (action) {

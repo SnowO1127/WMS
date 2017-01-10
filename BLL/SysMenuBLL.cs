@@ -14,6 +14,7 @@ namespace BLL
     {
         private readonly ISysMenuDAL sysMenuDal = DataAccess.CreateMenu();
         private readonly SysUserBLL sysUserBll = new SysUserBLL();
+
         //public List<SysMenu> GetList()
         //{
         //    return dal.GetList();
@@ -51,31 +52,31 @@ namespace BLL
         //    return tlist;
         //}
 
-        //public List<Tree> GetHeadTree()
-        //{
-        //    List<Tree> tlist = new List<Tree>();
+        public List<Tree> GetHeadTree()
+        {
+            List<Tree> tlist = new List<Tree>();
 
-        //    Tree headtree = new Tree();
-        //    headtree.id = Guid.NewGuid().ToString();
-        //    headtree.text = "全部";
+            Tree headtree = new Tree();
+            headtree.id = Guid.NewGuid().ToString();
+            headtree.text = "全部";
 
-        //    tlist.Add(headtree);
+            tlist.Add(headtree);
 
-        //    List<SysMenu> smlist = dal.GetList();
-        //    if (smlist != null && smlist.Count > 0)
-        //    {
-        //        foreach (SysMenu sm in smlist)
-        //        {
-        //            Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = string.IsNullOrEmpty(sm.ParentID) ? headtree.id : sm.ParentID, iconCls = sm.IconCls };
-        //            Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-        //            attributes.Add("url", sm.MenuUrl);
-        //            attributes.Add("ismenu", sm.IsMenu);
-        //            t.attributes = attributes;
-        //            tlist.Add(t);
-        //        }
-        //    }
-        //    return tlist;
-        //}
+            List<SysMenu> smlist = sysMenuDal.GetList();
+            if (smlist != null && smlist.Count > 0)
+            {
+                foreach (SysMenu sm in smlist)
+                {
+                    Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = string.IsNullOrEmpty(sm.ParentID) ? headtree.id : sm.ParentID, iconCls = sm.IconCls };
+                    Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+                    attributes.Add("url", sm.MenuUrl);
+                    attributes.Add("ismenu", sm.IsMenu);
+                    t.attributes = attributes;
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
 
         //public List<Tree> GetEnabledHeadTree()
         //{
@@ -103,34 +104,56 @@ namespace BLL
         //    return tlist;
         //}
 
+        public List<SysMenu> GetEnabledList()
+        {
+            string where = "Enabled = 1";
 
-        //public List<Tree> GetMenuTree()
-        //{
-        //    List<Tree> tlist = new List<Tree>();
-        //    List<SysMenu> smlist = dal.GetEnabledList();
-        //    if (smlist != null && smlist.Count > 0)
-        //    {
-        //        foreach (SysMenu sm in smlist)
-        //        {
-        //            Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
-        //            Dictionary<String, Object> attributes = new Dictionary<String, Object>();
-        //            attributes.Add("url", sm.MenuUrl);
-        //            t.attributes = attributes;
-        //            tlist.Add(t);
-        //        }
-        //    }
-        //    return tlist;
-        //}
+            return sysMenuDal.GetList(where);
+        }
 
-        //public Grid<SysMenu> GetListByPage(PageSysMenu psm)
-        //{
-        //    Grid<SysMenu> g = new Grid<SysMenu>();
+        public List<Tree> GetEnabledMenuTree()
+        {
+            List<Tree> tlist = new List<Tree>();
 
-        //    g.rows = dal.GetListByPage(psm);
-        //    g.total = dal.GetCountByPage(psm);
+            List<SysMenu> smlist = GetEnabledList();
 
-        //    return g;
-        //}
+            if (smlist != null && smlist.Count > 0)
+            {
+                foreach (SysMenu sm in smlist)
+                {
+                    Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
+                    Dictionary<String, Object> attributes = new Dictionary<String, Object>();
+                    attributes.Add("url", sm.MenuUrl);
+                    t.attributes = attributes;
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
+
+        public Grid<SysMenu> GetListByPage(int pageIndex, int PageSize, string sortName, string sortOrder, string parentID)
+        {
+            Grid<SysMenu> g = new Grid<SysMenu>();
+
+            string rwhere = string.Empty;
+            string twhere = string.Empty;
+
+            if (!string.IsNullOrEmpty(parentID))
+            {
+                rwhere = "parentID='" + parentID + "' order by " + sortName + " " + sortOrder + "";
+                twhere = "parentID='" + parentID + "'";
+            }
+            else
+            {
+                rwhere = "parentID is null order by " + sortName + " " + sortOrder + "";
+                twhere = "parentID is null";
+            }
+
+            g.rows = sysMenuDal.GetList(pageIndex, PageSize, rwhere);
+            g.total = sysMenuDal.GetCount(twhere);
+
+            return g;
+        }
 
         //public void DeleteMenu(string id)
         //{
@@ -142,7 +165,7 @@ namespace BLL
         /// </summary>
         /// <param name="su"></param>
         /// <returns></returns>
-        public List<SysMenu> GetPessionMenus()
+        public List<SysMenu> GetPermissionMenus()
         {
             SysUser sysUser = sysUserBll.GetCurrentUser();
 
@@ -176,11 +199,11 @@ namespace BLL
         /// </summary>
         /// <param name="smlist"></param>
         /// <returns></returns>
-        public List<Tree> GetPessionTreeMenus()
+        public List<Tree> GetPermissionMenuTree()
         {
             List<Tree> tlist = new List<Tree>();
 
-            List<SysMenu> smlist = GetPessionMenus();
+            List<SysMenu> smlist = GetPermissionMenus();
 
             if (smlist != null && smlist.Count > 0)
             {
