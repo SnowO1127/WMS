@@ -21,7 +21,7 @@
         $(function () {
             grid = $('#role_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_role.ashx?action=getRoleByPage',
+                url: '../../datasorce/sy_role.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,

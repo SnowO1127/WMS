@@ -30,7 +30,7 @@ namespace WMS.datasorce
 
             switch (request["action"])
             {
-                case "getuserlist":
+                case "getListByPage":
                     jr = new JsonResult();
                     try
                     {

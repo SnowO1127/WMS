@@ -189,19 +189,10 @@
                         }
                     }
                 }],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function (data) {
-                    parent.$.messager.progress('close');
-                },
                 loadFilter: function (data) {
                     if (data.Success) {
                         return data.Obj;
                     } else {
-                        parent.$.messager.progress('close');
                         parent.$.messager.alert('错误', data.Msg, 'error');
                     }
                 }

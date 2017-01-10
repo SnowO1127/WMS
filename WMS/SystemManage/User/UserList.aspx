@@ -21,7 +21,7 @@
         $(function () {
             grid = $('#user_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_user.ashx?action=getuserlist',
+                url: '../../datasorce/sy_user.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,

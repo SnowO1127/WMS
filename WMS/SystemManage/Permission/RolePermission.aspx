@@ -21,7 +21,7 @@
         $(function () {
             grid = $('#role_list_grid').datagrid({
                 title: '',
-                url: '../../datasorce/sy_role.ashx?action=getrole',
+                url: '../../datasorce/sy_role.ashx?action=getListByPage',
                 striped: true,
                 rownumbers: true,
                 pagination: true,
@@ -154,14 +154,14 @@
                         }
                     }
                 }],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        fit: true,
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function () {
-                    parent.$.messager.progress('close');
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    }
+                    else {
+                        //parent.$.messager.progress('close');
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
                 }
             });
         });

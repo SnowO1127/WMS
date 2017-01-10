@@ -29,7 +29,7 @@ namespace WMS.datasorce
 
             switch (request["action"])
             {
-                case "getRoleByPage":
+                case "getListByPage":
                     jr = new JsonResult();
                     try
                     {
