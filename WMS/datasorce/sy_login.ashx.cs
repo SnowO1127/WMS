@@ -38,7 +38,7 @@ namespace WMS.datasorce
                         {
                             jr.Success = true;
 
-                            su = bll.GetOneUserByLoginName(loginname);
+                            su = bll.GetUserByLoginName(loginname);
 
                             SessionHelper.SetSession(Globe.UserSessionName, su.ID);
 
@@ -58,7 +58,7 @@ namespace WMS.datasorce
                                 }
                                 else
                                 {
-                                    su = bll.GetOneUserByLoginName(loginname);
+                                    su = bll.GetUserByLoginName(loginname);
                                     if (su == null)
                                     {
                                         jr.Msg = "2"; //用户不存在

@@ -21,6 +21,7 @@ namespace WMS.datasorce
         private string itemid;
         private int page, rows;
         private string sort, order;
+        private List<SysItemDetail> list;
         private Grid<SysItemDetail> gsid;
 
         public void ProcessRequest(HttpContext context)
@@ -111,17 +112,24 @@ namespace WMS.datasorce
                 //                throw ex;
                 //            }
                 //            break;
-                //        case "getcombox":
-                //            code = request["code"];
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetItemDetailsByCode(code)));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getCombox":
+                    jr = new JsonResult();
+                    try
+                    {
+                        code = request["code"];
+
+                        list = bll.GetListByCode(code);
+
+                        jr.Success = true;
+                        jr.Obj = list;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 //        case "deleteitemdetail":
                 //            itemdetailid = request["itemdetailid"];
                 //            jr = new JsonResult();

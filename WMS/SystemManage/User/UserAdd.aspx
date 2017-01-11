@@ -21,36 +21,57 @@
         $(function () {
 
             $('#Post').combobox({
-                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Post',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getCombox&code=Post',
                 valueField: 'Value',
                 textField: 'Name',
                 width: 153,
                 panelHeight: 100,
                 editable: false,
-                required: true
+                required: true,
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
+                }
             });
 
             $('#Sex').combobox({
-                url: '../../datasorce/sy_itemdetail.ashx?action=getcombox&code=Gender',
+                url: '../../datasorce/sy_itemdetail.ashx?action=getCombox&code=Gender',
                 valueField: 'Value',
                 textField: 'Name',
                 width: 153,
                 panelHeight: 60,
                 editable: false,
-                required: true
+                required: true,
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
+                }
             });
+
+
+
 
             if (userid) {
                 $.ajax({
-                    url: "../../datasorce/sy_user.ashx?action=getoneuser",
+                    url: "../../datasorce/sy_user.ashx?action=getUserByID",
                     dataType: "json",
                     type: "post",
                     data: {
-                        userid: userid
+                        UserID: userid
                     },
-                    success: function (jsonresult) {
-                        console.info(jsonresult);
-                        $("#user_add_form").form('load', jsonresult);
+                    success: function (jr) {
+                        if (jr.Success) {
+                            $("#user_add_form").form('load', jr.Obj);
+                        }
+                        else {
+                            $.messager.alert('错误', jr.Msg, 'error');
+                        }
                     }
                 })
             }

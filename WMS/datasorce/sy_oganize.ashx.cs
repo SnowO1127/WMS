@@ -30,16 +30,16 @@ namespace WMS.datasorce
 
             switch (request["action"])
             {
-                //        case "getoganizetree":
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetOganizeTree()));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getOganizeTree":
+                    try
+                    {
+                        //context.Response.Write(Utils.SerializeObject(bll.GetOganizeTree()));
+                    }
+                    catch (Exception ex)
+                    {
+                        throw ex;
+                    }
+                    break;
                 case "getHeadTree":
                     jr = new JsonResult();
                     try

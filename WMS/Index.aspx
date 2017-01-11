@@ -177,7 +177,6 @@
         //手风琴菜单加载
         $(function () {
             $('#index_accordion').accordion({
-                fillSpace: true,
                 fit: true,
                 border: false,
                 animate: false

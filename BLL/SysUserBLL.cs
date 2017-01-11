@@ -91,7 +91,14 @@ namespace BLL
         //    sudal.ResetPassWord(userid, password);
         //}
 
-        public SysUser GetOneUserByLoginName(string loginname)
+        public SysUser GetUserByID(string userID)
+        {
+            string where = "ID='" + userID + "'";
+
+            return sysUserDal.GetObjectByCondition(where);
+        }
+
+        public SysUser GetUserByLoginName(string loginname)
         {
             string where = "LoginName = '" + loginname + "'";
 

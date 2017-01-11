@@ -15,10 +15,10 @@ namespace WMS.datasorce
     public class sy_user : IHttpHandler
     {
         private readonly SysUserBLL bll = new SysUserBLL();
-        //private string userid, q;
+        private string userID, q;
         //private string rolesjsonstr;
         private JsonResult jr;
-        //private SysUser su;
+        private SysUser su;
         private int page, rows;
         private string sort, order;
         private Grid<SysUser> gsu;
@@ -90,17 +90,24 @@ namespace WMS.datasorce
 
                 //            context.Response.Write(Utils.SerializeObject(jr));
                 //            break;
-                //        case "getoneuser":
-                //            userid = request["userid"];
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetOneUser(userid)));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getUserByID":
+                    jr = new JsonResult();
+                    try
+                    {
+                        userID = request["UserID"];
+
+                        su = bll.GetUserByID(userID);
+
+                        jr.Success = true;
+                        jr.Obj = su;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 //        case "getuserlistbyspell":
                 //            q = request["q"];
                 //            int page = Convert.ToInt32(request["page"]);
