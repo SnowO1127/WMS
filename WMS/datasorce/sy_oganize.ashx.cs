@@ -19,6 +19,7 @@ namespace WMS.datasorce
         private int page, rows;
         private string sort, order;
         private Grid<SysOganize> gso;
+        private List<Tree> list;
         //private SysOganize so;
         //private PageSysOganize pso;
         //private string oganizeid;
@@ -31,13 +32,19 @@ namespace WMS.datasorce
             switch (request["action"])
             {
                 case "getOganizeTree":
+                    //jr = new JsonResult();
                     try
                     {
-                        //context.Response.Write(Utils.SerializeObject(bll.GetOganizeTree()));
+                        list = bll.GetOganizeTree();
+                        context.Response.Write(Utils.SerializeObject(list));
+                        //jr.Success = true;
+                        //jr.Obj = list;
                     }
                     catch (Exception ex)
                     {
-                        throw ex;
+                        //jr.Msg = "系统错误！" + ex;
+
+                        context.Response.Write(ex.ToString());
                     }
                     break;
                 case "getHeadTree":

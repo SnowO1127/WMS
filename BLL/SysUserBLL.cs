@@ -71,9 +71,9 @@ namespace BLL
             return sysUserDal.GetObjectByCondition(where);
         }
 
-        public void Update(SysUser su)
+        public void Update(SysUser sysUser)
         {
-            sysUserDal.Update(su);
+            sysUserDal.Update(sysUser);
         }
 
         //public List<SysUser> GetUserListBySpell(string q, int page, int rows, string sort, string order)
@@ -81,15 +81,21 @@ namespace BLL
         //    return sudal.GetUserListBySpell(q, page, rows, sort, order);
         //}
 
-        //public void DeleteUser(string userid)
-        //{
-        //    sudal.DeleteUser(userid);
-        //}
+        public void DeleteUser(string userID)
+        {
+            SysUser sysUser = GetUserByID(userID);
+            sysUser.DeleteMark = true;
 
-        //public void ResetPassWord(string userid, string password)
-        //{
-        //    sudal.ResetPassWord(userid, password);
-        //}
+            Update(sysUser);
+        }
+
+        public void ResetPassWord(string userID, string pwd)
+        {
+            SysUser sysUser = GetUserByID(userID);
+            sysUser.PassWord = pwd;
+
+            Update(sysUser);
+        }
 
         public SysUser GetUserByID(string userID)
         {

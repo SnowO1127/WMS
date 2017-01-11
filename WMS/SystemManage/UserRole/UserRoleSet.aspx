@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="../../library/jquery-1.9.1.min.js"></script>
+    <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
     <script src="../../library/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
-    <link id="easyuiTheme" href="../../library/themes/default/easyui.css" rel="stylesheet" />
+    <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
     <link href="../../library/base_css/ui.css" rel="stylesheet" />
     <link href="../../library/syExtCss.css" rel="stylesheet" />
@@ -24,7 +24,7 @@
             nogrid = $('#norole_grid').datagrid({
                 iconCls: 'icon-cancel',
                 title: '未选角色',
-                url: '../../datasorce/sy_role.ashx?action=getnorole',
+                url: '../../datasorce/sy_role.ashx?action=getNoRole',
                 striped: true,
                 rownumbers: true,
                 pagination: false,
@@ -36,7 +36,7 @@
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 //frozenColumns: [[]],
                 queryParams: {
-                    userid: userid
+                    UserID: userid
                 },
                 columns: [[{
                     width: '90',
@@ -51,21 +51,19 @@
                     halign: 'center',
                     sortable: true
                 }]],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        fit: true,
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function () {
-                    parent.$.messager.progress('close');
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
                 }
             });
 
             hasgrid = $('#hasrole_grid').datagrid({
                 iconCls: 'icon-ok',
                 title: '已选角色',
-                url: '../../datasorce/sy_role.ashx?action=gethasrole',
+                url: '../../datasorce/sy_role.ashx?action=getHasRole',
                 striped: true,
                 rownumbers: true,
                 pagination: false,
@@ -77,7 +75,7 @@
                 pageList: [10, 20, 30, 40, 50, 100, 200, 300, 400, 500],
                 //frozenColumns: [[]],
                 queryParams: {
-                    userid: userid
+                    UserID: userid
                 },
                 columns: [[{
                     width: '90',
@@ -92,14 +90,12 @@
                     halign: 'center',
                     sortable: true
                 }]],
-                onBeforeLoad: function (param) {
-                    parent.$.messager.progress({
-                        fit: true,
-                        text: '数据加载中....'
-                    });
-                },
-                onLoadSuccess: function () {
-                    parent.$.messager.progress('close');
+                loadFilter: function (data) {
+                    if (data.Success) {
+                        return data.Obj;
+                    } else {
+                        parent.$.messager.alert('提示', data.Msg, 'error');
+                    }
                 }
             });
         });

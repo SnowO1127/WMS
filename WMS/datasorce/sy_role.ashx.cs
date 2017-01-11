@@ -20,7 +20,8 @@ namespace WMS.datasorce
         private Grid<SysRole> gsr;
         //private SysRole psr;
         //private SysRole sr;
-        //private string roleid, userid;
+        private string roleID, userID;
+        private List<SysRole> list;
 
         public void ProcessRequest(HttpContext context)
         {
@@ -122,30 +123,46 @@ namespace WMS.datasorce
 
                 //            context.Response.Write(Utils.SerializeObject(jr));
                 //            break;
-                //        case "getnorole":
-                //            userid = request["userid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                //context.Response.Write(Utils.SerializeObject(bll.GetNoRoleList(userid)));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
-                //            break;
-                //        case "gethasrole":
-                //            userid = request["userid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                //context.Response.Write(Utils.SerializeObject(bll.GetHasRoleList(userid)));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
-                //            break;
+                case "getNoRole":
+                   
+                    jr = new JsonResult();
+                    try
+                    {
+                        userID = request["UserID"];
+
+                        gsr = bll.GetNoRoleList(userID);
+
+                        jr.Success = true;
+                        jr.Obj = gsr;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+
+                    break;
+                case "getHasRole":
+                    
+                    jr = new JsonResult();
+                    try
+                    {
+                        userID = request["UserID"];
+
+                        gsr = bll.GetHasRoleList(userID);
+
+                        jr.Success = true;
+                        jr.Obj = gsr;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = ex.ToString();
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
             }
         }
 

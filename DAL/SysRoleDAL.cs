@@ -13,9 +13,12 @@ namespace DAL
     {
         private readonly string tableName = "Sys_Role";
 
+        private SysRole sysRole;
+        private List<SysRole> list;
+        private long count = 0;
         public SysRole GetObjectByCondition(string where)
         {
-            SysRole sysRole = new SysRole();
+            sysRole = new SysRole();
             using (MAction action = new MAction(tableName))
             {
                 if (action.Fill(where))
@@ -46,7 +49,7 @@ namespace DAL
 
         public List<SysRole> GetList()
         {
-            List<SysRole> list = new List<SysRole>();
+            list = new List<SysRole>();
 
             using (MAction action = new MAction(tableName))
             {
@@ -58,8 +61,6 @@ namespace DAL
 
         public long GetCount()
         {
-            long count = 0;
-
             using (MAction action = new MAction(tableName))
             {
                 count = action.GetCount();
@@ -70,8 +71,6 @@ namespace DAL
 
         public long GetCount(string where)
         {
-            long count = 0;
-
             using (MAction action = new MAction(tableName))
             {
                 count = action.GetCount(where);
@@ -82,7 +81,7 @@ namespace DAL
 
         public List<SysRole> GetList(string where)
         {
-            List<SysRole> list = new List<SysRole>();
+            list = new List<SysRole>();
 
             using (MAction action = new MAction(tableName))
             {
@@ -94,7 +93,7 @@ namespace DAL
 
         public List<SysRole> GetList(int pageIndex, int pageSize)
         {
-            List<SysRole> list = new List<SysRole>();
+            list = new List<SysRole>();
 
             using (MAction action = new MAction(tableName))
             {
@@ -106,7 +105,7 @@ namespace DAL
 
         public List<SysRole> GetList(int pageIndex, int pageSize, string where)
         {
-            List<SysRole> list = new List<SysRole>();
+            list = new List<SysRole>();
 
             using (MAction action = new MAction(tableName))
             {
@@ -115,5 +114,30 @@ namespace DAL
 
             return list;
         }
+
+        public List<SysRole> GetNoRoleList(string userID)
+        {
+            string sql = "select a.* from [WMS].[dbo].[Sys_Role] as a join [WMS].[dbo].[Sys_UserRole] as b on a.ID = b.RoleID where b.UserID = '" + userID + "'";
+
+            using (MAction action = new MAction(sql))
+            {
+                list = action.Select().ToList<SysRole>();
+            }
+
+            return list;
+        }
+
+        public List<SysRole> GetHasRoleList(string userID)
+        {
+            string sql = "select a.* from [WMS].[dbo].[Sys_Role] as a join [WMS].[dbo].[Sys_UserRole] as b on a.ID = b.RoleID where b.UserID = '" + userID + "'";
+
+            using (MAction action = new MAction(sql))
+            {
+                list = action.Select().ToList<SysRole>();
+            }
+
+            return list;
+        }
+
     }
 }

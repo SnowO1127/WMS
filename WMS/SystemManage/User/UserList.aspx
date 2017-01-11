@@ -234,6 +234,11 @@
 
                     }
                 }],
+                rowStyler: function (index, row) {
+                    if (row.DeleteMark) {
+                        return 'background-color:red;';
+                    }
+                },
                 loadFilter: function (data) {
                     if (data.Success) {
                         return data.Obj;
@@ -248,9 +253,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-add',
                 title: '新增用户',
-                width: 520,
-                height: 460,
-                maximizable: true,
+                width: 560,
+                height: 555,
                 url: 'SystemManage/User/UserAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -266,8 +270,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
                 title: '编辑用户【当前：' + row.RealName + '】',
-                width: 520,
-                height: 460,
+                width: 560,
+                height: 555,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
@@ -283,17 +287,17 @@
             parent.$.messager.confirm('重置密码', '你确定重置用户【' + row.RealName + '】的密码吗?', function (r) {
                 if (r) {
                     $.ajax({
-                        url: "../../datasorce/sy_user.ashx?action=resetpassword",
+                        url: "../../datasorce/sy_user.ashx?action=resetPwd",
                         dataType: "json",
                         type: "post",
                         data: {
-                            userid: row.ID
+                            UserID: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {
                                 parent.$.messager.alert('提示', jsonresult.Msg, 'info');
                             } else {
-                                parent.$.messager.alert('提示', jsonresult.Msg, 'error');
+                                parent.$.messager.alert('错误', jsonresult.Msg, 'error');
                             }
                         }
                     })
@@ -305,8 +309,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
                 title: '查看用户【当前：' + row.RealName + '】',
-                width: 520,
-                height: 440,
+                width: 560,
+                height: 520,
                 url: 'SystemManage/User/UserAdd.aspx?userid=' + row.ID + '',
             });
         }
@@ -315,11 +319,11 @@
             parent.$.messager.confirm('删除用户', '你确定删除用户【' + row.RealName + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
-                        url: "../../datasorce/sy_user.ashx?action=deleteuser",
+                        url: "../../datasorce/sy_user.ashx?action=delete",
                         dataType: "json",
                         type: "post",
                         data: {
-                            userid: row.ID
+                            UserID: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {

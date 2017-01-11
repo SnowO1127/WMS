@@ -27,7 +27,7 @@ namespace BLL
         {
             Grid<SysRole> g = new Grid<SysRole>();
 
-             string where = "order by " + sortName + " " + sortOrder + "";
+            string where = "order by " + sortName + " " + sortOrder + "";
 
             g.total = sysRoleDal.GetCount();
             g.rows = sysRoleDal.GetList(pageIndex, pageSize, where);
@@ -68,14 +68,30 @@ namespace BLL
         //    dal.DeleteRole(id);
         //}
 
-        //public List<SysRole> GetNoRoleList(string userid)
-        //{
-        //    return dal.GetNoRoleList(userid);
-        //}
+        public Grid<SysRole> GetNoRoleList(string userID)
+        {
+            Grid<SysRole> g = new Grid<SysRole>();
 
-        //public List<SysRole> GetHasRoleList(string userid)
-        //{
-        //    return dal.GetHasRoleList(userid);
-        //}
+
+            List<SysRole> list = sysRoleDal.GetNoRoleList(userID);
+
+            g.total = list.Count;
+            g.rows = list;
+
+            return g;
+
+        }
+
+        public Grid<SysRole> GetHasRoleList(string userID)
+        {
+            Grid<SysRole> g = new Grid<SysRole>();
+
+            List<SysRole> list = sysRoleDal.GetHasRoleList(userID);
+
+            g.total = list.Count;
+            g.rows = list;
+
+            return g;
+        }
     }
 }

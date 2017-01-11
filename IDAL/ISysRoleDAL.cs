@@ -27,5 +27,8 @@ namespace IDAL
 
         List<SysRole> GetList(int pageIndex, int pageSize, string where);
 
+        List<SysRole> GetNoRoleList(string userID);
+
+        List<SysRole> GetHasRoleList(string userID);
     }
 }

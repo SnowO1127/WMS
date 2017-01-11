@@ -51,45 +51,49 @@ namespace WMS.datasorce
 
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
-                //        case "adduser":
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+                case "Insert":
+                    jr = new JsonResult();
+                    try
+                    {
+                        su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
 
-                //                su.ID = Guid.NewGuid().ToString();
-                //                su.PassWord = DEncrypt.Encrypt(Globe.DefaultPassWord);
-                //                su.CDate = DateTime.Now;
-                //                bll.AddUser(su);
-                //                jr.Success = true;
-                //                jr.Msg = "保存成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Msg = ex.ToString();
-                //            }
+                        su.ID = Guid.NewGuid().ToString();
+                        //su.PassWord = DEncrypt.Encrypt(Globe.DefaultPassWord);
+                        su.PassWord = Globe.DefaultPassWord;
+                        su.CDate = DateTime.Now;
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
+                        bll.Insert(su);
 
-                //            break;
-                //        case "updateuser":
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "保存失败！" + ex.ToString();
+                    }
 
-                //                bll.UpdateUser(su);
+                    context.Response.Write(Utils.SerializeObject(jr));
 
-                //                jr.Success = true;
-                //                jr.Msg = "保存成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Msg = ex.ToString();
-                //            }
+                    break;
+                case "Update":
+                    jr = new JsonResult();
+                    try
+                    {
+                        su = Utils.AutoWiredClass<SysUser>(request, su = new SysUser());
+                        su.UDate = DateTime.Now;
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
-                //            break;
+                        bll.Update(su);
+
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "保存失败！" + ex.ToString();
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 case "getUserByID":
                     jr = new JsonResult();
                     try
@@ -143,38 +147,42 @@ namespace WMS.datasorce
 
                 //            context.Response.Write(Utils.SerializeObject(jr));
                 //            break;
-                //        case "deleteuser":
-                //            userid = request["userid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                bll.DeleteUser(userid);
+                case "delete":
+                    jr = new JsonResult();
+                    try
+                    {
+                        userID = request["UserID"];
 
-                //                jr.Success = true;
-                //                jr.Msg = "删除成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Msg = ex.ToString();
-                //            }
-                //            context.Response.Write(Utils.SerializeObject(jr));
-                //            break;
-                //        case "resetpassword":
-                //            userid = request["userid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                bll.ResetPassWord(userid, DEncrypt.Encrypt(Globe.DefaultPassWord));
+                        bll.DeleteUser(userID);
 
-                //                jr.Success = true;
-                //                jr.Msg = "重置成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Msg = ex.ToString();
-                //            }
-                //            context.Response.Write(Utils.SerializeObject(jr));
-                //            break;
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "删除失败！" + ex.ToString();
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
+                case "resetPwd":
+                    jr = new JsonResult();
+                    try
+                    {
+                        userID = request["UserID"];
+
+                        bll.ResetPassWord(userID, Globe.DefaultPassWord);
+
+                        jr.Success = true;
+                        jr.Msg = "重置成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "重置失败！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+
+                    break;
             }
         }
 

@@ -33,20 +33,20 @@ namespace BLL
         //    return dal.GetOneOganize(id);
         //}
 
-        //public List<Tree> GetOganizeTree()
-        //{
-        //    List<Tree> tlist = new List<Tree>();
-        //    List<SysOganize> solist = dal.GetList();
-        //    if (solist != null && solist.Count > 0)
-        //    {
-        //        foreach (SysOganize so in solist)
-        //        {
-        //            Tree t = new Tree() { id = so.ID, text = so.Name, pid = so.ParentID };
-        //            tlist.Add(t);
-        //        }
-        //    }
-        //    return tlist;
-        //}
+        public List<Tree> GetOganizeTree()
+        {
+            List<Tree> tlist = new List<Tree>();
+            List<SysOganize> solist = GetList();
+            if (solist != null && solist.Count > 0)
+            {
+                foreach (SysOganize so in solist)
+                {
+                    Tree t = new Tree() { id = so.ID, text = so.Name, pid = so.ParentID };
+                    tlist.Add(t);
+                }
+            }
+            return tlist;
+        }
 
         public Grid<SysOganize> GetListByPage(int pageIndex, int pageSize, string sortName, string sortOrder, string parentID)
         {
