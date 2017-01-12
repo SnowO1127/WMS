@@ -161,32 +161,32 @@
         <form id="menu_add_form" style="font-size: 13px; padding-top: 10px">
             <table style="width: 100%">
                 <tr>
-                    <td class="tb_td_lable" style="width: 80px">菜单名称</td>
+                    <td class="tb_td_lable" style="width: 80px">菜单名称：</td>
                     <td class="tb_td" colspan="3">
                         <input name="MenuName" class="easyui-textbox" type="text" data-options="required:true" style="width: 150px; height: 26px" />
                         <input name="ID" type="hidden" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">分类</td>
+                    <td class="tb_td_lable">分类：</td>
                     <td class="tb_td">
                         <input name="Category" id="Category" type="text" style="width: 150px; height: 26px" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">上级菜单</td>
+                    <td class="tb_td_lable">上级菜单：</td>
                     <td class="tb_td" colspan="3">
                         <input id="ParentID" name="ParentID" class="easyui-combotree" style="width: 150px; height: 26px" data-options="" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">地址</td>
+                    <td class="tb_td_lable">地址：</td>
                     <td class="tb_td" colspan="3">
                         <input name="MenuUrl" class="easyui-textbox" type="text" style="width: 415px; height: 26px" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">图标</td>
+                    <td class="tb_td_lable">图标：</td>
                     <td class="tb_td">
                         <input id="IconCls" name="IconCls" class="easyui-textbox" readonly="readonly" style="width: 150px; height: 26px" />
                     </td>
@@ -195,28 +195,28 @@
                         <img class="iconImg ext-icon-cross" onclick="$('#iconCls').val('');$('#iconCls').attr('class','');" title="清空" /></td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">有效</td>
+                    <td class="tb_td_lable">有效：</td>
                     <td class="tb_td">
                         <select id="Enabled" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="Enabled" style="width: 150px; height: 26px">
                             <option value="true">是</option>
                             <option value="false">否</option>
                         </select>
                     </td>
-                    <td class="tb_td_lable">排序号
+                    <td class="tb_td_lable">排序号：
                     </td>
                     <td class="tb_td">
                         <input id="OrderID" name="OrderID" class="easyui-textbox" data-options="required:true,validType:'integer',tipPosition:'left'" style="width: 150px; height: 26px" />
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">是否公开</td>
+                    <td class="tb_td_lable">是否公开：</td>
                     <td class="tb_td">
                         <select id="IsPublic" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsPublic" style="width: 150px; height: 26px">
                             <option value="true">是</option>
                             <option value="false">否</option>
                         </select>
                     </td>
-                    <td class="tb_td_lable" style="width: 80px">是否菜单</td>
+                    <td class="tb_td_lable" style="width: 80px">是否菜单：</td>
                     <td class="tb_td">
                         <select id="IsMenu" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="IsMenu" style="width: 150px; height: 26px">
                             <option value="true">是</option>
@@ -225,14 +225,14 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">允许编辑</td>
+                    <td class="tb_td_lable">允许编辑：</td>
                     <td class="tb_td">
                         <select id="AllowEdit" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowEdit" style="width: 150px; height: 26px">
                             <option value="true">是</option>
                             <option value="false">否</option>
                         </select>
                     </td>
-                    <td class="tb_td_lable">允许删除</td>
+                    <td class="tb_td_lable">允许删除：</td>
                     <td class="tb_td">
                         <select id="AllowDelete" class="easyui-combobox" data-options="panelHeight:50,editable:false" name="AllowDelete" style="width: 150px; height: 26px">
                             <option value="true">是</option>
@@ -241,7 +241,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="tb_td_lable">描述</td>
+                    <td class="tb_td_lable">描述：</td>
                     <td class="tb_td" colspan="3">
                         <input name="Description" class="easyui-textbox" data-options="multiline:true,height:50" style="width: 415px" />
                     </td>
