@@ -44,7 +44,7 @@ namespace DAL
             using (MAction action = new MAction(tableName))
             {
                 action.Data.LoadFrom(menu);
-                action.Insert();
+                action.Update();
             }
         }
         public List<SysMenu> GetList()

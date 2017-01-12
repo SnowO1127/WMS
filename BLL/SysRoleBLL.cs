@@ -14,6 +14,8 @@ namespace BLL
     {
         private readonly ISysRoleDAL sysRoleDal = DataAccess.CreateRole();
 
+        private SysRole sysRole;
+
         public Grid<SysRole> GetList()
         {
             Grid<SysRole> g = new Grid<SysRole>();
@@ -48,30 +50,34 @@ namespace BLL
         //    return g;
         //}
 
-        //public SysRole GetOneRole(string id)
-        //{
-        //    return dal.GetOneRole(id);
-        //}
+        public SysRole GetObjectByID(string roleID)
+        {
+            string where = "ID='" + roleID + "'";
+            return sysRoleDal.GetObjectByCondition(where);
+        }
 
-        //public void AddRole(SysRole sr)
-        //{
-        //    dal.AddRole(sr);
-        //}
+        public void Insert(SysRole sysRole)
+        {
+            sysRoleDal.Insert(sysRole);
+        }
 
-        //public void UpdateRole(SysRole sr)
-        //{
-        //    dal.UpdateRole(sr);
-        //}
+        public void Update(SysRole sysRole)
+        {
+            sysRoleDal.Update(sysRole);
+        }
 
-        //public void DeleteRole(string id)
-        //{
-        //    dal.DeleteRole(id);
-        //}
+        public void Delete(string roleID)
+        {
+            sysRole = GetObjectByID(roleID);
+
+            sysRole.DeleteMark = true;
+
+            Update(sysRole);
+        }
 
         public Grid<SysRole> GetNoRoleList(string userID)
         {
             Grid<SysRole> g = new Grid<SysRole>();
-
 
             List<SysRole> list = sysRoleDal.GetNoRoleList(userID);
 
@@ -79,7 +85,6 @@ namespace BLL
             g.rows = list;
 
             return g;
-
         }
 
         public Grid<SysRole> GetHasRoleList(string userID)

@@ -15,15 +15,19 @@ namespace BLL
         private readonly ISysMenuDAL sysMenuDal = DataAccess.CreateMenu();
         private readonly SysUserBLL sysUserBll = new SysUserBLL();
 
+        private List<Tree> tlist;
+        private List<SysMenu> mlist;
+
         //public List<SysMenu> GetList()
         //{
         //    return dal.GetList();
         //}
 
-        //public List<SysMenu> GetIsMenuList()
-        //{
-        //    return dal.GetIsMenuList();
-        //}
+        public List<SysMenu> GetIsMenuList()
+        {
+            string where = "IsMenu=1";
+            return sysMenuDal.GetList(where);
+        }
 
         //public void AddMenu(SysMenu sm)
         //{
@@ -40,21 +44,21 @@ namespace BLL
         //    return dal.GetOneMenu(id);
         //}
 
-        //public List<Tree> GetIsMenuTree()
-        //{
-        //    List<Tree> tlist = new List<Tree>();
-        //    List<SysMenu> list = GetIsMenuList();
-        //    foreach (SysMenu sm in list)
-        //    {
-        //        Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
-        //        tlist.Add(t);
-        //    }
-        //    return tlist;
-        //}
+        public List<Tree> GetIsMenuTree()
+        {
+            tlist = new List<Tree>();
+            mlist = GetIsMenuList();
+            foreach (SysMenu sm in mlist)
+            {
+                Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
+                tlist.Add(t);
+            }
+            return tlist;
+        }
 
         public List<Tree> GetHeadTree()
         {
-            List<Tree> tlist = new List<Tree>();
+            tlist = new List<Tree>();
 
             Tree headtree = new Tree();
             headtree.id = Guid.NewGuid().ToString();
@@ -62,10 +66,10 @@ namespace BLL
 
             tlist.Add(headtree);
 
-            List<SysMenu> smlist = sysMenuDal.GetList();
-            if (smlist != null && smlist.Count > 0)
+            mlist = sysMenuDal.GetList();
+            if (mlist != null && mlist.Count > 0)
             {
-                foreach (SysMenu sm in smlist)
+                foreach (SysMenu sm in mlist)
                 {
                     Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = string.IsNullOrEmpty(sm.ParentID) ? headtree.id : sm.ParentID, iconCls = sm.IconCls };
                     Dictionary<String, Object> attributes = new Dictionary<String, Object>();
@@ -113,13 +117,13 @@ namespace BLL
 
         public List<Tree> GetEnabledMenuTree()
         {
-            List<Tree> tlist = new List<Tree>();
+            tlist = new List<Tree>();
 
-            List<SysMenu> smlist = GetEnabledList();
+            mlist = GetEnabledList();
 
-            if (smlist != null && smlist.Count > 0)
+            if (mlist != null && mlist.Count > 0)
             {
-                foreach (SysMenu sm in smlist)
+                foreach (SysMenu sm in mlist)
                 {
                     Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls };
                     Dictionary<String, Object> attributes = new Dictionary<String, Object>();
@@ -169,12 +173,12 @@ namespace BLL
         {
             SysUser sysUser = sysUserBll.GetCurrentUser();
 
-            List<SysMenu> smlist = new List<SysMenu>();
+            mlist = new List<SysMenu>();
 
             if (sysUser.IsAdmin)
             {
                 string where = "Enabled = 1";
-                smlist = sysMenuDal.GetList(where);
+                mlist = sysMenuDal.GetList(where);
             }
             else
             {
@@ -191,7 +195,7 @@ namespace BLL
                 //    }
                 //}
             }
-            return smlist;
+            return mlist;
         }
 
         /// <summary>
@@ -201,13 +205,13 @@ namespace BLL
         /// <returns></returns>
         public List<Tree> GetPermissionMenuTree()
         {
-            List<Tree> tlist = new List<Tree>();
+            tlist = new List<Tree>();
 
-            List<SysMenu> smlist = GetPermissionMenus();
+            mlist = GetPermissionMenus();
 
-            if (smlist != null && smlist.Count > 0)
+            if (mlist != null && mlist.Count > 0)
             {
-                foreach (SysMenu sm in smlist)
+                foreach (SysMenu sm in mlist)
                 {
                     Tree t = new Tree() { id = sm.ID, text = sm.MenuName, pid = sm.ParentID, iconCls = sm.IconCls, order = sm.OrderID };
                     Dictionary<String, Object> attributes = new Dictionary<String, Object>();

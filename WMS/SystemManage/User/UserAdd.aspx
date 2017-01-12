@@ -14,6 +14,7 @@
     <script src="../../library/xyUtils.js"></script>
     <link id="easyuiTheme" href="../../library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="../../library/themes/icon.css" rel="stylesheet" />
+    <link href="../../library/MyCss.css" rel="stylesheet" />
     <title></title>
     <script>
         var userid = "<%=userid %>";
@@ -183,17 +184,6 @@
             }
         };
     </script>
-    <style>
-        .tb_td_lable {
-            height: 28px;
-            text-align: right;
-        }
-
-        .tb_td {
-            height: 28px;
-            text-align: left;
-        }
-    </style>
 </head>
 <body>
     <div style="margin: 0 auto">

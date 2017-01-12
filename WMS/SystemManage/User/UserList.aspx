@@ -236,7 +236,7 @@
                 }],
                 rowStyler: function (index, row) {
                     if (row.DeleteMark) {
-                        return 'background-color:red;';
+                        return 'color:red;';
                     }
                 },
                 loadFilter: function (data) {

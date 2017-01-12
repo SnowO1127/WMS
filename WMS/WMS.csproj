@@ -1471,6 +1471,7 @@
     <Content Include="library\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
     <Content Include="library\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="library\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+    <Content Include="library\MyCss.css" />
     <Content Include="library\plugins\jquery.accordion.js" />
     <Content Include="library\plugins\jquery.calendar.js" />
     <Content Include="library\plugins\jquery.combo.js" />

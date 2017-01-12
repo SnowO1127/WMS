@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
-    <script src="../../library/easyui-lang-zh_CN.js"></script>
+    <script src="../../library/locale/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
@@ -171,6 +171,11 @@
                 //onLoadSuccess: function () {
                 //    parent.$.messager.progress('close');
                 //},
+                rowStyler: function (index, row) {
+                    if (row.DeleteMark) {
+                        return 'color:red;';
+                    }
+                },
                 loadFilter: function (data) {
                     if (data.Success) {
                         return data.Obj;
@@ -187,8 +192,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-add',
                 title: '新增角色',
-                width: 520,
-                height: 280,
+                width: 560,
+                height: 330,
                 url: 'SystemManage/Role/RoleAdd.aspx',
                 buttons: [{
                     text: '保存',
@@ -204,8 +209,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
                 title: '编辑角色【当前：' + row.Name + '】',
-                width: 520,
-                height: 280,
+                width: 560,
+                height: 330,
                 url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
@@ -221,8 +226,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
                 title: '查看角色【当前：' + row.Name + '】',
-                width: 520,
-                height: 260,
+                width: 560,
+                height: 300,
                 url: 'SystemManage/Role/RoleAdd.aspx?roleid=' + row.ID + '',
             });
         }
@@ -231,11 +236,11 @@
             parent.$.messager.confirm('删除角色', '你确定删除角色【' + row.Name + '】吗?', function (r) {
                 if (r) {
                     $.ajax({
-                        url: "../../datasorce/sy_role.ashx?action=deleterole",
+                        url: "../../datasorce/sy_role.ashx?action=delete",
                         dataType: "json",
                         type: "post",
                         data: {
-                            roleid: row.ID
+                            RoleID: row.ID
                         },
                         success: function (jsonresult) {
                             if (jsonresult.Success) {

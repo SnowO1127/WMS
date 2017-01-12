@@ -5,9 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="library/jquery-1.9.1.min.js"></script>
+    <script src="library/jquery.min.js"></script>
     <script src="library/jquery.easyui.min.js"></script>
-    <script src="library/easyui-lang-zh_CN.js"></script>
+    <script src="library/locale/easyui-lang-zh_CN.js"></script>
     <link id="easyuiTheme" href="library/themes/bootstrap/easyui.css" rel="stylesheet" />
     <link href="library/themes/icon.css" rel="stylesheet" />
     <link href="library/base_css/ui.css" rel="stylesheet" />

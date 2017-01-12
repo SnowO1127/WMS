@@ -18,8 +18,7 @@ namespace WMS.datasorce
         private int page, rows;
         private string sort, order;
         private Grid<SysRole> gsr;
-        //private SysRole psr;
-        //private SysRole sr;
+        private SysRole sysRole;
         private string roleID, userID;
         private List<SysRole> list;
 
@@ -46,85 +45,96 @@ namespace WMS.datasorce
                     }
                     catch (Exception ex)
                     {
-                        jr.Msg = ex.ToString();
+                        jr.Msg = "系统错误！" + ex.ToString();
                     }
                     context.Response.Write(Utils.SerializeObject(jr));
 
                     break;
-                //        case "addrole":
-                //            sr = new SysRole();
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                sr = Utils.AutoWiredClass<SysRole>(request, sr);
-                //                sr.ID = Guid.NewGuid().ToString();
-                //                sr.CDate = DateTime.Now;
-                //                //bll.AddRole(sr);
-                //                jr.IsSuccess = true;
-                //                jr.Message = "保存成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
+                case "Insert":
+                    jr = new JsonResult();
+                    try
+                    {
+                        sysRole = Utils.AutoWiredClass<SysRole>(request, sysRole = new SysRole());
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
+                        sysRole.ID = Guid.NewGuid().ToString();
+                        sysRole.CDate = DateTime.Now;
 
-                //            break;
-                //        case "updaterole":
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                sr = Utils.AutoWiredClass<SysRole>(request, sr = new SysRole());
+                        bll.Insert(sysRole);
 
-                //                //bll.UpdateRole(sr);
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "保存失败！" + ex.ToString();
+                    }
 
-                //                jr.IsSuccess = true;
-                //                jr.Message = "保存成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
+                    context.Response.Write(Utils.SerializeObject(jr));
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
+                    break;
+                case "Update":
+                    jr = new JsonResult();
+                    try
+                    {
+                        sysRole = Utils.AutoWiredClass<SysRole>(request, sysRole = new SysRole());
 
-                //            break;
-                //        case "getonerole":
-                //            roleid = request["roleid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                jr.IsSuccess = true;
-                //                //jr.Obj = bll.GetOneRole(roleid);
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
+                        sysRole.UDate = DateTime.Now;
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
+                        bll.Update(sysRole);
 
-                //            break;
-                //        case "deleterole":
-                //            roleid = request["roleid"];
-                //            jr = new JsonResult();
-                //            try
-                //            {
-                //                //bll.DeleteRole(roleid);
+                        jr.Success = true;
+                        jr.Msg = "保存成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "保存失败！" + ex.ToString();
+                    }
 
-                //                jr.IsSuccess = true;
-                //                jr.Message = "删除成功！";
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                jr.Message = ex.ToString();
-                //            }
+                    context.Response.Write(Utils.SerializeObject(jr));
 
-                //            context.Response.Write(Utils.SerializeObject(jr));
-                //            break;
+                    break;
+                case "getRoleByID":
+
+                    jr = new JsonResult();
+                    try
+                    {
+                        roleID = request["RoleID"];
+
+                        sysRole = bll.GetObjectByID(roleID);
+
+                        jr.Success = true;
+                        jr.Obj = sysRole;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex.ToString();
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+
+                    break;
+                case "delete":
+
+                    jr = new JsonResult();
+                    try
+                    {
+                        roleID = request["RoleID"];
+
+
+                        bll.Delete(roleID);
+
+                        jr.Success = true;
+                        jr.Msg = "删除成功！";
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "删除失败！" + ex;
+                    }
+
+                    context.Response.Write(Utils.SerializeObject(jr));
+                    break;
                 case "getNoRole":
-                   
+
                     jr = new JsonResult();
                     try
                     {
@@ -145,7 +155,7 @@ namespace WMS.datasorce
 
                     break;
                 case "getHasRole":
-                    
+
                     jr = new JsonResult();
                     try
                     {

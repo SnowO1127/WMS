@@ -19,7 +19,7 @@ namespace WMS.datasorce
         private int page, rows;
         private string sort, order;
         private string parentID;
-
+        private List<Tree> list;
         private Grid<SysMenu> gsm;
         //private SysMenu sm;
         //private PageSysMenu psm;
@@ -36,7 +36,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        List<Tree> list = bll.GetEnabledMenuTree();
+                        list = bll.GetEnabledMenuTree();
 
                         jr.Success = true;
                         jr.Obj = list;
@@ -63,7 +63,7 @@ namespace WMS.datasorce
                     jr = new JsonResult();
                     try
                     {
-                        List<Tree> list = bll.GetHeadTree();
+                        list = bll.GetHeadTree();
 
                         jr.Success = true;
                         jr.Obj = list;
@@ -109,16 +109,22 @@ namespace WMS.datasorce
                     }
                     context.Response.Write(Utils.SerializeObject(jr));
                     break;
-                //        case "getismenu":
-                //            try
-                //            {
-                //                context.Response.Write(Utils.SerializeObject(bll.GetIsMenuTree()));
-                //            }
-                //            catch (Exception ex)
-                //            {
-                //                throw ex;
-                //            }
-                //            break;
+                case "getIsMenu":
+                    jr = new JsonResult();
+                    try
+                    {
+                        list = bll.GetIsMenuTree();
+
+                        jr.Success = true;
+                        jr.Obj = list;
+                    }
+                    catch (Exception ex)
+                    {
+                        jr.Msg = "系统错误！" + ex;
+                    }
+                    context.Response.Write(Utils.SerializeObject(jr));
+
+                    break;
                 //        case "addmenu":
                 //            jr = new JsonResult();
                 //            try

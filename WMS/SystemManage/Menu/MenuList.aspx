@@ -6,9 +6,9 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script src="../../library/jquery-1.9.1.min.js"></script>
+     <script src="../../library/jquery.min.js"></script>
     <script src="../../library/jquery.easyui.min.js"></script>
-    <script src="../../library/easyui-lang-zh_CN.js"></script>
+    <script src="../../library/locale/easyui-lang-zh_CN.js"></script>
     <script src="../../library/jquery.cookie.js"></script>
     <script src="../../library/xyEasyUI.js"></script>
     <script src="../../library/xyUtils.js"></script>
@@ -23,10 +23,8 @@
         $(function () {
 
             tree = $("#menu_tree").tree({
-                //url: '../../datasorce/sy_menu.ashx?action=getHeadTree',
                 parentField: 'pid',
                 lines: true,
-                //data: data.Obj,
                 onClick: function (node) {
 
                     treeid = node.text == "全部" ? "" : node.id;
@@ -37,16 +35,6 @@
                     grid.datagrid("load", obj);  // 在用户点击的时候提示
                     grid.datagrid("unselectAll");
                 }
-                //onLoadSuccess: function (node, data) {
-                //    if (treeid) {
-                //        var n = tree.tree("find", treeid);
-                //        tree.tree("select", n.target);
-                //    }
-                //    else {
-                //        var n = tree.tree("find", data[0].id);
-                //        tree.tree("select", n.target);
-                //    }
-                //}
             })
 
             loadMenuTree();
@@ -251,14 +239,14 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-add',
                 title: '新增菜单',
-                width: 545,
-                height: 360,
+                width: 560,
+                height: 420,
                 url: 'SystemManage/Menu/MenuAdd.aspx',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, loadMenuTree, parent.$);
                     }
                 }]
             });
@@ -268,14 +256,14 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-edit',
                 title: '编辑菜单【当前：' + row.MenuName + '】',
-                width: 545,
-                height: 360,
+                width: 560,
+                height: 420,
                 url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',
                 buttons: [{
                     text: '保存',
                     iconCls: 'icon-add',
                     handler: function () {
-                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, tree, parent.$);
+                        dialog.find('iframe').get(0).contentWindow.f_save(dialog, grid, loadMenuTree, parent.$);
                     }
                 }]
             });
@@ -285,8 +273,8 @@
             var dialog = parent.sy.modalDialog({
                 iconCls: 'icon-save',
                 title: '查看菜单【当前：' + row.MenuName + '】',
-                width: 545,
-                height: 330,
+                width: 560,
+                height: 400,
                 url: 'SystemManage/Menu/MenuAdd.aspx?menuid=' + row.ID + '',
             });
         }

@@ -40,7 +40,7 @@ namespace DAL
             using (MAction action = new MAction(tableName))
             {
                 action.Data.LoadFrom(user);
-                action.Insert();
+                action.Update();
             }
         }
 
